@@ -4,12 +4,12 @@
  */
 
 const studios = [
-  { name: "Felicidad Pública", url: "https://felicidadpublica.cl", field: "Branding / Identidad", city: "Santiago, Chile", tags: ["branding", "identidad", "editorial"], previews: ["felicidad-1", "felicidad-2", "felicidad-3", "felicidad-4"] },
-  { name: "Otros Pérez", url: "http://otrosperez.com/", field: "Identidad / Editorial", city: "Santiago, Chile", tags: ["identidad", "editorial", "gráfico"], previews: ["otrosperez-1", "otrosperez-2", "otrosperez-3"] },
-  { name: "Gaggeroworks", url: "http://gaggeroworks.co.uk/", field: "Art Direction / Graphic Design", city: "London, UK", tags: ["direction", "graphic", "art"], previews: ["gaggero-1", "gaggero-2", "gaggero-3", "gaggero-4"] },
-  { name: "Estudio Postal", url: "https://www.estudiopostal.cl/", field: "Branding / Packaging", city: "Santiago, Chile", tags: ["branding", "packaging", "identidad"], previews: ["postal-1", "postal-2", "postal-3"] },
+  { name: "Felicidad Pública", url: "https://felicidadpublica.cl", field: "Dirección Creativa / Branding / Editorial", city: "Santiago, Chile", tags: ["branding", "identidad", "editorial"], previews: ["felicidad-1", "felicidad-2", "felicidad-3", "felicidad-4"] },
+  { name: "Otros Pérez", url: "http://otrosperez.com/", field: "Branding / Editorial / Campañas", city: "Santiago, Chile", tags: ["identidad", "editorial", "gráfico"], previews: ["otrosperez-1", "otrosperez-2", "otrosperez-3"] },
+  { name: "Gaggeroworks", url: "http://gaggeroworks.co.uk/", field: "Dirección Creativa / Diseño Gráfico / Museografía", city: "London, UK", tags: ["direction", "graphic", "art"], previews: ["gaggero-1", "gaggero-2", "gaggero-3", "gaggero-4"] },
+  { name: "Estudio Postal", url: "https://www.estudiopostal.cl/", field: "Branding / Packaging / Corporativo / Editorial", city: "Santiago, Chile", tags: ["branding", "packaging", "identidad"], previews: ["postal-1", "postal-2", "postal-3"] },
   { name: "10:10", url: "https://www.diezdiez.com/", field: "Digital / Web", city: "Santiago, Chile", tags: ["digital", "web", "experiencia"], previews: ["diezdiez-1", "diezdiez-2", "diezdiez-3", "diezdiez-4"] },
-  { name: "Design Systems International", url: "https://designsystems.international/", field: "Design Systems / Digital", city: "International", tags: ["design systems", "digital", "product"], previews: ["dsi-1", "dsi-2", "dsi-3"] },
+  { name: "Design Systems International", url: "https://designsystems.international/", field: "Design Systems / Digital / Multidisciplinario", city: "International", tags: ["design systems", "digital", "product"], previews: ["dsi-1", "dsi-2", "dsi-3"] },
   { name: "searchsystem", url: "#", field: "Digital / Technology", city: "Santiago, Chile", tags: ["digital", "tech", "systems"], previews: ["search-1", "search-2", "search-3"] },
   { name: "JVD", url: "#", field: "Dirección de arte / Arquitectura", city: "Santiago, Chile", tags: ["dirección de arte", "arquitectura", "gráfico"], previews: ["jvd-1", "jvd-2", "jvd-3"] },
 ];
