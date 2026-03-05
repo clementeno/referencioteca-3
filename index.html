@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Referencioteca</title>
+
+  <!-- Fuente local -->
+  <style>
+    @font-face {
+      font-family: "Diatype Variable";
+      src: url("Cargo-DiatypePlusVariable.woff2") format("woff2");
+      font-weight: 100 900;
+      font-style: normal;
+    }
+  </style>
+
+  <!-- CSS del embed (el archivo pequeño que te bajaste de Cargo) -->
+  <link rel="stylesheet" href="embed.css">
+
+  <!-- CSS global de tu sitio (index.css que ya tienes) -->
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+<!-- Modal institucional (work in progress) -->
+<div class="ref2d__wip-overlay" id="ref2dWipOverlay" hidden>
+  <div class="ref2d__wip-modal" role="dialog" aria-labelledby="wipTitle" aria-modal="true">
+    <button class="ref2d__wip-close" id="ref2dWipClose" aria-label="Cerrar">×</button>
+    <h2 class="ref2d__wip-title" id="wipTitle">Referencioteca</h2>
+    <div class="ref2d__wip-content">
+      <p>Referencioteca es un proyecto en desarrollo (work in progress) y forma parte del proyecto de un proyecto de título a desarrollar en julio 2026.</p>
+      <p>Este proyecto busca mapear, organizar y facilitar la búsqueda curada de proyectos y trayectorias que ex estudiantes de Diseño UC han producido a lo largo del tiempo, con el objetivo de visibilizar la riqueza cultural y proyectual generada en el desarrollo de sus profesiones. Toda la información contenida aquí ha sido recopilada desde fuentes públicas, entregando siempre la atribución correspondiente y el enlace a los sitios originales.</p>
+      <p>Si quieres saber más información o si apareces aquí y no deseas ser parte, puedes solicitar la edición o retiro de tu registro escribiendo a <a href="mailto:referencioteca.cl@gmail.com">referencioteca.cl@gmail.com</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Info (descripción del proyecto) -->
+<div class="ref2d__wip-overlay ref2d__header-modal" id="ref2dInfoOverlay" hidden>
+  <div class="ref2d__wip-modal" role="dialog" aria-labelledby="ref2dInfoTitle" aria-modal="true">
+    <button class="ref2d__wip-close" id="ref2dInfoClose" aria-label="Cerrar">×</button>
+    <h2 class="ref2d__wip-title" id="ref2dInfoTitle">Sobre Referencioteca</h2>
+    <div class="ref2d__wip-content">
+      <p>Referencioteca es un proyecto en desarrollo que busca mapear, organizar y facilitar la búsqueda curada de proyectos y trayectorias que ex estudiantes de Diseño UC han producido a lo largo del tiempo.</p>
+      <p>Si quieres saber más o solicitar edición o retiro de tu registro: <a href="mailto:referencioteca.cl@gmail.com">referencioteca.cl@gmail.com</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Submit (proponer proyecto) -->
+<div class="ref2d__wip-overlay ref2d__header-modal" id="ref2dSubmitOverlay" hidden>
+  <div class="ref2d__wip-modal" role="dialog" aria-labelledby="ref2dSubmitTitle" aria-modal="true">
+    <button class="ref2d__wip-close" id="ref2dSubmitClose" aria-label="Cerrar">×</button>
+    <h2 class="ref2d__wip-title" id="ref2dSubmitTitle">¿Quieres proponer un proyecto?</h2>
+    <div class="ref2d__wip-content">
+      <p>Puedes enviarnos la información a <a href="mailto:referencioteca.cl@gmail.com">referencioteca.cl@gmail.com</a> con el asunto «Propuesta de proyecto».</p>
+    </div>
+  </div>
+</div>
+
+<!--  REFERENCIOTECA 2D — Contenedor principal -->
+<section class="ref2d">
+  <header class="ref2d__top">
+    <a class="ref2d__brand" href="#top">REFERENCIOTECA</a>
+    <div class="ref2d__search-block">
+      <div class="ref2d__search-wrapper">
+        <input class="ref2d__search" id="ref2dSearch" placeholder="Buscar palabras clave… (museografía, ilustración, dirección de arte, …)">
+        <div id="ref2dSuggestions" class="ref2d__suggestions" hidden></div>
+      </div>
+      <div class="ref2d__count" id="ref2dCount">—</div>
+    </div>
+    <div class="ref2d__header-actions">
+      <button class="ref2d__catToggle" id="ref2dCatToggle" type="button" aria-expanded="false" aria-controls="ref2dCatPanel">Ver categorías</button>
+      <button class="ref2d__header-btn ref2d__header-btn--secondary" id="ref2dInfoBtn" type="button" aria-controls="ref2dInfoOverlay">Información</button>
+      <button class="ref2d__header-btn ref2d__header-btn--secondary" id="ref2dSubmitBtn" type="button" aria-controls="ref2dSubmitOverlay">Submit</button>
+      <a class="ref2d__header-chip" href="indexoteca.html">Indexoteca <span aria-hidden="true">↗</span></a>
+      <div class="ref2d__header-more-wrap">
+        <button class="ref2d__header-more" id="ref2dHeaderMore" type="button" aria-expanded="false" aria-haspopup="true" aria-label="Más opciones">⋯</button>
+        <div class="ref2d__header-more-dropdown" id="ref2dHeaderMoreDropdown" hidden>
+          <button type="button" data-action="info">Información</button>
+          <button type="button" data-action="submit">Submit</button>
+          <a href="indexoteca.html">Indexoteca ↗</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section
+    class="ref2d__catPanel"
+    id="ref2dCatPanel"
+    hidden
+  >
+    <div class="ref2d__catGrid" id="ref2dCatGrid"></div>
+  </section>
+
+  <!-- Botón flotante para categorías (solo mobile) -->
+  <button
+    class="ref2d__mobileCatToggle"
+    id="ref2dMobileCatToggle"
+    type="button"
+    aria-expanded="false"
+    aria-controls="ref2dCatPanel"
+    aria-label="Ver categorías"
+  >
+    <span class="ref2d__mobileCatToggle-icon">+</span>
+  </button>
+
+  <!-- Viewport panable -->
+  <div aria-live="polite" class="ref2d__viewport" id="ref2dViewport">
+    <div class="ref2d__plane" id="ref2dPlane"></div>
+  </div>
+
+  <!-- Modal / Spotlight -->
+  <div class="ref2d__overlay" id="ref2dOverlay" hidden>
+    <div aria-labelledby="sheetTitle" aria-modal="true" class="ref2d__modal" role="dialog">
+      <button class="sheet__close" id="sheetClose" title="Cerrar">×</button>
+
+      <div class="sheet__figure">
+        <img alt="" id="sheetImg">
+      </div>
+
+      <aside class="sheet__aside">
+        <h3 class="sheet__title" id="sheetTitle">—</h3>
+
+        <dl class="sheet__meta">
+          <div><dt>Autor</dt><dd id="sheetAuthor">—</dd></div>
+          <div><dt>Colaboraciones</dt><dd id="sheetCollab">—</dd></div>
+          <div><dt>Área</dt><dd id="sheetArea">—</dd></div>
+          <div><dt>Año</dt><dd id="sheetYear">—</dd></div>
+        </dl>
+
+        <div class="sheet__tags" id="sheetTags"></div>
+
+        <a class="sheet__link" id="sheetLink" target="_blank" rel="noopener"></a>
+      </aside>
+    </div>
+  </div>
+
+  <button class="ref2d__center" id="ref2dCenter" title="Volver al centro">Recentrar</button>
+</section>
+
+<!-- JS principal de la Referencioteca 2D -->
+<!-- Nota: index.js (bundle de Cargo.site) fue eliminado porque no es necesario
+     para Referencioteca y causaba errores al intentar conectar con api.cargo.site -->
+<script src="ref2d.js"></script>
+
+</body>
+</html>

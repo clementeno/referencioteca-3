@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Indexoteca — Referencioteca</title>
+  <link rel="stylesheet" href="embed.css">
+  <link rel="stylesheet" href="indexoteca.css">
+</head>
+<body>
+  <header class="ref2d__top ref2d__top--internal" role="banner">
+    <a class="ref2d__brand" href="index.html">REFERENCIOTECA</a>
+    <div class="ref2d__header-actions">
+      <a class="ref2d__header-btn ref2d__header-btn--secondary" href="info.html">Información</a>
+      <a class="ref2d__header-btn ref2d__header-btn--secondary" href="submit.html">Submit</a>
+      <a class="ref2d__header-chip" href="indexoteca.html">Indexoteca <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main class="idx-main" role="main">
+    <section class="idx-editorial" aria-labelledby="idx-title">
+      <h1 class="idx-title" id="idx-title">INDEXOTECA</h1>
+      <p class="idx-lead">Indexoteca es una selección curada de estudios de diseño chilenos.
+        Un índice pensado para visibilizar oficinas, prácticas y enfoques que forman parte del ecosistema actual. 
+        Aquí encontrarás referencias, áreas y sitios oficiales de las oficinas y estudios.</p>
+    </section>
+
+    <div class="idx-toolbar">
+      <label for="search-input" class="visually-hidden">Buscar estudios</label>
+      <input type="search" id="search-input" class="idx-search" placeholder="Buscar por nombre, área, tags, ciudad…" autocomplete="off">
+      <span class="idx-count" id="count-el" aria-live="polite">0 items</span>
+    </div>
+
+    <div class="idx-table-wrap">
+      <table class="idx-table" role="table">
+        <thead>
+          <tr>
+            <th scope="col" class="col-name" data-sort="name">NOMBRE <span class="sort-icon" aria-hidden="true"></span></th>
+            <th scope="col" class="col-field" data-sort="field">ÁREA <span class="sort-icon" aria-hidden="true"></span></th>
+            <th scope="col" class="col-city" data-sort="city">CIUDAD <span class="sort-icon" aria-hidden="true"></span></th>
+            <th scope="col" class="col-link">LINK</th>
+          </tr>
+        </thead>
+        <tbody id="table-body"></tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="indexoteca.js"></script>
+</body>
+</html>
