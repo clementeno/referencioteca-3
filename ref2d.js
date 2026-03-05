@@ -92,52 +92,187 @@
   /* Helpers */
   const norm = s => (s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
   const PALETTE = ["#ff6b6b","#ffd93d","#6bcBef","#b084f6","#26de81","#ff9f1a","#f368e0","#00d2d3","#10ac84","#a29bfe","#fd79a8","#81ecec"];
+    /* =================== TAG NORMALIZATION (dedupe + Titlecase + aliases) =================== */
 
-  /* Mapeo de labels para categorías (normalizado) */
-  const CAT_LABELS = {
-    'all': 'ALL',
-    'editorial': 'EDITORIAL',
-    'ilustración': 'ILUSTRACIÓN',
-    'dirección de arte': 'ART DIRECTION',
-    'tipografía': 'TYPE DESIGN',
-    'experimental': 'EXPERIMENTAL',
-    'publicación digital': 'DIGITAL DESIGN',
-    'impresión': 'PRINTS',
-    'curaduría': 'CURATORSHIP',
-    'identidad exposición': 'IDENTITY',
-    'branding': 'BRANDING',
-    'señaletica': 'SIGNALETICS',
-    'iluminación museografica': 'LIGHTING',
-    'música': 'MUSIC',
-    'visuales': 'VISUALS',
-    'merchandising': 'MERCHANDISING',
-    'afiche': 'POSTER',
-    'vestuario': 'VESTUARIO',
-    'motion graphics': 'MOTION GRAPHICS',
-    'sitio web': 'WEB',
-    'educación': 'EDUCATION',
-    'exposición de arte': 'EXHIBITION',
-    'museografia': 'MUSEOGRAFÍA',
-    'moda': 'MODA',
-    'diagramación': 'EDITORIAL',
-    'gráfico': 'GRAPHIC DESIGN',
-    'fotografía': 'PHOTOGRAPHY',
-    'fotografía de moda': 'PHOTOGRAPHY',
-    'dirección creativa': 'CREATIVE DIRECTION',
-    'ux': 'INTERACTION DESIGN',
-    'ui': 'INTERACTION DESIGN',
-    'fanzine': 'EDITORIAL',
-    'objeto editorial': 'EDITORIAL',
-    'risografía': 'PRINT',
-    'infantil': 'EDITORIAL',
-    'videojuego': 'DIGITAL DESIGN',
-    'animación': 'MOTION',
-    'arte': 'ART',
-    'audiovisual': 'MOTION',
-    'stop-motion': 'MOTION',
-    'teatro': 'PERFORMANCE',
-    'instalación': 'SPATIAL DESIGN'
+  // Alias: tags distintos que deben caer en UNA sola categoría (evita duplicados como 3 "Editorial")
+  const TAG_ALIASES = {
+    // Editorial bucket
+    "diagramacion": "editorial",
+    "fanzine": "editorial",
+    "objeto editorial": "editorial",
+    "publicacion digital": "editorial",
+    "infantil": "editorial",
+
+    // Branding bucket
+    "identidad visual": "branding",
+    "identidad grafica": "branding",
+    "identidad gráfica": "branding",
+
+    // Web / Digital bucket
+    "sitio web": "web",
+    "digital": "web",
+    "ux": "ux",
+    "ui": "ui",
+    "responsivo": "web",
+
+    // Motion / Audiovisual bucket
+    "motion graphics": "animación",
+    "animacion": "animación",
+    "audiovisual": "animación",
+    "stop-motion": "animación",
+
+    // Museografía / Espacios bucket
+    "museografia": "museografía",
+    "museografía": "museografía",
+    "identidad exposicion": "museografía",
+    "identidad exposición": "museografía",
+    "instalacion": "museografía",
+    "instalación": "museografía",
+    "iluminacion museografica": "museografía",
+    "iluminación museografica": "museografía",
+
+    // Gráfico bucket (si quieres mantenerlo como categoría propia)
+    "grafico": "gráfico",
+    "gráfico": "gráfico",
   };
+
+  // Cómo se muestran (Mayúscula primero + acentos + excepciones)
+  const TAG_DISPLAY = {
+    "editorial": "Editorial",
+    "ilustracion": "Ilustración",
+    "ilustración": "Ilustración",
+    "direccion de arte": "Dirección de arte",
+    "dirección de arte": "Dirección de arte",
+    "tipografia": "Tipografía",
+    "tipografía": "Tipografía",
+    "experimental": "Experimental",
+    "impresion": "Impresión",
+    "impresión": "Impresión",
+    "curaduria": "Curaduría",
+    "curaduría": "Curaduría",
+    "branding": "Branding",
+    "senaletica": "Señalética",
+    "señaletica": "Señalética",
+    "señalética": "Señalética",
+    "fotografia": "Fotografía",
+    "fotografía": "Fotografía",
+    "moda": "Moda",
+    "vestuario": "Vestuario",
+    "musica": "Música",
+    "música": "Música",
+    "museografia": "Museografía",
+    "museografía": "Museografía",
+    "web": "Web",
+    "ux": "UX",
+    "ui": "UI",
+    "animación": "Animación",
+    "animacion": "Animación",
+    "gráfico": "Gráfico",
+    "grafico": "Gráfico",
+    "producto": "Producto",
+    "servicio": "Servicio",
+    "salud": "Salud",
+    "investigacion": "Investigación",
+    "investigación": "Investigación",
+    "packaging": "Packaging",
+    "serigrafia": "Serigrafía",
+    "serigrafía": "Serigrafía",
+    "industrial": "Industrial",
+    "mobiliario": "Mobiliario",
+    "espacios": "Espacios",
+    "social": "Social",
+    "afiche": "Afiche",
+    "iluminación": "Iluminación",
+    "iluminacion": "Iluminación",
+  };
+
+  const canonicalTagKey = (tag) => {
+    const k = norm(tag);
+    return TAG_ALIASES[k] || k;
+  };
+
+  const prettyTag = (canonicalKey) => {
+    return TAG_DISPLAY[canonicalKey] ||
+      (canonicalKey ? canonicalKey.charAt(0).toUpperCase() + canonicalKey.slice(1) : "—");
+  };
+
+  function normalizeProjectTags(p) {
+    const raw = Array.isArray(p.tags) ? p.tags.slice() : [];
+    const keys = [];
+    const seen = new Set();
+
+    raw.forEach(t => {
+      const k = canonicalTagKey(t);
+      if (!k) return;
+      if (seen.has(k)) return;
+      seen.add(k);
+      keys.push(k);
+    });
+
+    // tags mostrables (Titlecase)
+    p._tagKeys = keys;
+    p.tags = keys.map(prettyTag);
+
+    // índice de búsqueda (incluye raw + normalizados + texto del proyecto)
+    const hay = [
+      p.title || "",
+      p.author || "",
+      p.area || "",
+      p.collab || "",
+      raw.join(" "),
+      p.tags.join(" "),
+      keys.join(" ")
+    ].join(" ");
+    p._search = norm(hay);
+  }
+
+    /* Mapeo de labels para categorías (normalizado) */
+    const CAT_LABELS = {
+      "all": "ALL",
+      "editorial": "Editorial",
+      "ilustración": "Ilustración",
+      "ilustracion": "Ilustración",
+      "dirección de arte": "Dirección de arte",
+      "direccion de arte": "Dirección de arte",
+      "tipografía": "Tipografía",
+      "tipografia": "Tipografía",
+      "experimental": "Experimental",
+      "impresión": "Impresión",
+      "impresion": "Impresión",
+      "curaduría": "Curaduría",
+      "curaduria": "Curaduría",
+      "branding": "Branding",
+      "señalética": "Señalética",
+      "senaletica": "Señalética",
+      "museografía": "Museografía",
+      "museografia": "Museografía",
+      "web": "Web",
+      "ux": "UX",
+      "ui": "UI",
+      "animación": "Animación",
+      "animacion": "Animación",
+      "fotografía": "Fotografía",
+      "fotografia": "Fotografía",
+      "moda": "Moda",
+      "vestuario": "Vestuario",
+      "música": "Música",
+      "musica": "Música",
+      "gráfico": "Gráfico",
+      "grafico": "Gráfico",
+      "producto": "Producto",
+      "servicio": "Servicio",
+      "salud": "Salud",
+      "investigación": "Investigación",
+      "investigacion": "Investigación",
+      "packaging": "Packaging",
+      "serigrafía": "Serigrafía",
+      "serigrafia": "Serigrafía",
+      "industrial": "Industrial",
+      "mobiliario": "Mobiliario",
+      "espacios": "Espacios",
+      "social": "Social",
+      "afiche": "Afiche"
+    };
 
   /* Config desde CSS */
   let COL_W = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--colw'));
@@ -1213,6 +1348,8 @@
     }
     
   ];
+    // Normalizar tags + crear índice de búsqueda
+    DB.forEach(normalizeProjectTags);
 
   /* ===== Reordenamiento de proyectos al cargar ===== */
   // Opción A: Shuffle aleatorio (Fisher-Yates)
@@ -1899,8 +2036,12 @@
     const stats = {};
 
     projects.forEach(p => {
-      (p.tags || []).forEach(tag => {
-        const key = norm(tag);
+      const keys = (p._tagKeys && p._tagKeys.length)
+        ? p._tagKeys
+        : (p.tags || []).map(canonicalTagKey);
+    
+      keys.forEach(key => {
+        if (!key) return;
         if (!stats[key]) stats[key] = 0;
         stats[key] += 1;
       });
@@ -1920,7 +2061,7 @@
         return labelA.localeCompare(labelB);
       })
       .forEach(([key, count]) => {
-        const label = CAT_LABELS[key] || key.charAt(0).toUpperCase() + key.slice(1).toUpperCase();
+        const label = CAT_LABELS[key] || prettyTag(key);
         list.push({ key, label, count });
       });
 
