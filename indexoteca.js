@@ -11,8 +11,8 @@ const studios = [
   { name: "10:10", url: "https://www.diezdiez.com/", field: "Digital / Web", city: "Santiago, Chile", tags: ["digital", "web", "experiencia"], previews: ["diezdiez-1", "diezdiez-2", "diezdiez-3", "diezdiez-4"] },
   { name: "Design Systems International", url: "https://designsystems.international/", field: "Design Systems / Digital / Multidisciplinario", city: "International", tags: ["design systems", "digital", "product"], previews: ["dsi-1", "dsi-2", "dsi-3"] },
   { name: "searchsystem", url: "#", field: "Digital / Technology", city: "Santiago, Chile", tags: ["digital", "tech", "systems"], previews: ["search-1", "search-2", "search-3"] },
-  { name: "iv Studio", url: "https://www.ivestudio.com", field: "Branding / Dirección Creativa", city: "Santiago, Chile", tags: ["dirección de arte", "branding", "gráfico"], previews: ["iv-1.avif", "iv-2.avif", "iv-3.avif"] },
-  { name: "JVD", url: "#", field: "Dirección de arte / Arquitectura", city: "Santiago, Chile", tags: ["dirección de arte", "arquitectura", "gráfico"], previews: ["jvd-1", "jvd-2", "jvd-3"] },
+  { name: "IV Studio", url: "https://www.ivestudio.com", field: "Branding / Dirección Creativa", city: "Santiago, Chile", tags: ["dirección de arte", "branding", "gráfico"], previews: ["iv-1.avif", "iv-2.avif", "iv-3.avif"] },
+  { name: "JVD", url: "https://www.instagram.com/jvd_estudio/?hl=es", field: "Dirección de arte / Arquitectura", city: "Santiago, Chile", tags: ["dirección de arte", "arquitectura", "gráfico"], previews: ["jvd-1", "jvd-2", "jvd-3"] },
 ];
 
 let filtered = [...studios];
