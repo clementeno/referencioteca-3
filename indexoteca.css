@@ -65,7 +65,7 @@ body {
 }
 .idx-lead {
   margin: 0;
-  max-width: 65ch;
+  max-width: 1250ch;
   font-size: clamp(0.95rem, 1.2vw, 1.05rem);
   line-height: 1.55;
   color: var(--idx-ink-dim);
@@ -83,7 +83,7 @@ body {
 .idx-search {
   flex: 1;
   min-width: 200px;
-  max-width: 420px;
+  max-width: 1600px;
   height: 40px;
   padding: 0 16px;
   font-size: 0.95rem;
