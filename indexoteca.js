@@ -63,6 +63,13 @@ let sortDir = 1;
 const tableBody = document.getElementById("table-body");
 const searchInput = document.getElementById("search-input");
 const countEl = document.getElementById("count-el");
+const sortSelect = document.getElementById("sort-select");
+const headerMoreBtn = document.getElementById("idxHeaderMore");
+const headerMoreDropdown = document.getElementById("idxHeaderMoreDropdown");
+
+const isCoarsePointer = window.matchMedia("(hover: none), (pointer: coarse)").matches;
+const SEARCH_DEBOUNCE_MS = 130;
+let searchDebounceTimer = null;
 
 function escapeHtml(s) {
   const div = document.createElement("div");
@@ -85,6 +92,26 @@ function compare(a, b) {
   return 0;
 }
 
+function hasLink(url) {
+  return Boolean(url && url !== "#");
+}
+
+function getSortOptionValue() {
+  return `${sortKey}-${sortDir === 1 ? "asc" : "desc"}`;
+}
+
+function setSortFromOption(value) {
+  const [key, dir] = (value || "").split("-");
+  if (!key || !["name", "field", "city"].includes(key)) return;
+  sortKey = key;
+  sortDir = dir === "desc" ? -1 : 1;
+}
+
+function syncSortSelect() {
+  if (!sortSelect) return;
+  sortSelect.value = getSortOptionValue();
+}
+
 function getPreviewUrl(seed) {
   return `https://picsum.photos/seed/${encodeURIComponent(seed)}/600/400`;
 }
@@ -97,19 +124,21 @@ function render() {
     th.classList.remove("sort-asc", "sort-desc");
     if (th.dataset.sort === sortKey) th.classList.add(sortDir === 1 ? "sort-asc" : "sort-desc");
   });
+  syncSortSelect();
 
   let html = "";
   filtered.forEach((studio, i) => {
-    const linkLabel = studio.url === "#" ? "—" : "→";
-    const linkCell = studio.url === "#"
-      ? `<a href="#" onclick="event.preventDefault();event.stopPropagation();">${linkLabel}</a>`
-      : `<a href="${escapeHtml(studio.url)}" target="_blank" rel="noopener" onclick="event.stopPropagation();">${linkLabel}</a>`;
+    const canOpen = hasLink(studio.url);
+    const hasPreviews = (studio.previews || []).length > 0;
+    const linkCell = canOpen
+      ? `<a href="${escapeHtml(studio.url)}" target="_blank" rel="noopener" onclick="event.stopPropagation();"><span class="idx-link-desktop">→</span><span class="idx-link-mobile">Abrir ↗</span></a>`
+      : `<span aria-hidden="true">—</span>`;
     const thumbs = (studio.previews || [])
       .map((seed) => `<img class="drawer-thumb" src="${getPreviewUrl(seed)}" alt="" loading="lazy">`)
       .join("");
 
     html += `
-      <tr class="data-row" tabindex="0" data-index="${i}" data-href="${escapeHtml(studio.url)}" role="button">
+      <tr class="data-row ${hasPreviews ? "has-previews" : ""}" tabindex="0" data-index="${i}" data-href="${escapeHtml(studio.url)}" data-has-previews="${hasPreviews ? "1" : "0"}" role="button">
         <td class="col-name">${escapeHtml(studio.name)}</td>
         <td class="col-field">${escapeHtml(studio.field)}</td>
         <td class="col-city">${escapeHtml(studio.city)}</td>
@@ -167,8 +196,10 @@ function closeAllDrawers() {
 
 function bindRowEvents() {
   tableBody.querySelectorAll("tr.data-row").forEach((row) => {
-    row.addEventListener("mouseenter", () => openDrawer(row));
-    row.addEventListener("mouseleave", () => closeDrawer(row));
+    if (!isCoarsePointer) {
+      row.addEventListener("mouseenter", () => openDrawer(row));
+      row.addEventListener("mouseleave", () => closeDrawer(row));
+    }
     row.addEventListener("focus", () => openDrawer(row));
     row.addEventListener("blur", (e) => {
       const next = e.relatedTarget;
@@ -176,8 +207,18 @@ function bindRowEvents() {
       if (!next || (!row.contains(next) && (!drawer || !drawer.contains(next)))) closeDrawer(row);
     });
     row.addEventListener("click", (e) => {
-      if (e.target.closest("a[href]") && e.target.closest("a[href]").getAttribute("href") !== "#") return;
+      const link = e.target.closest("a[href]");
+      if (link && link.getAttribute("href") !== "#") return;
       const href = row.dataset.href;
+      const hasPreviews = row.dataset.hasPreviews === "1";
+      if (isCoarsePointer && hasPreviews) {
+        const drawerRow = getDrawerRow(row);
+        const wrapper = drawerRow ? drawerRow.querySelector(".drawer-wrapper") : null;
+        const alreadyOpen = Boolean(wrapper && wrapper.classList.contains("is-open"));
+        closeAllDrawers();
+        if (!alreadyOpen) openDrawer(row);
+        return;
+      }
       if (href && href !== "#") window.open(href, "_blank", "noopener");
     });
     row.addEventListener("keydown", (e) => {
@@ -189,21 +230,31 @@ function bindRowEvents() {
     });
   });
   tableBody.querySelectorAll("tr.drawer-row").forEach((drawerRow) => {
-    drawerRow.addEventListener("mouseenter", () => {
-      const dataRow = tableBody.querySelector(`tr.data-row[data-index="${drawerRow.dataset.index}"]`);
-      if (dataRow) openDrawer(dataRow);
-    });
-    drawerRow.addEventListener("mouseleave", () => {
-      const dataRow = tableBody.querySelector(`tr.data-row[data-index="${drawerRow.dataset.index}"]`);
-      if (dataRow) closeDrawer(dataRow);
-    });
+    if (!isCoarsePointer) {
+      drawerRow.addEventListener("mouseenter", () => {
+        const dataRow = tableBody.querySelector(`tr.data-row[data-index="${drawerRow.dataset.index}"]`);
+        if (dataRow) openDrawer(dataRow);
+      });
+      drawerRow.addEventListener("mouseleave", () => {
+        const dataRow = tableBody.querySelector(`tr.data-row[data-index="${drawerRow.dataset.index}"]`);
+        if (dataRow) closeDrawer(dataRow);
+      });
+    }
   });
 }
 
-searchInput.addEventListener("input", () => {
+function applySearch() {
   const q = searchInput.value.trim();
   filtered = studios.filter((s) => matchStudio(s, q));
   render();
+}
+
+searchInput.addEventListener("input", () => {
+  if (searchDebounceTimer) clearTimeout(searchDebounceTimer);
+  searchDebounceTimer = setTimeout(() => {
+    searchDebounceTimer = null;
+    applySearch();
+  }, SEARCH_DEBOUNCE_MS);
 });
 
 document.querySelectorAll(".idx-table th[data-sort]").forEach((th) => {
@@ -214,9 +265,52 @@ document.querySelectorAll(".idx-table th[data-sort]").forEach((th) => {
   });
 });
 
+if (sortSelect) {
+  sortSelect.addEventListener("change", () => {
+    setSortFromOption(sortSelect.value);
+    render();
+  });
+}
+
+if (headerMoreBtn && headerMoreDropdown) {
+  const closeHeaderMore = () => {
+    headerMoreDropdown.hidden = true;
+    headerMoreBtn.setAttribute("aria-expanded", "false");
+  };
+  const openHeaderMore = () => {
+    headerMoreDropdown.hidden = false;
+    headerMoreBtn.setAttribute("aria-expanded", "true");
+  };
+
+  headerMoreBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if (headerMoreDropdown.hidden) openHeaderMore();
+    else closeHeaderMore();
+  });
+
+  document.addEventListener("click", (e) => {
+    if (headerMoreDropdown.hidden) return;
+    if (!e.target.closest("#idxHeaderMore") && !e.target.closest("#idxHeaderMoreDropdown")) closeHeaderMore();
+  });
+}
+
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") closeAllDrawers();
+  if (e.key === "Escape") {
+    closeAllDrawers();
+    if (headerMoreDropdown && !headerMoreDropdown.hidden) {
+      headerMoreDropdown.hidden = true;
+      if (headerMoreBtn) headerMoreBtn.setAttribute("aria-expanded", "false");
+    }
+  }
 });
+
+if (isCoarsePointer) {
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest("tr.data-row") && !e.target.closest("tr.drawer-row")) {
+      closeAllDrawers();
+    }
+  });
+}
 
 filtered = [...studios];
 render();

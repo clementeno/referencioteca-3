@@ -14,6 +14,14 @@
       <a class="ref2d__header-btn ref2d__header-btn--secondary" href="info.html">Información</a>
       <a class="ref2d__header-btn ref2d__header-btn--secondary" href="submit.html">Submit</a>
       <a class="ref2d__header-chip" href="indexoteca.html">Indexoteca <span aria-hidden="true">↗</span></a>
+      <div class="ref2d__header-more-wrap">
+        <button class="ref2d__header-more" id="idxHeaderMore" type="button" aria-expanded="false" aria-haspopup="true" aria-label="Más opciones">⋯</button>
+        <div class="ref2d__header-more-dropdown" id="idxHeaderMoreDropdown" hidden>
+          <a href="info.html">Información</a>
+          <a href="submit.html">Submit</a>
+          <a href="indexoteca.html">Indexoteca ↗</a>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -29,6 +37,15 @@
     <div class="idx-toolbar">
       <label for="search-input" class="visually-hidden">Buscar estudios</label>
       <input type="search" id="search-input" class="idx-search" placeholder="Buscar por nombre, área, tags, ciudad…" autocomplete="off">
+      <label for="sort-select" class="visually-hidden">Ordenar resultados</label>
+      <select id="sort-select" class="idx-sort" aria-label="Ordenar resultados">
+        <option value="name-asc">Nombre (A-Z)</option>
+        <option value="name-desc">Nombre (Z-A)</option>
+        <option value="field-asc">Área (A-Z)</option>
+        <option value="field-desc">Área (Z-A)</option>
+        <option value="city-asc">Ciudad (A-Z)</option>
+        <option value="city-desc">Ciudad (Z-A)</option>
+      </select>
       <span class="idx-count" id="count-el" aria-live="polite">0 items</span>
     </div>
 

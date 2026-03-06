@@ -28,6 +28,7 @@ body {
   font-family: system-ui, -apple-system, sans-serif;
   font-size: 15px;
   line-height: 1.4;
+  overflow-x: hidden;
 }
 
 .visually-hidden {
@@ -82,7 +83,7 @@ body {
 }
 .idx-search {
   flex: 1;
-  min-width: 200px;
+  min-width: 220px;
   max-width: 1600px;
   height: 40px;
   padding: 0 16px;
@@ -102,6 +103,27 @@ body {
   color: var(--idx-ink-dim);
   white-space: nowrap;
 }
+.idx-sort {
+  height: 40px;
+  min-width: 170px;
+  padding: 0 36px 0 12px;
+  border-radius: 999px;
+  border: 1px solid #2a2a2e;
+  background: #141418;
+  color: var(--idx-ink);
+  font-size: 0.9rem;
+  outline: none;
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, #9a9aa1 50%),
+    linear-gradient(135deg, #9a9aa1 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) 17px,
+    calc(100% - 12px) 17px;
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+}
+.idx-sort:focus { border-color: rgba(255, 255, 255, 0.2); }
 
 /* --- Tabla --- */
 .idx-main {
@@ -167,6 +189,8 @@ body {
   text-decoration: none;
 }
 .idx-table .col-link a:hover { color: var(--idx-ink); }
+.idx-link-mobile { display: none; }
+.idx-link-desktop { display: inline; }
 
 /* Drawer */
 .idx-table tr.drawer-row td {
@@ -217,20 +241,106 @@ body {
 
 /* Responsive */
 @media (max-width: 767px) {
-  .idx-editorial { padding-top: clamp(20px, 4vw, 32px); }
-  .idx-table .col-city,
-  .idx-table .col-link { display: none; }
-  .idx-table tr.data-row td { display: block; border-bottom: 0; }
-  .idx-table tr.data-row td.col-name { padding-bottom: 0.15rem; }
+  .idx-main {
+    padding-left: 14px;
+    padding-right: 14px;
+    padding-bottom: 2rem;
+  }
+  .idx-editorial {
+    padding-top: clamp(20px, 4vw, 32px);
+    padding-bottom: 1rem;
+  }
+  .idx-lead {
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+  .idx-toolbar {
+    gap: 10px;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding-bottom: 14px;
+  }
+  .idx-search,
+  .idx-sort {
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+  }
+  .idx-count {
+    font-size: 0.82rem;
+    padding-left: 2px;
+  }
+  .idx-table-wrap {
+    overflow: visible;
+  }
+  .idx-table thead {
+    display: none;
+  }
+  .idx-table,
+  .idx-table tbody,
+  .idx-table tr,
+  .idx-table td {
+    display: block;
+    width: 100%;
+  }
+  .idx-table tr.data-row {
+    border-bottom: 1px solid var(--idx-line);
+    padding: 0.85rem 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .idx-table tr.data-row td {
+    padding: 0;
+    border-bottom: 0;
+  }
+  .idx-table tr.data-row td.col-name {
+    padding-bottom: 0.2rem;
+    font-size: 0.98rem;
+  }
   .idx-table tr.data-row td.col-field {
-    padding-top: 0.15rem;
-    font-size: 0.85rem;
+    padding-top: 0.05rem;
+    font-size: 0.86rem;
     color: var(--idx-ink-dim);
+    line-height: 1.45;
+  }
+  .idx-table tr.data-row td.col-city {
+    margin-top: 0.2rem;
+    font-size: 0.82rem;
+    color: var(--idx-ink-dim);
+  }
+  .idx-table tr.data-row td.col-link {
+    margin-top: 0.6rem;
+  }
+  .idx-table .col-link a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 36px;
+    padding: 0 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 0.78rem;
+    letter-spacing: 0.02em;
+    color: var(--idx-ink);
+    background: rgba(255, 255, 255, 0.03);
+  }
+  .idx-link-mobile { display: inline; }
+  .idx-link-desktop { display: none; }
+  .idx-table tr.drawer-row td {
     border-bottom: 1px solid var(--idx-line);
   }
-  .idx-table thead th.col-city,
-  .idx-table thead th.col-link { display: none; }
-  .idx-table thead th.col-name,
-  .idx-table thead th.col-field { display: block; }
+  .drawer-content {
+    min-height: auto;
+    padding: 0.4rem 0 0.9rem;
+    border-radius: 0;
+    background: transparent;
+  }
   .drawer-thumb { width: 120px; height: 80px; }
+}
+
+@media (max-width: 420px) {
+  .idx-title { font-size: clamp(1.9rem, 10vw, 2.6rem); }
+  .idx-search,
+  .idx-sort {
+    height: 38px;
+  }
 }
