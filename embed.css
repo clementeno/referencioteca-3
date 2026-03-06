@@ -28,18 +28,53 @@ body {
 @media (max-width:768px){
   .ref2d__top{
     grid-template-columns:1fr;
-    gap:8px;
+    gap:10px;
     padding-left:0;
     padding-right:0;
   }
-  .ref2d__brand{font-size:clamp(0.95rem, 2.5vw, 1.1rem); padding-left:16px;}
-  .ref2d__header-actions .ref2d__catToggle,
-  .ref2d__header-actions .ref2d__header-btn,
-  .ref2d__header-actions .ref2d__header-chip{ display:none !important; }
-  .ref2d__header-more-wrap{ display:flex !important; }
-  .ref2d__search-block{ padding:0 16px; max-width:none; }
+  .ref2d__brand{
+    font-size:clamp(0.95rem, 2.5vw, 1.1rem);
+    padding:2px 16px 0;
+  }
+  .ref2d__search-block{
+    padding:0 16px;
+    max-width:none;
+    width:100%;
+    display:grid;
+    grid-template-columns:minmax(0, 1fr) auto;
+    align-items:center;
+    gap:10px;
+  }
   .ref2d__search-wrapper{ max-width:none; }
-  .ref2d__search, #ref2dSearch{ width:100%; margin:0; }
+  .ref2d__search, #ref2dSearch{
+    width:100%;
+    margin:0;
+    min-width:0;
+  }
+  .ref2d__top:not(.ref2d__top--internal) .ref2d__header-actions{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:8px;
+    padding:0 16px 2px;
+  }
+  .ref2d__top:not(.ref2d__top--internal) .ref2d__header-actions .ref2d__catToggle{
+    display:none !important;
+  }
+  .ref2d__top:not(.ref2d__top--internal) .ref2d__header-actions .ref2d__header-btn,
+  .ref2d__top:not(.ref2d__top--internal) .ref2d__header-actions .ref2d__header-chip,
+  .ref2d__top:not(.ref2d__top--internal) .ref2d__header-actions .ref2d__view-wrap{
+    display:inline-flex !important;
+  }
+  .ref2d__top:not(.ref2d__top--internal) .ref2d__header-actions .ref2d__header-btn,
+  .ref2d__top:not(.ref2d__top--internal) .ref2d__header-actions .ref2d__header-chip,
+  .ref2d__top:not(.ref2d__top--internal) .ref2d__header-actions .ref2d__view-toggle{
+    min-height:38px;
+    font-size:0.86rem;
+  }
+  .ref2d__top:not(.ref2d__top--internal) .ref2d__header-actions .ref2d__header-more-wrap{
+    display:none !important;
+  }
   .ref2d__top--internal .ref2d__header-actions .ref2d__header-btn,
   .ref2d__top--internal .ref2d__header-actions .ref2d__header-chip{ display:inline-flex !important; }
   .ref2d__top--internal .ref2d__header-more-wrap{ display:none !important; }
