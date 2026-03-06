@@ -238,24 +238,6 @@ body {
   background: var(--idx-line);
   object-fit: cover;
 }
-.drawer-thumb--placeholder {
-  background: linear-gradient(110deg, #1a1a1f 8%, #26262d 18%, #1a1a1f 33%);
-  background-size: 200% 100%;
-  animation: idx-shimmer 1.2s linear infinite;
-}
-.drawer-thumb--fallback {
-  background: #1a1a1f;
-}
-.drawer-empty {
-  color: var(--idx-ink-dim);
-  font-size: 0.84rem;
-  padding: 0.25rem 0;
-}
-
-@keyframes idx-shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
-}
 
 /* Responsive */
 @media (max-width: 767px) {

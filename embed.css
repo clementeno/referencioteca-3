@@ -38,10 +38,10 @@ body {
   }
   .ref2d__search-block{
     padding:0 16px;
-    max-width:none;
-    width:100%;
+    max-width:none !important;
+    width:100% !important;
     display:grid;
-    grid-template-columns:minmax(0, 1fr) auto;
+    grid-template-columns:minmax(0, 1fr) max-content;
     align-items:center;
     gap:10px;
   }
@@ -71,6 +71,10 @@ body {
   .ref2d__top:not(.ref2d__top--internal) .ref2d__header-actions .ref2d__view-toggle{
     min-height:38px;
     font-size:0.86rem;
+  }
+  .ref2d__count{
+    min-width:82px;
+    text-align:center;
   }
   .ref2d__top:not(.ref2d__top--internal) .ref2d__header-actions .ref2d__header-more-wrap{
     display:none !important;

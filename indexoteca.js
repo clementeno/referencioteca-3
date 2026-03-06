@@ -69,23 +69,12 @@ const headerMoreDropdown = document.getElementById("idxHeaderMoreDropdown");
 
 const isCoarsePointer = window.matchMedia("(hover: none), (pointer: coarse)").matches;
 const SEARCH_DEBOUNCE_MS = 130;
-const PREVIEW_SLOTS = 5;
 let searchDebounceTimer = null;
-const previewCache = new Map();
-const previewPromiseCache = new Map();
 
 function escapeHtml(s) {
   const div = document.createElement("div");
   div.textContent = s;
   return div.innerHTML;
-}
-
-function escapeAttr(s) {
-  return String(s ?? "")
-    .replace(/&/g, "&amp;")
-    .replace(/"/g, "&quot;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
 }
 
 function matchStudio(studio, q) {
@@ -107,19 +96,6 @@ function hasLink(url) {
   return Boolean(url && url !== "#");
 }
 
-function isHttpUrl(url) {
-  try {
-    const parsed = new URL(url);
-    return parsed.protocol === "http:" || parsed.protocol === "https:";
-  } catch (_error) {
-    return false;
-  }
-}
-
-function getStudioKey(studio) {
-  return `${studio.name || "studio"}::${studio.url || "no-link"}`;
-}
-
 function getSortOptionValue() {
   return `${sortKey}-${sortDir === 1 ? "asc" : "desc"}`;
 }
@@ -136,106 +112,8 @@ function syncSortSelect() {
   sortSelect.value = getSortOptionValue();
 }
 
-function getSeedPreviewUrl(seed) {
+function getPreviewUrl(seed) {
   return `https://picsum.photos/seed/${encodeURIComponent(seed)}/600/400`;
-}
-
-function shuffle(list) {
-  const copy = [...list];
-  for (let i = copy.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [copy[i], copy[j]] = [copy[j], copy[i]];
-  }
-  return copy;
-}
-
-function uniqueUrls(urls) {
-  const seen = new Set();
-  const out = [];
-  urls.forEach((url) => {
-    if (!url) return;
-    if (seen.has(url)) return;
-    seen.add(url);
-    out.push(url);
-  });
-  return out;
-}
-
-function getWebsiteScreenshotUrls(siteUrl) {
-  if (!hasLink(siteUrl) || !isHttpUrl(siteUrl)) return [];
-  const encoded = encodeURIComponent(siteUrl);
-
-  return [
-    `https://s.wordpress.com/mshots/v1/${encoded}?w=1280`,
-    `https://s.wordpress.com/mshots/v1/${encoded}?w=1024`,
-    `https://s.wordpress.com/mshots/v1/${encoded}?w=800`,
-    `https://image.thum.io/get/width/1280/noanimate/${siteUrl}`,
-    `https://image.thum.io/get/width/1100/crop/800/noanimate/${siteUrl}`,
-    `https://image.thum.io/get/width/900/noanimate/${siteUrl}`,
-  ];
-}
-
-function getFallbackPreviewDataUri(studio, index) {
-  const title = escapeHtml(studio.name || "Proyecto");
-  const slot = index + 1;
-  const svg = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400">
-      <defs>
-        <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
-          <stop offset="0" stop-color="#18181c"/>
-          <stop offset="1" stop-color="#222229"/>
-        </linearGradient>
-      </defs>
-      <rect width="600" height="400" fill="url(#g)"/>
-      <text x="28" y="335" fill="#d9d9df" font-size="28" font-family="system-ui, -apple-system, sans-serif">${title}</text>
-      <text x="28" y="365" fill="#9595a1" font-size="18" font-family="system-ui, -apple-system, sans-serif">Preview ${slot}</text>
-    </svg>
-  `.trim();
-  return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
-}
-
-function buildPreviewUrls(studio) {
-  const fromWebsite = getWebsiteScreenshotUrls(studio.url);
-  const manual = (studio.previews || []).map((item) => (isHttpUrl(item) ? item : getSeedPreviewUrl(item)));
-  const shuffled = shuffle(uniqueUrls([...fromWebsite, ...manual]));
-  const picked = shuffled.slice(0, PREVIEW_SLOTS);
-
-  while (picked.length < PREVIEW_SLOTS) {
-    picked.push(getSeedPreviewUrl(`${studio.name || "studio"}-${picked.length + 1}`));
-  }
-
-  return picked;
-}
-
-async function getStudioPreviews(studio, key) {
-  if (previewCache.has(key)) return previewCache.get(key);
-  if (previewPromiseCache.has(key)) return previewPromiseCache.get(key);
-
-  const promise = Promise.resolve().then(() => {
-    const urls = buildPreviewUrls(studio);
-    previewCache.set(key, urls);
-    previewPromiseCache.delete(key);
-    return urls;
-  }).catch((error) => {
-    previewPromiseCache.delete(key);
-    throw error;
-  });
-
-  previewPromiseCache.set(key, promise);
-  return promise;
-}
-
-function renderThumbSkeletons() {
-  return Array.from({ length: PREVIEW_SLOTS }, () => '<span class="drawer-thumb drawer-thumb--placeholder" aria-hidden="true"></span>').join("");
-}
-
-function renderThumbImages(studio, urls) {
-  const safeName = escapeHtml(studio.name || "Proyecto");
-  return urls.map((url, index) => {
-    const safeUrl = escapeAttr(url);
-    const fallback = escapeAttr(getFallbackPreviewDataUri(studio, index));
-    return `<img class="drawer-thumb" src="${safeUrl}" alt="Preview ${index + 1} de ${safeName}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='${fallback}';this.classList.add('drawer-thumb--fallback');">`;
-  }).join("");
 }
 
 function render() {
@@ -251,17 +129,16 @@ function render() {
   let html = "";
   filtered.forEach((studio, i) => {
     const canOpen = hasLink(studio.url);
-    const hasPreviews = canOpen || (studio.previews || []).length > 0;
-    const studioKey = getStudioKey(studio);
+    const hasPreviews = (studio.previews || []).length > 0;
     const linkCell = canOpen
       ? `<a href="${escapeHtml(studio.url)}" target="_blank" rel="noopener" onclick="event.stopPropagation();"><span class="idx-link-desktop">→</span><span class="idx-link-mobile">Abrir ↗</span></a>`
       : `<span aria-hidden="true">—</span>`;
-    const thumbs = hasPreviews
-      ? renderThumbSkeletons()
-      : '<div class="drawer-empty">Sin previews para este estudio.</div>';
+    const thumbs = (studio.previews || [])
+      .map((seed) => `<img class="drawer-thumb" src="${getPreviewUrl(seed)}" alt="" loading="lazy">`)
+      .join("");
 
     html += `
-      <tr class="data-row ${hasPreviews ? "has-previews" : ""}" tabindex="0" data-index="${i}" data-studio-key="${escapeAttr(studioKey)}" data-href="${escapeHtml(studio.url)}" data-has-previews="${hasPreviews ? "1" : "0"}" role="button">
+      <tr class="data-row ${hasPreviews ? "has-previews" : ""}" tabindex="0" data-index="${i}" data-href="${escapeHtml(studio.url)}" data-has-previews="${hasPreviews ? "1" : "0"}" role="button">
         <td class="col-name">${escapeHtml(studio.name)}</td>
         <td class="col-field">${escapeHtml(studio.field)}</td>
         <td class="col-city">${escapeHtml(studio.city)}</td>
@@ -272,7 +149,7 @@ function render() {
           <div class="drawer-wrapper">
             <div class="drawer-inner">
               <div class="drawer-content">
-                <div class="drawer-thumbs" data-loaded="${hasPreviews ? "0" : "1"}" data-loading="0">${thumbs}</div>
+                <div class="drawer-thumbs">${thumbs}</div>
               </div>
             </div>
           </div>
@@ -289,38 +166,6 @@ function getDrawerRow(dataRow) {
   return tableBody.querySelector(`tr.drawer-row[data-index="${idx}"]`);
 }
 
-async function hydrateDrawerPreviews(dataRow) {
-  if (!dataRow || dataRow.dataset.hasPreviews !== "1") return;
-
-  const drawerRow = getDrawerRow(dataRow);
-  if (!drawerRow) return;
-  const thumbsNode = drawerRow.querySelector(".drawer-thumbs");
-  if (!thumbsNode) return;
-  if (thumbsNode.dataset.loaded === "1" || thumbsNode.dataset.loading === "1") return;
-
-  const studioIndex = Number(dataRow.dataset.index);
-  const studio = filtered[studioIndex];
-  if (!studio) return;
-
-  thumbsNode.dataset.loading = "1";
-  thumbsNode.innerHTML = renderThumbSkeletons();
-
-  try {
-    const key = dataRow.dataset.studioKey || getStudioKey(studio);
-    const previews = await getStudioPreviews(studio, key);
-    if (!document.body.contains(thumbsNode)) return;
-    thumbsNode.innerHTML = renderThumbImages(studio, previews);
-    thumbsNode.dataset.loaded = "1";
-  } catch (_error) {
-    if (!document.body.contains(thumbsNode)) return;
-    thumbsNode.innerHTML = '<div class="drawer-empty">No fue posible cargar previews.</div>';
-  } finally {
-    if (document.body.contains(thumbsNode)) {
-      thumbsNode.dataset.loading = "0";
-    }
-  }
-}
-
 function openDrawer(dataRow) {
   const drawerRow = getDrawerRow(dataRow);
   if (!drawerRow) return;
@@ -328,7 +173,6 @@ function openDrawer(dataRow) {
   if (wrapper) {
     wrapper.classList.add("is-open");
     drawerRow.setAttribute("aria-hidden", "false");
-    hydrateDrawerPreviews(dataRow);
   }
 }
 
