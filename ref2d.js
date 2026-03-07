@@ -1092,20 +1092,6 @@
       src: "https://freight.cargo.site/t/original/i/T2726560875526688930172594762435/Sofia-AlvarezCaptura-de-pantalla-2026-01-02-a-las-14.32.18.png",
       url: "https://readymag.website/u3068913620/portafoliomojona/proyectotoyngtravelgames/"
     },
-    /* ------------------ DRP_01 — Benjamín Becerra ------------------ */
-{
-  src: "https://freight.cargo.site/t/original/i/W2729729462721201243755679003331/Benjamin-Becerra-Captura-de-pantalla-2026-01-04-a-las-14.02.30.png",
-  orientation: "v",
-  span: 2,
-  tags: ["vestuario","moda"],
-  title: "DRP_01",
-  author: "Benjamín Becerra",
-  collab: "Marca: Hostil",
-  area: "Vestuario / Moda",
-  year: "2025",
-  url: "https://hostil-streetwear.com/products/hoodie_core"
-},
-
 /* ------------------ De Cancelling — Domingo Smart ------------------ */
 {
   src: "https://freight.cargo.site/t/original/i/D2825598558428431692792129336003/Smart-Domingo.png",
