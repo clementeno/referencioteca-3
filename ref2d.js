@@ -30,11 +30,8 @@
   const indexBody = $("#ref2dIndexBody");
   const btnRandom = $("#ref2dRandom");
   const infoBtn = $("#ref2dInfoBtn");
-  const submitBtn = $("#ref2dSubmitBtn");
   const infoOverlay = $("#ref2dInfoOverlay");
-  const submitOverlay = $("#ref2dSubmitOverlay");
   const infoClose = $("#ref2dInfoClose");
-  const submitClose = $("#ref2dSubmitClose");
   const headerMoreBtn = $("#ref2dHeaderMore");
   const headerMoreDropdown = $("#ref2dHeaderMoreDropdown");
 
@@ -2859,13 +2856,6 @@
       });
     }
 
-    if (submitBtn) {
-      submitBtn.addEventListener('click', () => {
-        closeHeaderMore();
-        openSimpleOverlay(submitOverlay);
-      });
-    }
-
     if (infoClose) {
       infoClose.addEventListener('click', (e) => {
         e.preventDefault();
@@ -2874,23 +2864,10 @@
       });
     }
 
-    if (submitClose) {
-      submitClose.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        closeSimpleOverlay(submitOverlay);
-      });
-    }
 
     if (infoOverlay) {
       infoOverlay.addEventListener('click', (e) => {
         if (e.target === infoOverlay) closeSimpleOverlay(infoOverlay);
-      });
-    }
-
-    if (submitOverlay) {
-      submitOverlay.addEventListener('click', (e) => {
-        if (e.target === submitOverlay) closeSimpleOverlay(submitOverlay);
       });
     }
 
@@ -2907,7 +2884,6 @@
         const action = actionBtn.dataset.action;
         closeHeaderMore();
         if (action === 'info') openSimpleOverlay(infoOverlay);
-        if (action === 'submit') openSimpleOverlay(submitOverlay);
       });
 
       document.addEventListener('click', (e) => {
@@ -2922,7 +2898,6 @@
       if (e.key !== 'Escape') return;
       closeHeaderMore();
       if (infoOverlay && !infoOverlay.hidden) closeSimpleOverlay(infoOverlay);
-      if (submitOverlay && !submitOverlay.hidden) closeSimpleOverlay(submitOverlay);
     });
   }
 

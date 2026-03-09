@@ -49,17 +49,6 @@
   </div>
 </div>
 
-<!-- Modal Submit (proponer proyecto) -->
-<div class="ref2d__wip-overlay ref2d__header-modal" id="ref2dSubmitOverlay" hidden>
-  <div class="ref2d__wip-modal" role="dialog" aria-labelledby="ref2dSubmitTitle" aria-modal="true">
-    <button class="ref2d__wip-close" id="ref2dSubmitClose" aria-label="Cerrar">×</button>
-    <h2 class="ref2d__wip-title" id="ref2dSubmitTitle">¿Quieres proponer un proyecto?</h2>
-    <div class="ref2d__wip-content">
-      <p>Puedes enviarnos la información a <a href="mailto:referencioteca.cl@gmail.com">referencioteca.cl@gmail.com</a> con el asunto «Propuesta de proyecto».</p>
-    </div>
-  </div>
-</div>
-
 <!--  REFERENCIOTECA 2D — Contenedor principal -->
 <section class="ref2d">
   <header class="ref2d__top">
@@ -82,13 +71,13 @@
         </div>
       </div>
       <button class="ref2d__header-btn ref2d__header-btn--secondary" id="ref2dInfoBtn" type="button" aria-controls="ref2dInfoOverlay">Información</button>
-      <button class="ref2d__header-btn ref2d__header-btn--secondary" id="ref2dSubmitBtn" type="button" aria-controls="ref2dSubmitOverlay">Submit</button>
+      <a class="ref2d__header-btn ref2d__header-btn--secondary" href="submit.html">Submit</a>
       <a class="ref2d__header-chip" href="indexoteca.html">Indexoteca <span aria-hidden="true">↗</span></a>
       <div class="ref2d__header-more-wrap">
         <button class="ref2d__header-more" id="ref2dHeaderMore" type="button" aria-expanded="false" aria-haspopup="true" aria-label="Más opciones">⋯</button>
         <div class="ref2d__header-more-dropdown" id="ref2dHeaderMoreDropdown" hidden>
           <button type="button" data-action="info">Información</button>
-          <button type="button" data-action="submit">Submit</button>
+          <a href="submit.html">Submit</a>
           <a href="indexoteca.html">Indexoteca ↗</a>
         </div>
       </div>

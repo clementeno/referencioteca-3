@@ -6,6 +6,123 @@
   <title>Submit — Referencioteca</title>
   <link rel="stylesheet" href="embed.css">
   <link rel="stylesheet" href="index.css">
+  <style>
+    .ref2d-submit {
+      max-width: min(920px, 100% - 32px);
+      margin: clamp(20px, 4vw, 40px) auto 48px;
+      color: var(--ink);
+    }
+    .ref2d-submit__lead {
+      color: var(--ink-dim);
+      line-height: 1.6;
+      max-width: 66ch;
+      margin: 0 0 1.5rem;
+    }
+    .ref2d-submit__panel {
+      border: 1px solid #24242a;
+      background: #121217;
+      border-radius: 16px;
+      padding: clamp(16px, 2.6vw, 28px);
+    }
+    .ref2d-submit__grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .ref2d-submit__field {
+      display: grid;
+      gap: 8px;
+    }
+    .ref2d-submit__field--full {
+      grid-column: 1 / -1;
+    }
+    .ref2d-submit label {
+      font-size: 0.9rem;
+      color: #d2d2d8;
+    }
+    .ref2d-submit input,
+    .ref2d-submit textarea {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid #2f2f36;
+      background: #0f1014;
+      color: #f3f3f4;
+      font: inherit;
+      padding: 0.75rem 0.9rem;
+      outline: none;
+    }
+    .ref2d-submit textarea {
+      min-height: 130px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+    .ref2d-submit input:focus,
+    .ref2d-submit textarea:focus {
+      border-color: #6d89ff;
+      box-shadow: 0 0 0 1px rgba(109, 137, 255, 0.35);
+    }
+    .ref2d-submit__hint {
+      margin: 6px 0 0;
+      color: #9f9fa8;
+      font-size: 0.84rem;
+      line-height: 1.5;
+    }
+    .ref2d-submit__consent {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 4px;
+      color: #bfc0c8;
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+    .ref2d-submit__consent input {
+      width: 16px;
+      height: 16px;
+      margin-top: 0.25rem;
+      padding: 0;
+    }
+    .ref2d-submit__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .ref2d-submit__send {
+      appearance: none;
+      border: 1px solid rgba(255,255,255,0.24);
+      background: #1b1d26;
+      color: #fff;
+      border-radius: 999px;
+      padding: 0.6rem 1rem;
+      font: inherit;
+      cursor: pointer;
+    }
+    .ref2d-submit__send:hover {
+      background: #262938;
+    }
+    .ref2d-submit__fallback {
+      color: #b7b8c2;
+      font-size: 0.9rem;
+      margin-top: 12px;
+    }
+    .ref2d-submit__fallback a {
+      color: #f0f0f2;
+      text-decoration: underline;
+      text-decoration-color: rgba(255,255,255,0.35);
+    }
+    .ref2d-submit__fallback a:hover {
+      text-decoration-color: rgba(255,255,255,0.65);
+    }
+    @media (max-width: 780px) {
+      .ref2d-submit {
+        max-width: calc(100% - 24px);
+      }
+      .ref2d-submit__grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
   <header class="ref2d__top ref2d__top--internal" role="banner">
@@ -17,11 +134,103 @@
     </div>
   </header>
 
-  <main class="ref2d-internal__main" role="main">
+  <main class="ref2d-internal__main ref2d-submit" role="main">
     <h1 class="ref2d-internal__title">¿Quieres proponer un proyecto?</h1>
-    <div class="ref2d-internal__content">
-      <p>Puedes enviarnos la información a <a href="mailto:referencioteca.cl@gmail.com">referencioteca.cl@gmail.com</a> con el asunto «Propuesta de proyecto».</p>
-    </div>
+    <p class="ref2d-submit__lead">
+      Completa estos datos básicos y envíalos directamente al correo del equipo de Referencioteca.
+      Esto no publica automáticamente el proyecto: primero se revisa y luego se notifica la inclusión.
+    </p>
+
+    <form
+      class="ref2d-submit__panel"
+      action="https://formsubmit.co/referencioteca.cl@gmail.com"
+      method="POST"
+      autocomplete="on"
+    >
+      <input type="hidden" name="_subject" value="Nueva propuesta de proyecto — Referencioteca">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_next" id="submitNext" value="">
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+
+      <div class="ref2d-submit__grid">
+        <div class="ref2d-submit__field">
+          <label for="projectTitle">Nombre del proyecto *</label>
+          <input id="projectTitle" name="Nombre del proyecto" type="text" required>
+        </div>
+
+        <div class="ref2d-submit__field">
+          <label for="projectYear">Año *</label>
+          <input id="projectYear" name="Año" type="number" min="1900" max="2100" required>
+        </div>
+
+        <div class="ref2d-submit__field">
+          <label for="projectAuthors">Autor(es) *</label>
+          <input id="projectAuthors" name="Autor(es)" type="text" required>
+        </div>
+
+        <div class="ref2d-submit__field">
+          <label for="projectArea">Área / disciplina *</label>
+          <input id="projectArea" name="Área o disciplina" type="text" placeholder="Ej: Branding / Museografía / Editorial" required>
+        </div>
+
+        <div class="ref2d-submit__field ref2d-submit__field--full">
+          <label for="projectUrl">Link principal del proyecto *</label>
+          <input id="projectUrl" name="Link principal" type="url" placeholder="https://..." required>
+        </div>
+
+        <div class="ref2d-submit__field ref2d-submit__field--full">
+          <label for="extraLinks">Links extra (opcional)</label>
+          <input id="extraLinks" name="Links extra" type="text" placeholder="Puedes separar varios por coma">
+        </div>
+
+        <div class="ref2d-submit__field ref2d-submit__field--full">
+          <label for="projectTags">Palabras clave / tags (opcional)</label>
+          <input id="projectTags" name="Tags" type="text" placeholder="Ej: gráfico, editorial, servicio">
+        </div>
+
+        <div class="ref2d-submit__field ref2d-submit__field--full">
+          <label for="projectDesc">Descripción breve *</label>
+          <textarea id="projectDesc" name="Descripción" required></textarea>
+          <p class="ref2d-submit__hint">Incluye contexto, rol de autoría y colaboración si aplica.</p>
+        </div>
+
+        <div class="ref2d-submit__field">
+          <label for="contactName">Nombre de contacto *</label>
+          <input id="contactName" name="Nombre de contacto" type="text" required>
+        </div>
+
+        <div class="ref2d-submit__field">
+          <label for="contactEmail">Email para notificación *</label>
+          <input id="contactEmail" name="Email de contacto" type="email" required>
+        </div>
+      </div>
+
+      <label class="ref2d-submit__consent">
+        <input type="checkbox" name="Consentimiento de revisión" required>
+        <span>Declaro que la información enviada puede ser revisada para su posible inclusión en Referencioteca.</span>
+      </label>
+
+      <div class="ref2d-submit__actions">
+        <button class="ref2d-submit__send" type="submit">Enviar propuesta</button>
+      </div>
+    </form>
+
+    <p class="ref2d-submit__fallback">
+      Si prefieres, también puedes escribir directo a
+      <a href="mailto:referencioteca.cl@gmail.com?subject=Propuesta%20de%20proyecto%20—%20Referencioteca">referencioteca.cl@gmail.com</a>.
+    </p>
   </main>
+
+  <script>
+    (function () {
+      const next = document.getElementById('submitNext');
+      if (!next) return;
+      if (location.protocol === 'http:' || location.protocol === 'https:') {
+        const base = location.href.replace(/\/[^/]*$/, '/');
+        next.value = base + 'submit-ok.html';
+      }
+    })();
+  </script>
 </body>
 </html>
