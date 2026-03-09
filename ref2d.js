@@ -1467,6 +1467,47 @@
   url: "https://www.behance.net/gallery/224614769/2025-PORTAFOLIO-DISENO-DG"
 },
 
+/* ------------------ Restaurant KrossBar — Catalina Harasic ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/V2831938879131019020006840545987/Harasic-Catalina.jpeg",
+  orientation: "v",
+  span: 1,
+  tags: ["iluminación","industrial","espacio"],
+  title: "Restaurant KrossBar",
+  author: "Catalina Harasic",
+  collab: "Iluminación: Harasic Diseño e Iluminación. Proyecto liderado por Diagrama Arquitectos",
+  area: "Iluminación / Industrial / Espacios",
+  year: "2025",
+  url: "https://www.linkedin.com/in/catalina-harasic-gil-9239a844/details/projects/?profileUrn=urn%3Ali%3Afsd_profile%3AACoAAAlm0SsBad8u2IpnSwXl7YUI3xvZq3sFM20"
+},
+
+/* ------------------ El Delantal Vestido (Iluminación) — Catalina Harasic ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/D2831938879149465764080550097603/Harasic-Catalina-2.jpeg",
+  orientation: "v",
+  span: 1,
+  tags: ["iluminación","industrial","espacio"],
+  title: "El Delantal Vestido",
+  author: "Catalina Harasic",
+  collab: "Curaduría e investigación: Camila Ríos Erazo. Fotografía: Valentina Osnovikoff",
+  area: "Iluminación / Industrial / Espacios",
+  year: "2024",
+  url: "https://www.linkedin.com/in/catalina-harasic-gil-9239a844/details/projects/?profileUrn=urn%3Ali%3Afsd_profile%3AACoAAAlm0SsBad8u2IpnSwXl7YUI3xvZq3sFM21"
+},
+
+/* ------------------ Zipi — Maximiliano Contreras ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/B2831946269671458199149019083459/Contreras-Maximiliano-Captura-de-pantalla-2026-03-09-a-las-17.24.59.png",
+  orientation: "v",
+  span: 1,
+  tags: ["producto","industrial"],
+  title: "Zipi",
+  author: "Maximiliano Contreras",
+  collab: "",
+  area: "Producto / Industrial",
+  year: "2026",
+  url: "https://www.instagram.com/zipi.cl/"
+},
 /* ------------------ Guaico — Joaquín Gajardo ------------------ */
 {
   src: "https://freight.cargo.site/t/original/i/M2825598558502218669086967542467/Gajardo-Joaquin-65f0f31b0ed2f6147a720a72_GUAICO-STUDIO-1.jpg",
