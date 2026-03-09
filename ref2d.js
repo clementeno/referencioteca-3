@@ -1961,6 +1961,23 @@
     // El CSS con max-width, max-height y object-fit: contain se encarga de todo
   }
 
+  function formatCollabText(raw) {
+    const normalized = String(raw || "").replace(/\s+/g, " ").trim();
+    if (!normalized) return "—";
+
+    const withBreaks = normalized
+      .replace(/\s*\|\s*/g, "\n")
+      .replace(/;\s+(?=[A-Za-zÁÉÍÓÚÜÑ][^:]{1,50}:)/g, "\n")
+      .replace(/\.\s+(?=[A-Za-zÁÉÍÓÚÜÑ][^:]{1,50}:)/g, "\n");
+
+    const lines = withBreaks
+      .split("\n")
+      .map((line) => line.trim())
+      .filter(Boolean);
+
+    return lines.length ? lines.join("\n") : "—";
+  }
+
   function openSpotlight(el){
     resetPointerState(); // por si quedó un drag “medio”
     const meta = el._meta || {};
@@ -1969,7 +1986,7 @@
     sAuthor.textContent = el.dataset.author || meta.author || "—";
 
     const collabText = meta.collab || el.dataset.collab || "";
-    sCollab.textContent = collabText || "—";
+    sCollab.textContent = formatCollabText(collabText);
 
     sArea.textContent   = el.dataset.area   || meta.area   || "—";
     sYear.textContent   = el.dataset.year   || meta.year   || "—";
