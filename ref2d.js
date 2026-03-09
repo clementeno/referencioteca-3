@@ -2045,9 +2045,16 @@
       }
     }
 
-    // Imagen - el CSS responsivo controla el tamaño
-    const src = el.querySelector("img")?.src || "data:image/gif;base64,R0lGODlhAQABAAAAACw=";
+    // Imagen - prioriza la miniatura existente y cae a meta.src (clave para vista lista)
+    const imgNode = el.querySelector("img");
+    const src =
+      imgNode?.currentSrc ||
+      imgNode?.src ||
+      meta.src ||
+      el.dataset.src ||
+      "data:image/gif;base64,R0lGODlhAQABAAAAACw=";
     sheetImg.src = src;
+    sheetImg.alt = el.dataset.title || meta.title || "";
     // Ya no necesitamos calcular tamaños - el CSS se encarga de todo
     // Mantenemos el listener de resize por si se necesita en el futuro
     _onResizeWhileOpen = null;
