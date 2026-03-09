@@ -523,7 +523,7 @@
       url: "https://open.spotify.com/intl-es/album/6b3ijspHJK294Ao2HM5eWJ?si=e_KzcDHuTmabWIE5BYPMFA"
     },
 
-    /* ------------- Música — Vicente Acuña ------------- */
+    /* ------------- felicidad — Vicente Acuña ------------- */
     {
       src: "https://freight.cargo.site/t/original/i/K2831772530303672050896792400579/Acuna-Vicente-SSF_CASE_Felicidadpublica_19.png",
       orientation: "v",
