@@ -419,7 +419,7 @@
       span: 2,
       tags: ["Moda","Editorial","fotografía de moda","dirección de arte","vestuario"],
       title: "Retorno",
-      author: "Catalina Uribe, Andres Miquel",
+      author: "Catalina Uribe, Andres Miquel, Fernanda Gutiérrez",
       collab: "Schön! Magazine",
       area: "Editorial / Moda / Vestuario",
       year: "2025",
@@ -431,13 +431,25 @@
       span: 1,
       tags: ["Moda","Editorial","fotografía de moda","dirección de arte","vestuario"],
       title: "Retorno",
-      author: "Andres Miquel, Catalina Uribe",
+      author: "Andres Miquel, Catalina Uribe, Fernanda Gutiérrez",
       collab: "Schön! Magazine",
       area: "Editorial / Moda / Vestuario",
       year: "2025",
       url: "https://www.instagram.com/p/DPO39QgDY3z/?img_index=1"
     },
 
+    {
+      src: "https://freight.cargo.site/t/original/i/X2831921117369892999512004702915/gutierrez-fernanda-1.jpg",
+      orientation: "v",
+      span: 1,
+      tags: ["Moda","Editorial","fotografía de moda","dirección de arte","vestuario"],
+      title: "Retorno",
+      author: "Fernanda Gutiérrez, Andres Miquel, Catalina Uribe",
+      collab: "Schön! Magazine",
+      area: "Editorial / Moda / Vestuario",
+      year: "2025",
+      url: "https://www.instagram.com/p/DPO39QgDY3z/?img_index=1"
+    },
     /* ------------- Paula Santa María ------------- */
     {
       src: "https://freight.cargo.site/t/original/i/Z2666098984577216193038513550019/santa-maria_1.jpg",
@@ -1342,6 +1354,117 @@
   area: "Desarrollo Web / Ecommerce",
   year: "2023",
   url: "https://www.gaja.studio/proyectos/jose-maiza"
+},
+/* ------------------ La Raíz del Aire — Florencia Caro / Colomba Acosta ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/U2831918759230364336851473871555/Caro-Florencia-Captura-de-pantalla-2026-03-09-a-las-16.27.21.png",
+  orientation: "v",
+  span: 1,
+  tags: ["editorial","diagramación","gráfico"],
+  title: "La Raíz del Aire",
+  author: "Florencia Caro, Colomba Acosta",
+  collab: "Fotografía: G. Vivanco. Realizado en Mucha Trama Estudio",
+  area: "Editorial / Diagramación / Gráfico",
+  year: "2025",
+  url: "https://muchatrama.wixsite.com/muchatrama/portfolio-collections/my-portfolio/project-title-5"
+},
+
+/* ------------------ Raíz Rituales — Colomba Acosta / Florencia Caro ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/D2831918759248811080925183423171/Acosta--Colomba-Captura-de-pantalla-2026-03-09-a-las-16.30.34.png",
+  orientation: "v",
+  span: 1,
+  tags: ["editorial","fanzine","impresión"],
+  title: "Raíz Rituales",
+  author: "Colomba Acosta, Florencia Caro",
+  collab: "Proyecto de diseño para Raíz Rituales. Realizado en Mucha Trama Estudio",
+  area: "Editorial / Fanzine / Impreso",
+  year: "2025",
+  url: "https://muchatrama.wixsite.com/muchatrama/portfolio-collections/my-portfolio/project-title-6-1"
+},
+
+/* ------------------ Decide Chile — Constanza Morales ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/Y2831921117406786487659423806147/morales-constanza-1.jpg",
+  orientation: "v",
+  span: 1,
+  tags: ["ux","ui","web","responsivo"],
+  title: "Decide Chile",
+  author: "Constanza Morales",
+  collab: "Colaboradoras: Natalia Rojo, Camila Navarrete",
+  area: "UX / UI / Web",
+  year: "2020",
+  url: "https://www.constanzamorales.com/projects/decidechile"
+},
+
+/* ------------------ Antagonista — Bernardita Hoffmann ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/K2831918759304151313146312078019/Hoffmann-Bernardita-1.JPG",
+  orientation: "v",
+  span: 1,
+  tags: ["producto","industrial","packaging"],
+  title: "Antagonista",
+  author: "Bernardita Hoffmann",
+  collab: "",
+  area: "Producto / Industrial / Packaging",
+  year: "2023",
+  url: "https://bhbouchon.myportfolio.com/antagonista"
+},
+
+/* ------------------ Batallas en el barrio — Magdalena Leigh ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/I2831918759285704569072602526403/leigh-magdalena.jpeg",
+  orientation: "v",
+  span: 1,
+  tags: ["cultura","museografía","investigación"],
+  title: "Batallas en el barrio",
+  author: "Magdalena Leigh",
+  collab: "Investigación: Magdalena Leigh. Guiatura: Pedro Álvarez",
+  area: "Cultura / Museografía / Investigación",
+  year: "2025",
+  url: "https://www.linkedin.com/posts/magdalena-leigh-maturana-b586aa27b_despu%C3%A9s-de-varios-meses-de-investigaci%C3%B3n-activity-7415374998154207232-lamk"
+},
+
+/* ------------------ POLKA DOT — Fernanda Gutiérrez ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/I2831921117351446255438295151299/gutierrez-fernanda-2.jpg",
+  orientation: "v",
+  span: 1,
+  tags: ["dirección de arte","moda","fotografía"],
+  title: "POLKA DOT",
+  author: "Fernanda Gutiérrez",
+  collab: "Dirección creativa: @fgtzzz_, @javinaranjot. Fotografía: @diegoaguilera.p. Modelo: @agustinazegers. Estilismo: @manuela.eyz",
+  area: "Dirección de arte / Moda / Fotografía",
+  year: "2025",
+  url: "https://readymag.website/u1773068245/6079251/2/"
+},
+
+/* ------------------ Fresca Rebeca (producto) — Fernanda Gutiérrez ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/P2831921117388339743585714254531/gutierrez-fernanda-3.jpg.jpg",
+  orientation: "v",
+  span: 1,
+  tags: ["dirección de arte","moda","fotografía"],
+  title: "Fresca Rebeca",
+  author: "Fernanda Gutiérrez",
+  collab: "Dirección de arte: @fgtzzz_. Fotografía: @crisa.a. Asistente producción: @javinaranjot",
+  area: "Dirección de arte / Moda / Fotografía",
+  year: "2025",
+  url: "https://readymag.website/u1773068245/6079251/2/"
+},
+
+/* ------------------ Presente — Daniela Gajardo ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/R2831918759267257824998892974787/Gajardo-Daniela-Captura-de-pantalla-2026-03-09-a-las-17.02.33.png",
+  orientation: "v",
+  span: 1,
+  tags: ["editorial","textil","gráfico","afiche"],
+  title: "Presente",
+  author: "Daniela Gajardo",
+  collab: "Idea original: Diamela Burboa, Elisa Modak, Isidora Modak, Isidora Montalván, Josefina Stuardo. Post-producción: Carlos Nauto",
+  area: "Editorial / Textil / Gráfico / Afiche",
+  year: "2025",
+  url: "https://www.behance.net/gallery/224614769/2025-PORTAFOLIO-DISENO-DG"
 },
 
 /* ------------------ Guaico — Joaquín Gajardo ------------------ */
