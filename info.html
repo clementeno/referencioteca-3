@@ -164,14 +164,27 @@
     .refinfo__media {
       margin: 0;
       width: 100%;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      align-items: center;
     }
 
     .refinfo__media img {
+      grid-area: 1 / 1;
       width: 100%;
       height: auto;
       display: block;
       opacity: 1;
-      transition: opacity 0.24s linear;
+      transition: opacity 2.8s linear;
+    }
+
+    .refinfo__image--bottom {
+      z-index: 1;
+    }
+
+    .refinfo__image--top {
+      z-index: 2;
     }
 
     .refinfo__media img.is-fading {
@@ -409,7 +422,18 @@
 
       <aside class="refinfo__aside" aria-label="Panel visual dinámico">
         <figure class="refinfo__media">
-          <img id="refinfoImage" src="IMG/r0.jpg" alt="Registro visual de Referencioteca">
+          <img
+            id="refinfoImageBottom"
+            class="refinfo__image--bottom"
+            src="IMG/r1.jpg"
+            alt="Registro visual de Referencioteca"
+          >
+          <img
+            id="refinfoImageTop"
+            class="refinfo__image--top"
+            src="IMG/r0.jpg"
+            alt="Registro visual de Referencioteca"
+          >
         </figure>
         <div class="refinfo__mediabar">
           <p class="refinfo__caption" id="refinfoCaption">Registro de proyectos en circulación pública.</p>
@@ -429,13 +453,16 @@
 
   <script>
     (function () {
-      const imageEl = document.getElementById('refinfoImage');
+      const imageTopEl = document.getElementById('refinfoImageTop');
+      const imageBottomEl = document.getElementById('refinfoImageBottom');
       const captionEl = document.getElementById('refinfoCaption');
       const clockEl = document.getElementById('refinfoClock');
       const nextBtn = document.getElementById('refinfoNext');
       const prevBtn = document.getElementById('refinfoPrev');
+      const FADE_MS = 2800;
+      const STEP_MS = 5200;
 
-      if (!imageEl || !captionEl) return;
+      if (!imageTopEl || !imageBottomEl || !captionEl) return;
 
       const slides = [
         { src: 'IMG/r0.jpg', caption: 'Proyectos y memorias visuales de diseño en circulación.' },
@@ -447,33 +474,68 @@
 
       let current = 0;
       let timer = null;
+      let isTransitioning = false;
 
-      function renderSlide(index) {
-        const safe = (index + slides.length) % slides.length;
-        current = safe;
-        const slide = slides[safe];
-        imageEl.classList.add('is-fading');
-        setTimeout(() => {
-          imageEl.src = slide.src;
-          imageEl.alt = slide.caption;
-          captionEl.textContent = slide.caption;
-          imageEl.classList.remove('is-fading');
-        }, 240);
+      function normalizeIndex(index) {
+        return (index + slides.length) % slides.length;
       }
 
-      imageEl.addEventListener('error', () => {
-        move(1);
+      function syncLayers(baseIndex) {
+        current = normalizeIndex(baseIndex);
+        const next = normalizeIndex(current + 1);
+        const currentSlide = slides[current];
+        const nextSlide = slides[next];
+
+        imageTopEl.src = currentSlide.src;
+        imageTopEl.alt = currentSlide.caption;
+        imageTopEl.classList.remove('is-fading');
+
+        imageBottomEl.src = nextSlide.src;
+        imageBottomEl.alt = nextSlide.caption;
+
+        captionEl.textContent = currentSlide.caption;
+      }
+
+      function crossfadeTo(index) {
+        if (isTransitioning) return;
+
+        const next = normalizeIndex(index);
+        if (next === current) return;
+
+        const nextSlide = slides[next];
+        imageBottomEl.src = nextSlide.src;
+        imageBottomEl.alt = nextSlide.caption;
+        captionEl.textContent = nextSlide.caption;
+
+        isTransitioning = true;
+        imageTopEl.classList.add('is-fading');
+
+        window.setTimeout(() => {
+          imageTopEl.src = imageBottomEl.src;
+          imageTopEl.alt = imageBottomEl.alt;
+          imageTopEl.classList.remove('is-fading');
+          current = next;
+          isTransitioning = false;
+        }, FADE_MS + 40);
+      }
+
+      imageTopEl.addEventListener('error', () => {
+        crossfadeTo(current + 1);
+      });
+
+      imageBottomEl.addEventListener('error', () => {
+        crossfadeTo(current + 1);
       });
 
       function move(direction) {
-        renderSlide(current + direction);
+        crossfadeTo(current + direction);
         restartAuto();
       }
 
       function startAuto() {
         timer = window.setInterval(() => {
-          renderSlide(current + 1);
-        }, 4200);
+          crossfadeTo(current + 1);
+        }, STEP_MS);
       }
 
       function restartAuto() {
@@ -484,7 +546,7 @@
       if (nextBtn) nextBtn.addEventListener('click', () => move(1));
       if (prevBtn) prevBtn.addEventListener('click', () => move(-1));
 
-      renderSlide(0);
+      syncLayers(0);
       startAuto();
 
       if (clockEl) {
