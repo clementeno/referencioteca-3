@@ -155,34 +155,27 @@
     .refinfo__aside {
       position: sticky;
       top: 78px;
-      border: 1px solid var(--refinfo-border);
-      border-radius: 18px;
-      background: #111218;
-      overflow: hidden;
+      border: none;
+      border-radius: 0;
+      background: transparent;
+      overflow: visible;
     }
 
     .refinfo__media {
-      aspect-ratio: 4 / 5;
+      margin: 0;
       width: 100%;
-      position: relative;
-      background: #08080b;
-      display: grid;
-      place-items: center;
-      overflow: hidden;
     }
 
     .refinfo__media img {
       width: 100%;
-      height: 100%;
-      object-fit: contain;
-      object-position: center center;
+      height: auto;
       display: block;
       opacity: 1;
-      transition: opacity 0.45s ease;
+      transition: opacity 0.24s linear;
     }
 
     .refinfo__media img.is-fading {
-      opacity: 0.25;
+      opacity: 0;
     }
 
     .refinfo__mediabar {
@@ -465,7 +458,7 @@
           imageEl.alt = slide.caption;
           captionEl.textContent = slide.caption;
           imageEl.classList.remove('is-fading');
-        }, 130);
+        }, 240);
       }
 
       imageEl.addEventListener('error', () => {
