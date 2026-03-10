@@ -478,7 +478,7 @@
       collab: "Schön! Magazine",
       area: "Editorial / Moda / Vestuario",
       year: "2025",
-      url: "https://www.instagram.com/p/DPO39QgDY3z/?img_index=0", "https://schonmagazine.com/retorno/"
+      url: ["https://www.instagram.com/p/DPO39QgDY3z/?img_index=0", "https://schonmagazine.com/retorno/"]
     },
     {
       src: "https://freight.cargo.site/t/original/i/L2578592035202173407474317996739/Captura-de-pantalla-2025-10-01-a-las-18.22.21.png",
@@ -490,7 +490,7 @@
       collab: "Schön! Magazine",
       area: "Editorial / Moda / Vestuario",
       year: "2025",
-      url: "https://www.instagram.com/p/DPO39QgDY3z/?img_index=1", "https://schonmagazine.com/retorno/"
+      url: ["https://www.instagram.com/p/DPO39QgDY3z/?img_index=1", "https://schonmagazine.com/retorno/"]
     },
 
     {
@@ -503,7 +503,7 @@
       collab: "Schön! Magazine",
       area: "Editorial / Moda / Vestuario",
       year: "2025",
-      url: "https://www.instagram.com/p/DPO39QgDY3z/?img_index=1", "https://schonmagazine.com/retorno/"
+      url: ["https://www.instagram.com/p/DPO39QgDY3z/?img_index=1", "https://schonmagazine.com/retorno/"]
     },
     /* ------------- Paula Santa María ------------- */
     {
