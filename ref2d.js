@@ -1664,7 +1664,7 @@
 /* ------------------ Con Devuelta — Isabel Díaz-del Río ------------------ */
 {
   src: "https://freight.cargo.site/t/original/i/M2832974993122033015192994394819/rios-isabel.jpg",
-  orientation: "v",
+  orientation: "sq",
   span: 1,
   tags: ["servicio","social","ecología"],
   title: "Con Devuelta",
