@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Monitor de autores | INDEXOTECA</title>
+  <style>
+    :root {
+      --bg: #f6f4ef;
+      --card: #ffffff;
+      --ink: #1f1d1a;
+      --muted: #6b645c;
+      --line: #e7e1d7;
+      --accent: #1a7f6c;
+      --accent-soft: #d9f2ec;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Avenir Next", "Segoe UI", sans-serif;
+      background: radial-gradient(circle at 15% 10%, #fffefb 0%, var(--bg) 60%);
+      color: var(--ink);
+    }
+    .wrap {
+      max-width: 1000px;
+      margin: 28px auto;
+      padding: 0 16px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(24px, 4vw, 34px);
+      line-height: 1.1;
+    }
+    .sub {
+      margin: 0 0 20px;
+      color: var(--muted);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px;
+    }
+    .k {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .v {
+      margin: 6px 0 0;
+      font-size: clamp(24px, 3vw, 30px);
+      font-weight: 700;
+      line-height: 1;
+    }
+    .v small {
+      font-size: 15px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    button, input {
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      padding: 8px 10px;
+      font-size: 14px;
+    }
+    button {
+      cursor: pointer;
+      font-weight: 600;
+    }
+    button.primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    button.ghost {
+      background: var(--accent-soft);
+      border-color: #bfe7dc;
+      color: #165e51;
+    }
+    .status {
+      margin-left: auto;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    th, td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+    }
+    th {
+      background: #fbfaf7;
+      font-size: 12px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    tr:last-child td { border-bottom: 0; }
+    .rank {
+      display: inline-block;
+      min-width: 26px;
+      color: var(--muted);
+    }
+    .err {
+      color: #b42318;
+      margin-top: 10px;
+      font-size: 13px;
+      display: none;
+    }
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .status { width: 100%; margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>Monitor de autores</h1>
+    <p class="sub">Lee <code>ref2d.js</code>, separa autores por coma y actualiza los totales automáticamente.</p>
+
+    <section class="grid">
+      <article class="card">
+        <p class="k">Entradas con autor</p>
+        <p class="v" id="entries">0</p>
+      </article>
+      <article class="card">
+        <p class="k">Firmas (sumadas)</p>
+        <p class="v" id="signatures">0</p>
+      </article>
+      <article class="card">
+        <p class="k">Autores únicos</p>
+        <p class="v" id="unique">0</p>
+      </article>
+      <article class="card">
+        <p class="k">Crecimiento vs base</p>
+        <p class="v" id="delta">+0 <small>autores únicos</small></p>
+      </article>
+    </section>
+
+    <section class="toolbar">
+      <button class="primary" id="refresh">Refrescar ahora</button>
+      <button class="ghost" id="setBaseline">Fijar base actual</button>
+      <button id="clearBaseline">Limpiar base</button>
+      <label>
+        Auto-refresh (seg)
+        <input id="interval" type="number" min="2" max="120" step="1" value="8" />
+      </label>
+      <span class="status" id="status">Esperando primer cálculo...</span>
+    </section>
+
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Autor</th>
+          <th>Entradas</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <p class="err" id="error"></p>
+  </main>
+
+  <script>
+    (function () {
+      const SOURCE = "../ref2d.js";
+      const BASELINE_KEY = "idx_authors_baseline_v1";
+      const entriesEl = document.getElementById("entries");
+      const signaturesEl = document.getElementById("signatures");
+      const uniqueEl = document.getElementById("unique");
+      const deltaEl = document.getElementById("delta");
+      const rowsEl = document.getElementById("rows");
+      const statusEl = document.getElementById("status");
+      const errorEl = document.getElementById("error");
+      const intervalEl = document.getElementById("interval");
+      let timer = null;
+      let lastUnique = 0;
+
+      function normalizeAuthor(name) {
+        return name
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .toLowerCase()
+          .replace(/\s+/g, " ")
+          .trim();
+      }
+
+      function parseAuthorsFromJs(text) {
+        const matches = [...text.matchAll(/author:\s*"([^"]*)"/g)];
+        const rows = matches.map((m) => (m[1] || "").trim()).filter(Boolean);
+        const counter = new Map();
+        const displayByKey = new Map();
+        let signatures = 0;
+
+        for (const row of rows) {
+          const authors = row
+            .split(",")
+            .map((s) => s.trim())
+            .filter(Boolean);
+
+          signatures += authors.length;
+          for (const raw of authors) {
+            const key = normalizeAuthor(raw);
+            if (!key) continue;
+            counter.set(key, (counter.get(key) || 0) + 1);
+            if (!displayByKey.has(key)) displayByKey.set(key, raw);
+          }
+        }
+
+        const ranking = [...counter.entries()]
+          .map(([key, count]) => ({ author: displayByKey.get(key) || key, count }))
+          .sort((a, b) => b.count - a.count || a.author.localeCompare(b.author, "es"));
+
+        return {
+          entries: rows.length,
+          signatures,
+          unique: counter.size,
+          ranking
+        };
+      }
+
+      function renderTable(ranking) {
+        const top = ranking.slice(0, 100);
+        rowsEl.innerHTML = top.map((r, idx) => (
+          "<tr>" +
+          "<td><span class=\"rank\">" + (idx + 1) + "</span></td>" +
+          "<td>" + escapeHtml(r.author) + "</td>" +
+          "<td>" + r.count + "</td>" +
+          "</tr>"
+        )).join("");
+      }
+
+      function escapeHtml(s) {
+        return s
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/\"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      function baselineValue() {
+        const raw = localStorage.getItem(BASELINE_KEY);
+        if (!raw) return null;
+        const n = Number(raw);
+        return Number.isFinite(n) ? n : null;
+      }
+
+      function renderDelta(currentUnique) {
+        const base = baselineValue();
+        if (base == null) {
+          deltaEl.innerHTML = "+0 <small>(sin base)</small>";
+          return;
+        }
+        const d = currentUnique - base;
+        const sign = d >= 0 ? "+" : "";
+        deltaEl.innerHTML = sign + d + " <small>autores únicos</small>";
+      }
+
+      async function recalc() {
+        errorEl.style.display = "none";
+        try {
+          const res = await fetch(SOURCE + "?t=" + Date.now(), { cache: "no-store" });
+          if (!res.ok) throw new Error("HTTP " + res.status);
+          const text = await res.text();
+          const data = parseAuthorsFromJs(text);
+
+          entriesEl.textContent = String(data.entries);
+          signaturesEl.textContent = String(data.signatures);
+          uniqueEl.textContent = String(data.unique);
+          renderDelta(data.unique);
+          renderTable(data.ranking);
+
+          const now = new Date();
+          const uniqueDiff = data.unique - lastUnique;
+          const diffLabel = lastUnique ? " | cambio autores únicos: " + (uniqueDiff >= 0 ? "+" : "") + uniqueDiff : "";
+          statusEl.textContent = "Actualizado: " + now.toLocaleTimeString("es-CL") + diffLabel;
+          lastUnique = data.unique;
+        } catch (err) {
+          statusEl.textContent = "Sin actualización";
+          errorEl.style.display = "block";
+          errorEl.textContent = "No se pudo leer ../ref2d.js. Abre este HTML desde un servidor local (no file://). Error: " + err.message;
+        }
+      }
+
+      function scheduleAutoRefresh() {
+        if (timer) clearInterval(timer);
+        const seconds = Math.max(2, Number(intervalEl.value) || 8);
+        timer = setInterval(recalc, seconds * 1000);
+      }
+
+      document.getElementById("refresh").addEventListener("click", recalc);
+      document.getElementById("setBaseline").addEventListener("click", function () {
+        const current = Number(uniqueEl.textContent || "0");
+        localStorage.setItem(BASELINE_KEY, String(current));
+        renderDelta(current);
+      });
+      document.getElementById("clearBaseline").addEventListener("click", function () {
+        localStorage.removeItem(BASELINE_KEY);
+        renderDelta(Number(uniqueEl.textContent || "0"));
+      });
+      intervalEl.addEventListener("change", scheduleAutoRefresh);
+
+      scheduleAutoRefresh();
+      recalc();
+    })();
+  </script>
+</body>
+</html>

@@ -867,8 +867,8 @@
       span: 1,
       tags: ["Fotografía"],
       title: "60 años Kérastase",
-      author: "Varios",
-      collab: "Francisco Finat (fotografía)",
+      author: "Francisco Finat (fotografía)",
+      collab: "Fotografía: Francisco Finat",
       area: "Fotografía",
       year: "2025",
       url: "https://www.instagram.com/p/DG1Km0yyJsd/?hl=es&img_index=1"
