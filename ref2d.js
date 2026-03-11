@@ -903,8 +903,8 @@
 /* ------------------ Afiche n°1 — Gianfranco Music Wachtendorff ------------------ */
 {
   src: "https://freight.cargo.site/t/original/i/A2835041680366224049869540504259/Gianfranco-Music-Wachtendorff-2-ca55e895-7d6a-44c6-a77d-78b5454f0fa0_rw_1920.png",
-  orientation: "v",
-  span: 1,
+  orientation: "sq",
+  span: 2,
   tags: ["afiche","afiche digital","gráfico"],
   title: "Afiche n°1",
   author: "Gianfranco Music Wachtendorff",
@@ -917,8 +917,8 @@
 /* ------------------ Afiche n°2 — Gianfranco Music Wachtendorff ------------------ */
 {
   src: "https://freight.cargo.site/t/original/i/C2835041680347777305795830952643/Gianfranco-Music-Wachtendorff-7485022f-8fb6-4b6e-888d-2462ee018664_rw_1200.jpeg",
-  orientation: "v",
-  span: 1,
+  orientation: "sq",
+  span: 2,
   tags: ["afiche","afiche digital","gráfico"],
   title: "Afiche n°2",
   author: "Gianfranco Music Wachtendorff",
