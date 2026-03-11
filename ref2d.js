@@ -2627,7 +2627,7 @@
     if (indexList) indexList.hidden = !isIndex;
     if (btnCenter) btnCenter.hidden = !isBento;
     if (btnRandom) btnRandom.hidden = !isGrid;
-    if (count) count.hidden = isGrid;
+    if (count) count.hidden = false;
     if (btnSearchRandom) btnSearchRandom.hidden = !isGrid;
 
     renderActiveView();
