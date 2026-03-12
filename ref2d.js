@@ -100,7 +100,7 @@
     'identidad gráfica',
     'señaletica',
     'museografia',
-    'portada disco',
+    'cover art',
     'afiche digital',
     'afiche impreso',
     'fotografía de moda',
@@ -211,11 +211,11 @@
     "afiche digital": "afiche",
 
     // Portada disco (unificado)
-    "portada": "portada disco",
-    "portada de disco": "portada disco",
-    "portada de discos": "portada disco",
-    "musica": "portada disco",
-    "música": "portada disco",
+    "portada": "cover art",
+    "portada de disco": "cover art",
+    "portada de discos": "cover art",
+    "musica": "cover art",
+    "música": "cover art",
 
     // Museografía (mantener existente)
     "museografia": "museografía",
