@@ -204,6 +204,7 @@
     "biomateriales": "biomateriales",
     "artesania": "artesania",
     "artesanía": "artesania",
+    "soundscape": "investigacion",
 
     // Afiche (unificado)
     "afiche": "afiche",
