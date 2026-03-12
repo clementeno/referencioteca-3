@@ -29,6 +29,8 @@
   const multiGrid = $("#ref2dMultiGrid");
   const indexList = $("#ref2dIndexList");
   const indexBody = $("#ref2dIndexBody");
+  const simpleView = $("#ref2dSimpleView");
+  const simpleGrid = $("#ref2dSimpleGrid");
   const btnRandom = $("#ref2dRandom");
   const btnSearchRandom = $("#ref2dSearchRandom");
   const headerMoreBtn = $("#ref2dHeaderMore");
@@ -2691,6 +2693,7 @@
   let masonryRaf = null;
   let listSortKey = '';
   let listSortDir = 1;
+  let gridRenderToken = 0;
   let filterDebounceTimer = null;
   const FILTER_DEBOUNCE_MS = 220;
   let fillAroundRaf = null;
@@ -2698,6 +2701,8 @@
   const BENTO_PREFETCH_Y = 1.35;
   const BENTO_CULL_MARGIN = 2600;
   const BENTO_MAX_ITEMS_IN_DOM = 700;
+  const BENTO_MAX_NEW_PER_PASS = 190;
+  const SIMPLE_CARD_COUNT = 3;
   const nextMeta = ()=> activeList.length ? activeList[(genPtr++) % activeList.length] : null;
 
   /* Crear tarjeta */
@@ -2801,7 +2806,9 @@
     globalId++;
   }
 
-  function createSharedCardElement(meta, className) {
+  function createSharedCardElement(meta, className, options = {}) {
+    const maxTags = Number.isFinite(options.maxTags) ? options.maxTags : 4;
+    const onImageLoad = typeof options.onImageLoad === 'function' ? options.onImageLoad : null;
     const el = document.createElement('article');
     const orient = meta.orientation || 'h';
     const isFeatured = meta.span === 2;
@@ -2824,24 +2831,30 @@
       const img = new Image();
       img.src = meta.src;
       img.loading = 'lazy';
+      img.decoding = 'async';
+      img.fetchPriority = 'low';
       img.alt = meta.title || '';
-      img.addEventListener('load', scheduleMultiGridLayout);
-      img.addEventListener('error', scheduleMultiGridLayout);
+      if (onImageLoad) {
+        img.addEventListener('load', onImageLoad);
+        img.addEventListener('error', onImageLoad);
+      }
       imgWrap.appendChild(img);
     }
     body.appendChild(imgWrap);
 
     const head = document.createElement('div');
     head.className = 'ref2d__view-card-head';
-    head.innerHTML = `
-      <h3>${meta.title || '—'}</h3>
-      <p>${meta.author || '—'}</p>
-    `;
+    const title = document.createElement('h3');
+    title.textContent = meta.title || '—';
+    const author = document.createElement('p');
+    author.textContent = meta.author || '—';
+    head.appendChild(title);
+    head.appendChild(author);
     body.appendChild(head);
 
     const tagsWrap = document.createElement('div');
     tagsWrap.className = 'ref2d__view-card-tags';
-    (meta.tags || []).slice(0, 4).forEach((t) => {
+    (meta.tags || []).slice(0, maxTags).forEach((t) => {
       const chip = document.createElement('span');
       chip.className = 'ref2d__chip';
       chip.textContent = t;
@@ -2886,6 +2899,7 @@
 
   function renderMultiGridView() {
     if (!multiGrid) return;
+    const renderToken = ++gridRenderToken;
     multiGrid.innerHTML = '';
 
     if (!activeList.length) {
@@ -2893,13 +2907,111 @@
       return;
     }
 
-    const frag = document.createDocumentFragment();
-    activeList.forEach((meta) => {
-      const card = createSharedCardElement(meta, 'ref2d__view-card');
-      frag.appendChild(card);
+    const BATCH_SIZE = 40;
+    let cursor = 0;
+
+    const appendBatch = () => {
+      if (renderToken !== gridRenderToken || activeView !== 'grid' || !multiGrid) return;
+      const frag = document.createDocumentFragment();
+      const end = Math.min(cursor + BATCH_SIZE, activeList.length);
+      while (cursor < end) {
+        const meta = activeList[cursor++];
+        const card = createSharedCardElement(meta, 'ref2d__view-card', { onImageLoad: scheduleMultiGridLayout });
+        frag.appendChild(card);
+      }
+      multiGrid.appendChild(frag);
+      scheduleMultiGridLayout();
+      if (cursor < activeList.length) {
+        requestAnimationFrame(appendBatch);
+      }
+    };
+
+    appendBatch();
+  }
+
+  function getSimpleSelectionFromCategories(projects, amount = SIMPLE_CARD_COUNT) {
+    if (!projects.length) return [];
+    const target = Math.min(amount, projects.length);
+    const byCategory = new Map();
+
+    projects.forEach((meta) => {
+      const keys = (meta._tagKeys && meta._tagKeys.length)
+        ? meta._tagKeys
+        : (meta.tags || []).map(canonicalTagKey).filter(Boolean);
+      const uniqueKeys = Array.from(new Set(keys));
+      if (!uniqueKeys.length) {
+        if (!byCategory.has('all')) byCategory.set('all', []);
+        byCategory.get('all').push(meta);
+        return;
+      }
+      uniqueKeys.forEach((key) => {
+        if (!byCategory.has(key)) byCategory.set(key, []);
+        byCategory.get(key).push(meta);
+      });
     });
-    multiGrid.appendChild(frag);
-    scheduleMultiGridLayout();
+
+    const selected = [];
+    const usedProjects = new Set();
+    const entries = shuffleArray(Array.from(byCategory.entries()).filter(([, list]) => list.length));
+
+    for (let i = 0; i < entries.length && selected.length < target; i++) {
+      const [key, list] = entries[i];
+      const shuffledList = shuffleArray(list);
+      const candidate = shuffledList.find((item) => !usedProjects.has(item)) || shuffledList[0];
+      if (!candidate || usedProjects.has(candidate)) continue;
+      usedProjects.add(candidate);
+      selected.push({
+        meta: candidate,
+        categoryKey: key,
+        categoryLabel: CAT_LABELS[key] || prettyTag(key)
+      });
+    }
+
+    if (selected.length < target) {
+      const backup = shuffleArray(projects);
+      for (let i = 0; i < backup.length && selected.length < target; i++) {
+        const candidate = backup[i];
+        if (usedProjects.has(candidate)) continue;
+        usedProjects.add(candidate);
+        selected.push({
+          meta: candidate,
+          categoryKey: '',
+          categoryLabel: ''
+        });
+      }
+    }
+
+    return selected;
+  }
+
+  function createSimpleCardElement(entry) {
+    const card = createSharedCardElement(entry.meta, 'ref2d__simple-card');
+    const body = card.querySelector('.ref2d__view-card-body');
+    const head = card.querySelector('.ref2d__view-card-head');
+    if (body && head && entry.categoryLabel) {
+      const category = document.createElement('span');
+      category.className = 'ref2d__simple-card-cat';
+      category.textContent = entry.categoryLabel;
+      body.insertBefore(category, head);
+    }
+    return card;
+  }
+
+  function renderSimpleView() {
+    if (!simpleGrid) return;
+    simpleGrid.innerHTML = '';
+
+    if (!activeList.length) {
+      simpleGrid.innerHTML = '<p class="ref2d__empty">Sin resultados para esta búsqueda.</p>';
+      return;
+    }
+
+    const picks = getSimpleSelectionFromCategories(activeList, SIMPLE_CARD_COUNT);
+    const frag = document.createDocumentFragment();
+    picks.forEach((entry) => {
+      frag.appendChild(createSimpleCardElement(entry));
+    });
+    simpleGrid.appendChild(frag);
   }
 
   function normalizedTextValue(value) {
@@ -2996,6 +3108,11 @@
       updateCount();
       return;
     }
+    if (activeView === 'simple') {
+      renderSimpleView();
+      updateCount();
+      return;
+    }
     renderIndexListView();
     updateCount();
   }
@@ -3008,22 +3125,31 @@
     const viewMap = {
       bento: 'Vista: Infinita',
       grid: 'Vista: Grilla',
-      index: 'Vista: Lista'
+      index: 'Vista: Lista',
+      simple: 'Vista: Simple'
     };
     activeView = viewMap[view] ? view : 'bento';
 
     const isBento = activeView === 'bento';
     const isGrid = activeView === 'grid';
     const isIndex = activeView === 'index';
+    const isSimple = activeView === 'simple';
 
     if (viewToggle) viewToggle.textContent = viewMap[activeView];
     if (viewport) viewport.hidden = !isBento;
     if (multiGrid) multiGrid.hidden = !isGrid;
     if (indexList) indexList.hidden = !isIndex;
+    if (simpleView) simpleView.hidden = !isSimple;
     if (btnCenter) btnCenter.hidden = !isBento;
     if (btnRandom) btnRandom.hidden = !isGrid;
     if (count) count.hidden = false;
-    if (btnSearchRandom) btnSearchRandom.hidden = !isGrid;
+    if (!isGrid) {
+      gridRenderToken += 1;
+    }
+    if (btnSearchRandom) {
+      btnSearchRandom.hidden = !(isGrid || isSimple);
+      btnSearchRandom.textContent = isSimple ? 'Actualizar 3' : 'Aleatorio';
+    }
 
     renderActiveView();
   }
@@ -3073,16 +3199,29 @@
     const bottom = top + vh * BENTO_PREFETCH_Y;
     const startIdx = Math.floor((leftBound)  / (COL_W+GAP)) - 2;
     const endIdx   = Math.floor((rightBound) / (COL_W+GAP)) + 2;
+    let created = 0;
 
     for(let i=startIdx; i<=endIdx; i++){
       const col = ensureColumn(i);
       while(col.yDown < bottom){
         makeCard(i,'down', nextMeta());
+        created++;
         if(col.yDown > yBotLimit-(COL_W*2)) yBotLimit += 1500;
+        if (created >= BENTO_MAX_NEW_PER_PASS) {
+          cullFarItems();
+          requestFillAround();
+          return;
+        }
       }
       while(col.yUp > topV){
         makeCard(i,'up',   nextMeta());
+        created++;
         if(col.yUp   < yTopLimit+(COL_W*2)) yTopLimit -= 1500;
+        if (created >= BENTO_MAX_NEW_PER_PASS) {
+          cullFarItems();
+          requestFillAround();
+          return;
+        }
       }
     }
     cullFarItems();
@@ -3968,10 +4107,15 @@
 
   function initRandomButton() {
     const onRandomClick = () => {
-      if (activeView !== 'grid') return;
-      activeList = shuffleArray(activeList);
-      renderMultiGridView();
-      updateCount();
+      if (activeView === 'grid') {
+        activeList = shuffleArray(activeList);
+        renderMultiGridView();
+        updateCount();
+        return;
+      }
+      if (activeView === 'simple') {
+        renderSimpleView();
+      }
     };
     if (btnRandom) btnRandom.addEventListener('click', onRandomClick);
     if (btnSearchRandom) btnSearchRandom.addEventListener('click', onRandomClick);
