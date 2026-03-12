@@ -4,6 +4,7 @@
         plane    = $("#ref2dPlane");
   const search  = $("#ref2dSearch"),
         count   = $("#ref2dCount");
+  const searchClearBtn = $("#ref2dSearchClear");
   const suggestionsBox = $("#ref2dSuggestions");
   const catPanel = $("#ref2dCatPanel");
   const catGrid  = $("#ref2dCatGrid");
@@ -3289,6 +3290,11 @@
     });
   }
 
+  function updateSearchClearVisibility() {
+    if (!searchClearBtn || !search) return;
+    searchClearBtn.hidden = !search.value.trim();
+  }
+
   function queueFilter(term, immediate = false) {
     if (filterDebounceTimer !== null) {
       clearTimeout(filterDebounceTimer);
@@ -3375,6 +3381,7 @@
     renderActiveView();
   }
   if (search) {
+    updateSearchClearVisibility();
     // Mostrar sugerencias al escribir o al hacer focus
     search.addEventListener('focus', () => {
       showSuggestions(search.value);
@@ -3383,6 +3390,7 @@
     search.addEventListener('input', (e) => {
       const value = e.target.value;
       showSuggestions(value);
+      updateSearchClearVisibility();
       queueFilter(value);
     });
 
@@ -3433,9 +3441,20 @@
         } else {
           // Si está cerrado, limpiar búsqueda
           search.value = '';
+          updateSearchClearVisibility();
           queueFilter('', true);
         }
       }
+    });
+  }
+
+  if (searchClearBtn && search) {
+    searchClearBtn.addEventListener('click', () => {
+      search.value = '';
+      updateSearchClearVisibility();
+      closeSuggestions();
+      queueFilter('', true);
+      search.focus();
     });
   }
 
