@@ -77,6 +77,13 @@
     'afiche',
     'motion graphics',
     'educación',
+    'artículo académico',
+    'articulo academico',
+    'publicación académica',
+    'publicacion academica',
+    'paper',
+    'pub. académica',
+    'pub academica',
     'fotografía',
     'dirección creativa',
     'ux',
@@ -2685,8 +2692,12 @@
   let listSortKey = '';
   let listSortDir = 1;
   let filterDebounceTimer = null;
-  const FILTER_DEBOUNCE_MS = 150;
+  const FILTER_DEBOUNCE_MS = 220;
   let fillAroundRaf = null;
+  const BENTO_PREFETCH_X = 1.35;
+  const BENTO_PREFETCH_Y = 1.35;
+  const BENTO_CULL_MARGIN = 2600;
+  const BENTO_MAX_ITEMS_IN_DOM = 700;
   const nextMeta = ()=> activeList.length ? activeList[(genPtr++) % activeList.length] : null;
 
   /* Crear tarjeta */
@@ -2736,6 +2747,8 @@
     el.style.left = colA.pos + "px";
     el.style.top  = y + "px";
     el.style.background = meta.src ? "#000" : PALETTE[globalId % PALETTE.length];
+    el.dataset.y       = String(y);
+    el.dataset.h       = String(h);
     el.dataset.id      = meta.id ?? globalId;
     el.dataset.tags    = tags.join(' | ');
     el.dataset.title   = meta.title || '—';
@@ -2752,7 +2765,10 @@
 
     if(meta.src){
       const img = new Image();
-      img.src = meta.src; img.loading='lazy';
+      img.src = meta.src;
+      img.loading='lazy';
+      img.decoding='async';
+      img.fetchPriority = 'low';
       Object.assign(img.style,{position:'absolute',inset:'0',width:'100%',height:'100%',objectFit:'cover'});
       el.appendChild(img);
     }
@@ -3012,14 +3028,51 @@
     renderActiveView();
   }
 
+  function getViewportBounds() {
+    const vw = viewport.clientWidth || 0;
+    const vh = viewport.clientHeight || 0;
+    const top = -camY;
+    const bottom = top + vh;
+    const left = -camX;
+    const right = left + vw;
+    return { vw, vh, top, bottom, left, right };
+  }
+
+  function cullFarItems() {
+    if (!plane || activeView !== 'bento') return;
+    const children = plane.children;
+    const total = children.length;
+    if (!total) return;
+
+    const { top, bottom } = getViewportBounds();
+    const minVisible = top - BENTO_CULL_MARGIN;
+    const maxVisible = bottom + BENTO_CULL_MARGIN;
+    let removed = 0;
+    const aggressive = total > BENTO_MAX_ITEMS_IN_DOM;
+
+    for (let idx = children.length - 1; idx >= 0; idx--) {
+      const el = children[idx];
+      const y = parseFloat(el.dataset.y || '');
+      const h = parseFloat(el.dataset.h || '');
+      if (!Number.isFinite(y) || !Number.isFinite(h)) continue;
+      const isOut = (y + h) < minVisible || y > maxVisible;
+      if (!isOut) continue;
+      el.remove();
+      removed++;
+      if (!aggressive && removed >= 50) break;
+    }
+  }
+
   /* Relleno alrededor de la vista */
   function fillAround(){
     if(activeList.length===0) return;
-    const vw = viewport.clientWidth, vh = viewport.clientHeight;
-    const left  = -camX - vw*0.5, right = -camX + vw*1.5;
-    const topV  = -camY - vh*0.5, bottom = -camY + vh*1.5;
-    const startIdx = Math.floor((left)  / (COL_W+GAP)) - 2;
-    const endIdx   = Math.floor((right) / (COL_W+GAP)) + 2;
+    const { vw, vh, top, left, right } = getViewportBounds();
+    const leftBound = left - vw * (BENTO_PREFETCH_X - 1);
+    const rightBound = right + vw * (BENTO_PREFETCH_X - 1);
+    const topV  = top - vh * (BENTO_PREFETCH_Y - 1);
+    const bottom = top + vh * BENTO_PREFETCH_Y;
+    const startIdx = Math.floor((leftBound)  / (COL_W+GAP)) - 2;
+    const endIdx   = Math.floor((rightBound) / (COL_W+GAP)) + 2;
 
     for(let i=startIdx; i<=endIdx; i++){
       const col = ensureColumn(i);
@@ -3032,7 +3085,7 @@
         if(col.yUp   < yTopLimit+(COL_W*2)) yTopLimit -= 1500;
       }
     }
-    updateCount();
+    cullFarItems();
   }
 
   function requestFillAround() {
