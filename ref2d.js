@@ -1322,6 +1322,127 @@
   url: "https://pilar-fundamental.com/campana-ugn"
 },
 
+/* ------------------ Pequén — Elisa Aguirre ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/T2836714247389257057862945288899/Aguirre-Elisa-3c82918c-ebd6-4a47-892e-220fb1ee7cba_rw_3840.png",
+  orientation: "v",
+  span: 1,
+  tags: ["branding","gráfico","educación"],
+  title: "Pequén",
+  author: "Elisa Aguirre",
+  collab: "Proyecto estudiantil",
+  area: "Branding / Gráfico / Educación",
+  year: "2025",
+  url: "https://elisaaguirred.myportfolio.com/pequen"
+},
+
+/* ------------------ Paneles Voladores — Hugo Palmarola ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/C2836714089798722436162245833411/a-740x1024-1.png",
+  orientation: "v",
+  span: 1,
+  tags: ["investigación","publicación académica"],
+  title: "Paneles Voladores",
+  author: "Hugo Palmarola",
+  collab: "Pedro Ignacio Alonso (coautor). Libro ISBN: 9789561424135",
+  area: "Investigación / Publicación académica",
+  year: "2019",
+  url: [
+    "https://www.academia.edu/43825467/Pedro_Alonso_y_Hugo_Palmarola_editores_Paneles_Voladores_Cómo_los_paneles_de_hormigón_cambiaron_el_mundo_Dom_Publishers_Ediciones_UC_Berlín_2019_Indice_Prefacio_Biografías_",
+    "https://diseno.uc.cl/2020/05/libro-paneles-voladores/"
+  ]
+},
+
+/* ------------------ Cosmopolitical encounters — Pablo Hermansen ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/L2836714089780275692088536281795/rjce_a_1433705_f0002_c.jpg",
+  orientation: "v",
+  span: 1,
+  tags: ["investigación","publicación académica"],
+  title: "Cosmopolitical encounters: Prototyping at the National Zoo",
+  author: "Pablo Hermansen",
+  collab: "Coautor: Martín Tironi. Journal of Cultural Economy 11:4",
+  area: "Investigación / Publicación académica",
+  year: "2018",
+  url: [
+    "https://repositorio.uc.cl/handle/11534/28039",
+    "https://www.researchgate.net/publication/323367706_Cosmopolitical_encounters_Prototyping_at_the_National_Zoo_in_Santiago_Chile"
+  ]
+},
+
+/* ------------------ Hacer y componer — Francisco Gálvez ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/K2836714089743382203941117178563/hacer_y_componer-1-768x1121.jpg",
+  orientation: "v",
+  span: 1,
+  tags: ["investigación","publicación académica"],
+  title: "Hacer y componer: una introducción a la tipografía",
+  author: "Francisco Gálvez",
+  collab: "",
+  area: "Investigación / Publicación académica",
+  year: "2018",
+  url: "https://catalogoadquisiciondelibros.cultura.gob.cl/libro/hacer-y-componer/"
+},
+
+/* ------------------ Hacer y componer 2.0 — Francisco Gálvez ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/S2836714089761828948014826730179/51iAgF1DOuL._AC_UF1000-1000_QL80_.jpg",
+  orientation: "v",
+  span: 1,
+  tags: ["investigación","publicación académica"],
+  title: "Hacer y componer: una introducción a la tipografía 2.0",
+  author: "Francisco Gálvez",
+  collab: "",
+  area: "Investigación / Publicación académica",
+  year: "2024",
+  url: "https://diseno.uc.cl/2025/05/lanzamiento-hacer-componer-2-0-una-introduccion-a-la-tipografia/"
+},
+
+/* ------------------ Pedagogías para habitar el jardín infantil — Patricia Manns ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/U2836724512651845939827938112195/813k52dMx9L._AC_UF1000-1000_QL80_.jpg",
+  orientation: "v",
+  span: 1,
+  tags: ["investigación","publicación académica"],
+  title: "Pedagogías para habitar el jardín infantil",
+  author: "Patricia Manns",
+  collab: "Autores: Patricia Manns, Cynthia Adlerstein, Alberto González. Editorial: Ediciones UC",
+  area: "Investigación / Publicación académica",
+  year: "2018",
+  url: "https://lea.uc.cl/pedagogias-para-habitar-el-jardin-infantil-reimpresion-primera-edicion-2018/p"
+},
+
+/* ------------------ Pedagogías para habitar el jardín infantil — Alberto González ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/U2836725192026983430477014577859/158400-1200-auto.jpg",
+  orientation: "v",
+  span: 1,
+  tags: ["investigación","publicación académica"],
+  title: "Pedagogías para habitar el jardín infantil",
+  author: "Alberto González",
+  collab: "Autores: Patricia Manns, Cynthia Adlerstein, Alberto González. Editorial: Ediciones UC",
+  area: "Investigación / Publicación académica",
+  year: "2018",
+  url: "https://lea.uc.cl/pedagogias-para-habitar-el-jardin-infantil-reimpresion-primera-edicion-2018/p"
+},
+
+/* ------------------ RutaCL Typeface — Rodrigo Ramírez ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/E2836724512633399195754228560579/mini_magick20180818-12931-p4pb7n.png",
+  orientation: "v",
+  span: 1,
+  tags: ["investigación","publicación académica"],
+  title: "The design of RutaCL: Developing and measuring performance for highway typeface",
+  author: "Rodrigo Ramírez",
+  collab: "Autores: Francisco Gálvez Pizarro, Victoria Gallardo, Rodrigo Ramírez Montecinos",
+  area: "Investigación / Publicación académica",
+  year: "2016",
+  url: [
+    "https://bibliotecadigital.oducal.com/Record/ir-11534-38819",
+    "https://repositorio.uc.cl/handle/11534/38819"
+  ]
+},
+
 /* ------------------ Resistencia gráfica. Dictadura en Chile (APJ – Tallersol) — Nicole Cristi ------------------ */
 {
   src: "https://freight.cargo.site/t/original/i/L2834736126320671324158845989571/Cristi-Nicole-Captura-de-pantalla-2026-03-11-a-las-11.25.22.png",
@@ -1330,10 +1451,10 @@
   tags: ["editorial","investigación"],
   title: "Resistencia gráfica. Dictadura en Chile (APJ – Tallersol)",
   author: "Nicole Cristi",
-  collab: "Co-autora: Nicole Cristi",
+  collab: "Co-autora: Javiera Manzi",
   area: "Editorial / Investigación",
-  year: "2023",
-  url: "https://www.uc.cl/agenda/actividad/presentacion-de-investigacion-resistencia-grafica-dictadura-en-chile-apj-tallersol"
+  year: "2016",
+  url: "https://www.uc.cl/agenda/actividad/presentacion-de-investigacion-resistencia-grafica-dictadura-en-chile-apj-tallersol", "https://artishockrevista.com/2016/06/13/resistencia-grafica-dictadura-chile-apj-tallersol/"
 },
 
     /* ------------- Sofía Garrido ------------- */
