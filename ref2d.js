@@ -914,6 +914,216 @@
   url: "https://gianfrancomw.myportfolio.com/posters-semana-novata-2023"
 },
 
+/* ------------------ Vestuario obra "Hotel O'clock" — María Soledad Albornoz ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/M2836337163916842722668132643523/albornoz-soledad-d0121ec3-e775-49e9-978e-8d1430062baa_rw_1920.jpeg",
+  orientation: "h",
+  span: 2,
+  tags: ["vestuario","teatro","indumentaria"],
+  title: "Vestuario obra 'Hotel O'clock'",
+  author: "María Soledad Albornoz",
+  collab: "Diseño técnico, patronaje y confección de vestuario de once personajes. Estreno: Academia Club de Teatro Fernando González, julio 2025",
+  area: "Vestuario / Teatro / Indumentaria",
+  year: "2025",
+  url: "https://solealbornoz.myportfolio.com/copia-de-escarlata"
+},
+
+/* ------------------ Vestuario obra "Bailame" — María Soledad Albornoz ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/R2836337163898395978594423091907/albornoz-soledad-2-d0121ec3-e775-49e9-978e-8d1430062baa_rw_1920.jpeg",
+  orientation: "h",
+  span: 1,
+  tags: ["vestuario","teatro","indumentaria"],
+  title: "Vestuario obra 'Bailame'",
+  author: "María Soledad Albornoz",
+  collab: "Diseño técnico, patronaje y confección de vestuario de siete personajes",
+  area: "Vestuario / Teatro / Indumentaria",
+  year: "2025",
+  url: "https://solealbornoz.myportfolio.com/copia-de-vestuario-obra-hotel-oclock"
+},
+
+/* ------------------ Colaboración cervecería LOA — María Jesús Lafuente ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/Z2836337163879949234520713540291/Lafuente-Captura-de-pantalla-2026-03-12-a-las-10.27.11.png",
+  orientation: "v",
+  span: 1,
+  tags: ["ilustración","packaging","gráfico"],
+  title: "Colaboración cervecería LOA",
+  author: "María Jesús Lafuente",
+  collab: "Ilustración para etiqueta de cerveza experimental. Cervecería LOA",
+  area: "Ilustración / Packaging / Gráfico",
+  year: "2023",
+  url: "https://www.behance.net/gallery/206548179/Cerveza-LOA"
+},
+
+/* ------------------ Arrebol Spa — María Jesús Lafuente ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/H2836334657391704731087968613059/arrebolCaptura-de-pantalla-2026-03-12-a-las-10.30.04.png",
+  orientation: "h",
+  span: 1,
+  tags: ["afiche","ilustración","gráfico"],
+  title: "Arrebol Spa",
+  author: "María Jesús Lafuente",
+  collab: "",
+  area: "Afiche / Ilustración / Gráfico",
+  year: "2024",
+  url: "https://www.behance.net/gallery/215849417/Arrebol-Spa"
+},
+
+/* ------------------ alegría alegría (fotografía) — María Inés Alarcón ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/L2836334657410151475161678164675/Alarcon-MariaInes-1Captura-de-pantalla-2026-03-12-a-las-10.53.27.png",
+  orientation: "h",
+  span: 1,
+  tags: ["fotografía"],
+  title: "alegría alegría",
+  author: "María Inés Alarcón",
+  collab: "Creadora y fundadora: María Inés Alarcón",
+  area: "Fotografía",
+  year: "N/A",
+  url: ["https://www.alegria-alegria.com/portfolio","https://www.instagram.com/alegria___alegria/"]
+},
+
+/* ------------------ Rediseño portada Juan Salvador Gaviota — María Inés Alarcón ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/P2836334657428598219235387716291/Alarcon-MariaInes-2Captura-de-pantalla-2026-03-12-a-las-10.56.05.png",
+  orientation: "sq",
+  span: 1,
+  tags: ["ilustración","gráfico"],
+  title: "Rediseño portada Juan Salvador Gaviota",
+  author: "María Inés Alarcón",
+  collab: "",
+  area: "Ilustración / Gráfico",
+  year: "2018",
+  url: "https://www.behance.net/gallery/67251153/Rediseno-portada-Juan-Salvador-Gaviota-Richard-Bach"
+},
+
+/* ------------------ Circular Pet — León Quesney Cox ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/O2836334657373257987014259061443/Quesneyb9f9ce_c2d979ca09e44dfd8158696da129e7e2_mv2.jpg.jpg",
+  orientation: "h",
+  span: 1,
+  tags: ["packaging","servicio"],
+  title: "Circular Pet",
+  author: "León Quesney Cox",
+  collab: "Desarrollado en Periferi.co",
+  area: "Packaging / Servicio",
+  year: "2021",
+  url: ["https://www.behance.net/gallery/129565533/Pentawards-London-2021","https://www.periferi.co/services-1"]
+},
+
+/* ------------------ La Batea Deco — Josefina Stückrath ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/O2836334657336364498866839958211/Josefina-Stuckrath-1Captura-de-pantalla-2026-03-12-a-las-11.05.59.png",
+  orientation: "v",
+  span: 1,
+  tags: ["branding","gráfico","web"],
+  title: "La Batea Deco",
+  author: "Josefina Stückrath",
+  collab: "",
+  area: "Branding / Gráfico / Web",
+  year: "2026",
+  url: "https://www.behance.net/gallery/241350377/Diseno-grafico-web-y-fotografia-La-Batea-Deco"
+},
+
+/* ------------------ Tere Gott — Josefina Stückrath ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/Z2836334657354811242940549509827/Josefina-Stuckrath-2Captura-de-pantalla-2026-03-12-a-las-11.07.34.png",
+  orientation: "h",
+  span: 1,
+  tags: ["branding","gráfico","web"],
+  title: "Tere Gott",
+  author: "Josefina Stückrath",
+  collab: "Diseño gráfico, web y fotografía: Josefina Stückrath",
+  area: "Branding / Gráfico / Web",
+  year: "2025",
+  url: "https://www.behance.net/gallery/241036857/Diseno-grafico-web-y-fotografia-Tere-Gott"
+},
+
+/* ------------------ ALBADELUX — Josefa González Gil ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/X2836334657317917754793130406595/Gonzalez-Josefa-Captura-de-pantalla-2026-03-12-a-las-11.13.55.png",
+  orientation: "v",
+  span: 1,
+  tags: ["branding","packaging","gráfico"],
+  title: "ALBADELUX",
+  author: "Josefa González Gil",
+  collab: "Rediseño de identidad corporativa ALBADELUX. Implementación en desarrollo de packaging",
+  area: "Branding / Packaging / Gráfico",
+  year: "2023",
+  url: "https://www.behance.net/gallery/175998049/Packaging-Iluminacion-Industrial"
+},
+
+/* ------------------ Cajas de Puzzles (varias) — Florencia Rodríguez Errázuriz ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/B2836334657299471010719420854979/Florencia-Rodriguez-ErrazurizCaptura-de-pantalla-2026-03-12-a-las-11.15.31.png",
+  orientation: "h",
+  span: 1,
+  tags: ["branding","packaging","gráfico"],
+  title: "Cajas de Puzzles (varias)",
+  author: "Florencia Rodríguez Errázuriz",
+  collab: "",
+  area: "Branding / Packaging / Gráfico",
+  year: "2020",
+  url: "https://www.behance.net/gallery/100930229/Diseno-de-cajas-para-puzzles"
+},
+
+/* ------------------ Real Travel App — Colomba Plass ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/Y2836334657281024266645711303363/Plass-colombaCaptura-de-pantalla-2026-03-12-a-las-11.21.45.png",
+  orientation: "v",
+  span: 1,
+  tags: ["audiovisual","fotografía","dirección creativa"],
+  title: "Real Travel App",
+  author: "Colomba Plass",
+  collab: "Desarrollado en Cinco Estudio. Pieza audiovisual publicitaria para Real Travel",
+  area: "Audiovisual / Fotografía / Dirección creativa",
+  year: "N/A",
+  url: "https://cinco-estudio.com/real-travel"
+},
+
+/* ------------------ Silla Mudra — Chiara Antillo Heilenkötter ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/X2836334657244130778498292200131/Chiara-Antillosilla-mudra-madera-escultural2.jpg",
+  orientation: "v",
+  span: 1,
+  tags: ["producto","industrial","objeto"],
+  title: "Silla Mudra",
+  author: "Chiara Antillo Heilenkötter",
+  collab: "Desarrollado en Anka Taller",
+  area: "Producto / Industrial / Objeto",
+  year: "N/A",
+  url: ["https://www.instagram.com/p/DRj3ScXkWvl/?img_index=1","https://www.ankataller.com/collections/sillas/products/silla-mudra"]
+},
+
+/* ------------------ Silla alta Pliego — Chiara Antillo Heilenkötter ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/L2836334657262577522572001751747/Chiara-Antillosilla-2.jpg",
+  orientation: "v",
+  span: 1,
+  tags: ["producto","industrial","objeto"],
+  title: "Silla alta Pliego",
+  author: "Chiara Antillo Heilenkötter",
+  collab: "Desarrollado en Anka Taller",
+  area: "Producto / Industrial / Objeto",
+  year: "N/A",
+  url: ["https://www.instagram.com/p/DRj3ScXkWvl/?img_index=1","https://www.ankataller.com/collections/sillas/products/silla-alta-pliego-taburete"]
+},
+
+/* ------------------ Historia de la infografía en Chile (2018) — Gonzalo Morales ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/J2836334753314773914377637016259/Captura-de-pantalla-2026-03-12-a-las-11.32.10.png",
+  orientation: "sq",
+  span: 2,
+  tags: ["investigación","publicación académica"],
+  title: "Historia de la infografía en Chile (2018)",
+  author: "Gonzalo Morales",
+  collab: "",
+  area: "Investigación / Publicación académica",
+  year: "2018",
+  url: "https://www.academia.edu/36534358/Gonzalo_Morales_Historia_de_la_Infografía_en_Chile_2018_pdf"
+},
+
 /* ------------------ Afiche n°2 — Gianfranco Music Wachtendorff ------------------ */
 {
   src: "https://freight.cargo.site/t/original/i/C2835041680347777305795830952643/Gianfranco-Music-Wachtendorff-7485022f-8fb6-4b6e-888d-2462ee018664_rw_1200.jpeg",
