@@ -312,22 +312,71 @@
       (canonicalKey ? canonicalKey.charAt(0).toUpperCase() + canonicalKey.slice(1) : "—");
   };
 
-  const ROLE_DISPLAY = {
-    "designer": "Diseñador/a",
-    "photographer": "Photographer",
-    "illustrator": "Illustrator",
-    "art director": "Art director",
-    "creative director": "Creative director",
-    "editor": "Editor",
-    "curator": "Curator",
-    "researcher": "Researcher",
-    "web developer": "Web developer",
-    "director": "Director",
-    "producer": "Producer",
-    "co-author": "Co-author",
-    "typographer": "Typographer",
-    "guide": "Guide",
-    "lighting designer": "Lighting designer",
+  const ROLE_FORMS = {
+    "designer": {
+      singular: { female: "Diseñadora", male: "Diseñador", mixed: "Diseñador/a" },
+      plural: { female: "Diseñadoras", male: "Diseñadores", mixed: "Diseñadores/as" }
+    },
+    "photographer": {
+      singular: { female: "Fotógrafa", male: "Fotógrafo", mixed: "Fotógrafo/a" },
+      plural: { female: "Fotógrafas", male: "Fotógrafos", mixed: "Fotógrafos/as" }
+    },
+    "illustrator": {
+      singular: { female: "Ilustradora", male: "Ilustrador", mixed: "Ilustrador/a" },
+      plural: { female: "Ilustradoras", male: "Ilustradores", mixed: "Ilustradores/as" }
+    },
+    "art director": {
+      singular: { female: "Directora de arte", male: "Director de arte", mixed: "Director/a de arte" },
+      plural: { female: "Directoras de arte", male: "Directores de arte", mixed: "Directores/as de arte" }
+    },
+    "creative director": {
+      singular: { female: "Directora creativa", male: "Director creativo", mixed: "Director/a creativo/a" },
+      plural: { female: "Directoras creativas", male: "Directores creativos", mixed: "Directores/as creativos/as" }
+    },
+    "editor": {
+      singular: { female: "Editora", male: "Editor", mixed: "Editor/a" },
+      plural: { female: "Editoras", male: "Editores", mixed: "Editores/as" }
+    },
+    "curator": {
+      singular: { female: "Curadora", male: "Curador", mixed: "Curador/a" },
+      plural: { female: "Curadoras", male: "Curadores", mixed: "Curadores/as" }
+    },
+    "researcher": {
+      singular: { female: "Investigadora", male: "Investigador", mixed: "Investigador/a" },
+      plural: { female: "Investigadoras", male: "Investigadores", mixed: "Investigadores/as" }
+    },
+    "web developer": {
+      singular: { female: "Desarrolladora web", male: "Desarrollador web", mixed: "Desarrollador/a web" },
+      plural: { female: "Desarrolladoras web", male: "Desarrolladores web", mixed: "Desarrolladores/as web" }
+    },
+    "director": {
+      singular: { female: "Directora", male: "Director", mixed: "Director/a" },
+      plural: { female: "Directoras", male: "Directores", mixed: "Directores/as" }
+    },
+    "producer": {
+      singular: { female: "Productora", male: "Productor", mixed: "Productor/a" },
+      plural: { female: "Productoras", male: "Productores", mixed: "Productores/as" }
+    },
+    "author": {
+      singular: { female: "Autora", male: "Autor", mixed: "Autor/a" },
+      plural: { female: "Autoras", male: "Autores", mixed: "Autores/as" }
+    },
+    "co-author": {
+      singular: { female: "Coautora", male: "Coautor", mixed: "Coautor/a" },
+      plural: { female: "Coautoras", male: "Coautores", mixed: "Coautores/as" }
+    },
+    "typographer": {
+      singular: { female: "Tipógrafa", male: "Tipógrafo", mixed: "Tipógrafo/a" },
+      plural: { female: "Tipógrafas", male: "Tipógrafos", mixed: "Tipógrafos/as" }
+    },
+    "guide": {
+      singular: { female: "Guía", male: "Guía", mixed: "Guía" },
+      plural: { female: "Guías", male: "Guías", mixed: "Guías" }
+    },
+    "lighting designer": {
+      singular: { female: "Iluminadora", male: "Iluminador", mixed: "Iluminador/a" },
+      plural: { female: "Iluminadoras", male: "Iluminadores", mixed: "Iluminadores/as" }
+    },
   };
 
   const FEMALE_NAME_HINTS = new Set([
@@ -459,21 +508,31 @@
     return "unknown";
   }
 
-  function inferDesignerRoleByAuthors(authorRaw) {
+  function getAuthorGenderProfile(authorRaw) {
     const names = splitAuthorNames(authorRaw);
-    if (!names.length) return "Diseñador/a";
+    if (!names.length) {
+      return { group: "mixed", isPlural: false };
+    }
     const counts = { female: 0, male: 0, unknown: 0 };
     names.forEach((name) => {
       const gender = inferNameGender(name);
       counts[gender] += 1;
     });
     if (counts.female > 0 && counts.male === 0 && counts.unknown === 0) {
-      return names.length > 1 ? "Diseñadoras" : "Diseñadora";
+      return { group: "female", isPlural: names.length > 1 };
     }
     if (counts.male > 0 && counts.female === 0 && counts.unknown === 0) {
-      return names.length > 1 ? "Diseñadores" : "Diseñador";
+      return { group: "male", isPlural: names.length > 1 };
     }
-    return names.length > 1 ? "Diseñadores/as" : "Diseñador/a";
+    return { group: "mixed", isPlural: names.length > 1 };
+  }
+
+  function roleLabelFromCanonical(canonical, authorRaw) {
+    const key = canonical || "designer";
+    const forms = ROLE_FORMS[key] || ROLE_FORMS.designer;
+    const profile = getAuthorGenderProfile(authorRaw);
+    const bucket = profile.isPlural ? forms.plural : forms.singular;
+    return bucket[profile.group] || bucket.mixed || "Diseñador/a";
   }
 
   function toNameKey(value) {
@@ -517,6 +576,21 @@
       key.includes("branding") ||
       key.includes("identidad")
     ) return "designer";
+    return "";
+  }
+
+  function inferRoleFromTags(rawTags) {
+    const tags = Array.isArray(rawTags) ? rawTags : [];
+    const keys = tags.map((tag) => norm(tag));
+    if (keys.some((k) => k.includes("iluminacion"))) return "lighting designer";
+    if (keys.some((k) => k.includes("ilustracion"))) return "illustrator";
+    if (keys.some((k) => k.includes("fotografia"))) return "photographer";
+    if (keys.some((k) => k.includes("tipografia"))) return "typographer";
+    if (keys.some((k) => k.includes("direccion de arte"))) return "art director";
+    if (keys.some((k) => k.includes("direccion creativa"))) return "creative director";
+    if (keys.some((k) => k.includes("curaduria"))) return "curator";
+    if (keys.some((k) => k.includes("investigacion"))) return "researcher";
+    if (keys.some((k) => k.includes("desarrollo web") || k === "web")) return "web developer";
     return "";
   }
 
@@ -572,7 +646,6 @@
 
   function deriveDisplayPeople(meta) {
     const authorName = cleanAuthorName(meta.author) || "—";
-    const inferredDesignerRole = inferDesignerRoleByAuthors(meta.author);
     const authorKeys = splitAuthorNames(meta.author)
       .map(toNameKey)
       .filter((key) => key.length >= 4);
@@ -613,10 +686,11 @@
       credits.push(outputSegment);
     });
 
-    let roleLabel = ROLE_DISPLAY[roleCanonical] || inferredDesignerRole;
     if (!roleCanonical || roleCanonical === "designer" || roleCanonical === "author") {
-      roleLabel = inferredDesignerRole;
+      const tagRole = inferRoleFromTags(meta.tags);
+      roleCanonical = tagRole || "designer";
     }
+    const roleLabel = roleLabelFromCanonical(roleCanonical, meta.author);
 
     return {
       author: authorName,
