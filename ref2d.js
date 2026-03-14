@@ -3071,8 +3071,8 @@
 
 /* ------------------ Humanidad Teenager — Benjamín Saíz ------------------ */
 {
-  src: "",
-  orientation: "v",
+  src: "https://freight.cargo.site/t/original/i/D2840105943655249519298499523267/Captura-de-pantalla-2026-03-14-a-las-11.17.17.png",
+  orientation: "h",
   span: 1,
   tags: ["cover art","dirección de arte"],
   title: "Humanidad Teenager",
@@ -3085,8 +3085,8 @@
 
 /* ------------------ CHT Lab — Benjamín Saíz ------------------ */
 {
-  src: "",
-  orientation: "v",
+  src: "https://freight.cargo.site/t/original/i/X2840102851445987187440071684803/Captura-de-pantalla-2026-03-14-a-las-11.18.22.png",
+  orientation: "h",
   span: 1,
   tags: ["identidad visual"],
   title: "CHT Lab",
@@ -3455,6 +3455,104 @@
   area: "Desarrollo Web / Ecommerce",
   year: "2023",
   url: "https://www.gaja.studio/proyectos/proyecto-guaico"
+},
+
+/* ------------------ A Punto — María José Díaz ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/C2840101210589655086901745889987/Captura-de-pantalla-2026-03-14-a-las-20.16.15.png",
+  orientation: "h",
+  span: 1,
+  tags: ["identidad visual","dirección creativa"],
+  title: "A Punto",
+  author: "María José Díaz",
+  collab: "Desarrollado en Blanca Estudio. Branding Manager: María José Díaz",
+  area: "Identidad visual / Dirección creativa",
+  year: "2017",
+  url: "https://www.blancaestudio.com/apunto"
+},
+
+/* ------------------ VSPT — María José Díaz ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/R2840101210552761598754326786755/Captura-de-pantalla-2026-03-14-a-las-19.39.31.png",
+  orientation: "h",
+  span: 1,
+  tags: ["identidad visual","dirección creativa"],
+  title: "VSPT",
+  author: "María José Díaz",
+  collab: "Desarrollado en Blanca Estudio. Branding Manager: María José Díaz",
+  area: "Identidad visual / Dirección creativa",
+  year: "2020",
+  url: "https://www.blancaestudio.com/vspt"
+},
+
+/* ------------------ Resurgir: un poema a las raíces — Magdalena Sáez ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/B2840101210608101830975455441603/Captura-de-pantalla-2026-03-14-a-las-20.15.40.png",
+  orientation: "h",
+  span: 1,
+  tags: ["dirección creativa","objeto","moda","fotografía"],
+  title: "Resurgir: un poema a las raíces",
+  author: "Magdalena Sáez",
+  collab: "Campaña colaborativa entre las marcas Exo y Adeu. Equipo creativo: Giuliana Mellafe, Magdalena Sáenz, Sebastián Tala, María Jesús Vallejos, Josefina Véliz",
+  area: "Dirección creativa / Objeto / Moda / Fotografía",
+  year: "2023",
+  url: "https://www.behance.net/gallery/234618837/Resurgir"
+},
+
+/* ------------------ Resurgir: un poema a las raíces — María Jesús Vallejos ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/I2840101210644995319122874544835/Captura-de-pantalla-2026-03-14-a-las-20.15.27.png",
+  orientation: "h",
+  span: 1,
+  tags: ["dirección creativa","objeto","moda","fotografía"],
+  title: "Resurgir: un poema a las raíces",
+  author: "María Jesús Vallejos",
+  collab: "Campaña colaborativa entre las marcas Exo y Adeu. Equipo creativo: Giuliana Mellafe, Magdalena Sáenz, Sebastián Tala, María Jesús Vallejos, Josefina Véliz",
+  area: "Dirección creativa / Objeto / Moda / Fotografía",
+  year: "2023",
+  url: "https://www.behance.net/gallery/234618837/Resurgir"
+},
+
+/* ------------------ Resurgir: un poema a las raíces — Sebastián Tala ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/U2840101210626548575049164993219/Captura-de-pantalla-2026-03-14-a-las-20.15.33.png",
+  orientation: "h",
+  span: 1,
+  tags: ["dirección creativa","objeto","moda","fotografía"],
+  title: "Resurgir: un poema a las raíces",
+  author: "Sebastián Tala",
+  collab: "Campaña colaborativa entre las marcas Exo y Adeu. Equipo creativo: Giuliana Mellafe, Magdalena Sáenz, Sebastián Tala, María Jesús Vallejos, Josefina Véliz",
+  area: "Dirección creativa / Objeto / Moda / Fotografía",
+  year: "2023",
+  url: "https://www.behance.net/gallery/234618837/Resurgir"
+},
+
+/* ------------------ Resurgir: un poema a las raíces — Giuliana Mellafe ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/H2840101210663442063196584096451/Captura-de-pantalla-2026-03-14-a-las-20.15.21.png",
+  orientation: "h",
+  span: 1,
+  tags: ["dirección creativa","objeto","moda","fotografía"],
+  title: "Resurgir: un poema a las raíces",
+  author: "Giuliana Mellafe",
+  collab: "Campaña colaborativa entre las marcas Exo y Adeu. Equipo creativo: Giuliana Mellafe, Magdalena Sáenz, Sebastián Tala, María Jesús Vallejos, Josefina Véliz",
+  area: "Dirección creativa / Objeto / Moda / Fotografía",
+  year: "2023",
+  url: "https://www.behance.net/gallery/234618837/Resurgir"
+},
+
+/* ------------------ Resurgir: un poema a las raíces — Josefina Véliz ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/F2840101210571208342828036338371/Captura-de-pantalla-2026-03-14-a-las-20.15.47.png",
+  orientation: "h",
+  span: 1,
+  tags: ["dirección creativa","objeto","moda","fotografía"],
+  title: "Resurgir: un poema a las raíces",
+  author: "Josefina Véliz",
+  collab: "Campaña colaborativa entre las marcas Exo y Adeu. Equipo creativo: Giuliana Mellafe, Magdalena Sáenz, Sebastián Tala, María Jesús Vallejos, Josefina Véliz",
+  area: "Dirección creativa / Objeto / Moda / Fotografía",
+  year: "2023",
+  url: "https://www.behance.net/gallery/234618837/Resurgir"
 },
 
     /* ------------------ Campaña día del niño — Francisca Torres ------------------ */
