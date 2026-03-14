@@ -3488,7 +3488,7 @@
 /* ------------------ Resurgir: un poema a las raíces — Magdalena Sáez ------------------ */
 {
   src: "https://freight.cargo.site/t/original/i/B2840101210608101830975455441603/Captura-de-pantalla-2026-03-14-a-las-20.15.40.png",
-  orientation: "h",
+  orientation: "sq",
   span: 1,
   tags: ["dirección creativa","objeto","moda","fotografía"],
   title: "Resurgir: un poema a las raíces",
@@ -3502,7 +3502,7 @@
 /* ------------------ Resurgir: un poema a las raíces — María Jesús Vallejos ------------------ */
 {
   src: "https://freight.cargo.site/t/original/i/I2840101210644995319122874544835/Captura-de-pantalla-2026-03-14-a-las-20.15.27.png",
-  orientation: "h",
+  orientation: "sq",
   span: 1,
   tags: ["dirección creativa","objeto","moda","fotografía"],
   title: "Resurgir: un poema a las raíces",
@@ -3516,7 +3516,7 @@
 /* ------------------ Resurgir: un poema a las raíces — Sebastián Tala ------------------ */
 {
   src: "https://freight.cargo.site/t/original/i/U2840101210626548575049164993219/Captura-de-pantalla-2026-03-14-a-las-20.15.33.png",
-  orientation: "h",
+  orientation: "sq",
   span: 1,
   tags: ["dirección creativa","objeto","moda","fotografía"],
   title: "Resurgir: un poema a las raíces",
@@ -3530,7 +3530,7 @@
 /* ------------------ Resurgir: un poema a las raíces — Giuliana Mellafe ------------------ */
 {
   src: "https://freight.cargo.site/t/original/i/H2840101210663442063196584096451/Captura-de-pantalla-2026-03-14-a-las-20.15.21.png",
-  orientation: "h",
+  orientation: "sq",
   span: 1,
   tags: ["dirección creativa","objeto","moda","fotografía"],
   title: "Resurgir: un poema a las raíces",
@@ -3544,7 +3544,7 @@
 /* ------------------ Resurgir: un poema a las raíces — Josefina Véliz ------------------ */
 {
   src: "https://freight.cargo.site/t/original/i/F2840101210571208342828036338371/Captura-de-pantalla-2026-03-14-a-las-20.15.47.png",
-  orientation: "h",
+  orientation: "sq",
   span: 1,
   tags: ["dirección creativa","objeto","moda","fotografía"],
   title: "Resurgir: un poema a las raíces",
