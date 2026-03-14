@@ -531,6 +531,29 @@
     return { label: roleMatch[1].trim(), details: roleMatch[2].trim() };
   }
 
+  function isLikelyBareNameCredit(segment) {
+    const value = String(segment || "").trim();
+    if (!value) return false;
+    if (value.includes(":")) return false;
+    if (/[.;|]/.test(value)) return false;
+    if (/\d/.test(value)) return false;
+    if (
+      /\b(cliente|proyecto|trabajo|desarrollado|realizado|curso|banda|editorial|institucion|institución|fundacion|fundación|universidad|ministerio|isbn|presentado|financiado|encargo|estudio|studio)\b/i.test(value)
+    ) return false;
+    const tokens = value.split(/\s+/).filter(Boolean);
+    if (!tokens.length || tokens.length > 6) return false;
+    return tokens.every((token) => /^@?[A-ZÁÉÍÓÚÜÑ][\p{L}'’.\-]*$/u.test(token));
+  }
+
+  function normalizeBareCreditSegment(segment) {
+    const value = String(segment || "").trim();
+    if (!isLikelyBareNameCredit(value)) return value;
+    if (/[,&]/.test(value) || /\s+y\s+/i.test(value) || /\s+and\s+/i.test(value)) {
+      return `Colaboradores/as: ${value}`;
+    }
+    return `Colaborador/a: ${value}`;
+  }
+
   function stripAuthorFromCredit(text, authorKeys) {
     let cleaned = norm(text)
       .replace(/[^a-z0-9@]+/g, " ")
@@ -577,12 +600,17 @@
         const residue = stripAuthorFromCredit(segmentDetails, authorKeys);
         if (!residue) keepSegment = false;
       }
+      if (segmentHasAuthor && !labeled) {
+        const residue = stripAuthorFromCredit(segment, authorKeys);
+        if (!residue) keepSegment = false;
+      }
 
       if (!keepSegment) return;
-      const dedupeKey = toNameKey(segment);
+      const outputSegment = labeled ? segment : normalizeBareCreditSegment(segment);
+      const dedupeKey = toNameKey(outputSegment);
       if (!dedupeKey || seenCreditLines.has(dedupeKey)) return;
       seenCreditLines.add(dedupeKey);
-      credits.push(segment);
+      credits.push(outputSegment);
     });
 
     let roleLabel = ROLE_DISPLAY[roleCanonical] || inferredDesignerRole;
