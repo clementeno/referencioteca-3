@@ -1572,12 +1572,12 @@
 /* ------------------ Real Travel App — Colomba Plass ------------------ */
 {
   src: "https://freight.cargo.site/t/original/i/Y2836334657281024266645711303363/Plass-colombaCaptura-de-pantalla-2026-03-12-a-las-11.21.45.png",
-  orientation: "v",
+  orientation: "h",
   span: 1,
   tags: ["audiovisual","fotografía","dirección creativa"],
   title: "Real Travel App",
   author: "Colomba Plass",
-  role: "",
+  role: "diseñadora",
   collab: "Desarrollado en Cinco Estudio. Pieza audiovisual publicitaria para Real Travel",
   area: "Audiovisual / Fotografía / Dirección creativa",
   year: "N/A",
