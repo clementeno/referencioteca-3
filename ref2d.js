@@ -37,6 +37,8 @@
   const btnSearchRandom = $("#ref2dSearchRandom");
   const headerMoreBtn = $("#ref2dHeaderMore");
   const headerMoreDropdown = $("#ref2dHeaderMoreDropdown");
+  const MOBILE_MAX_WIDTH = 768;
+  const MOBILE_ALLOWED_VIEWS = new Set(['grid', 'index']);
 
   /* Si falta el contenedor principal, salimos en silencio (para no romper otras páginas) */
   if (!viewport || !plane) {
@@ -3885,7 +3887,7 @@
   /* Activo + generador circular */
   let activeList = DB_ORDERED.slice();
   let genPtr = 0;
-  let activeView = 'bento';
+  let activeView = window.matchMedia(`(max-width: ${MOBILE_MAX_WIDTH}px)`).matches ? 'grid' : 'bento';
   let masonryRaf = null;
   let listSortKey = '';
   let listSortDir = 1;
@@ -4332,6 +4334,7 @@
       clearTimeout(filterDebounceTimer);
       filterDebounceTimer = null;
     }
+    view = sanitizeViewForViewport(view);
     const viewMap = {
       bento: 'Vista: Infinita',
       grid: 'Vista: Grilla',
@@ -5244,6 +5247,32 @@
     if (!viewMenu || !viewToggle) return;
     viewMenu.hidden = true;
     viewToggle.setAttribute('aria-expanded', 'false');
+  }
+
+  function isMobileViewport() {
+    return window.matchMedia(`(max-width: ${MOBILE_MAX_WIDTH}px)`).matches;
+  }
+
+  function sanitizeViewForViewport(view) {
+    if (isMobileViewport() && !MOBILE_ALLOWED_VIEWS.has(view)) {
+      return 'grid';
+    }
+    return view;
+  }
+
+  function syncViewOptionsWithViewport() {
+    const mobile = isMobileViewport();
+    if (viewMenu) {
+      viewMenu.querySelectorAll('button[data-view]').forEach((btn) => {
+        const view = btn.dataset.view;
+        btn.hidden = mobile && !MOBILE_ALLOWED_VIEWS.has(view);
+      });
+    }
+    if (mobile && !MOBILE_ALLOWED_VIEWS.has(activeView)) {
+      setView('grid');
+      return true;
+    }
+    return false;
   }
 
   function initViewSwitcher() {
