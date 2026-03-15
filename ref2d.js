@@ -5075,7 +5075,10 @@
     COL_W = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--colw'));
     GAP   = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--gap'));
     resetPlaneLimits();
-    renderActiveView();
+    const forcedViewChange = syncViewOptionsWithViewport();
+    if (!forcedViewChange) {
+      renderActiveView();
+    }
   });
 
   /* ===== Panel de categorías ===== */
@@ -5277,6 +5280,7 @@
 
   function initViewSwitcher() {
     if (!viewToggle || !viewMenu) return;
+    syncViewOptionsWithViewport();
 
     viewToggle.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -5426,7 +5430,6 @@
   });
 
   /* Boot */
-  renderActiveView();
   if (overlay) {
     overlay.setAttribute('hidden',''); // garantía extra
   }
@@ -5437,6 +5440,7 @@
   initHeaderMore();
   initRandomButton();
   initIndexSorting();
+  setView(activeView);
   
   // Mostrar modal institucional al cargar (si no se ha visto antes)
   showWipModal();
