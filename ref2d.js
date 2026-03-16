@@ -3709,8 +3709,8 @@
 /* ------------------ AjuarParn — Camila Ríos ------------------ */
 {
   src: "IMG/remote-originals/192_Rios-Camila-21949970_10155734500863430_4521371404219177019_o.jpg.jpg",
-  orientation: "v",
-  span: 1,
+  orientation: "h",
+  span: 2,
   tags: ["producto","packaging","textil"],
   title: "AjuarParn",
   author: "Camila Ríos",
