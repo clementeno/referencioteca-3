@@ -2003,12 +2003,27 @@
       tags: ["Gráfico","Branding","Museografía"],
       title: "Museum Site Santa Fe",
       author: "Vicente Acuña",
-      role: "Diseñadora",
+      role: "Diseñador",
       collab: "Desarrollado en: Felicidad Pública. Design Direction: Simón Sepúlveda, Piedad Rivadeneira. Creative Direction: Simón Sepúlveda. Graphic Design: Pau Geis, Antonia Guzmán, Vicente Acuña",
       area: "Gráfico / Museografía / Branding",
       year: "2022",
       url: "https://felicidadpublica.cl/project/site-santa-fe/"
     },
+
+    {
+      src: "https://freight.cargo.site/t/original/i/U2843133799052803512373283861187/Captura-de-pantalla-2026-03-16-a-las-17.56.23.png",
+      orientation: "v",
+      span: 2,
+      tags: ["animación","Motion Graphics"],
+      title: "The Name Club",
+      author: "Vicente Acuña",
+      role: "Diseñador",
+      collab: "Desarrollado en: Otros Pérez.",
+      area: "Gráfico / animación / Motion Graphics",
+      year: "2025",
+      url: "https://www.instagram.com/reel/DKxHrSQRn7Z/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
+    },
+    
 
     /* ------------- Gracia González — SIENTO EL VIENTO ------------- */
     {
@@ -4164,6 +4179,23 @@
   url: [
     "https://aurorabotanica.cl",
     "https://www.instagram.com/aurorabotanica.cl"
+  ]
+},
+
+{
+  src: "https://freight.cargo.site/t/original/i/F2843129278512147553184274395843/461857978_1514275622555722_4416919289787104457_n.jpg",
+  orientation: "h",
+  span: 1,
+  tags: ["ecología","producto","innovación"],
+  title: "Otros Pérez",
+  author: "Catalina Pérez",
+  role: "Diseñadora / Fundadora",
+  collab: "",
+  area: "Estudio / Branding",
+  year: "N/A",
+  url: [
+    "http://otrosperez.com",
+    "https://www.instagram.com/otrosperez/"
   ]
 },
 
