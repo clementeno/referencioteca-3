@@ -39,6 +39,7 @@
   const headerMoreDropdown = $("#ref2dHeaderMoreDropdown");
   const MOBILE_MAX_WIDTH = 768;
   const MOBILE_ALLOWED_VIEWS = new Set(['grid', 'index']);
+  const DESKTOP_ALLOWED_VIEWS = new Set(['bento', 'grid', 'index']);
 
   /* Si falta el contenedor principal, salimos en silencio (para no romper otras páginas) */
   if (!viewport || !plane) {
@@ -4357,11 +4358,6 @@
       updateCount();
       return;
     }
-    if (activeView === 'simple') {
-      renderSimpleView();
-      updateCount();
-      return;
-    }
     renderIndexListView();
     updateCount();
   }
@@ -4375,21 +4371,19 @@
     const viewMap = {
       bento: 'Vista: Infinita',
       grid: 'Vista: Grilla',
-      index: 'Vista: Lista',
-      simple: 'Vista: Simple'
+      index: 'Vista: Lista'
     };
     activeView = viewMap[view] ? view : 'bento';
 
     const isBento = activeView === 'bento';
     const isGrid = activeView === 'grid';
     const isIndex = activeView === 'index';
-    const isSimple = activeView === 'simple';
 
     if (viewToggle) viewToggle.textContent = viewMap[activeView];
     if (viewport) viewport.hidden = !isBento;
     if (multiGrid) multiGrid.hidden = !isGrid;
     if (indexList) indexList.hidden = !isIndex;
-    if (simpleView) simpleView.hidden = !isSimple;
+    if (simpleView) simpleView.hidden = true;
     if (btnCenter) btnCenter.hidden = !isBento;
     if (btnRandom) btnRandom.hidden = !isGrid;
     if (count) count.hidden = false;
@@ -4400,7 +4394,7 @@
       btnSearchRandom.hidden = !isGrid;
       btnSearchRandom.textContent = 'Aleatorio';
     }
-    if (btnSimpleRefresh) btnSimpleRefresh.hidden = !isSimple;
+    if (btnSimpleRefresh) btnSimpleRefresh.hidden = true;
 
     renderActiveView();
   }
@@ -5318,9 +5312,11 @@
   }
 
   function sanitizeViewForViewport(view) {
-    if (isMobileViewport() && !MOBILE_ALLOWED_VIEWS.has(view)) {
-      return 'grid';
+    if (isMobileViewport()) {
+      if (!MOBILE_ALLOWED_VIEWS.has(view)) return 'grid';
+      return view;
     }
+    if (!DESKTOP_ALLOWED_VIEWS.has(view)) return 'bento';
     return view;
   }
 
@@ -5412,13 +5408,9 @@
         updateCount();
         return;
       }
-      if (activeView === 'simple') {
-        renderSimpleView();
-      }
     };
     if (btnRandom) btnRandom.addEventListener('click', onRandomClick);
     if (btnSearchRandom) btnSearchRandom.addEventListener('click', onRandomClick);
-    if (btnSimpleRefresh) btnSimpleRefresh.addEventListener('click', onRandomClick);
   }
 
   function initIndexSorting() {
