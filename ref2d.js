@@ -648,12 +648,14 @@
 
   function deriveDisplayPeople(meta) {
     const authorName = cleanAuthorName(meta.author) || "—";
+    const manualRoleRaw = String(meta.role || "").replace(/\s+/g, " ").trim();
+    const hasManualRole = Boolean(manualRoleRaw);
     const authorKeys = splitAuthorNames(meta.author)
       .map(toNameKey)
       .filter((key) => key.length >= 4);
     const authorRoleMatch = String(meta.author || "").match(/\(([^)]*)\)/);
-    let roleCanonical = normalizeRoleLabel(meta.role || "");
-    if (!roleCanonical && authorRoleMatch) {
+    let roleCanonical = hasManualRole ? "" : normalizeRoleLabel(meta.role || "");
+    if (!hasManualRole && !roleCanonical && authorRoleMatch) {
       roleCanonical = normalizeRoleLabel(authorRoleMatch[1]);
     }
 
@@ -665,7 +667,7 @@
       const labeled = extractCreditLabel(segment);
       const segmentRole = labeled ? normalizeRoleLabel(labeled.label) : "";
 
-      if (!roleCanonical && segmentHasAuthor && segmentRole && segmentRole !== "author") {
+      if (!hasManualRole && !roleCanonical && segmentHasAuthor && segmentRole && segmentRole !== "author") {
         roleCanonical = segmentRole;
       }
 
@@ -688,11 +690,13 @@
       credits.push(outputSegment);
     });
 
-    if (!roleCanonical || roleCanonical === "designer" || roleCanonical === "author") {
+    if (!hasManualRole && (!roleCanonical || roleCanonical === "designer" || roleCanonical === "author")) {
       const tagRole = inferRoleFromTags(meta.tags);
       roleCanonical = tagRole || "designer";
     }
-    const roleLabel = roleLabelFromCanonical(roleCanonical, meta.author);
+    const roleLabel = hasManualRole
+      ? manualRoleRaw
+      : roleLabelFromCanonical(roleCanonical, meta.author);
 
     return {
       author: authorName,
