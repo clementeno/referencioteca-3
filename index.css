@@ -132,7 +132,6 @@ div.caution-processing{--processing-opacity: .08;position:absolute;inset:0;opaci
   height:100%;
 }
 .ref2d__simple-card .ref2d__view-card-figure{
-  aspect-ratio:4/3 !important;
   min-height:clamp(220px, 34vh, 440px);
 }
 .ref2d__simple-card .ref2d__view-card-head{

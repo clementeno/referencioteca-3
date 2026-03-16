@@ -3905,20 +3905,35 @@
   const BENTO_PREFETCH_Y = 1.35;
   const BENTO_CULL_MARGIN = 2600;
   const BENTO_MAX_ITEMS_IN_DOM = 700;
-  const BENTO_MAX_NEW_PER_PASS = 190;
+  const BENTO_MAX_NEW_PER_PASS = 160;
   const SIMPLE_CARD_COUNT = 3;
   const nextMeta = ()=> activeList.length ? activeList[(genPtr++) % activeList.length] : null;
+  const ORIENTATION_RATIO = { h: 4 / 3, v: 3 / 4, sq: 1 };
+  const ORIENTATION_ASPECT_CSS = { h: '4 / 3', v: '3 / 4', sq: '1 / 1' };
+  const normalizeOrientation = (value) => {
+    const raw = String(value || '').trim().toLowerCase();
+    if (raw === 'v' || raw === 'sq' || raw === 'h') return raw;
+    return 'h';
+  };
+  let transformRaf = null;
+  const requestTransform = () => {
+    if (transformRaf !== null) return;
+    transformRaf = requestAnimationFrame(() => {
+      transformRaf = null;
+      applyTransform();
+    });
+  };
 
   /* Crear tarjeta */
   let globalId = 0;
   function makeCard(i, dir, meta){
     if(!meta) return;
-    const orient = meta.orientation || 'h';
+    const orient = normalizeOrientation(meta.orientation);
     const span2  = meta.span===2;
     const tags   = (meta.tags||[]);
 
     const w = span2 ? (COL_W*2+GAP) : COL_W;
-    const ratio = (orient==='h')? (4/3) : (orient==='v')? (3/4) : 1;
+    const ratio = ORIENTATION_RATIO[orient];
     const h = Math.round(w/ratio);
 
     // columnas involucradas
@@ -4016,7 +4031,7 @@
     const maxTags = Number.isFinite(options.maxTags) ? options.maxTags : 4;
     const onImageLoad = typeof options.onImageLoad === 'function' ? options.onImageLoad : null;
     const el = document.createElement('article');
-    const orient = meta.orientation || 'h';
+    const orient = normalizeOrientation(meta.orientation);
     const isFeatured = meta.span === 2;
     el.className = `${className} is-${orient} ${isFeatured ? 'is-featured' : ''}`;
     el.dataset.tags   = (meta.tags || []).join(' | ');
@@ -4035,6 +4050,7 @@
 
     const imgWrap = document.createElement('div');
     imgWrap.className = 'ref2d__view-card-figure';
+    imgWrap.style.aspectRatio = ORIENTATION_ASPECT_CSS[orient];
     if (meta.src) {
       const img = new Image();
       img.src = meta.src;
@@ -4120,7 +4136,7 @@
       return;
     }
 
-    const BATCH_SIZE = 40;
+    const BATCH_SIZE = 28;
     let cursor = 0;
 
     const appendBatch = () => {
@@ -4476,8 +4492,8 @@
     const endIdx   = Math.floor((vw*1.5) / (COL_W+GAP)) + 2;
     for(let i=startIdx; i<=endIdx; i++){
       const col = ensureColumn(i);
-      while(col.yDown < vh*0.8) makeCard(i,'down', nextMeta());
-      while(col.yUp   > -vh*0.8) makeCard(i,'up',   nextMeta());
+      while(col.yDown < vh*0.7) makeCard(i,'down', nextMeta());
+      while(col.yUp   > -vh*0.7) makeCard(i,'up',   nextMeta());
     }
     updateCount();
     requestFillAround();
@@ -4556,7 +4572,7 @@
       
       camX += dx;
       camY += dy;
-      applyTransform();
+      requestTransform();
       requestFillAround();
       
       lastX = currentX;
@@ -4631,7 +4647,7 @@
     if (activeView !== 'bento') return;
     e.preventDefault();
     camX -= e.deltaX; camY -= e.deltaY;
-    applyTransform();
+    requestTransform();
     requestFillAround();
   },{passive:false});
   if (btnCenter) {
