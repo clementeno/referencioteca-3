@@ -852,6 +852,19 @@
     plane.classList.toggle('is-lod-mid', nextMode === 'mid');
     plane.classList.toggle('is-lod-near', nextMode === 'near');
   };
+  const setInteractionActive = (active) => {
+    if (isInteractionActive === active) return;
+    isInteractionActive = active;
+    if (plane) plane.classList.toggle('is-interacting', active);
+  };
+  const scheduleInteractionSettle = () => {
+    if (interactionSettleTimer !== null) clearTimeout(interactionSettleTimer);
+    interactionSettleTimer = setTimeout(() => {
+      interactionSettleTimer = null;
+      setInteractionActive(false);
+      requestFillAround(false);
+    }, BENTO_INTERACTION_SETTLE_MS);
+  };
   const applyTransform = ()=> {
     plane.style.transform = `translate3d(${camX}px, ${camY}px, 0) scale(${camScale})`;
     if (activeView === 'bento') updateBentoLOD();
@@ -4550,7 +4563,9 @@
   let fillAroundRaf = null;
   let fillAroundLiteTimer = null;
   let fillAroundSettleTimer = null;
+  let interactionSettleTimer = null;
   let fillAroundNeedsFullPass = false;
+  let isInteractionActive = false;
   let lastLiteFillCamX = 0;
   let lastLiteFillCamY = 0;
   const BENTO_PREFETCH_X = 1.35;
@@ -4567,6 +4582,7 @@
   const BENTO_MAX_NEW_PER_PASS_LITE_MIN = 14;
   const BENTO_LITE_FILL_INTERVAL_MS = 130;
   const BENTO_SETTLE_FULL_DELAY_MS = 160;
+  const BENTO_INTERACTION_SETTLE_MS = 120;
   const BENTO_LITE_MIN_MOVE_SCREEN = 30;
   const BENTO_LITE_MIN_MOVE_SCREEN_SQ = BENTO_LITE_MIN_MOVE_SCREEN * BENTO_LITE_MIN_MOVE_SCREEN;
   const SIMPLE_CARD_COUNT = 3;
@@ -5110,6 +5126,11 @@
     if (!isBento && plane) {
       plane.classList.remove('is-lod-far', 'is-lod-mid', 'is-lod-near');
       currentLodMode = '';
+      setInteractionActive(false);
+      if (interactionSettleTimer !== null) {
+        clearTimeout(interactionSettleTimer);
+        interactionSettleTimer = null;
+      }
     }
 
     renderActiveView();
@@ -5239,7 +5260,7 @@
       lastLiteFillCamX = camX;
       lastLiteFillCamY = camY;
       requestFillAroundLite();
-      if (scheduleSettle) queueFullFillAfterInteraction();
+      if (scheduleSettle && !isInteractionActive) queueFullFillAfterInteraction();
       return;
     }
     const dx = camX - lastLiteFillCamX;
@@ -5249,7 +5270,7 @@
       lastLiteFillCamY = camY;
       requestFillAroundLite();
     }
-    if (scheduleSettle) queueFullFillAfterInteraction();
+    if (scheduleSettle && !isInteractionActive) queueFullFillAfterInteraction();
   }
 
   function requestFillAroundLite() {
@@ -5274,7 +5295,12 @@
       clearTimeout(fillAroundSettleTimer);
       fillAroundSettleTimer = null;
     }
+    if (interactionSettleTimer !== null) {
+      clearTimeout(interactionSettleTimer);
+      interactionSettleTimer = null;
+    }
     fillAroundNeedsFullPass = false;
+    setInteractionActive(false);
     resetPlaneLimits();
     plane.innerHTML = "";
     columns.clear();
@@ -5340,6 +5366,11 @@
     
     // Agregar clase de panning
     viewport.classList.add('is-panning');
+    setInteractionActive(true);
+    if (interactionSettleTimer !== null) {
+      clearTimeout(interactionSettleTimer);
+      interactionSettleTimer = null;
+    }
   }
   
   // Handler de pointermove
@@ -5376,6 +5407,7 @@
       camY += dy;
       requestTransform();
       requestFillAroundLiteIfNeeded(false, false);
+      scheduleInteractionSettle();
       
       lastX = currentX;
       lastY = currentY;
@@ -5396,7 +5428,11 @@
     }
     
     resetPointerState();
-    if (hadDrag) requestFillAround();
+    if (hadDrag) {
+      scheduleInteractionSettle();
+    } else {
+      setInteractionActive(false);
+    }
   }
   
   // Handler de pointercancel
@@ -5404,7 +5440,7 @@
     if (activeView !== 'bento') return;
     if(activePid === null || e.pointerId !== activePid) return;
     resetPointerState();
-    requestFillAround();
+    scheduleInteractionSettle();
   }
   
   // Agregar listeners normales
@@ -5453,12 +5489,16 @@
     e.preventDefault();
     if (e.ctrlKey || e.metaKey) {
       const zoomFactor = Math.exp(-e.deltaY * 0.0015);
+      setInteractionActive(true);
       zoomTo(camScale * zoomFactor, e.clientX, e.clientY, true);
+      scheduleInteractionSettle();
       return;
     }
     camX -= e.deltaX; camY -= e.deltaY;
     requestTransform();
+    setInteractionActive(true);
     requestFillAroundLiteIfNeeded(false, true);
+    scheduleInteractionSettle();
   },{passive:false});
   if (btnZoomOut) {
     btnZoomOut.addEventListener('click', ()=>{
@@ -5478,6 +5518,11 @@
       camX=camY=0;
       camScale = CAM_SCALE_MAX;
       applyTransform();
+      setInteractionActive(false);
+      if (interactionSettleTimer !== null) {
+        clearTimeout(interactionSettleTimer);
+        interactionSettleTimer = null;
+      }
       updateZoomButtons();
       requestFillAround();
     });

@@ -335,6 +335,15 @@ a.ref2d__header-btn{text-decoration:none; color:var(--ink);}
 .ref2d__plane.is-lod-far .ref2d__item:hover{
   box-shadow:none;
 }
+.ref2d__plane.is-interacting .ref2d__meta{
+  display:none;
+}
+.ref2d__plane.is-interacting .ref2d__item{
+  box-shadow:none !important;
+}
+.ref2d__plane.is-interacting .ref2d__item:hover{
+  box-shadow:none !important;
+}
 /* Etiquetas (chips) - aplica a grilla y modal */
 .ref2d__chip{
   background:rgba(0,0,0,0.65);
