@@ -23,7 +23,10 @@
         sYear   = $("#sheetYear"),
         sTags   = $("#sheetTags"),
         sLink   = $("#sheetLink");
+  const bentoControls = $("#ref2dBentoControls");
   const btnCenter = $("#ref2dCenter");
+  const btnZoomOut = $("#ref2dZoomOut");
+  const btnZoomIn = $("#ref2dZoomIn");
   const brand     = document.querySelector(".ref2d__brand");
   const viewToggle = $("#ref2dViewToggle");
   const viewMenu = $("#ref2dViewMenu");
@@ -825,7 +828,12 @@
 
   /* Cámara 2D */
   let camX = 0, camY = 0;
-  const applyTransform = ()=> plane.style.transform = `translate3d(${camX}px, ${camY}px, 0)`;
+  let camScale = 1;
+  const CAM_SCALE_MAX = 1;
+  const CAM_SCALE_MIN = 0.5;
+  const CAM_SCALE_STEP = 0.1;
+  const clampCamScale = (value) => Math.min(CAM_SCALE_MAX, Math.max(CAM_SCALE_MIN, value));
+  const applyTransform = ()=> plane.style.transform = `translate3d(${camX}px, ${camY}px, 0) scale(${camScale})`;
 
   /* Columnas (masonry por columna) */
   const columns = new Map();
@@ -4390,6 +4398,31 @@
       applyTransform();
     });
   };
+  const updateZoomButtons = () => {
+    if (btnZoomOut) btnZoomOut.disabled = camScale <= CAM_SCALE_MIN + 0.001;
+    if (btnZoomIn) btnZoomIn.disabled = camScale >= CAM_SCALE_MAX - 0.001;
+  };
+  const zoomTo = (targetScale, clientX, clientY) => {
+    const nextScale = clampCamScale(targetScale);
+    if (Math.abs(nextScale - camScale) < 0.0001) {
+      updateZoomButtons();
+      return;
+    }
+    const rect = viewport.getBoundingClientRect();
+    const focusX = Number.isFinite(clientX) ? (clientX - rect.left) : (viewport.clientWidth * 0.5);
+    const focusY = Number.isFinite(clientY) ? (clientY - rect.top) : (viewport.clientHeight * 0.5);
+    const worldX = (focusX - camX) / camScale;
+    const worldY = (focusY - camY) / camScale;
+    camScale = nextScale;
+    camX = focusX - (worldX * camScale);
+    camY = focusY - (worldY * camScale);
+    requestTransform();
+    requestFillAround();
+    updateZoomButtons();
+  };
+  const zoomBy = (deltaScale) => {
+    zoomTo(camScale + deltaScale);
+  };
 
   /* Crear tarjeta */
   let globalId = 0;
@@ -4835,6 +4868,7 @@
     if (multiGrid) multiGrid.hidden = !isGrid;
     if (indexList) indexList.hidden = !isIndex;
     if (simpleView) simpleView.hidden = true;
+    if (bentoControls) bentoControls.hidden = !isBento;
     if (btnCenter) btnCenter.hidden = !isBento;
     if (btnRandom) btnRandom.hidden = !isGrid;
     if (count) count.hidden = false;
@@ -4846,16 +4880,20 @@
       btnSearchRandom.textContent = 'Aleatorio';
     }
     if (btnSimpleRefresh) btnSimpleRefresh.hidden = true;
+    updateZoomButtons();
 
     renderActiveView();
   }
 
   function getViewportBounds() {
-    const vw = viewport.clientWidth || 0;
-    const vh = viewport.clientHeight || 0;
-    const top = -camY;
+    const scale = camScale || 1;
+    const screenW = viewport.clientWidth || 0;
+    const screenH = viewport.clientHeight || 0;
+    const vw = screenW / scale;
+    const vh = screenH / scale;
+    const top = (-camY) / scale;
     const bottom = top + vh;
-    const left = -camX;
+    const left = (-camX) / scale;
     const right = left + vw;
     return { vw, vh, top, bottom, left, right };
   }
@@ -4947,7 +4985,9 @@
       updateCount();
       return;
     }
-    const vw = viewport.clientWidth, vh = viewport.clientHeight;
+    const scale = camScale || 1;
+    const vw = (viewport.clientWidth || 0) / scale;
+    const vh = (viewport.clientHeight || 0) / scale;
     const startIdx = Math.floor((-vw*0.5) / (COL_W+GAP)) - 2;
     const endIdx   = Math.floor((vw*1.5) / (COL_W+GAP)) + 2;
     for(let i=startIdx; i<=endIdx; i++){
@@ -5106,15 +5146,33 @@
   viewport.addEventListener('wheel',(e)=>{
     if (activeView !== 'bento') return;
     e.preventDefault();
+    if (e.ctrlKey || e.metaKey) {
+      const zoomFactor = Math.exp(-e.deltaY * 0.0015);
+      zoomTo(camScale * zoomFactor, e.clientX, e.clientY);
+      return;
+    }
     camX -= e.deltaX; camY -= e.deltaY;
     requestTransform();
     requestFillAround();
   },{passive:false});
+  if (btnZoomOut) {
+    btnZoomOut.addEventListener('click', ()=>{
+      if (activeView !== 'bento') return;
+      zoomBy(-CAM_SCALE_STEP);
+    });
+  }
+  if (btnZoomIn) {
+    btnZoomIn.addEventListener('click', ()=>{
+      if (activeView !== 'bento') return;
+      zoomBy(CAM_SCALE_STEP);
+    });
+  }
   if (btnCenter) {
     btnCenter.addEventListener('click', ()=>{
       if (activeView !== 'bento') return;
       camX=camY=0;
       applyTransform();
+      updateZoomButtons();
       requestFillAround();
     });
   

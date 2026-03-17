@@ -208,11 +208,12 @@ a.ref2d__header-btn{text-decoration:none; color:var(--ink);}
     padding:0;
   }
   
-  /* Alinear botón Recentrar con el botón de categorías */
-  .ref2d__center{
-    bottom:16px !important;
+  .ref2d__bentoControls{
+    bottom:16px;
     right:16px;
-    left:auto;
+  }
+
+  .ref2d__center{
     height:56px;
     min-height:56px;
     padding:0 20px;
@@ -221,9 +222,8 @@ a.ref2d__header-btn{text-decoration:none; color:var(--ink);}
     justify-content:center;
   }
   
-  /* Ocultar botones flotantes cuando el modal está abierto */
-  body.is-modal-open .ref2d__mobileCatToggle,
-  body.is-modal-open .ref2d__center{
+  /* Ocultar botón flotante de categorías cuando el modal está abierto */
+  body.is-modal-open .ref2d__mobileCatToggle{
     opacity:0;
     pointer-events:none;
     visibility:hidden;
@@ -308,7 +308,7 @@ a.ref2d__header-btn{text-decoration:none; color:var(--ink);}
 .ref2d__viewport{position:relative; width:100vw; height: calc(100vh - 64px); overflow:hidden; touch-action:none; cursor:grab; user-select:none;}
 .ref2d__viewport.is-dragging,
 .ref2d__viewport.is-panning{ cursor:grabbing; }
-.ref2d__plane{ position:absolute; will-change:transform; transform: translate3d(0,0,0); user-select:none; }
+.ref2d__plane{ position:absolute; will-change:transform; transform: translate3d(0,0,0); transform-origin:0 0; user-select:none; }
 
 /* Ítems (igual que antes) */
 .ref2d__item{position:absolute; overflow:hidden; border-radius:var(--rad); box-shadow:0 1px 0 #1c1c20 inset, 0 0 0 1px #1a1a1d; transition: box-shadow .15s ease, transform .2s ease; background:#222; cursor:pointer; user-select:none;}
@@ -585,9 +585,52 @@ a.ref2d__header-btn{text-decoration:none; color:var(--ink);}
 .sheet__link{ display:inline-block; padding:10px 12px; border-radius:10px; background:#1f1f24; border:1px solid #2a2a2e; color:#fff; text-decoration:none;}
 .sheet__link:hover{ filter:brightness(1.1); }
 
-/* Botón recentrar */
-.ref2d__center{ position:fixed; right:16px; bottom:16px; z-index:7; padding:10px 14px; border-radius:999px; background:#1f1f24; color:var(--ink); border:1px solid #2a2a2e; cursor:pointer; font-size:clamp(0.85rem, 1vw, 0.95rem); font-weight:500; letter-spacing:0.02em;}
-.ref2d__center:hover{ filter:brightness(1.12); }
+/* Controles flotantes de vista infinita */
+.ref2d__bentoControls{
+  position:fixed;
+  right:16px;
+  bottom:16px;
+  z-index:7;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:8px;
+}
+
+.ref2d__center,
+.ref2d__zoom{
+  padding:10px 14px;
+  border-radius:999px;
+  background:#1f1f24;
+  color:var(--ink);
+  border:1px solid #2a2a2e;
+  cursor:pointer;
+  font-size:clamp(0.85rem, 1vw, 0.95rem);
+  font-weight:500;
+  letter-spacing:0.02em;
+}
+
+.ref2d__zoom{
+  min-width:96px;
+}
+
+.ref2d__center:hover,
+.ref2d__zoom:hover{
+  filter:brightness(1.12);
+}
+
+.ref2d__zoom[disabled]{
+  opacity:0.45;
+  cursor:not-allowed;
+  filter:none;
+}
+
+body.is-modal-open .ref2d__bentoControls{
+  opacity:0;
+  pointer-events:none;
+  visibility:hidden;
+  transition:opacity 0.2s ease, visibility 0.2s ease;
+}
 
 /* Responsive - Modal apilado en pantallas medianas/pequeñas */
 @media (max-width:1024px){
