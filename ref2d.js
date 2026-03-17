@@ -832,6 +832,12 @@
   const CAM_SCALE_MAX = 1;
   const CAM_SCALE_MIN = 0.38;
   const CAM_SCALE_STEP = 0.08;
+  let viewportWidth = viewport.clientWidth || 0;
+  let viewportHeight = viewport.clientHeight || 0;
+  const refreshViewportSize = () => {
+    viewportWidth = viewport.clientWidth || 0;
+    viewportHeight = viewport.clientHeight || 0;
+  };
   const clampCamScale = (value) => Math.min(CAM_SCALE_MAX, Math.max(CAM_SCALE_MIN, value));
   const applyTransform = ()=> plane.style.transform = `translate3d(${camX}px, ${camY}px, 0) scale(${camScale})`;
 
@@ -4383,6 +4389,7 @@
   const BENTO_LITE_FILL_INTERVAL_MS = 130;
   const BENTO_SETTLE_FULL_DELAY_MS = 160;
   const BENTO_LITE_MIN_MOVE_SCREEN = 30;
+  const BENTO_LITE_MIN_MOVE_SCREEN_SQ = BENTO_LITE_MIN_MOVE_SCREEN * BENTO_LITE_MIN_MOVE_SCREEN;
   const SIMPLE_CARD_COUNT = 3;
   const nextMeta = ()=> activeList.length ? activeList[(genPtr++) % activeList.length] : null;
   const ORIENTATION_RATIO = { h: 4 / 3, v: 3 / 4, sq: 1 };
@@ -4510,6 +4517,8 @@
     el.style.background = meta.src ? "#000" : PALETTE[globalId % PALETTE.length];
     el.dataset.y       = String(y);
     el.dataset.h       = String(h);
+    el._y = y;
+    el._h = h;
     el.dataset.id      = meta.id ?? globalId;
     el.dataset.tags    = tags.join(' | ');
     el.dataset.title   = meta.title || '—';
@@ -4918,14 +4927,15 @@
     }
     if (btnSimpleRefresh) btnSimpleRefresh.hidden = true;
     updateZoomButtons();
+    if (isBento) refreshViewportSize();
 
     renderActiveView();
   }
 
   function getViewportBounds() {
     const scale = camScale || 1;
-    const screenW = viewport.clientWidth || 0;
-    const screenH = viewport.clientHeight || 0;
+    const screenW = viewportWidth;
+    const screenH = viewportHeight;
     const vw = screenW / scale;
     const vh = screenH / scale;
     const top = (-camY) / scale;
@@ -4949,9 +4959,11 @@
 
     for (let idx = children.length - 1; idx >= 0; idx--) {
       const el = children[idx];
-      const y = parseFloat(el.dataset.y || '');
-      const h = parseFloat(el.dataset.h || '');
+      const y = Number.isFinite(el._y) ? el._y : parseFloat(el.dataset.y || '');
+      const h = Number.isFinite(el._h) ? el._h : parseFloat(el.dataset.h || '');
       if (!Number.isFinite(y) || !Number.isFinite(h)) continue;
+      if (!Number.isFinite(el._y)) el._y = y;
+      if (!Number.isFinite(el._h)) el._h = h;
       const isOut = (y + h) < minVisible || y > maxVisible;
       if (!isOut) continue;
       el.remove();
@@ -5039,22 +5051,22 @@
     }, BENTO_SETTLE_FULL_DELAY_MS);
   }
 
-  function requestFillAroundLiteIfNeeded(force = false) {
+  function requestFillAroundLiteIfNeeded(force = false, scheduleSettle = true) {
     if (force) {
       lastLiteFillCamX = camX;
       lastLiteFillCamY = camY;
       requestFillAroundLite();
-      queueFullFillAfterInteraction();
+      if (scheduleSettle) queueFullFillAfterInteraction();
       return;
     }
     const dx = camX - lastLiteFillCamX;
     const dy = camY - lastLiteFillCamY;
-    if (Math.hypot(dx, dy) >= BENTO_LITE_MIN_MOVE_SCREEN) {
+    if ((dx * dx) + (dy * dy) >= BENTO_LITE_MIN_MOVE_SCREEN_SQ) {
       lastLiteFillCamX = camX;
       lastLiteFillCamY = camY;
       requestFillAroundLite();
     }
-    queueFullFillAfterInteraction();
+    if (scheduleSettle) queueFullFillAfterInteraction();
   }
 
   function requestFillAroundLite() {
@@ -5093,8 +5105,8 @@
       return;
     }
     const scale = camScale || 1;
-    const vw = (viewport.clientWidth || 0) / scale;
-    const vh = (viewport.clientHeight || 0) / scale;
+    const vw = viewportWidth / scale;
+    const vh = viewportHeight / scale;
     const startIdx = Math.floor((-vw*0.5) / (COL_W+GAP)) - 2;
     const endIdx   = Math.floor((vw*1.5) / (COL_W+GAP)) + 2;
     for(let i=startIdx; i<=endIdx; i++){
@@ -5180,7 +5192,7 @@
       camX += dx;
       camY += dy;
       requestTransform();
-      requestFillAroundLiteIfNeeded();
+      requestFillAroundLiteIfNeeded(false, false);
       
       lastX = currentX;
       lastY = currentY;
@@ -5263,7 +5275,7 @@
     }
     camX -= e.deltaX; camY -= e.deltaY;
     requestTransform();
-    requestFillAroundLiteIfNeeded();
+    requestFillAroundLiteIfNeeded(false, true);
   },{passive:false});
   if (btnZoomOut) {
     btnZoomOut.addEventListener('click', ()=>{
@@ -5748,6 +5760,7 @@
   window.addEventListener('resize', ()=>{
     COL_W = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--colw'));
     GAP   = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--gap'));
+    refreshViewportSize();
     resetPlaneLimits();
     const forcedViewChange = syncViewOptionsWithViewport();
     if (!forcedViewChange) {
