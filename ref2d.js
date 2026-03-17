@@ -1308,6 +1308,140 @@
   year: "N/A",
   url: "https://vvasquezzumaran15fd.myportfolio.com/descartadas-identidad-grafica"
 },
+/* ------------------ Indigno de ser humano — Javiera Vaccaro ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/G2844239123198440217689050264259/97396d_d193cc8440d94b3ba44e3030ab00242bmv2.jpg",
+  orientation: "v",
+  span: 1,
+  tags: ["editorial", "ilustración"],
+  title: "Indigno de ser humano",
+  author: "Javiera Vaccaro",
+  role: "Diseñadora / Ilustradora",
+  collab: "Desarrollado en Abducción Editorial.",
+  area: "Editorial / Ilustración",
+  year: "2026",
+  url: "https://www.abduccioneditorial.cl/product-page/indigno-de-ser-humano-osamu-dazai-1"
+},
+
+/* ------------------ Visualización de productos para página web — Álvaro Magalhães ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/N2844237192285504302141734859459/Captura-de-pantalla-2026-03-17-a-las-10.02.51.png",
+  orientation: "h",
+  span: 1,
+  tags: ["diseño conceptual", "3D"],
+  title: "Visualización de productos para página web",
+  author: "Álvaro Magalhães",
+  role: "Diseñador",
+  collab: "Desarrollado en Mundigo - Diseño",
+  area: "Diseño Conceptual / 3D",
+  year: "2026",
+  url: "https://www.instagram.com/p/DTQh37hlVke/?img_index=1"
+},
+
+/* ------------------ Diseño de soportes y montaje para @genoveva_scl y @bronca.stgo en la tienda de @cdl___stgo — Clemente Mackay ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/H2844237192414631510657701720771/Captura-de-pantalla-2026-03-17-a-las-10.07.54.png",
+  orientation: "h",
+  span: 1,
+  tags: ["industrial", "objeto"],
+  title: "Diseño de soportes y montaje para @genoveva_scl y @bronca.stgo en la tienda de @cdl___stgo",
+  author: "Clemente Mackay",
+  role: "Diseñador",
+  collab: "Diseño y montaje: Clemente Mackay y Sebastián Cobo. Fotos de Ignacio Squella.",
+  area: "Industrial / Objeto",
+  year: "2025",
+  url: "https://www.instagram.com/p/DTyuD4gFefE/?img_index=1"
+},
+
+/* ------------------ DTAD — Clemente Mackay ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/E2844237192396184766583992169155/Captura-de-pantalla-2026-03-17-a-las-10.09.28.png",
+  orientation: "h",
+  span: 1,
+  tags: ["industrial", "objeto"],
+  title: "DTAD",
+  author: "Clemente Mackay",
+  role: "Diseñador",
+  collab: "",
+  area: "Industrial / Objeto",
+  year: "2024",
+  url: "https://www.instagram.com/p/DDsppBEyNgw/?img_index=1"
+},
+
+/* ------------------ Ignacio Squella — Ignacio Squella ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/E2844237192359291278436573065923/Captura-de-pantalla-2026-03-17-a-las-10.15.56.png",
+  orientation: "h",
+  span: 1,
+  tags: ["fotografía", "dirección de arte"],
+  title: "Ignacio Squella",
+  author: "Ignacio Squella",
+  role: "Diseñador / fotógrafo",
+  collab: "",
+  area: "Fotografía / Dirección de arte",
+  year: "n/a",
+  url: "https://ignaciosquella.cl"
+},
+
+/* ------------------ Fotografía producto - Caluet.cl — Ignacio Squella ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/Z2844237192377738022510282617539/Captura-de-pantalla-2026-03-17-a-las-10.15.47.png",
+  orientation: "h",
+  span: 1,
+  tags: ["fotografía", "dirección de arte"],
+  title: "Fotografía producto - Caluet.cl",
+  author: "Ignacio Squella",
+  role: "Diseñador / fotógrafo",
+  collab: "",
+  area: "Fotografía / Dirección de arte",
+  year: "2025",
+  url: "https://www.behance.net/gallery/226249599/Fotografia-producto-Caluetcl"
+},
+
+/* ------------------ Proyecto sin título — Sofía Jiménez ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/A2844237192340844534362863514307/Captura-de-pantalla-2026-03-17-a-las-10.27.24.png",
+  orientation: "v",
+  span: 1,
+  tags: ["estilismo", "moda", "dirección de arte"],
+  title: "",
+  author: "Sofía Jiménez",
+  role: "",
+  collab: "",
+  area: "Estilismo / Moda / Dirección de arte",
+  year: "2024",
+  url: "https://www.instagram.com/p/C7AMr_8pWUE/?img_index=1"
+},
+
+/* ------------------ Proyecto sin título — Sofía Jiménez ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/D2844237192322397790289153962691/Captura-de-pantalla-2026-03-17-a-las-10.28.05.png",
+  orientation: "v",
+  span: 1,
+  tags: ["estilismo", "moda", "dirección de arte"],
+  title: "",
+  author: "Sofía Jiménez",
+  role: "",
+  collab: "",
+  area: "Estilismo / Moda / Dirección de arte",
+  year: "2024",
+  url: "https://www.instagram.com/p/DC9MfyCpSoO/?img_index=1"
+},
+
+/* ------------------ Topsy Studio — Malú Fernández Aspillaga ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/F2844237192303951046215444411075/Captura-de-pantalla-2026-03-17-a-las-10.32.38.png",
+  orientation: "h",
+  span: 1,
+  tags: ["dirección creativa", "rrss"],
+  title: "Topsy Studio",
+  author: "Malú Fernández Aspillaga",
+  role: "Diseñadora / Fundadora",
+  collab: "Directora Creativa en Topsy Studio",
+  area: "Dirección creativa / RRSS",
+  year: "n/a",
+  url: "https://www.topsystudio.com"
+},
 
 /* ------------------ Orniflor viaja a Chiloé — Valentina Rey Carmona ------------------ */
 {
