@@ -858,12 +858,21 @@
     if (plane) plane.classList.toggle('is-interacting', active);
   };
   const scheduleInteractionSettle = () => {
-    if (interactionSettleTimer !== null) clearTimeout(interactionSettleTimer);
-    interactionSettleTimer = setTimeout(() => {
-      interactionSettleTimer = null;
-      setInteractionActive(false);
-      requestFillAround(false);
-    }, BENTO_INTERACTION_SETTLE_MS);
+    lastInteractionTs = performance.now();
+    setInteractionActive(true);
+    if (interactionSettleTimer !== null) return;
+    const tick = () => {
+      const elapsed = performance.now() - lastInteractionTs;
+      const remaining = BENTO_INTERACTION_SETTLE_MS - elapsed;
+      if (remaining <= 0) {
+        interactionSettleTimer = null;
+        setInteractionActive(false);
+        requestFillAround(false);
+        return;
+      }
+      interactionSettleTimer = setTimeout(tick, Math.min(remaining, BENTO_INTERACTION_SETTLE_MS));
+    };
+    interactionSettleTimer = setTimeout(tick, BENTO_INTERACTION_SETTLE_MS);
   };
   const applyTransform = ()=> {
     plane.style.transform = `translate3d(${camX}px, ${camY}px, 0) scale(${camScale})`;
@@ -4564,6 +4573,7 @@
   let fillAroundLiteTimer = null;
   let fillAroundSettleTimer = null;
   let interactionSettleTimer = null;
+  let lastInteractionTs = 0;
   let fillAroundNeedsFullPass = false;
   let isInteractionActive = false;
   let lastLiteFillCamX = 0;
@@ -5158,8 +5168,10 @@
     const { top, bottom } = getViewportBounds();
     const minVisible = top - BENTO_CULL_MARGIN;
     const maxVisible = bottom + BENTO_CULL_MARGIN;
+    const dynamicMaxItemsInDom = Math.round(420 + (280 * getZoomProgress()));
     let removed = 0;
-    const aggressive = total > BENTO_MAX_ITEMS_IN_DOM;
+    const aggressive = total > dynamicMaxItemsInDom;
+    const removeLimit = aggressive ? 120 : 50;
 
     for (let idx = children.length - 1; idx >= 0; idx--) {
       const el = children[idx];
@@ -5172,7 +5184,7 @@
       if (!isOut) continue;
       el.remove();
       removed++;
-      if (!aggressive && removed >= 50) break;
+      if (removed >= removeLimit) break;
     }
   }
 
@@ -5366,11 +5378,7 @@
     
     // Agregar clase de panning
     viewport.classList.add('is-panning');
-    setInteractionActive(true);
-    if (interactionSettleTimer !== null) {
-      clearTimeout(interactionSettleTimer);
-      interactionSettleTimer = null;
-    }
+    scheduleInteractionSettle();
   }
   
   // Handler de pointermove
@@ -5489,14 +5497,12 @@
     e.preventDefault();
     if (e.ctrlKey || e.metaKey) {
       const zoomFactor = Math.exp(-e.deltaY * 0.0015);
-      setInteractionActive(true);
       zoomTo(camScale * zoomFactor, e.clientX, e.clientY, true);
       scheduleInteractionSettle();
       return;
     }
     camX -= e.deltaX; camY -= e.deltaY;
     requestTransform();
-    setInteractionActive(true);
     requestFillAroundLiteIfNeeded(false, true);
     scheduleInteractionSettle();
   },{passive:false});
