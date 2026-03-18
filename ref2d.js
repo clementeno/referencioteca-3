@@ -749,23 +749,48 @@
     p._displayRole = people.role || "Diseñador/a";
     p._displayCredits = people.credits || "";
 
-    const raw = Array.isArray(p.tags) ? p.tags.slice() : [];
-    const keys = [];
-    const seen = new Set();
+    const rawPrimary = Array.isArray(p.primaryCategories)
+      ? p.primaryCategories.slice()
+      : (Array.isArray(p.tags) ? p.tags.slice() : []);
+    const rawSecondary = Array.isArray(p.secondaryTags) ? p.secondaryTags.slice() : [];
+    const rawKeywords = Array.isArray(p.keywords) ? p.keywords.slice() : [];
 
-    raw.forEach(t => {
+    const primaryKeys = [];
+    const primarySeen = new Set();
+    rawPrimary.forEach((t) => {
       const k = canonicalTagKey(t);
-      if (!k) return;
-      if (seen.has(k)) return;
-      seen.add(k);
-      keys.push(k);
+      if (!k || primarySeen.has(k)) return;
+      primarySeen.add(k);
+      primaryKeys.push(k);
     });
 
-    // tags mostrables (Titlecase)
-    p._tagKeys = keys;
-    p.tags = keys.map(prettyTag);
+    const secondaryKeys = [];
+    const secondarySeen = new Set(primaryKeys);
+    rawSecondary.forEach((t) => {
+      const k = canonicalTagKey(t);
+      if (!k || secondarySeen.has(k)) return;
+      secondarySeen.add(k);
+      secondaryKeys.push(k);
+    });
 
-    // índice de búsqueda (incluye raw + normalizados + texto del proyecto)
+    const keywordValues = rawKeywords
+      .map((v) => String(v || "").trim())
+      .filter(Boolean);
+
+    // Capa visible (principal)
+    p._tagKeys = primaryKeys;
+    p.primaryCategories = primaryKeys.map(prettyTag);
+    p.tags = p.primaryCategories.slice();
+
+    // Capa no visible (secundaria) para futura expansión y búsqueda.
+    p._secondaryTagKeys = secondaryKeys;
+    p.secondaryTags = secondaryKeys.map(prettyTag);
+    p.keywords = keywordValues;
+
+    // índice de búsqueda (incluye metadatos visibles + secundarios)
+    const metadataText = (p.metadata && typeof p.metadata === "object")
+      ? Object.values(p.metadata).map((v) => String(v || "")).join(" ")
+      : "";
     const hay = [
       p.title || "",
       p.author || "",
@@ -774,9 +799,14 @@
       p.area || "",
       p.collab || "",
       p._displayCredits || "",
-      raw.join(" "),
+      rawPrimary.join(" "),
+      rawSecondary.join(" "),
+      rawKeywords.join(" "),
       p.tags.join(" "),
-      keys.join(" ")
+      p.secondaryTags.join(" "),
+      primaryKeys.join(" "),
+      secondaryKeys.join(" "),
+      metadataText
     ].join(" ");
     p._search = norm(hay);
   }
