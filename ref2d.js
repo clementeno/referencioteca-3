@@ -50,7 +50,6 @@
   const MOBILE_MAX_WIDTH = 768;
   const MOBILE_ALLOWED_VIEWS = new Set(['grid', 'index']);
   const DESKTOP_ALLOWED_VIEWS = new Set(['bento', 'grid', 'index']);
-  const REQUEST_CONTACT_EMAIL = "referencioteca.uc@gmail.com"; // Cambiar por correo real de administración
   const REQUESTS_STORAGE_KEY = "ref2d_admin_requests_v1";
   const REQUEST_TYPES = {
     modify: {
@@ -5857,6 +5856,7 @@
     activeRequestType = "";
     if (sheetRequestPanel) sheetRequestPanel.hidden = true;
     if (sheetRequestEmail) sheetRequestEmail.value = "";
+    if (sheetRequestMessage) sheetRequestMessage.value = "";
   }
 
   function buildRequestBaseText(typeKey) {
@@ -5884,6 +5884,7 @@
     activeRequestType = typeKey;
     if (sheetRequestTitle) sheetRequestTitle.textContent = cfg.title;
     sheetRequestMessage.value = buildRequestBaseText(typeKey);
+    if (sheetRequestEmail) sheetRequestEmail.required = true;
     sheetRequestPanel.hidden = false;
     requestAnimationFrame(() => sheetRequestMessage.focus());
   }
@@ -5893,6 +5894,14 @@
     const cfg = REQUEST_TYPES[activeRequestType] || REQUEST_TYPES.modify;
     const meta = activeSpotlightMeta || {};
     const requesterEmail = (sheetRequestEmail && sheetRequestEmail.value.trim()) ? sheetRequestEmail.value.trim() : "";
+    if (!requesterEmail) {
+      if (sheetRequestEmail) sheetRequestEmail.focus();
+      return;
+    }
+    if (sheetRequestEmail && !sheetRequestEmail.checkValidity()) {
+      sheetRequestEmail.reportValidity();
+      return;
+    }
     const message = (sheetRequestMessage.value || "").trim();
     if (!message) return;
 
@@ -5923,20 +5932,14 @@
       // Si localStorage falla, mantenemos funcionamiento sin romper UI.
     }
 
-    const lines = [message];
-    if (requesterEmail) lines.push("", `[Correo solicitante] ${requesterEmail}`);
-    const subject = `${cfg.subject}: ${meta.title || "Proyecto sin título"}`;
-    const body = lines.join("\n");
-    const href = `mailto:${encodeURIComponent(REQUEST_CONTACT_EMAIL)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     if (sheetRequestSend) {
       const prev = sheetRequestSend.textContent;
-      sheetRequestSend.textContent = "Solicitud guardada";
+      sheetRequestSend.textContent = "Solicitud enviada";
       setTimeout(() => {
         if (sheetRequestSend) sheetRequestSend.textContent = prev || "Enviar solicitud";
       }, 1400);
     }
     closeRequestPanel();
-    window.open(href, "_blank", "noopener");
   }
 
   function openSpotlight(el){

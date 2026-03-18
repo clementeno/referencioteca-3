@@ -147,11 +147,11 @@
 
           <section class="sheet__requestPanel" id="sheetRequestPanel" hidden aria-live="polite">
             <h4 class="sheet__requestTitle" id="sheetRequestTitle">Solicitud</h4>
-            <p class="sheet__requestHint">Se abrirá tu correo con el contenido listo para enviar al equipo.</p>
+            <p class="sheet__requestHint">La solicitud se enviará directamente al panel de administración.</p>
             <label class="sheet__requestLabel" for="sheetRequestMessage">Detalle</label>
             <textarea class="sheet__requestTextarea" id="sheetRequestMessage" rows="5"></textarea>
-            <label class="sheet__requestLabel" for="sheetRequestEmail">Tu correo (opcional)</label>
-            <input class="sheet__requestInput" id="sheetRequestEmail" type="email" placeholder="tu-correo@dominio.com" />
+            <label class="sheet__requestLabel" for="sheetRequestEmail">Tu correo</label>
+            <input class="sheet__requestInput" id="sheetRequestEmail" type="email" placeholder="tu-correo@dominio.com" required />
             <div class="sheet__requestFooter">
               <button class="sheet__requestSend" id="sheetRequestSend" type="button">Enviar solicitud</button>
               <button class="sheet__requestCancel" id="sheetRequestCancel" type="button">Cancelar</button>
