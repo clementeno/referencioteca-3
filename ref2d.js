@@ -23,6 +23,13 @@
         sYear   = $("#sheetYear"),
         sTags   = $("#sheetTags"),
         sLink   = $("#sheetLink");
+  const sheetReportActions = $("#sheetReportActions");
+  const sheetRequestPanel = $("#sheetRequestPanel");
+  const sheetRequestTitle = $("#sheetRequestTitle");
+  const sheetRequestMessage = $("#sheetRequestMessage");
+  const sheetRequestEmail = $("#sheetRequestEmail");
+  const sheetRequestSend = $("#sheetRequestSend");
+  const sheetRequestCancel = $("#sheetRequestCancel");
   const bentoControls = $("#ref2dBentoControls");
   const btnCenter = $("#ref2dCenter");
   const btnZoomOut = $("#ref2dZoomOut");
@@ -43,6 +50,26 @@
   const MOBILE_MAX_WIDTH = 768;
   const MOBILE_ALLOWED_VIEWS = new Set(['grid', 'index']);
   const DESKTOP_ALLOWED_VIEWS = new Set(['bento', 'grid', 'index']);
+  const REQUEST_CONTACT_EMAIL = "referencioteca.uc@gmail.com"; // Cambiar por correo real de administración
+  const REQUEST_TYPES = {
+    modify: {
+      title: "Modificar Información",
+      subject: "Solicitud de modificación de proyecto",
+      prompt: "Indica qué información debemos corregir o actualizar."
+    },
+    remove: {
+      title: "Solicitud de Baja",
+      subject: "Solicitud de baja de proyecto",
+      prompt: "Indica por qué se solicita eliminar este proyecto."
+    },
+    link: {
+      title: "Notificar Enlace con Error",
+      subject: "Reporte de enlace con error",
+      prompt: "Indica qué enlace falla y, si existe, comparte enlace correcto."
+    }
+  };
+  let activeRequestType = "";
+  let activeSpotlightMeta = null;
 
   /* Si falta el contenedor principal, salimos en silencio (para no romper otras páginas) */
   if (!viewport || !plane) {
@@ -5825,9 +5852,67 @@
     return lines.length ? lines.join("\n") : "—";
   }
 
+  function closeRequestPanel() {
+    activeRequestType = "";
+    if (sheetRequestPanel) sheetRequestPanel.hidden = true;
+    if (sheetRequestEmail) sheetRequestEmail.value = "";
+  }
+
+  function buildRequestBaseText(typeKey) {
+    const cfg = REQUEST_TYPES[typeKey] || REQUEST_TYPES.modify;
+    const meta = activeSpotlightMeta || {};
+    const urls = Array.isArray(meta.urls) ? meta.urls.filter(Boolean) : [];
+    const firstUrl = urls[0] || meta.url || "";
+    const base = [
+      `[Tipo] ${cfg.title}`,
+      `[Proyecto] ${meta.title || "—"}`,
+      `[Autor] ${meta.author || "—"}`,
+      `[Año] ${meta.year || "—"}`,
+      `[Área] ${meta.area || "—"}`,
+      `[Link actual] ${firstUrl || "Sin link"}`,
+      "",
+      `${cfg.prompt}`,
+      ""
+    ];
+    return base.join("\n");
+  }
+
+  function openRequestPanel(typeKey) {
+    const cfg = REQUEST_TYPES[typeKey];
+    if (!cfg || !sheetRequestPanel || !sheetRequestMessage) return;
+    activeRequestType = typeKey;
+    if (sheetRequestTitle) sheetRequestTitle.textContent = cfg.title;
+    sheetRequestMessage.value = buildRequestBaseText(typeKey);
+    sheetRequestPanel.hidden = false;
+    requestAnimationFrame(() => sheetRequestMessage.focus());
+  }
+
+  function sendRequestEmail() {
+    if (!activeRequestType || !sheetRequestMessage) return;
+    const cfg = REQUEST_TYPES[activeRequestType] || REQUEST_TYPES.modify;
+    const meta = activeSpotlightMeta || {};
+    const requesterEmail = (sheetRequestEmail && sheetRequestEmail.value.trim()) ? sheetRequestEmail.value.trim() : "";
+    const lines = [sheetRequestMessage.value.trim()];
+    if (requesterEmail) lines.push("", `[Correo solicitante] ${requesterEmail}`);
+    const subject = `${cfg.subject}: ${meta.title || "Proyecto sin título"}`;
+    const body = lines.join("\n");
+    const href = `mailto:${encodeURIComponent(REQUEST_CONTACT_EMAIL)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = href;
+    closeRequestPanel();
+  }
+
   function openSpotlight(el){
     resetPointerState(); // por si quedó un drag “medio”
     const meta = el._meta || {};
+    activeSpotlightMeta = {
+      title: el.dataset.title || meta.title || "—",
+      author: el.dataset.author || meta._displayAuthor || meta.author || "—",
+      year: el.dataset.year || meta.year || "—",
+      area: el.dataset.area || meta.area || "—",
+      url: meta.url || el.dataset.url || "",
+      urls: Array.isArray(meta.url) ? meta.url.slice() : [meta.url || el.dataset.url || ""].filter(Boolean)
+    };
+    closeRequestPanel();
 
     sTitle.textContent  = el.dataset.title  || meta.title  || "—";
     sAuthor.textContent = el.dataset.author || meta._displayAuthor || meta.author || "—";
@@ -5931,6 +6016,8 @@
   }
 
   function closeSpotlight(){
+    closeRequestPanel();
+    activeSpotlightMeta = null;
     if (overlay) {
       overlay.setAttribute('hidden','');
     }
@@ -5954,11 +6041,39 @@
       closeSpotlight();
     });
   }
+  if (sheetReportActions) {
+    sheetReportActions.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-request-type]');
+      if (!btn) return;
+      e.preventDefault();
+      e.stopPropagation();
+      openRequestPanel(btn.dataset.requestType || "");
+    });
+  }
+  if (sheetRequestSend) {
+    sheetRequestSend.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      sendRequestEmail();
+    });
+  }
+  if (sheetRequestCancel) {
+    sheetRequestCancel.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      closeRequestPanel();
+    });
+  }
   
   // Cerrar modal de proyecto con tecla Escape
   document.addEventListener('keydown', (e) => {
     // Solo cerrar si el modal de proyecto está abierto y no hay otros modales abiertos
     if (e.key === 'Escape' && overlay && !overlay.hidden) {
+      if (sheetRequestPanel && !sheetRequestPanel.hidden) {
+        e.preventDefault();
+        closeRequestPanel();
+        return;
+      }
       // Verificar que no esté abierto el modal de categorías ni el modal institucional
       const catPanelOpen = catPanel && !catPanel.hidden;
       const wipOverlayOpen = wipOverlay && !wipOverlay.hidden;
