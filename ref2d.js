@@ -52,6 +52,9 @@
   const MOBILE_ALLOWED_VIEWS = new Set(['grid', 'index']);
   const DESKTOP_ALLOWED_VIEWS = new Set(['bento', 'grid', 'index']);
   const REQUESTS_STORAGE_KEY = "ref2d_admin_requests_v1";
+  const REQUESTS_API_URL = "https://script.google.com/macros/s/AKfycbwxazNeMlGlw2aFNLCF1L3B-ceWtH54qWYa_7FHRs8GjN0V3zmzXYgosdCP4cjGEWdjWQ/exec";
+  const REQUESTS_API_KEY = "ref123.teca";
+  const REQUEST_EMAIL_ENDPOINT = "https://formsubmit.co/referencioteca.cl@gmail.com";
   const REQUEST_TYPES = {
     modify: {
       title: "Modificar Información",
@@ -6001,14 +6004,97 @@
       return;
     }
 
-    if (sheetRequestStatus) {
-      sheetRequestStatus.hidden = false;
-      sheetRequestStatus.classList.remove('is-error');
-      sheetRequestStatus.textContent = "Solicitud enviada correctamente.";
-    }
-    if (sheetRequestMessage) {
-      sheetRequestMessage.value = "";
-    }
+    const onSuccess = (msg) => {
+      if (sheetRequestStatus) {
+        sheetRequestStatus.hidden = false;
+        sheetRequestStatus.classList.remove('is-error');
+        sheetRequestStatus.textContent = msg;
+      }
+      if (sheetRequestMessage) {
+        sheetRequestMessage.value = "";
+      }
+    };
+    const onError = (msg) => {
+      if (sheetRequestStatus) {
+        sheetRequestStatus.hidden = false;
+        sheetRequestStatus.classList.add('is-error');
+        sheetRequestStatus.textContent = msg;
+      }
+    };
+
+    const sendEmailFallback = () => {
+      const formData = new URLSearchParams();
+      formData.set("_subject", `[Referencioteca] ${cfg.title}: ${ticket.projectTitle}`);
+      formData.set("_captcha", "false");
+      formData.set("_template", "table");
+      formData.set("Tipo", ticket.typeLabel || ticket.type || "Solicitud");
+      formData.set("Proyecto", ticket.projectTitle || "—");
+      formData.set("Autor", ticket.projectAuthor || "—");
+      formData.set("Año", ticket.projectYear || "—");
+      formData.set("Área", ticket.projectArea || "—");
+      formData.set("Link", ticket.projectUrl || "—");
+      formData.set("Email solicitante", ticket.requesterEmail || "—");
+      formData.set("Detalle", ticket.message || "");
+      formData.set("ID Solicitud", ticket.id || "");
+      formData.set("Fecha", ticket.createdAt || "");
+
+      return fetch(REQUEST_EMAIL_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          "Accept": "application/json"
+        },
+        body: formData.toString()
+      });
+    };
+
+    const sendCentral = () => {
+      if (!REQUESTS_API_URL) return Promise.resolve({ skipped: true });
+      const payload = new URLSearchParams();
+      payload.set("mode", "create");
+      payload.set("apiKey", REQUESTS_API_KEY || "");
+      payload.set("id", ticket.id || "");
+      payload.set("createdAt", ticket.createdAt || "");
+      payload.set("type", ticket.type || "");
+      payload.set("typeLabel", ticket.typeLabel || "");
+      payload.set("projectTitle", ticket.projectTitle || "");
+      payload.set("projectAuthor", ticket.projectAuthor || "");
+      payload.set("projectYear", String(ticket.projectYear || ""));
+      payload.set("projectArea", ticket.projectArea || "");
+      payload.set("projectUrl", ticket.projectUrl || "");
+      payload.set("requesterEmail", ticket.requesterEmail || "");
+      payload.set("message", ticket.message || "");
+      payload.set("status", ticket.status || "open");
+
+      return fetch(REQUESTS_API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+          "Accept": "application/json"
+        },
+        body: payload.toString()
+      }).then((res) => {
+        if (!res.ok) throw new Error("central_send_failed");
+        return res.json().catch(() => ({}));
+      });
+    };
+
+    sendCentral()
+      .then((data) => {
+        if (data && data.skipped) {
+          return sendEmailFallback().then((res) => {
+            if (!res.ok) throw new Error("request_email_failed");
+            onSuccess("Solicitud enviada correctamente al correo de Referencioteca.");
+          });
+        }
+        onSuccess("Solicitud enviada correctamente al panel de solicitudes.");
+      })
+      .catch(() => sendEmailFallback().then((res) => {
+        if (!res.ok) throw new Error("request_email_failed");
+        onSuccess("Solicitud enviada al correo (falló panel central).");
+      }).catch(() => {
+        onError("Se guardó localmente, pero falló el envío.");
+      }));
   }
 
   function openSpotlight(el){

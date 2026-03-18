@@ -32,7 +32,7 @@
     .sub { color: var(--dim); margin-bottom: 16px; }
     .toolbar {
       display: grid;
-      grid-template-columns: 1fr auto auto auto;
+      grid-template-columns: 1fr auto auto auto auto;
       gap: 10px;
       margin-bottom: 14px;
     }
@@ -120,9 +120,20 @@
   </style>
 </head>
 <body>
+  <div id="authGate" style="position:fixed;inset:0;background:#0a0b11;display:flex;align-items:center;justify-content:center;z-index:99;">
+    <div style="width:min(420px,92vw);background:#11131b;border:1px solid #2a2f42;border-radius:12px;padding:18px;">
+      <h2 style="margin:0 0 10px 0;">Acceso administrador</h2>
+      <p style="margin:0 0 10px 0;color:#9ea5be;">Ingresa tu clave privada para ver solicitudes.</p>
+      <input id="authInput" type="password" placeholder="Clave privada" style="width:100%;height:40px;border-radius:10px;border:1px solid #2a2f42;background:#0a0b11;color:#eef1ff;padding:0 10px;" />
+      <div style="display:flex;gap:8px;margin-top:10px;">
+        <button id="authBtn" style="height:38px;border-radius:10px;border:1px solid #2a2f42;background:#eef1ff;color:#111;padding:0 12px;cursor:pointer;">Entrar</button>
+      </div>
+      <p id="authErr" style="min-height:18px;margin:8px 0 0 0;color:#ffadad;font-size:12px;"></p>
+    </div>
+  </div>
   <main class="wrap">
     <h1>Solicitudes de Referencioteca</h1>
-    <div class="sub">Panel local para revisar modificaciones, bajas y enlaces con error.</div>
+    <div class="sub">Panel de solicitudes para revisar modificaciones, bajas y enlaces con error.</div>
     <div class="sub" id="originHint"></div>
 
     <div class="toolbar">
@@ -133,6 +144,7 @@
         <option value="remove">Solicitud de baja</option>
         <option value="link">Notificar enlace</option>
       </select>
+      <button id="refreshBtn" class="btn">Actualizar</button>
       <button id="exportCsv" class="btn">Exportar CSV</button>
       <button id="clearAll" class="btn">Vaciar</button>
     </div>
@@ -158,18 +170,42 @@
 
   <script>
     (function () {
+      const ADMIN_KEY_HASH = 'f6010fcfc407a6d747534d8b08062c8f71ff02dcdc23a09f15066a44cb24d9fd'; // "ref-admin-2026-cambiar"
       const STORAGE_KEY = 'ref2d_admin_requests_v1';
+      const REQUESTS_API_URL = 'https://script.google.com/macros/s/AKfycbwxazNeMlGlw2aFNLCF1L3B-ceWtH54qWYa_7FHRs8GjN0V3zmzXYgosdCP4cjGEWdjWQ/exec';
+      const REQUESTS_API_KEY = 'ref123.teca';
+      const AUTO_REFRESH_MS = 30000;
+      const authGate = document.getElementById('authGate');
+      const authInput = document.getElementById('authInput');
+      const authBtn = document.getElementById('authBtn');
+      const authErr = document.getElementById('authErr');
       const q = document.getElementById('q');
       const type = document.getElementById('type');
+      const refreshBtn = document.getElementById('refreshBtn');
       const rows = document.getElementById('rows');
       const stats = document.getElementById('stats');
       const exportCsv = document.getElementById('exportCsv');
       const clearAll = document.getElementById('clearAll');
       const originHint = document.getElementById('originHint');
+      let allItems = [];
+      let refreshTimer = null;
 
       const esc = (v) => String(v || '').replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+      const params = new URLSearchParams(window.location.search);
 
-      function load() {
+      async function sha256(text) {
+        const data = new TextEncoder().encode(String(text || ''));
+        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+      }
+
+      async function tryAuth(inputKey) {
+        const h = await sha256(inputKey);
+        return h === ADMIN_KEY_HASH;
+      }
+
+      function loadLocal() {
         try {
           const raw = localStorage.getItem(STORAGE_KEY);
           const list = raw ? JSON.parse(raw) : [];
@@ -179,8 +215,89 @@
         }
       }
 
-      function save(list) {
+      function saveLocal(list) {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+      }
+
+      async function loadRemote() {
+        if (!REQUESTS_API_URL) return null;
+        const url = new URL(REQUESTS_API_URL);
+        url.searchParams.set('mode', 'list');
+        if (REQUESTS_API_KEY) url.searchParams.set('apiKey', REQUESTS_API_KEY);
+        try {
+          const res = await fetch(url.toString(), { headers: { 'Accept': 'application/json' } });
+          if (!res.ok) throw new Error('remote_list_failed');
+          const data = await res.json();
+          if (!data || !Array.isArray(data.items)) return [];
+          return data.items;
+        } catch (_) {
+          return loadRemoteJsonp();
+        }
+      }
+
+      function loadRemoteJsonp() {
+        return new Promise((resolve, reject) => {
+          if (!REQUESTS_API_URL) return resolve([]);
+          const cbName = '__refReqCb_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7);
+          const script = document.createElement('script');
+          const url = new URL(REQUESTS_API_URL);
+          url.searchParams.set('mode', 'jsonp');
+          url.searchParams.set('callback', cbName);
+          if (REQUESTS_API_KEY) url.searchParams.set('apiKey', REQUESTS_API_KEY);
+
+          const cleanup = () => {
+            delete window[cbName];
+            if (script.parentNode) script.parentNode.removeChild(script);
+          };
+
+          window[cbName] = (payload) => {
+            cleanup();
+            if (!payload || !Array.isArray(payload.items)) return resolve([]);
+            resolve(payload.items);
+          };
+
+          script.onerror = () => {
+            cleanup();
+            reject(new Error('jsonp_failed'));
+          };
+          script.src = url.toString();
+          document.head.appendChild(script);
+          setTimeout(() => {
+            if (window[cbName]) {
+              cleanup();
+              reject(new Error('jsonp_timeout'));
+            }
+          }, 10000);
+        });
+      }
+
+      async function updateRemoteStatus(id, status) {
+        if (!REQUESTS_API_URL) return false;
+        const payload = new URLSearchParams();
+        payload.set('mode', 'update');
+        payload.set('apiKey', REQUESTS_API_KEY || '');
+        payload.set('id', id);
+        payload.set('status', status);
+        const res = await fetch(REQUESTS_API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8', 'Accept': 'application/json' },
+          body: payload.toString()
+        });
+        return res.ok;
+      }
+
+      async function deleteRemote(id) {
+        if (!REQUESTS_API_URL) return false;
+        const payload = new URLSearchParams();
+        payload.set('mode', 'delete');
+        payload.set('apiKey', REQUESTS_API_KEY || '');
+        payload.set('id', id);
+        const res = await fetch(REQUESTS_API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8', 'Accept': 'application/json' },
+          body: payload.toString()
+        });
+        return res.ok;
       }
 
       function fmtDate(iso) {
@@ -209,7 +326,7 @@
       }
 
       function render() {
-        const all = load();
+        const all = allItems.slice();
         const list = filterList(all);
         const openCount = all.filter((x) => x.status !== 'resolved').length;
         const resolvedCount = all.filter((x) => x.status === 'resolved').length;
@@ -220,8 +337,11 @@
           '<span>Mostrando: <b>' + list.length + '</b></span>';
 
         if (originHint) {
-          originHint.innerHTML = 'Origen actual: <b>' + esc(window.location.origin || 'file://') + '</b>. Si no ves solicitudes, abre este panel desde el mismo dominio donde se envían (ej: indexoteca-cl.vercel.app).';
+          originHint.innerHTML = REQUESTS_API_URL
+            ? 'Fuente: <b>panel central</b>. Auto-actualiza cada ' + Math.round(AUTO_REFRESH_MS / 1000) + 's.'
+            : 'Fuente: <b>local</b>. Configura REQUESTS_API_URL para centralizar.';
         }
+        clearAll.disabled = !!REQUESTS_API_URL;
 
         if (!list.length) {
           rows.innerHTML = '<tr><td colspan="6" class="small">Sin solicitudes.</td></tr>';
@@ -250,21 +370,36 @@
         const tr = e.target.closest('tr[data-id]');
         if (!tr) return;
         const id = tr.getAttribute('data-id');
-        const list = load();
+        const list = allItems.slice();
         const idx = list.findIndex((x) => String(x.id) === String(id));
         if (idx < 0) return;
+        const current = list[idx];
+        const action = btn.dataset.act;
+        const nextStatus = current.status === 'resolved' ? 'open' : 'resolved';
 
-        if (btn.dataset.act === 'toggle') {
-          list[idx].status = list[idx].status === 'resolved' ? 'open' : 'resolved';
-        } else if (btn.dataset.act === 'delete') {
+        if (REQUESTS_API_URL) {
+          const op = action === 'toggle'
+            ? updateRemoteStatus(String(id), nextStatus)
+            : deleteRemote(String(id));
+          op.then((ok) => {
+            if (!ok) return;
+            syncAndRender(true);
+          });
+          return;
+        }
+
+        if (action === 'toggle') {
+          list[idx].status = nextStatus;
+        } else if (action === 'delete') {
           list.splice(idx, 1);
         }
-        save(list);
+        saveLocal(list);
+        allItems = list;
         render();
       });
 
       exportCsv.addEventListener('click', function () {
-        const list = filterList(load());
+        const list = filterList(allItems);
         const head = ['id','createdAt','type','typeLabel','projectTitle','projectAuthor','projectYear','projectArea','projectUrl','requesterEmail','message','status'];
         const rowsCsv = [head.join(',')];
         list.forEach((it) => {
@@ -287,13 +422,65 @@
 
       clearAll.addEventListener('click', function () {
         if (!window.confirm('¿Vaciar todas las solicitudes guardadas localmente?')) return;
-        save([]);
+        if (REQUESTS_API_URL) {
+          return;
+        }
+        saveLocal([]);
+        allItems = [];
         render();
       });
 
       q.addEventListener('input', render);
       type.addEventListener('change', render);
-      render();
+      refreshBtn.addEventListener('click', () => syncAndRender(true));
+
+      async function syncAndRender(showLoading) {
+        if (showLoading && stats) {
+          stats.innerHTML = '<span>Cargando solicitudes...</span>';
+        }
+        if (REQUESTS_API_URL) {
+          try {
+            allItems = await loadRemote();
+            render();
+            return;
+          } catch (_) {
+            // fallback local si endpoint falla
+          }
+        }
+        allItems = loadLocal();
+        render();
+      }
+
+      async function unlockIfAllowed() {
+        const keyFromUrl = params.get('k') || '';
+        if (keyFromUrl && await tryAuth(keyFromUrl)) {
+          authGate.style.display = 'none';
+          syncAndRender(true);
+          if (refreshTimer === null) {
+            refreshTimer = setInterval(() => syncAndRender(false), AUTO_REFRESH_MS);
+          }
+          return;
+        }
+        authBtn.addEventListener('click', async function () {
+          const ok = await tryAuth(authInput.value.trim());
+          if (!ok) {
+            authErr.textContent = 'Clave inválida.';
+            return;
+          }
+          authErr.textContent = '';
+          authGate.style.display = 'none';
+          syncAndRender(true);
+          if (refreshTimer === null) {
+            refreshTimer = setInterval(() => syncAndRender(false), AUTO_REFRESH_MS);
+          }
+        });
+        authInput.addEventListener('keydown', async function (e) {
+          if (e.key !== 'Enter') return;
+          authBtn.click();
+        });
+      }
+
+      unlockIfAllowed();
     })();
   </script>
 </body>
