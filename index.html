@@ -24,6 +24,31 @@
 
 <body>
 
+<!-- Pantalla de acceso inicial -->
+<div class="ref2d__access-overlay" id="ref2dAccessOverlay">
+  <div class="ref2d__access-card" role="dialog" aria-labelledby="accessTitle" aria-modal="true">
+    <h1 class="ref2d__access-title" id="accessTitle">Acceso Referencioteca</h1>
+    <p class="ref2d__access-text">
+      Estamos trabajando en este dispositivo como parte de un proyecto de título.
+      Para ingresar, escribe la clave de acceso.
+    </p>
+    <form class="ref2d__access-form" id="ref2dAccessForm" novalidate>
+      <label class="ref2d__access-label" for="ref2dAccessKey">Clave</label>
+      <input
+        class="ref2d__access-input"
+        id="ref2dAccessKey"
+        name="key"
+        type="password"
+        autocomplete="off"
+        spellcheck="false"
+        required
+      />
+      <button class="ref2d__access-btn" type="submit">Entrar</button>
+      <p class="ref2d__access-status" id="ref2dAccessStatus" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</div>
+
 <!-- Modal institucional (work in progress) -->
 <div class="ref2d__wip-overlay" id="ref2dWipOverlay" hidden>
   <div class="ref2d__wip-modal" role="dialog" aria-labelledby="wipTitle" aria-modal="true">
@@ -162,6 +187,54 @@
 <!-- Nota: index.js (bundle de Cargo.site) fue eliminado porque no es necesario
      para Referencioteca y causaba errores al intentar conectar con api.cargo.site -->
 <script src="ref2d.js?v=20260317a"></script>
+<script>
+  (function () {
+    const ACCESS_KEY = "ref123.teca";
+    const MAX_ATTEMPTS = 5;
+    let attempts = 0;
+
+    const overlay = document.getElementById("ref2dAccessOverlay");
+    const form = document.getElementById("ref2dAccessForm");
+    const input = document.getElementById("ref2dAccessKey");
+    const status = document.getElementById("ref2dAccessStatus");
+
+    if (!overlay || !form || !input || !status) return;
+
+    const showError = (msg) => {
+      status.textContent = msg;
+      status.classList.add("is-error");
+    };
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      const value = input.value.trim();
+
+      if (value === ACCESS_KEY) {
+        status.textContent = "Clave correcta. Ingresando...";
+        status.classList.remove("is-error");
+        overlay.setAttribute("hidden", "");
+        document.body.classList.remove("ref2d--locked");
+        return;
+      }
+
+      attempts += 1;
+      const remaining = MAX_ATTEMPTS - attempts;
+      input.value = "";
+      input.focus();
+
+      if (remaining > 0) {
+        showError("Clave incorrecta. Inténtalo nuevamente. Intentos restantes: " + remaining + ".");
+      } else {
+        showError("Clave incorrecta. Demasiados intentos fallidos.");
+        form.querySelector("button[type='submit']").disabled = true;
+        input.disabled = true;
+      }
+    });
+
+    document.body.classList.add("ref2d--locked");
+    input.focus();
+  })();
+</script>
 
 </body>
 </html>
