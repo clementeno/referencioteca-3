@@ -1212,6 +1212,275 @@
   year: "2023",
   url: "https://www.cclm.cl/exposicion/como-disenar-una-revolucion/"
 },
+/* ------------------ Escuela Global — Dominga Olavarría Schuh ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/M2846130404079476651128609256131/Captura-de-pantalla-2026-03-17-a-las-12.34.04.png",
+  orientation: "h",
+  span: 1,
+  tags: ["branding", "gráfico", "educación"],
+  title: "Escuela Global",
+  author: "Dominga Olavarría Schuh",
+  role: "",
+  collab: "",
+  area: "Branding / Gráfico / Educación",
+  year: "2023",
+  url: "https://www.behance.net/gallery/182285675/Brand-Identity"
+},
+
+/* ------------------ Puente Textil — Josefina Boggio ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/H2846130182626314046245442106051/7798fa4f-b5cf-4c01-8e91-fc3043244124_rw_3840.jpg",
+  orientation: "v",
+  span: 1,
+  tags: ["exhibición", "cultura", "experiencia"],
+  title: "Puente Textil",
+  author: "Josefina Boggio",
+  role: "",
+  collab: "Proyecto de título",
+  area: "Exhibición / Cultura / Experiencia",
+  year: "2025",
+  url: "https://josefinaboggio.myportfolio.com/copy-of-habitar-cuerpos-reales"
+},
+
+/* ------------------ ARQUEOLOGÍA PERSONAL — Josefina Boggio ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/N2846130182700101022540280312515/e83bcadd-da64-44da-a493-c8dacd67f9a0.jpg",
+  orientation: "v",
+  span: 1,
+  tags: ["editorial", "cultura"],
+  title: "ARQUEOLOGÍA PERSONAL",
+  author: "Josefina Boggio",
+  role: "",
+  collab: "",
+  area: "Editorial / Cultura",
+  year: "2023",
+  url: "https://josefinaboggio.myportfolio.com/arqueologia-personal"
+},
+
+/* ------------------ Memoria Luz que Enseña — Alejandra Garcia Huidobro ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/C2846130182681654278466570760899/IMGP0054_2x.jpg",
+  orientation: "v",
+  span: 1,
+  tags: ["editorial", "cultura"],
+  title: "Memoria Luz que Enseña",
+  author: "Alejandra Garcia Huidobro",
+  role: "",
+  collab: "",
+  area: "Editorial / Cultura",
+  year: "2014",
+  url: "https://cargocollective.com/alegarciahuidobro/MEMORIA-LUZ-QUE-ENSENA"
+},
+
+/* ------------------ Luz que enseña — Alejandra Garcia Huidobro ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/W2846130182663207534392861209283/1_2x.jpg",
+  orientation: "v",
+  span: 1,
+  tags: ["editorial", "cultura"],
+  title: "Luz que enseña",
+  author: "Alejandra Garcia Huidobro",
+  role: "",
+  collab: "",
+  area: "Editorial / Cultura",
+  year: "2014",
+  url: "https://cargocollective.com/alegarciahuidobro/LUZ-QUE-ENSENA"
+},
+
+/* ------------------ Protagonistas en Palabras — Lucas Góngora Rocha ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/J2846130182644760790319151657667/95962b21-1d6f-4e7b-b9a1-0492feaca812_rw_1920.jpg",
+  orientation: "h",
+  span: 1,
+  tags: ["servicio", "editorial", "educación"],
+  title: "Protagonistas en Palabras",
+  author: "Lucas Góngora Rocha",
+  role: "",
+  collab: "Desarrollado en conjunto: Andrés Navarro, Denisse Hernández, Javiera Sánchez, Magdalena Manríquez, Martín Cáceres, Michelle Serni y Ximena Silva.",
+  area: "Servicio / Editorial / Educación",
+  year: "2025",
+  url: "https://lucasgongorarocha.myportfolio.com/protagonistas-en-palabras-1"
+},
+
+/* ------------------ LA MADRE DEL CORDERO — María Cristina Adasme ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/J2846188941944102492891972580035/SET.png",
+  orientation: "h",
+  span: 1,
+  tags: ["afiche", "ilustración", "gráfico"],
+  title: "LA MADRE DEL CORDERO",
+  author: "María Cristina Adasme",
+  role: "Diseñadora / Ilustradora",
+  collab: "Película dirigida por Diego Ayala y Aníbal Jofré. Ilustraciones y gráficas para afiches por: María Cristina Adasme.",
+  area: "Afiche / Ilustración / Gráfico",
+  year: "2014",
+  url: "https://cargocollective.com/mariacristo/LA-MADRE-DEL-CORDERO"
+},
+
+/* ------------------ Volantín Cortao — María Cristina Adasme ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/Y2846188941925655748818263028419/poster_volantin_horizontal_670.png",
+  orientation: "h",
+  span: 1,
+  tags: ["afiche", "ilustración", "gráfico"],
+  title: "Volantín Cortao",
+  author: "María Cristina Adasme",
+  role: "Diseñadora / Ilustradora",
+  collab: "Película co-dirigida por Enrique Farías y Rosario Espinosa. Ilustraciones y gráficas para afiches por: María Cristina Adasme.",
+  area: "Afiche / Ilustración / Gráfico",
+  year: "2013",
+  url: "https://cargocollective.com/mariacristo/VOLANTIN-CORTAO"
+},
+
+/* ------------------ 50 años después: Golpe en la memoria — María Cristina Adasme ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/N2846189121486262562307038458563/Captura-de-pantalla-2026-03-18-a-las-15.19.19.png",
+  orientation: "h",
+  span: 1,
+  tags: ["museografía", "exhibición"],
+  title: "50 años después: Golpe en la memoria",
+  author: "María Cristina Adasme",
+  role: "",
+  collab: "Desarrollado en Segundo Nombre. Museografía: Paulina Montero y Nicolás Maturana. Diseño gráfico: Mayela Cerda @mayyyela y Leonor Tapia @leonor_th. Construcción y producción: Cromolux @cromolux_fg y Amaya Rojas @amayarojasarnal.",
+  area: "Museografía / Exhibición",
+  year: "2023",
+  url: "https://www.instagram.com/p/DAjJHymu9Ds/?img_index=1"
+},
+
+/* ------------------ Variations 1 and 2 for Chanting vessels project — leonor tapia ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/H2846191855072373357178073330371/Captura-de-pantalla-2026-03-18-a-las-15.59.04.png",
+  orientation: "h",
+  span: 1,
+  tags: ["diseño conceptual", "artesanía", "3D"],
+  title: "Variations 1 and 2 for Chanting vessels project",
+  author: "leonor tapia",
+  role: "",
+  collab: "",
+  area: "Diseño conceptual / Artesanía / 3D",
+  year: "2022",
+  url: "https://www.instagram.com/p/CaC9y0wvtCh/"
+},
+
+/* ------------------ Sin Nombre — leonor tapia ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/Y2846189121633836514896714871491/Captura-de-pantalla-2026-03-18-a-las-15.22.17.png",
+  orientation: "h",
+  span: 1,
+  tags: ["diseño conceptual", "artesanía", "3D"],
+  title: "Sin Nombre",
+  author: "leonor tapia",
+  role: "",
+  collab: "",
+  area: "Diseño conceptual / Artesanía / 3D",
+  year: "2022",
+  url: "https://www.instagram.com/p/CaU1C_8li6x/"
+},
+
+/* ------------------ Tótem, Fuente para Abejas — Lucas Margotta ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/W2846189121615389770823005319875/Captura-de-pantalla-2026-03-18-a-las-15.28.05.png",
+  orientation: "h",
+  span: 1,
+  tags: ["objeto", "artesanía", "exhibición"],
+  title: "Tótem, Fuente para Abejas",
+  author: "Lucas Margotta",
+  role: "Diseñador",
+  collab: "Desarrollado en Sistema Simple Studio",
+  area: "Objeto / Artesanía / Exhibición",
+  year: "2022",
+  url: "https://www.instagram.com/p/CmFX14AJcVT/?img_index=2"
+},
+
+/* ------------------ Pabellón de Chile / London Design Biennale 2021 — Lucas Margotta ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/P2846189121596943026749295768259/Captura-de-pantalla-2026-03-18-a-las-15.30.17.png",
+  orientation: "h",
+  span: 1,
+  tags: ["exhibición", "cultura", "experiencia"],
+  title: "Pabellón de Chile / London Design Biennale 2021. ‘Resonancias Tectónicas desde el Sur: Del diseño centrado en el usuario al diseño orientado en el planeta’.",
+  author: "Lucas Margotta",
+  role: "Diseñador / Sistema SimpleStudio",
+  collab: "Proyecto desarrollado por Marcos Chilet, Pablo Hermansen, Carola Ureta, Martin Tironi. En colaboración con Macarena Irarrázaval, Sistema Simple Studio, Design Systems International, Valentina Aliaga.",
+  area: "Exhibición / Cultura / Experiencia",
+  year: "2021",
+  url: "https://www.instagram.com/p/CRHZFD1jD5z/?img_index=2"
+},
+
+/* ------------------ (Mobiliario) Librero Rubén — Diego Gajardo ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/R2846189121560049538601876665027/Captura-de-pantalla-2026-03-18-a-las-15.33.20.png",
+  orientation: "h",
+  span: 1,
+  tags: ["mobiliario", "objeto", "industrial"],
+  title: "(Mobiliario) Librero Rubén",
+  author: "Diego Gajardo",
+  role: "Diseñador / Fundador",
+  collab: "Desarrollado en ardo™︎ studio.",
+  area: "Mobiliario / Objeto / Industrial",
+  year: "2025",
+  url: "https://www.instagram.com/p/DReznSODaPH/?img_index=1"
+},
+
+/* ------------------ [Banca Cafecito] — Diego Gajardo ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/L2846189121541602794528167113411/Captura-de-pantalla-2026-03-18-a-las-15.36.53.png",
+  orientation: "h",
+  span: 1,
+  tags: ["mobiliario", "objeto", "industrial"],
+  title: "[Banca Cafecito]",
+  author: "Diego Gajardo",
+  role: "Diseñador / Fundador",
+  collab: "Diseñada en 2025 para la -tienda, cafetería y espacio de arte- @piso2stgo x C.Miller. Desarrollado en ardo™︎ studio.",
+  area: "Mobiliario / Objeto / Industrial",
+  year: "2025",
+  url: "https://www.instagram.com/p/DU1ufwgDo0z/?img_index=2"
+},
+
+/* ------------------ José Vidal & Co - Tacto y Contacto — Lucía Rosselot Valdés ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/L2846189121523156050454457561795/Captura-de-pantalla-2026-03-18-a-las-15.44.07.png",
+  orientation: "h",
+  span: 1,
+  tags: ["objeto", "editorial"],
+  title: "José Vidal & Co - Tacto y Contacto",
+  author: "Lucía Rosselot Valdés",
+  role: "Diseñadora",
+  collab: "Libro objeto para José Vidal & Co.",
+  area: "Objeto / Editorial",
+  year: "2018",
+  url: "https://luciarosselotv.myportfolio.com/tacto-y-contacto"
+},
+
+/* ------------------ Modelo A04 — Lucía Rosselot Valdés ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/T2846191855090820101251782881987/Captura-de-pantalla-2026-03-18-a-las-15.59.22.png",
+  orientation: "h",
+  span: 1,
+  tags: ["objeto", "indumentaria", "moda"],
+  title: "Modelo A04",
+  author: "Lucía Rosselot Valdés",
+  role: "",
+  collab: "",
+  area: "Objeto / Indumentaria / Moda",
+  year: "2023",
+  url: "https://www.instagram.com/p/Cq_n5vYuUe_/?img_index=1"
+},
+
+/* ------------------ Intergenerationality and Flexibility — Daniela Moyano ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/Z2846189121504709306380748010179/Captura-de-pantalla-2026-03-18-a-las-15.55.37.png",
+  orientation: "h",
+  span: 1,
+  tags: ["diseño de información"],
+  title: "Intergenerationality and Flexibility: A Guide for the Inclusion of 50+ Workers in Formal Workplaces",
+  author: "Daniela Moyano",
+  role: "Diseñadora",
+  collab: "Illustrations by Camila Valencia (@mellamocamilinda)",
+  area: "Diseño de información",
+  year: "2024",
+  url: "https://www.behance.net/gallery/213942821/Guide-for-the-Inclusion-of-50-Workers-in-Workplaces"
+},
 
 /* ------------------ Cómo diseñar una revolución. La vía chilena al diseño — Hugo Palmarola ------------------ */
 {
