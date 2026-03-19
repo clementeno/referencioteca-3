@@ -75,6 +75,7 @@
   };
   let activeRequestType = "";
   let activeSpotlightMeta = null;
+  let isRequestSending = false;
 
   /* Si falta el contenedor principal, salimos en silencio (para no romper otras páginas) */
   if (!viewport || !plane) {
@@ -5888,6 +5889,7 @@
   }
 
   function closeRequestPanel() {
+    isRequestSending = false;
     activeRequestType = "";
     if (sheetRequestPanel) sheetRequestPanel.hidden = true;
     if (sheetRequestEmail) sheetRequestEmail.value = "";
@@ -5895,8 +5897,17 @@
     if (sheetRequestStatus) {
       sheetRequestStatus.hidden = true;
       sheetRequestStatus.classList.remove('is-error');
+      sheetRequestStatus.classList.remove('is-loading');
       sheetRequestStatus.textContent = "";
     }
+    if (sheetRequestSend) {
+      sheetRequestSend.disabled = false;
+      sheetRequestSend.textContent = "Enviar solicitud";
+    }
+    if (sheetRequestCancel) sheetRequestCancel.disabled = false;
+    if (sheetRequestClose) sheetRequestClose.disabled = false;
+    if (sheetRequestEmail) sheetRequestEmail.disabled = false;
+    if (sheetRequestMessage) sheetRequestMessage.disabled = false;
   }
 
   function buildRequestBaseText(typeKey) {
@@ -5928,6 +5939,7 @@
     if (sheetRequestStatus) {
       sheetRequestStatus.hidden = true;
       sheetRequestStatus.classList.remove('is-error');
+      sheetRequestStatus.classList.remove('is-loading');
       sheetRequestStatus.textContent = "";
     }
     sheetRequestPanel.hidden = false;
@@ -5935,6 +5947,7 @@
   }
 
   function sendRequestEmail() {
+    if (isRequestSending) return;
     if (!activeRequestType || !sheetRequestMessage) return;
     const cfg = REQUEST_TYPES[activeRequestType] || REQUEST_TYPES.modify;
     const meta = activeSpotlightMeta || {};
@@ -6006,9 +6019,19 @@
     }
 
     const onSuccess = (msg) => {
+      isRequestSending = false;
+      if (sheetRequestSend) {
+        sheetRequestSend.disabled = false;
+        sheetRequestSend.textContent = "Enviar solicitud";
+      }
+      if (sheetRequestCancel) sheetRequestCancel.disabled = false;
+      if (sheetRequestClose) sheetRequestClose.disabled = false;
+      if (sheetRequestEmail) sheetRequestEmail.disabled = false;
+      if (sheetRequestMessage) sheetRequestMessage.disabled = false;
       if (sheetRequestStatus) {
         sheetRequestStatus.hidden = false;
         sheetRequestStatus.classList.remove('is-error');
+        sheetRequestStatus.classList.remove('is-loading');
         sheetRequestStatus.textContent = msg;
       }
       if (sheetRequestMessage) {
@@ -6016,12 +6039,38 @@
       }
     };
     const onError = (msg) => {
+      isRequestSending = false;
+      if (sheetRequestSend) {
+        sheetRequestSend.disabled = false;
+        sheetRequestSend.textContent = "Enviar solicitud";
+      }
+      if (sheetRequestCancel) sheetRequestCancel.disabled = false;
+      if (sheetRequestClose) sheetRequestClose.disabled = false;
+      if (sheetRequestEmail) sheetRequestEmail.disabled = false;
+      if (sheetRequestMessage) sheetRequestMessage.disabled = false;
       if (sheetRequestStatus) {
         sheetRequestStatus.hidden = false;
         sheetRequestStatus.classList.add('is-error');
+        sheetRequestStatus.classList.remove('is-loading');
         sheetRequestStatus.textContent = msg;
       }
     };
+
+    isRequestSending = true;
+    if (sheetRequestSend) {
+      sheetRequestSend.disabled = true;
+      sheetRequestSend.textContent = "Enviando...";
+    }
+    if (sheetRequestCancel) sheetRequestCancel.disabled = true;
+    if (sheetRequestClose) sheetRequestClose.disabled = true;
+    if (sheetRequestEmail) sheetRequestEmail.disabled = true;
+    if (sheetRequestMessage) sheetRequestMessage.disabled = true;
+    if (sheetRequestStatus) {
+      sheetRequestStatus.hidden = false;
+      sheetRequestStatus.classList.remove('is-error');
+      sheetRequestStatus.classList.add('is-loading');
+      sheetRequestStatus.textContent = "Enviando solicitud";
+    }
 
     const sendEmailFallback = () => {
       const formData = new URLSearchParams();

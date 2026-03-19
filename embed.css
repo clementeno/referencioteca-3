@@ -694,6 +694,17 @@ a.ref2d__header-btn{text-decoration:none; color:var(--ink);}
   font-size:0.8rem;
   color:#93f0bf;
 }
+.sheet__requestStatus.is-loading{
+  color:#b9c0d8;
+}
+.sheet__requestStatus.is-loading::after{
+  content:"...";
+  display:inline-block;
+  width:1.4em;
+  overflow:hidden;
+  vertical-align:bottom;
+  animation:sheetRequestDots 1.1s steps(4, end) infinite;
+}
 .sheet__requestStatus.is-error{
   color:#ffadad;
 }
@@ -729,9 +740,20 @@ a.ref2d__header-btn{text-decoration:none; color:var(--ink);}
   color:#111;
   border-color:#e7e7ea;
 }
+.sheet__requestSend[disabled],
+.sheet__requestCancel[disabled],
+.sheet__requestClose[disabled]{
+  opacity:0.6;
+  cursor:not-allowed;
+}
 .sheet__requestCancel{
   background:#15151a;
   color:var(--ink);
+}
+
+@keyframes sheetRequestDots{
+  0%{ width:0; }
+  100%{ width:1.4em; }
 }
 
 /* Controles flotantes de vista infinita */
