@@ -216,6 +216,9 @@
     "identidad grafica": "branding",
     "imagen corporativa": "branding",
     "marca": "branding",
+    "logo": "branding",
+    "logos": "branding",
+    "rebranding": "branding",
     "brand": "branding",
     "brand strategy": "branding",
 
@@ -275,6 +278,7 @@
     // Espacio
     "espacios": "espacio",
     "espacio": "espacio",
+    "estudio": "espacio",
     "arquitectura interior": "espacio",
     "interiorismo": "espacio",
     "diseno interior": "espacio",
@@ -308,6 +312,7 @@
     "patronaje": "textil",
     "diseno textil": "textil",
     "textile design": "textil",
+    "upcycling": "ecologia",
     "bordado": "textil",
     "costume design": "textil",
     "fashion": "moda",
@@ -410,6 +415,7 @@
     "product design": "producto",
     "product": "producto",
     "prototipo": "producto",
+    "diseno integral": "branding",
     "embalaje": "packaging",
     "envase": "packaging",
     "empaque": "packaging",
@@ -5041,6 +5047,381 @@
       tags: ["branding", "identidad visual", "gráfico"],
       src: "IMG/remote-originals/201_Francisca-Torres-Captura-de-pantalla-2026-01-02-a-las-14.35.51.png",
       url: "https://flen.es/campana-dia-del-nino"
+    },
+
+    /* ------------------ Ketal — Sebastián Castro ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/S2848001385960420189766764933827/Captura-de-pantalla-2026-03-19-a-las-10.28.18.png",
+      orientation: "h",
+      span: 1,
+      tags: ["identidad visual", "servicio"],
+      title: "Ketal",
+      author: "Sebastián Castro",
+      role: "Diseñador",
+      collab: "Proyecto en colaboración con Vicente Barría, Antonia Catalán, Fernanda Pineda, María José Vega. Desarrollado por Nodo Sur.",
+      area: "Identidad visual / Servicio",
+      year: "2025",
+      url: "https://sebastiancastrog.myportfolio.com/portafolio-2026"
+    },
+
+    /* ------------------ La Mesa — Magdalena Fontaine ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/W2848001385941973445693055382211/Captura-de-pantalla-2026-03-19-a-las-10.37.04.png",
+      orientation: "h",
+      span: 1,
+      tags: ["logo", "identidad visual", "branding"],
+      title: "La Mesa",
+      author: "Magdalena Fontaine",
+      role: "",
+      collab: "La Mesa. Logo Sal Condimentada de Cahuil.",
+      area: "Logo / Identidad visual / Branding",
+      year: "2022",
+      url: "https://www.behance.net/gallery/141549371/La-Mesa"
+    },
+
+    /* ------------------ Maremagnum — Beatriz Luna ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/E2848006640958191443701571990211/d645c253-e6d4-4750-b906-e31b46e59e98_rw_1920.png",
+      orientation: "h",
+      span: 1,
+      tags: ["diseño textil", "indumentaria", "ilustración"],
+      title: "Maremagnum",
+      author: "Beatriz Luna",
+      role: "Diseñadora / Ilustradora",
+      collab: "Juegos Panamericanos Santiago 2023",
+      area: "Diseño textil / Indumentaria / Ilustración",
+      year: "2023",
+      url: "https://beatrizluna.myportfolio.com/maremagnum"
+    },
+
+    /* ------------------ Canción del Ciervo y el Niño — Antonella Rosati ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/V2848001385923526701619345830595/Captura-de-pantalla-2026-03-19-a-las-15.37.19.png",
+      orientation: "h",
+      span: 1,
+      tags: ["afiche", "ilustración", "gráfico"],
+      title: "Canción del Ciervo y el Niño",
+      author: "Antonella Rosati",
+      role: "",
+      collab: "",
+      area: "Afiche / Ilustración / Gráfico",
+      year: "2024",
+      url: "https://www.behance.net/gallery/221101819/Afiche-para-Cancion-del-Ciervo-y-el-Nino"
+    },
+
+    /* ------------------ Fiesta de La Tirana — Francisca Valenzuela Chamorro ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/P2847999343629150069013757768387/7B5KqvI2mj1XaPoMpTu3obWbr2U.png",
+      orientation: "v",
+      span: 1,
+      tags: ["afiche", "ilustración", "gráfico"],
+      title: "Fiesta de La Tirana",
+      author: "Francisca Valenzuela Chamorro",
+      role: "",
+      collab: "",
+      area: "Afiche / Ilustración / Gráfico",
+      year: "2025",
+      url: "https://franvalenzuela.framer.website/la-fiesta-de-la-tirana"
+    },
+
+    /* ------------------ CANASTOS ORIETA — Fernanda González ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/Q2848001385905079957545636278979/Captura-de-pantalla-2026-03-19-a-las-15.45.47.png",
+      orientation: "h",
+      span: 1,
+      tags: ["identidad visual", "logo"],
+      title: "CANASTOS ORIETA",
+      author: "Fernanda González",
+      role: "",
+      collab: "Práctica de servicio en Parley for the Oceans",
+      area: "Identidad visual / Logo",
+      year: "n/a",
+      url: "https://fernandagn.myportfolio.com/canastos-orieta"
+    },
+
+    /* ------------------ Finca Estudio — Andrea Balmaceda Vicuña ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/R2847999343647596813087467320003/561314050_18054938429268251_3112647212846362856_n.jpg",
+      orientation: "v",
+      span: 1,
+      tags: ["diseño interior", "estudio"],
+      title: "Finca Estudio",
+      author: "Andrea Balmaceda Vicuña",
+      role: "",
+      collab: "Desarrollado en Finca Estudio",
+      area: "Diseño interior / Estudio",
+      year: "2016",
+      url: "https://www.instagram.com/finca.estudio/"
+    },
+
+    /* ------------------ Landing page Impacto Neto Positivo — Paula Alvarado Echeverría ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/Z2848001385886633213471926727363/Captura-de-pantalla-2026-03-19-a-las-17.01.20.png",
+      orientation: "h",
+      span: 1,
+      tags: ["web", "ux ui"],
+      title: "Landing page Impacto Neto Positivo",
+      author: "Paula Alvarado Echeverría",
+      role: "",
+      collab: "",
+      area: "Web / UX UI",
+      year: "2024",
+      url: "https://www.impactonetopositivo.com/landing/"
+    },
+
+    /* ------------------ Rediseño website greenticket — Paula Alvarado Echeverría ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/T2848001385868186469398217175747/Captura-de-pantalla-2026-03-19-a-las-17.02.57.png",
+      orientation: "h",
+      span: 1,
+      tags: ["web", "ux ui"],
+      title: "Rediseño website greenticket",
+      author: "Paula Alvarado Echeverría",
+      role: "",
+      collab: "",
+      area: "Web / UX UI",
+      year: "2024",
+      url: "https://www.greenticket.cl/"
+    },
+
+    /* ------------------ Lumi: Juego para niños con Discapacidad Visual — Daniela Fernández Luengas ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/G2848008019077547702394754118339/cc52c147171561.5872d8e96589c.jpg",
+      orientation: "h",
+      span: 1,
+      tags: ["educación", "juego de mesa"],
+      title: "Lumi: Juego para niños con Discapacidad Visual",
+      author: "Daniela Fernández Luengas",
+      role: "",
+      collab: "Proyecto de título",
+      area: "Educación / Juego de mesa",
+      year: "2016",
+      url: "https://www.behance.net/gallery/47171561/Lumi-Juego-para-ninos-con-Discapacidad-Visual"
+    },
+
+    /* ------------------ Cerámicas — Antonia Grunefeld ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/V2848001385849739725324507624131/Captura-de-pantalla-2026-03-19-a-las-18.32.32.png",
+      orientation: "h",
+      span: 1,
+      tags: ["artesanía"],
+      title: "Cerámicas",
+      author: "Antonia Grunefeld",
+      role: "Diseñadora",
+      collab: "",
+      area: "Artesanía",
+      year: "2025",
+      url: "https://antoniagrunefeld.com/ceramics-i"
+    },
+
+    /* ------------------ Ilustraciones — Antonia Grunefeld ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/E2848001385831292981250798072515/Captura-de-pantalla-2026-03-19-a-las-18.33.37.png",
+      orientation: "h",
+      span: 1,
+      tags: ["ilustración"],
+      title: "Ilustraciones",
+      author: "Antonia Grunefeld",
+      role: "Diseñadora",
+      collab: "",
+      area: "Ilustración",
+      year: "n/a",
+      url: "https://antoniagrunefeld.com/ilus"
+    },
+
+    /* ------------------ Ilustraciones — Juan de Dios Urrutia Izquierdo ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/H2848001385812846237177088520899/Captura-de-pantalla-2026-03-19-a-las-18.43.03.png",
+      orientation: "h",
+      span: 1,
+      tags: ["ilustración"],
+      title: "Ilustraciones",
+      author: "Juan de Dios Urrutia Izquierdo",
+      role: "diseñador / ilustrador",
+      collab: "",
+      area: "Ilustración",
+      year: "2025",
+      url: "https://dribbble.com/juandedios/shots"
+    },
+
+    /* ------------------ BOHO — MANUELA VILLANUEVA WALKER ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/L2848000653827594648308370846403/Captura-de-Pantalla-2023-01-12-a-la_s_-22_55_36.png.jpg",
+      orientation: "h",
+      span: 1,
+      tags: ["moda", "indumentaria", "dirección creativa"],
+      title: "BOHO",
+      author: "MANUELA VILLANUEVA WALKER",
+      role: "",
+      collab: "Lounge",
+      area: "Moda / Indumentaria / Dirección creativa",
+      year: "n/a",
+      url: "https://manuelavillanueva9.wixsite.com/mvwdesign/boho-lounge"
+    },
+
+    /* ------------------ DREAMY WINTER 22 — MANUELA VILLANUEVA WALKER ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/E2848000225309729816035486806723/c1d4c5_2fecf120d07d4edcbc2e4f654eea64e6_mv2.png.jpg",
+      orientation: "h",
+      span: 1,
+      tags: ["moda", "indumentaria", "dirección creativa"],
+      title: "DREAMY WINTER 22",
+      author: "MANUELA VILLANUEVA WALKER",
+      role: "",
+      collab: "Lounge",
+      area: "Moda / Indumentaria / Dirección creativa",
+      year: "2022",
+      url: "https://manuelavillanueva9.wixsite.com/mvwdesign/lounge-dreamy-w22"
+    },
+
+    /* ------------------ LOUNGE HOME S23 — MANUELA VILLANUEVA WALKER ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/N2848000225291283071961777255107/c1d4c5_9c88194a79b7451391aa4d7d02c62f69_mv2.png.jpg",
+      orientation: "h",
+      span: 1,
+      tags: ["moda", "indumentaria", "dirección creativa"],
+      title: "LOUNGE HOME S23",
+      author: "MANUELA VILLANUEVA WALKER",
+      role: "",
+      collab: "Lounge",
+      area: "Moda / Indumentaria / Dirección creativa",
+      year: "2023",
+      url: "https://manuelavillanueva9.wixsite.com/mvwdesign/lounge-home-s23"
+    },
+
+    /* ------------------ Armenté — Francisca Villela Armenté ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/A2848004591045309508653939110595/Captura-de-pantalla-2026-03-19-a-las-19.17.10.png",
+      orientation: "h",
+      span: 1,
+      tags: ["moda", "indumentaria", "dirección creativa"],
+      title: "Armenté",
+      author: "Francisca Villela Armenté",
+      role: "",
+      collab: "",
+      area: "Moda / Indumentaria / Dirección creativa",
+      year: "2019",
+      url: "https://www.instagram.com/armenteofficial/"
+    },
+
+    /* ------------------ Japo Set — Francisca Villela Armenté ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/X2848001385794399493103378969283/Captura-de-pantalla-2026-03-19-a-las-18.53.25.png",
+      orientation: "h",
+      span: 1,
+      tags: ["moda", "indumentaria", "ecología", "upcycling"],
+      title: "Japo Set",
+      author: "Francisca Villela Armenté",
+      role: "",
+      collab: "Ph @sampedrobraga Asist @anafardy. St @matiosale. Mua @xinaarodriguez. Models @violeta.silvestre_. x @armenteofficial @ftvillela.",
+      area: "Moda / Indumentaria / Ecología / Upcycling",
+      year: "2024",
+      url: "https://www.instagram.com/p/C74bWQuitaA/?img_index=1"
+    },
+
+    /* ------------------ BEST SELLER — Francisca Villela Armenté ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/Q2848001385775952749029669417667/Captura-de-pantalla-2026-03-19-a-las-18.55.17.png",
+      orientation: "h",
+      span: 1,
+      tags: ["moda", "indumentaria", "ecología", "upcycling"],
+      title: "BEST SELLER",
+      author: "Francisca Villela Armenté",
+      role: "",
+      collab: "Ph @sampedrobraga Asist @anafardy. St @matiosale. Mua @xinaarodriguez. Models @teo_silguero. x @armenteofficial @ftvillela.",
+      area: "Moda / Indumentaria / Ecología / Upcycling",
+      year: "2024",
+      url: "https://www.instagram.com/p/C8oyZ1gCXr6/?img_index=1"
+    },
+
+    /* ------------------ Top Nostalgia — Francisca Villela Armenté ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/X2848001385757506004955959866051/Captura-de-pantalla-2026-03-19-a-las-18.56.46.png",
+      orientation: "h",
+      span: 1,
+      tags: ["moda", "indumentaria", "ecología", "upcycling"],
+      title: "Top Nostalgia",
+      author: "Francisca Villela Armenté",
+      role: "",
+      collab: "Falda: @georgielastudio. Fotos: @lacomunevintage.",
+      area: "Moda / Indumentaria / Ecología / Upcycling",
+      year: "2023",
+      url: "https://www.instagram.com/p/C1HdKDrtb2X/?img_index=1"
+    },
+
+    /* ------------------ NoJockey — Francisca Villela Armenté ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/F2848001385739059260882250314435/Captura-de-pantalla-2026-03-19-a-las-18.57.36.png",
+      orientation: "h",
+      span: 1,
+      tags: ["moda", "indumentaria", "ecología", "upcycling"],
+      title: "NoJockey",
+      author: "Francisca Villela Armenté",
+      role: "",
+      collab: "",
+      area: "Moda / Indumentaria / Ecología / Upcycling",
+      year: "2023",
+      url: "https://www.instagram.com/p/CwhvIPGII_c/?img_index=1"
+    },
+
+    /* ------------------ Señalética Club Manquehue — Carolina Correa ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/M2848001385720612516808540762819/Captura-de-pantalla-2026-03-19-a-las-19.03.56.png",
+      orientation: "h",
+      span: 1,
+      tags: ["wayfinding", "señaletica", "diseño de información"],
+      title: "Señalética Club Manquehue",
+      author: "Carolina Correa",
+      role: "",
+      collab: "Equipo Wayfinding Consultores: Carolina Correa, José Manuel Allard, Carola Zurob.",
+      area: "Wayfinding / Señalética / Diseño de información",
+      year: "2025",
+      url: "https://carocorrea.com/senaletica-club-manquehue"
+    },
+
+    /* ------------------ Tawa Refugio del Puelo — Carolina Correa ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/F2848001385702165772734831211203/Captura-de-pantalla-2026-03-19-a-las-19.05.27.png",
+      orientation: "h",
+      span: 1,
+      tags: ["diseño integral", "branding", "gráfico"],
+      title: "Tawa Refugio del Puelo",
+      author: "Carolina Correa",
+      role: "",
+      collab: "Junto al equipo de Rimaya Lab se realizó la conceptualización de marca.",
+      area: "Diseño integral / Branding / Gráfico",
+      year: "n/a",
+      url: "https://carocorrea.com/tawa-refugio-del-puelo"
+    },
+
+    /* ------------------ Adagio Teas® | Rebranding — Carla Marrazzo ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/F2848001385683719028661121659587/Captura-de-pantalla-2026-03-19-a-las-19.08.02.png",
+      orientation: "h",
+      span: 1,
+      tags: ["branding", "identidad visual"],
+      title: "Adagio Teas® | Rebranding",
+      author: "Carla Marrazzo",
+      role: "",
+      collab: "Desarrollado por Corsicana. Branding: Carla Marrazzo. Estrategia: Sapiens Branding.",
+      area: "Branding / Identidad visual",
+      year: "2020",
+      url: "https://www.behance.net/gallery/161640559/Adagio-Teas-Rebranding"
+    },
+
+    /* ------------------ MODO — Carla Marrazzo ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/G2848001385665272284587412107971/Captura-de-pantalla-2026-03-19-a-las-19.09.51.png",
+      orientation: "h",
+      span: 1,
+      tags: ["branding", "identidad visual"],
+      title: "MODO",
+      author: "Carla Marrazzo",
+      role: "",
+      collab: "Desarrollado por Corsicana. Branding: Carla Marrazzo. Estrategia: Sapiens Branding.",
+      area: "Branding / Identidad visual",
+      year: "2024",
+      url: "https://www.behance.net/gallery/220938527/MODO-Branding-Strategy"
     }
     
   ];
