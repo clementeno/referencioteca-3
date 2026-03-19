@@ -88,73 +88,108 @@
   }
   document.body.style.overflow = '';
 
-  /* ---- TAGS (puedes editar/añadir) ---- */
+  /* ---- TAGS (filtros canónicos visibles en la interfaz) ---- */
   const TAGS = [
-    'editorial','ilustración','dirección de arte','Tipografía','Experimental','Publicación digital','Impresión',
-    'Curaduría','Identidad exposición','Señaletica','iluminación museografica','Música','visuales','Merchandising',
-    'Afiche','Vestuario','Motion Graphics','Sitio Web','educación','Exposición de arte','Museografia','Moda'
+    'Editorial','Ilustración','Dirección de arte','Tipografía','Experimental',
+    'Publicación digital','Impresión','Curaduría','Señalética','Iluminación',
+    'Música','Visuales','Merchandising','Afiche','Moda','Motion Graphics',
+    'Sitio Web','Educación','Exhibición','Museografía','Branding','Fotografía',
+    'Gráfico','Animación','Audiovisual','Arte','Espacio','UX UI','Packaging',
+    'Producto','Industrial','Mobiliario','Textil','Artesanía','Biomateriales',
+    'Investigación','Pub. Académica','Videojuego','Teatro','Social','Salud',
+    'Muralismo','Infografía','RRSS','Web','Cover Art','Portafolio'
   ];
 
-  /* ---- SUGERENCIAS DE BÚSQUEDA (puedes editar/añadir) ---- */
+  /* ---- SUGERENCIAS DE BÚSQUEDA ---- */
   const SUGGESTIONS = [
-    'editorial',
-    'diagramación',
-    'gráfico',
-    'ilustración',
-    'museografía',
-    'moda',
-    'vestuario',
-    'identidad visual',
-    'dirección de arte',
-    'fotografía de moda',
-    'sitio web',
-    'branding',
-    'museo',
-    'experimental',
-    'tipografía',
-    'impresión',
-    'publicación digital',
-    'curaduría',
-    'exposición de arte',
-    'música',
-    'afiche',
-    'motion graphics',
-    'educación',
-    'artículo académico',
-    'articulo academico',
-    'publicación académica',
-    'publicacion academica',
-    'paper',
-    'pub. académica',
-    'pub academica',
-    'fotografía',
-    'dirección creativa',
-    'ux',
-    'ui',
-    'ux ui',
-    'diseño servicio',
-    'espacio',
-    'exhibición',
-    'web',
-    'responsivo',
-    'fanzine',
-    'objeto editorial',
-    'risografía',
-    'infantil',
-    'videojuego',
-    'animación',
-    'arte',
-    'audiovisual',
-    'stop-motion',
-    'teatro',
-    'identidad gráfica',
-    'señaletica',
-    'museografia',
-    'cover art',
-    'afiche digital',
-    'afiche impreso',
-    'fotografía de moda',
-    'instalación'
+    // Editorial
+    'editorial','diagramación','layout','maquetación','fanzine','zine',
+    'objeto editorial','libro de artista','publicación digital','publicacion digital',
+    'infantil','risografía','risografia','riso','impresión','impresion',
+
+    // Identidad / Branding
+    'branding','identidad visual','identidad gráfica','identidad grafica',
+    'imagen corporativa','marca',
+
+    // Gráfico / Comunicación visual
+    'gráfico','grafico','diseño gráfico','comunicación visual','comunicacion visual',
+    'graphic design',
+
+    // Ilustración
+    'ilustración','ilustracion','dibujo','ilustración editorial','ilustración infantil',
+
+    // Tipografía
+    'tipografía','tipografia','lettering','caligrafía','caligrafia','type design','fuente',
+
+    // Fotografía
+    'fotografía','fotografia','fotografía de moda','fotografia de moda',
+    'fotografía editorial','fotografía de producto',
+
+    // Animación / Motion / Audiovisual
+    'animación','animacion','motion graphics','motion','diseño en movimiento',
+    'audiovisual','stop-motion','stop motion','animación 2d','animacion 2d',
+    'animación 3d','animacion 3d',
+
+    // Web / Digital
+    'sitio web','web','diseño web','web design','responsivo','responsive',
+    'landing page','front-end','one pager','ux','ui','ux ui',
+
+    // Espacio / Interior
+    'espacio','arquitectura interior','interiorismo','diseño interior',
+
+    // Exhibición / Museografía
+    'exhibición','exhibicion','exposición','exposicion','exposición de arte',
+    'exposicion de arte','museografía','museografia','museo','curaduría','curaduria',
+    'montaje','instalación','instalacion','señalética','señaletica','wayfinding',
+
+    // Moda / Textil
+    'moda','vestuario','indumentaria','textil','diseño textil','patronaje',
+    'fotografía de moda','fotografia de moda','costume design',
+
+    // Publicación académica
+    'publicación académica','publicacion academica','pub. académica','pub academica',
+    'artículo académico','articulo academico','paper','tesis','revista académica',
+
+    // Música / Visuales
+    'música','musica','cover art','portada de disco','visuales','vjing',
+
+    // Afiche / Poster
+    'afiche','afiche digital','afiche impreso','poster','póster','cartel',
+
+    // Diseño de servicio
+    'diseño servicio','diseno servicio','service design','diseño de servicios',
+
+    // Espacio público / Social
+    'muralismo','mural','arte urbano','street art','diseño social','social',
+    'accesibilidad',
+
+    // Investigación / Experimental
+    'experimental','investigación','investigacion','research','diseño especulativo',
+    'speculative design','design research','archivo',
+
+    // Producto / Industrial
+    'producto','diseño de producto','product design','industrial','diseño industrial',
+    'packaging','embalaje','envase','empaque','mobiliario','furniture',
+
+    // Salud / Educación
+    'salud','health design','educación','educacion',
+
+    // Teatro / Videojuego / Arte
+    'teatro','escenografía','escenografia','artes escénicas',
+    'videojuego','game design','video game','gaming',
+    'arte','artes visuales','arte digital','arte generativo',
+
+    // Infografía / Datos
+    'infografía','infografia','infographic','data viz','visualización de datos',
+
+    // RRSS
+    'rrss','redes sociales','social media','contenido digital',
+
+    // Artesanía / Biomateriales
+    'artesanía','artesania','craft','oficios','biomateriales','materiales sustentables',
+
+    // Lettering / Portafolio
+    'lettering','portafolio',
   ];
 
   /* Helpers */
@@ -162,189 +197,344 @@
   const PALETTE = ["#ff6b6b","#ffd93d","#6bcBef","#b084f6","#26de81","#ff9f1a","#f368e0","#00d2d3","#10ac84","#a29bfe","#fd79a8","#81ecec"];
     /* =================== TAG NORMALIZATION (dedupe + Titlecase + aliases) =================== */
 
-  // Alias: tags distintos que deben caer en UNA sola categoría (evita duplicados como 3 "Editorial")
+  // Alias: la clave debe ir normalizada (sin tildes, en minúsculas) porque canonicalTagKey usa norm().
   const TAG_ALIASES = {
-    // Editorial bucket
+    // Editorial
     "diagramacion": "editorial",
+    "layout": "editorial",
+    "maquetacion": "editorial",
     "fanzine": "editorial",
+    "zine": "editorial",
     "objeto editorial": "editorial",
+    "libro de artista": "editorial",
     "publicacion digital": "editorial",
     "infantil": "editorial",
+    "book design": "editorial",
 
-    // Branding bucket
+    // Branding / Identidad
     "identidad visual": "branding",
     "identidad grafica": "branding",
-    "identidad gráfica": "branding",
+    "imagen corporativa": "branding",
+    "marca": "branding",
+    "brand": "branding",
+    "brand strategy": "branding",
 
-    // Web / Digital bucket
+    // Web / Digital
     "sitio web": "web",
     "digital": "web",
     "responsivo": "web",
+    "responsive": "web",
     "desarrollo web": "web",
     "portafolio web": "web",
     "ecommerce": "web",
+    "landing page": "web",
+    "one pager": "web",
+    "front-end": "web",
+    "web design": "web",
+    "diseno web": "web",
 
-    // UX/UI (unificado)
+    // UX / UI
     "ux": "ux ui",
     "ui": "ux ui",
     "ux/ui": "ux ui",
     "ui/ux": "ux ui",
+    "interfaz": "ux ui",
+    "interaction design": "ux ui",
+    "diseno de interfaz": "ux ui",
+    "experiencia de usuario": "ux ui",
 
-    // Diseño de servicio (unificado)
+    // Diseño servicio
     "servicio": "diseno servicio",
-    "diseño servicio": "diseno servicio",
+    "servicios": "diseno servicio",
     "diseno servicio": "diseno servicio",
-    "diseño de servicio": "diseno servicio",
     "diseno de servicio": "diseno servicio",
+    "diseno de servicios": "diseno servicio",
+    "service design": "diseno servicio",
     "deporte": "diseno servicio",
     "deportes": "diseno servicio",
 
-    // Motion / Audiovisual bucket
+    // Animación / Motion / Audiovisual
     "motion graphics": "animación",
+    "motion": "animación",
     "animacion": "animación",
+    "animacion 2d": "animación",
+    "animacion 3d": "animación",
+    "diseno en movimiento": "animación",
     "audiovisual": "animación",
     "stop-motion": "animación",
+    "stop motion": "animación",
+
+    // Visuales / VJ
     "vjing": "visuales",
     "vj": "visuales",
     "vjing (visuales)": "visuales",
+    "artes visuales": "visuales",
+    "arte digital": "visuales",
+    "arte generativo": "visuales",
 
-    // Espacio (unificado)
+    // Espacio
     "espacios": "espacio",
     "espacio": "espacio",
+    "arquitectura interior": "espacio",
+    "interiorismo": "espacio",
+    "diseno interior": "espacio",
 
-    // Exhibición (unificado)
+    // Exhibición
     "exhibicion": "exhibicion",
-    "exhibición": "exhibicion",
     "exphibicion": "exhibicion",
-    "exposición": "exhibicion",
     "exposicion": "exhibicion",
     "expo arte": "exhibicion",
-    "exposición de arte": "exhibicion",
     "exposicion de arte": "exhibicion",
     "identidad exposicion": "exhibicion",
-    "identidad exposición": "exhibicion",
 
-    // Fotografía (unificado)
+    // Fotografía
     "fotografia": "fotografia",
-    "fotografía": "fotografia",
     "fotografia de moda": "fotografia",
-    "fotografía de moda": "fotografia",
+    "fotografia editorial": "fotografia",
+    "fotografia de producto": "fotografia",
+    "photo": "fotografia",
 
-    // Impreso (unificado)
+    // Impreso
     "risografia": "impreso",
-    "risografía": "impreso",
+    "riso": "impreso",
     "serigrafia": "impreso",
-    "serigrafía": "impreso",
     "impresion": "impreso",
-    "impresión": "impreso",
+    "print": "impreso",
+    "grafica impresa": "impreso",
 
-    // Textil (unificado)
+    // Moda / Textil
     "vestuario": "textil",
     "indumentaria": "textil",
     "patronaje": "textil",
+    "diseno textil": "textil",
+    "textile design": "textil",
+    "bordado": "textil",
+    "costume design": "textil",
+    "fashion": "moda",
+    "diseno de moda": "moda",
 
-    // Publicación académica (unificado)
+    // Museografía
+    "museografia": "museografía",
+    "instalacion": "museografía",
+    "iluminacion museografica": "museografía",
+    "diseno de exposiciones": "museografía",
+    "montaje": "museografía",
+    "heritage design": "museografía",
+    "heritage": "museografía",
+
+    // Señalética
+    "senaletica": "señalética",
+    "wayfinding": "señalética",
+    "senalizacion": "señalética",
+    "diseno de senales": "señalética",
+
+    // Publicación académica
     "articulo academico": "pub academica",
-    "artículo academico": "pub academica",
-    "articulo académico": "pub academica",
-    "artículo académico": "pub academica",
+    "articulo academica": "pub academica",
     "paper": "pub academica",
+    "tesis": "pub academica",
     "publicacion academica": "pub academica",
-    "publicación academica": "pub academica",
-    "publicacion académica": "pub academica",
-    "publicación académica": "pub academica",
+    "revista academica": "pub academica",
 
-    // Biomateriales + Artesanía
+    // Biomateriales / Artesanía
     "biomaterial": "biomateriales",
     "biomateriales": "biomateriales",
+    "materiales sustentables": "biomateriales",
+    "biofabricacion": "biomateriales",
     "artesania": "artesania",
-    "artesanía": "artesania",
+    "craft": "artesania",
+    "oficios": "artesania",
+    "artes y oficios": "artesania",
     "soundscape": "investigacion",
 
-    // Afiche (unificado)
+    // Afiche / Poster
     "afiche": "afiche",
     "afiche impreso": "afiche",
     "afiche digital": "afiche",
+    "poster": "afiche",
+    "cartel": "afiche",
 
-    // Portada disco (unificado)
+    // Cover art / Portada
     "disco": "cover art",
-    "EP": "cover art",
+    "ep": "cover art",
     "portada de disco": "cover art",
     "portada de discos": "cover art",
+    "arte de tapa": "cover art",
+    "arte de portada": "cover art",
+    "portada musical": "cover art",
 
-    // Museografía (mantener existente)
-    "museografia": "museografía",
-    "museografía": "museografía",
-    "instalacion": "museografía",
-    "instalación": "museografía",
-    "iluminacion museografica": "museografía",
-    "iluminación museografica": "museografía",
-
-    // Gráfico bucket
+    // Gráfico / Comunicación visual
     "grafico": "gráfico",
-    "gráfico": "gráfico",
+    "diseno grafico": "gráfico",
+    "comunicacion visual": "gráfico",
+    "graphic design": "gráfico",
+
+    // Ilustración
+    "ilustracion": "ilustración",
+    "dibujo": "ilustración",
+    "drawing": "ilustración",
+    "ilustracion editorial": "ilustración",
+    "ilustracion infantil": "ilustración",
+
+    // Tipografía
+    "tipografia": "tipografía",
+    "lettering": "tipografía",
+    "caligrafia": "tipografía",
+    "type design": "tipografía",
+    "fuente": "tipografía",
+
+    // Infografía / Datos
+    "infografia": "infografía",
+    "infographic": "infografía",
+    "data viz": "infografía",
+    "visualizacion de datos": "infografía",
+
+    // Muralismo / Arte urbano
+    "mural": "muralismo",
+    "arte urbano": "muralismo",
+    "street art": "muralismo",
+    "grafiti": "muralismo",
+
+    // Teatro
+    "escenografia": "teatro",
+    "artes escenicas": "teatro",
+
+    // Videojuego
+    "game design": "videojuego",
+    "video game": "videojuego",
+    "gaming": "videojuego",
+    "juego digital": "videojuego",
+
+    // Producto / Industrial / Packaging
+    "diseno de producto": "producto",
+    "product design": "producto",
+    "product": "producto",
+    "prototipo": "producto",
+    "embalaje": "packaging",
+    "envase": "packaging",
+    "empaque": "packaging",
+    "diseno de envase": "packaging",
+    "furniture": "mobiliario",
+    "diseno de mobiliario": "mobiliario",
+    "diseno de muebles": "mobiliario",
+
+    // Salud / Social
+    "health design": "salud",
+    "salud publica": "salud",
+    "diseno sanitario": "salud",
+    "diseno medico": "salud",
+    "diseno social": "social",
+    "accesibilidad": "social",
+
+    // Investigación / Experimental
+    "investigacion": "investigacion",
+    "research": "investigacion",
+    "diseno especulativo": "investigacion",
+    "speculative design": "investigacion",
+    "design research": "investigacion",
+    "critical design": "investigacion",
+    "diseno critico": "investigacion",
+    "archivo": "investigacion",
+
+    // RRSS
+    "redes sociales": "rrss",
+    "social media": "rrss",
+    "contenido digital": "rrss",
+    "instagram": "rrss",
+    "tiktok": "rrss",
+
+    // Música
+    "musica": "música",
   };
 
-  // Cómo se muestran (Mayúscula primero + acentos + excepciones)
+  /* ---- TAG DISPLAY (cómo se muestran los canónicos) ---- */
   const TAG_DISPLAY = {
-    "editorial": "Editorial",
-    "ilustracion": "Ilustración",
-    "ilustración": "Ilustración",
-    "direccion de arte": "Dirección de arte",
-    "dirección de arte": "Dirección de arte",
-    "tipografia": "Tipografía",
-    "tipografía": "Tipografía",
-    "experimental": "Experimental",
-    "impresion": "Impresión",
-    "impresión": "Impresión",
-    "curaduria": "Curaduría",
-    "curaduría": "Curaduría",
-    "branding": "Branding",
-    "senaletica": "Señalética",
-    "señaletica": "Señalética",
-    "señalética": "Señalética",
-    "fotografia": "Fotografía",
-    "fotografía": "Fotografía",
-    "exhibicion": "Exhibición",
-    "espacio": "Espacio",
-    "ux ui": "UX UI",
-    "diseno servicio": "Diseño servicio",
-    "portada disco": "Portada disco",
-    "impreso": "Impreso",
-    "textil": "Textil",
-    "pub academica": "Pub. Académica",
-    "biomateriales": "Biomateriales",
-    "artesania": "Artesanía",
-    "moda": "Moda",
-    "vestuario": "Vestuario",
-    "musica": "Música",
-    "música": "Música",
-    "museografia": "Museografía",
-    "museografía": "Museografía",
-    "web": "Web",
-    "ux": "UX",
-    "ui": "UI",
-    "animación": "Animación",
-    "animacion": "Animación",
-    "gráfico": "Gráfico",
-    "grafico": "Gráfico",
-    "producto": "Producto",
-    "servicio": "Servicio",
-    "salud": "Salud",
-    "investigacion": "Investigación",
-    "investigación": "Investigación",
-    "packaging": "Packaging",
-    "serigrafia": "Serigrafía",
-    "serigrafía": "Serigrafía",
-    "industrial": "Industrial",
-    "mobiliario": "Mobiliario",
-    "espacios": "Espacios",
-    "social": "Social",
-    "afiche": "Afiche",
-    "iluminación": "Iluminación",
-    "rrss": "RRSS",
-    "Rrss": "RRSS",
-    "iluminacion": "Iluminación",
+    "editorial":          "Editorial",
+    "ilustracion":        "Ilustración",
+    "ilustración":        "Ilustración",
+    "tipografia":         "Tipografía",
+    "tipografía":         "Tipografía",
+    "lettering":          "Tipografía",
+    "experimental":       "Experimental",
+    "impresion":          "Impresión",
+    "impresión":          "Impresión",
+    "impreso":            "Impreso",
+    "curaduria":          "Curaduría",
+    "curaduría":          "Curaduría",
+    "branding":           "Branding",
+    "senaletica":         "Señalética",
+    "señaletica":         "Señalética",
+    "señalética":         "Señalética",
+    "fotografia":         "Fotografía",
+    "fotografía":         "Fotografía",
+    "exhibicion":         "Exhibición",
+    "espacio":            "Espacio",
+    "ux ui":              "UX UI",
+    "ux":                 "UX UI",
+    "ui":                 "UX UI",
+    "diseno servicio":    "Diseño Servicio",
+    "portada disco":      "Portada Disco",
+    "cover art":          "Cover Art",
+    "textil":             "Textil",
+    "pub academica":      "Pub. Académica",
+    "biomateriales":      "Biomateriales",
+    "artesania":          "Artesanía",
+    "artesanía":          "Artesanía",
+    "moda":               "Moda",
+    "vestuario":          "Moda",
+    "musica":             "Música",
+    "música":             "Música",
+    "museografia":        "Museografía",
+    "museografía":        "Museografía",
+    "web":                "Web",
+    "animación":          "Animación",
+    "animacion":          "Animación",
+    "gráfico":            "Gráfico",
+    "grafico":            "Gráfico",
+    "producto":           "Producto",
+    "servicio":           "Servicio",
+    "salud":              "Salud",
+    "investigacion":      "Investigación",
+    "investigación":      "Investigación",
+    "packaging":          "Packaging",
+    "serigrafia":         "Serigrafía",
+    "serigrafía":         "Serigrafía",
+    "industrial":         "Industrial",
+    "mobiliario":         "Mobiliario",
+    "espacios":           "Espacio",
+    "social":             "Social",
+    "afiche":             "Afiche",
+    "iluminacion":        "Iluminación",
+    "iluminación":        "Iluminación",
+    "rrss":               "RRSS",
+    "infografia":         "Infografía",
+    "infografía":         "Infografía",
+    "muralismo":          "Muralismo",
+    "teatro":             "Teatro",
+    "videojuego":         "Videojuego",
+    "visuales":           "Visuales",
+    "arte":               "Arte",
+    "3d":                 "3D",
+    "app":                "App",
+    "cultura":            "Cultura",
+    "direccion creativa": "Dirección Creativa",
+    "direccion de arte":  "Dirección de Arte",
+    "diseno conceptual":  "Diseño Conceptual",
+    "diseno de informacion":"Diseño de Información",
+    "ecologia":           "Ecología",
+    "estilismo":          "Estilismo",
+    "experiencia":        "Experiencia",
+    "galeria":            "Galería",
+    "innovacion":         "Innovación",
+    "juego de mesa":      "Juego de Mesa",
+    "objeto":             "Objeto",
+    "portada":            "Portada",
+    "dirección de arte":  "Dirección de Arte",
+    "portafolio":         "Portafolio",
+    "vitrinaje":          "Vitrinaje",
+    "educacion":          "Educación",
+    "educación":          "Educación",
+    "diseño servicio":    "Diseño Servicio",
   };
 
   const canonicalTagKey = (tag) => {
