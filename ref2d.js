@@ -6633,12 +6633,12 @@
     // ej. "poster" -> "afiche", "stop motion" -> "animación".
     const fullCanonical = canonicalTagKey(normalized);
     if (fullCanonical && fullCanonical !== normalized) {
-      return [fullCanonical];
+      return [norm(fullCanonical)];
     }
 
     const tokens = normalized
       .split(/\s+/)
-      .map((t) => canonicalTagKey(t.trim()))
+      .map((t) => norm(canonicalTagKey(t.trim())))
       .filter(Boolean);
 
     return Array.from(new Set(tokens));
