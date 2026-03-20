@@ -5518,11 +5518,8 @@
   const BENTO_PREFETCH_MIN_Y = 1.06;
   const BENTO_LITE_PREFETCH_MIN_X = 1.0;
   const BENTO_LITE_PREFETCH_MIN_Y = 1.0;
-  const BENTO_CULL_MARGIN_NEAR = 3000;
-  const BENTO_CULL_MARGIN_FAR = 1150;
-  const BENTO_MAX_ITEMS_IN_DOM_NEAR = 500;
-  const BENTO_MAX_ITEMS_IN_DOM_FAR = 170;
-  const BENTO_CULL_MIN_INTERVAL_MS = 70;
+  const BENTO_CULL_MARGIN = 2600;
+  const BENTO_MAX_ITEMS_IN_DOM = 700;
   const BENTO_MAX_NEW_PER_PASS = 140;
   const BENTO_MAX_NEW_PER_PASS_MIN = 56;
   const BENTO_MAX_NEW_PER_PASS_LITE = 28;
@@ -5530,10 +5527,9 @@
   const BENTO_LITE_FILL_INTERVAL_MS = 180;
   const BENTO_SETTLE_FULL_DELAY_MS = 160;
   const BENTO_INTERACTION_SETTLE_MS = 120;
-  const BENTO_LITE_MIN_MOVE_SCREEN = 64;
+  const BENTO_LITE_MIN_MOVE_SCREEN = 30;
   const BENTO_LITE_MIN_MOVE_SCREEN_SQ = BENTO_LITE_MIN_MOVE_SCREEN * BENTO_LITE_MIN_MOVE_SCREEN;
   const SIMPLE_CARD_COUNT = 3;
-  let lastCullTs = 0;
   const nextMeta = ()=> activeList.length ? activeList[(genPtr++) % activeList.length] : null;
   const ORIENTATION_RATIO = { h: 4 / 3, v: 3 / 4, sq: 1 };
   const ORIENTATION_ASPECT_CSS = { h: '4 / 3', v: '3 / 4', sq: '1 / 1' };
@@ -5588,14 +5584,6 @@
     }
     return Math.round(BENTO_MAX_NEW_PER_PASS_MIN + ((BENTO_MAX_NEW_PER_PASS - BENTO_MAX_NEW_PER_PASS_MIN) * t));
   };
-  const getDynamicCullMargin = () => {
-    const t = getZoomProgress();
-    return Math.round(BENTO_CULL_MARGIN_FAR + ((BENTO_CULL_MARGIN_NEAR - BENTO_CULL_MARGIN_FAR) * t));
-  };
-  const getDynamicMaxItemsInDom = () => {
-    const t = getZoomProgress();
-    return Math.round(BENTO_MAX_ITEMS_IN_DOM_FAR + ((BENTO_MAX_ITEMS_IN_DOM_NEAR - BENTO_MAX_ITEMS_IN_DOM_FAR) * t));
-  };
   const zoomTo = (targetScale, clientX, clientY, useLiteFill = false) => {
     const nextScale = clampCamScale(targetScale);
     if (Math.abs(nextScale - camScale) < 0.0001) {
@@ -5621,7 +5609,7 @@
 
   /* Crear tarjeta */
   let globalId = 0;
-  function makeCard(i, dir, meta, appendTarget = plane){
+  function makeCard(i, dir, meta){
     if(!meta) return;
     const orient = normalizeOrientation(meta.orientation);
     const span2  = getBentoSpan(meta) === 2;
@@ -5698,18 +5686,30 @@
 
     const metaBox = document.createElement('div');
     metaBox.className='ref2d__meta';
-    tags.slice(0,2).forEach(t=>{
+    tags.slice(0,3).forEach(t=>{
       const c=document.createElement('span');
       c.className='ref2d__chip';
       c.textContent=t;
       c.setAttribute('data-tag', t);
+      // Etiquetas de la grilla también son clickeables
+      c.addEventListener('click', (e)=>{
+        // Suprimir click si acabamos de hacer drag
+        if(performance.now() < suppressClickUntil){
+          e.preventDefault();
+          e.stopPropagation();
+          return;
+        }
+        e.preventDefault();
+        e.stopPropagation(); // Evita que se abra el modal al hacer click en la etiqueta
+        if (search) search.value=t;
+        applyFilter(t);
+      }); // Sin capture phase
       metaBox.appendChild(c);
     });
     el.appendChild(metaBox);
 
-    if (appendTarget) appendTarget.appendChild(el);
+    plane.appendChild(el);
     globalId++;
-    return el;
   }
 
   function createSharedCardElement(meta, className, options = {}) {
@@ -5772,7 +5772,12 @@
       const chip = document.createElement('span');
       chip.className = 'ref2d__chip';
       chip.textContent = t;
-      chip.setAttribute('data-tag', t);
+      chip.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (search) search.value = t;
+        applyFilter(t);
+      });
       tagsWrap.appendChild(chip);
     });
     body.appendChild(tagsWrap);
@@ -6088,26 +6093,19 @@
     return { vw, vh, top, bottom, left, right };
   }
 
-  function cullFarItems(force = false) {
+  function cullFarItems() {
     if (!plane || activeView !== 'bento') return;
     const children = plane.children;
     const total = children.length;
     if (!total) return;
-    const dynamicMaxItemsInDom = getDynamicMaxItemsInDom();
-    const now = performance.now();
-    if (!force) {
-      if (total <= dynamicMaxItemsInDom) return;
-      if ((now - lastCullTs) < BENTO_CULL_MIN_INTERVAL_MS) return;
-    }
-    lastCullTs = now;
 
     const { top, bottom } = getViewportBounds();
-    const cullMargin = getDynamicCullMargin();
-    const minVisible = top - cullMargin;
-    const maxVisible = bottom + cullMargin;
+    const minVisible = top - BENTO_CULL_MARGIN;
+    const maxVisible = bottom + BENTO_CULL_MARGIN;
+    const dynamicMaxItemsInDom = Math.round(300 + (340 * getZoomProgress()));
     let removed = 0;
     const aggressive = total > dynamicMaxItemsInDom;
-    const removeLimit = aggressive ? 220 : 90;
+    const removeLimit = aggressive ? 220 : 70;
 
     for (let idx = children.length - 1; idx >= 0; idx--) {
       const el = children[idx];
@@ -6137,16 +6135,14 @@
     const startIdx = Math.floor((leftBound)  / (COL_W+GAP)) - 2;
     const endIdx   = Math.floor((rightBound) / (COL_W+GAP)) + 2;
     let created = 0;
-    const frag = document.createDocumentFragment();
 
     for(let i=startIdx; i<=endIdx; i++){
       const col = ensureColumn(i);
       while(col.yDown < bottom){
-        makeCard(i,'down', nextMeta(), frag);
+        makeCard(i,'down', nextMeta());
         created++;
         if(col.yDown > yBotLimit-(COL_W*2)) yBotLimit += 1500;
         if (created >= maxNewPerPass) {
-          if (frag.childNodes.length) plane.appendChild(frag);
           if (!lite) cullFarItems();
           if (lite) requestFillAroundLite();
           else requestFillAround();
@@ -6154,11 +6150,10 @@
         }
       }
       while(col.yUp > topV){
-        makeCard(i,'up',   nextMeta(), frag);
+        makeCard(i,'up',   nextMeta());
         created++;
         if(col.yUp   < yTopLimit+(COL_W*2)) yTopLimit -= 1500;
         if (created >= maxNewPerPass) {
-          if (frag.childNodes.length) plane.appendChild(frag);
           if (!lite) cullFarItems();
           if (lite) requestFillAroundLite();
           else requestFillAround();
@@ -6166,7 +6161,6 @@
         }
       }
     }
-    if (frag.childNodes.length) plane.appendChild(frag);
     if (!lite) cullFarItems();
   }
 
@@ -6235,19 +6229,6 @@
 
   /* Reset/reordenar mundo */
   function resetWorld(){
-    if (pointerPanRaf !== null) {
-      cancelAnimationFrame(pointerPanRaf);
-      pointerPanRaf = null;
-    }
-    pointerPanAccumX = 0;
-    pointerPanAccumY = 0;
-    if (wheelRaf !== null) {
-      cancelAnimationFrame(wheelRaf);
-      wheelRaf = null;
-    }
-    wheelPanAccumX = 0;
-    wheelPanAccumY = 0;
-    wheelZoomFactor = 1;
     if (fillAroundRaf !== null) {
       cancelAnimationFrame(fillAroundRaf);
       fillAroundRaf = null;
@@ -6265,7 +6246,6 @@
       interactionSettleTimer = null;
     }
     fillAroundNeedsFullPass = false;
-    lastCullTs = 0;
     setInteractionActive(false);
     resetPlaneLimits();
     plane.innerHTML = "";
@@ -6284,15 +6264,12 @@
     const vh = viewportHeight / scale;
     const startIdx = Math.floor((-vw*0.5) / (COL_W+GAP)) - 2;
     const endIdx   = Math.floor((vw*1.5) / (COL_W+GAP)) + 2;
-    const frag = document.createDocumentFragment();
     for(let i=startIdx; i<=endIdx; i++){
       const col = ensureColumn(i);
-      while(col.yDown < vh*1.15) makeCard(i,'down', nextMeta(), frag);
-      while(col.yUp   > -vh*1.15) makeCard(i,'up',   nextMeta(), frag);
+      while(col.yDown < vh*1.15) makeCard(i,'down', nextMeta());
+      while(col.yUp   > -vh*1.15) makeCard(i,'up',   nextMeta());
     }
-    if (frag.childNodes.length) plane.appendChild(frag);
     updateCount();
-    cullFarItems(true);
     requestFillAround();
   }
   const updateCount = ()=> count && (count.textContent = activeList.length + " ítems");
@@ -6307,75 +6284,6 @@
   let activePid = null;
   let suppressClickUntil = 0; // Para evitar clicks fantasma después de drag
   const CARD_CONTEXT_BLOCK_SELECTOR = '.ref2d__item, .ref2d__view-card, .ref2d__simple-card';
-  let pointerPanAccumX = 0;
-  let pointerPanAccumY = 0;
-  let pointerPanRaf = null;
-  let wheelPanAccumX = 0;
-  let wheelPanAccumY = 0;
-  let wheelZoomFactor = 1;
-  let wheelZoomClientX = 0;
-  let wheelZoomClientY = 0;
-  let wheelRaf = null;
-
-  function normalizeWheelDelta(delta, mode) {
-    if (mode === 1) return delta * 16; // line mode (Firefox)
-    if (mode === 2) return delta * viewportHeight; // page mode
-    return delta; // pixel mode
-  }
-
-  function flushWheelFrame() {
-    wheelRaf = null;
-    if (activeView !== 'bento') {
-      wheelPanAccumX = 0;
-      wheelPanAccumY = 0;
-      wheelZoomFactor = 1;
-      return;
-    }
-
-    let didChange = false;
-    if (Math.abs(wheelZoomFactor - 1) > 0.0001) {
-      zoomTo(camScale * wheelZoomFactor, wheelZoomClientX, wheelZoomClientY, true);
-      wheelZoomFactor = 1;
-      didChange = true;
-    }
-    if (wheelPanAccumX !== 0 || wheelPanAccumY !== 0) {
-      camX -= wheelPanAccumX;
-      camY -= wheelPanAccumY;
-      wheelPanAccumX = 0;
-      wheelPanAccumY = 0;
-      requestTransform();
-      requestFillAroundLiteIfNeeded(false, true);
-      didChange = true;
-    }
-    if (didChange) scheduleInteractionSettle();
-  }
-
-  function scheduleWheelFrame() {
-    if (wheelRaf !== null) return;
-    wheelRaf = requestAnimationFrame(flushWheelFrame);
-  }
-
-  function flushPointerPanFrame() {
-    pointerPanRaf = null;
-    if (activeView !== 'bento') {
-      pointerPanAccumX = 0;
-      pointerPanAccumY = 0;
-      return;
-    }
-    if (pointerPanAccumX === 0 && pointerPanAccumY === 0) return;
-    camX += pointerPanAccumX;
-    camY += pointerPanAccumY;
-    pointerPanAccumX = 0;
-    pointerPanAccumY = 0;
-    requestTransform();
-    requestFillAroundLiteIfNeeded(false, false);
-    scheduleInteractionSettle();
-  }
-
-  function schedulePointerPanFrame() {
-    if (pointerPanRaf !== null) return;
-    pointerPanRaf = requestAnimationFrame(flushPointerPanFrame);
-  }
   
   function resetPointerState(){
     isDown = false;
@@ -6436,9 +6344,12 @@
     if(isDragging){
       const dx = currentX - lastX;
       const dy = currentY - lastY;
-      pointerPanAccumX += dx;
-      pointerPanAccumY += dy;
-      schedulePointerPanFrame();
+      
+      camX += dx;
+      camY += dy;
+      requestTransform();
+      requestFillAroundLiteIfNeeded(false, false);
+      scheduleInteractionSettle();
       
       lastX = currentX;
       lastY = currentY;
@@ -6452,11 +6363,6 @@
     if (activeView !== 'bento') return;
     if(activePid === null || e.pointerId !== activePid) return;
     const hadDrag = isDragging;
-
-    if (pointerPanRaf !== null) {
-      cancelAnimationFrame(pointerPanRaf);
-      flushPointerPanFrame();
-    }
     
     // Si hubo drag, suprimir clicks por un tiempo
     if(isDragging){
@@ -6475,12 +6381,6 @@
   function onPointerCancel(e){
     if (activeView !== 'bento') return;
     if(activePid === null || e.pointerId !== activePid) return;
-    if (pointerPanRaf !== null) {
-      cancelAnimationFrame(pointerPanRaf);
-      pointerPanRaf = null;
-    }
-    pointerPanAccumX = 0;
-    pointerPanAccumY = 0;
     resetPointerState();
     scheduleInteractionSettle();
   }
@@ -6501,23 +6401,6 @@
     if (e.target && e.target.closest(CARD_CONTEXT_BLOCK_SELECTOR)) {
       e.preventDefault();
     }
-  });
-
-  // Delegación única para filtros por chip (evita miles de listeners individuales).
-  document.addEventListener('click', (e) => {
-    const chip = e.target.closest('.ref2d__chip[data-tag]');
-    if (!chip) return;
-    if (performance.now() < suppressClickUntil) {
-      e.preventDefault();
-      e.stopPropagation();
-      return;
-    }
-    const tag = (chip.getAttribute('data-tag') || '').trim();
-    if (!tag) return;
-    e.preventDefault();
-    e.stopPropagation();
-    if (search) search.value = tag;
-    applyFilter(tag);
   });
   
   // Handler de click para abrir popup (solo si no hubo drag)
@@ -6546,18 +6429,16 @@
   viewport.addEventListener('wheel',(e)=>{
     if (activeView !== 'bento') return;
     e.preventDefault();
-    const mode = e.deltaMode || 0;
     if (e.ctrlKey || e.metaKey) {
-      const dy = normalizeWheelDelta(e.deltaY, mode);
-      wheelZoomFactor *= Math.exp(-dy * 0.0012);
-      wheelZoomClientX = e.clientX;
-      wheelZoomClientY = e.clientY;
-      scheduleWheelFrame();
+      const zoomFactor = Math.exp(-e.deltaY * 0.0015);
+      zoomTo(camScale * zoomFactor, e.clientX, e.clientY, true);
+      scheduleInteractionSettle();
       return;
     }
-    wheelPanAccumX += normalizeWheelDelta(e.deltaX, mode);
-    wheelPanAccumY += normalizeWheelDelta(e.deltaY, mode);
-    scheduleWheelFrame();
+    camX -= e.deltaX; camY -= e.deltaY;
+    requestTransform();
+    requestFillAroundLiteIfNeeded(false, true);
+    scheduleInteractionSettle();
   },{passive:false});
   if (btnZoomOut) {
     btnZoomOut.addEventListener('click', ()=>{
