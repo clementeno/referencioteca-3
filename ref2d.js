@@ -5518,8 +5518,11 @@
   const BENTO_PREFETCH_MIN_Y = 1.06;
   const BENTO_LITE_PREFETCH_MIN_X = 1.0;
   const BENTO_LITE_PREFETCH_MIN_Y = 1.0;
-  const BENTO_CULL_MARGIN = 2600;
-  const BENTO_MAX_ITEMS_IN_DOM = 700;
+  const BENTO_CULL_MARGIN_NEAR = 3000;
+  const BENTO_CULL_MARGIN_FAR = 1150;
+  const BENTO_MAX_ITEMS_IN_DOM_NEAR = 500;
+  const BENTO_MAX_ITEMS_IN_DOM_FAR = 170;
+  const BENTO_CULL_MIN_INTERVAL_MS = 70;
   const BENTO_MAX_NEW_PER_PASS = 140;
   const BENTO_MAX_NEW_PER_PASS_MIN = 56;
   const BENTO_MAX_NEW_PER_PASS_LITE = 28;
@@ -5530,6 +5533,7 @@
   const BENTO_LITE_MIN_MOVE_SCREEN = 64;
   const BENTO_LITE_MIN_MOVE_SCREEN_SQ = BENTO_LITE_MIN_MOVE_SCREEN * BENTO_LITE_MIN_MOVE_SCREEN;
   const SIMPLE_CARD_COUNT = 3;
+  let lastCullTs = 0;
   const nextMeta = ()=> activeList.length ? activeList[(genPtr++) % activeList.length] : null;
   const ORIENTATION_RATIO = { h: 4 / 3, v: 3 / 4, sq: 1 };
   const ORIENTATION_ASPECT_CSS = { h: '4 / 3', v: '3 / 4', sq: '1 / 1' };
@@ -5584,6 +5588,14 @@
     }
     return Math.round(BENTO_MAX_NEW_PER_PASS_MIN + ((BENTO_MAX_NEW_PER_PASS - BENTO_MAX_NEW_PER_PASS_MIN) * t));
   };
+  const getDynamicCullMargin = () => {
+    const t = getZoomProgress();
+    return Math.round(BENTO_CULL_MARGIN_FAR + ((BENTO_CULL_MARGIN_NEAR - BENTO_CULL_MARGIN_FAR) * t));
+  };
+  const getDynamicMaxItemsInDom = () => {
+    const t = getZoomProgress();
+    return Math.round(BENTO_MAX_ITEMS_IN_DOM_FAR + ((BENTO_MAX_ITEMS_IN_DOM_NEAR - BENTO_MAX_ITEMS_IN_DOM_FAR) * t));
+  };
   const zoomTo = (targetScale, clientX, clientY, useLiteFill = false) => {
     const nextScale = clampCamScale(targetScale);
     if (Math.abs(nextScale - camScale) < 0.0001) {
@@ -5609,7 +5621,7 @@
 
   /* Crear tarjeta */
   let globalId = 0;
-  function makeCard(i, dir, meta){
+  function makeCard(i, dir, meta, appendTarget = plane){
     if(!meta) return;
     const orient = normalizeOrientation(meta.orientation);
     const span2  = getBentoSpan(meta) === 2;
@@ -5695,8 +5707,9 @@
     });
     el.appendChild(metaBox);
 
-    plane.appendChild(el);
+    if (appendTarget) appendTarget.appendChild(el);
     globalId++;
+    return el;
   }
 
   function createSharedCardElement(meta, className, options = {}) {
@@ -6075,19 +6088,26 @@
     return { vw, vh, top, bottom, left, right };
   }
 
-  function cullFarItems() {
+  function cullFarItems(force = false) {
     if (!plane || activeView !== 'bento') return;
     const children = plane.children;
     const total = children.length;
     if (!total) return;
+    const dynamicMaxItemsInDom = getDynamicMaxItemsInDom();
+    const now = performance.now();
+    if (!force) {
+      if (total <= dynamicMaxItemsInDom) return;
+      if ((now - lastCullTs) < BENTO_CULL_MIN_INTERVAL_MS) return;
+    }
+    lastCullTs = now;
 
     const { top, bottom } = getViewportBounds();
-    const minVisible = top - BENTO_CULL_MARGIN;
-    const maxVisible = bottom + BENTO_CULL_MARGIN;
-    const dynamicMaxItemsInDom = Math.round(300 + (340 * getZoomProgress()));
+    const cullMargin = getDynamicCullMargin();
+    const minVisible = top - cullMargin;
+    const maxVisible = bottom + cullMargin;
     let removed = 0;
     const aggressive = total > dynamicMaxItemsInDom;
-    const removeLimit = aggressive ? 220 : 70;
+    const removeLimit = aggressive ? 220 : 90;
 
     for (let idx = children.length - 1; idx >= 0; idx--) {
       const el = children[idx];
@@ -6117,14 +6137,16 @@
     const startIdx = Math.floor((leftBound)  / (COL_W+GAP)) - 2;
     const endIdx   = Math.floor((rightBound) / (COL_W+GAP)) + 2;
     let created = 0;
+    const frag = document.createDocumentFragment();
 
     for(let i=startIdx; i<=endIdx; i++){
       const col = ensureColumn(i);
       while(col.yDown < bottom){
-        makeCard(i,'down', nextMeta());
+        makeCard(i,'down', nextMeta(), frag);
         created++;
         if(col.yDown > yBotLimit-(COL_W*2)) yBotLimit += 1500;
         if (created >= maxNewPerPass) {
+          if (frag.childNodes.length) plane.appendChild(frag);
           if (!lite) cullFarItems();
           if (lite) requestFillAroundLite();
           else requestFillAround();
@@ -6132,10 +6154,11 @@
         }
       }
       while(col.yUp > topV){
-        makeCard(i,'up',   nextMeta());
+        makeCard(i,'up',   nextMeta(), frag);
         created++;
         if(col.yUp   < yTopLimit+(COL_W*2)) yTopLimit -= 1500;
         if (created >= maxNewPerPass) {
+          if (frag.childNodes.length) plane.appendChild(frag);
           if (!lite) cullFarItems();
           if (lite) requestFillAroundLite();
           else requestFillAround();
@@ -6143,6 +6166,7 @@
         }
       }
     }
+    if (frag.childNodes.length) plane.appendChild(frag);
     if (!lite) cullFarItems();
   }
 
@@ -6241,6 +6265,7 @@
       interactionSettleTimer = null;
     }
     fillAroundNeedsFullPass = false;
+    lastCullTs = 0;
     setInteractionActive(false);
     resetPlaneLimits();
     plane.innerHTML = "";
@@ -6259,12 +6284,15 @@
     const vh = viewportHeight / scale;
     const startIdx = Math.floor((-vw*0.5) / (COL_W+GAP)) - 2;
     const endIdx   = Math.floor((vw*1.5) / (COL_W+GAP)) + 2;
+    const frag = document.createDocumentFragment();
     for(let i=startIdx; i<=endIdx; i++){
       const col = ensureColumn(i);
-      while(col.yDown < vh*1.15) makeCard(i,'down', nextMeta());
-      while(col.yUp   > -vh*1.15) makeCard(i,'up',   nextMeta());
+      while(col.yDown < vh*1.15) makeCard(i,'down', nextMeta(), frag);
+      while(col.yUp   > -vh*1.15) makeCard(i,'up',   nextMeta(), frag);
     }
+    if (frag.childNodes.length) plane.appendChild(frag);
     updateCount();
+    cullFarItems(true);
     requestFillAround();
   }
   const updateCount = ()=> count && (count.textContent = activeList.length + " ítems");

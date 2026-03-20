@@ -311,13 +311,14 @@ a.ref2d__header-btn{text-decoration:none; color:var(--ink);}
 .ref2d__plane{ position:absolute; will-change:transform; transform: translate3d(0,0,0); transform-origin:0 0; user-select:none; }
 
 /* Ítems (igual que antes) */
-.ref2d__item{position:absolute; overflow:hidden; border-radius:var(--rad); box-shadow:0 1px 0 #1c1c20 inset, 0 0 0 1px #1a1a1d; transition: box-shadow .15s ease, transform .2s ease; background:#222; cursor:pointer; user-select:none;}
+.ref2d__item{position:absolute; overflow:hidden; border-radius:var(--rad); box-shadow:0 1px 0 #1c1c20 inset, 0 0 0 1px #1a1a1d; transition: box-shadow .15s ease, transform .2s ease; background:#222; cursor:pointer; user-select:none; contain:layout paint style; content-visibility:auto; contain-intrinsic-size:260px 195px;}
 .ref2d__item:hover{ box-shadow:0 0 0 2px #ffffff30; }
 .ratio-h{ aspect-ratio: 4/3; } .ratio-v{ aspect-ratio: 3/4; } .ratio-sq{ aspect-ratio: 1/1; }
 .norm{ width: var(--colw); } .span-2{ width: calc(var(--colw)*2 + var(--gap)); }
 .ref2d__item>.ratio-proxy{ width:100%; aspect-ratio:inherit; opacity:0; pointer-events:none; display:block; }
 .ref2d__item img{-webkit-user-drag:none; user-drag:none; pointer-events:none; user-select:none;}
 .ref2d__meta{position:absolute; left:8px; right:8px; bottom:8px; display:flex; flex-wrap:wrap; gap:8px; user-select:none;}
+.ref2d__meta .ref2d__chip{backdrop-filter:none;}
 
 /* LOD en vista infinita: reduce costo de pintura cuando hay zoom-out */
 .ref2d__plane.is-lod-mid .ref2d__meta .ref2d__chip:nth-child(n+2){
