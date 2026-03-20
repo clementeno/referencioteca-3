@@ -5281,7 +5281,7 @@
     /* ------------------ LOUNGE HOME S23 — MANUELA VILLANUEVA WALKER ------------------ */
     {
       src: "https://freight.cargo.site/t/original/i/N2848000225291283071961777255107/c1d4c5_9c88194a79b7451391aa4d7d02c62f69_mv2.png.jpg",
-      orientation: "h",
+      orientation: "v",
       span: 1,
       tags: ["moda", "indumentaria", "dirección creativa"],
       title: "LOUNGE HOME S23",
@@ -5296,7 +5296,7 @@
     /* ------------------ Armenté — Francisca Villela Armenté ------------------ */
     {
       src: "https://freight.cargo.site/t/original/i/A2848004591045309508653939110595/Captura-de-pantalla-2026-03-19-a-las-19.17.10.png",
-      orientation: "h",
+      orientation: "v",
       span: 1,
       tags: ["moda", "indumentaria", "dirección creativa"],
       title: "Armenté",
@@ -5311,7 +5311,7 @@
     /* ------------------ Japo Set — Francisca Villela Armenté ------------------ */
     {
       src: "https://freight.cargo.site/t/original/i/X2848001385794399493103378969283/Captura-de-pantalla-2026-03-19-a-las-18.53.25.png",
-      orientation: "h",
+      orientation: "v",
       span: 1,
       tags: ["moda", "indumentaria", "ecología", "upcycling"],
       title: "Japo Set",
@@ -5326,7 +5326,7 @@
     /* ------------------ BEST SELLER — Francisca Villela Armenté ------------------ */
     {
       src: "https://freight.cargo.site/t/original/i/Q2848001385775952749029669417667/Captura-de-pantalla-2026-03-19-a-las-18.55.17.png",
-      orientation: "h",
+      orientation: "v",
       span: 1,
       tags: ["moda", "indumentaria", "ecología", "upcycling"],
       title: "BEST SELLER",
@@ -5341,7 +5341,7 @@
     /* ------------------ Top Nostalgia — Francisca Villela Armenté ------------------ */
     {
       src: "https://freight.cargo.site/t/original/i/X2848001385757506004955959866051/Captura-de-pantalla-2026-03-19-a-las-18.56.46.png",
-      orientation: "h",
+      orientation: "v",
       span: 1,
       tags: ["moda", "indumentaria", "ecología", "upcycling"],
       title: "Top Nostalgia",
@@ -5356,7 +5356,7 @@
     /* ------------------ NoJockey — Francisca Villela Armenté ------------------ */
     {
       src: "https://freight.cargo.site/t/original/i/F2848001385739059260882250314435/Captura-de-pantalla-2026-03-19-a-las-18.57.36.png",
-      orientation: "h",
+      orientation: "v",
       span: 1,
       tags: ["moda", "indumentaria", "ecología", "upcycling"],
       title: "NoJockey",
