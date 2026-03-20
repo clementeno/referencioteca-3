@@ -1094,6 +1094,7 @@
   const CAM_SCALE_STEP = 0.08;
   const CAM_LOD_FAR = 0.56;
   const CAM_LOD_MID = 0.74;
+  const CAM_LOD_ULTRA = CAM_SCALE_MIN + 0.03;
   let viewportWidth = viewport.clientWidth || 0;
   let viewportHeight = viewport.clientHeight || 0;
   const refreshViewportSize = () => {
@@ -1104,9 +1105,12 @@
   let currentLodMode = '';
   const updateBentoLOD = () => {
     if (!plane) return;
-    const nextMode = camScale <= CAM_LOD_FAR ? 'far' : (camScale <= CAM_LOD_MID ? 'mid' : 'near');
+    const nextMode = camScale <= CAM_LOD_ULTRA
+      ? 'ultra'
+      : (camScale <= CAM_LOD_FAR ? 'far' : (camScale <= CAM_LOD_MID ? 'mid' : 'near'));
     if (nextMode === currentLodMode) return;
     currentLodMode = nextMode;
+    plane.classList.toggle('is-lod-ultra', nextMode === 'ultra');
     plane.classList.toggle('is-lod-far', nextMode === 'far');
     plane.classList.toggle('is-lod-mid', nextMode === 'mid');
     plane.classList.toggle('is-lod-near', nextMode === 'near');
@@ -5518,6 +5522,10 @@
   const BENTO_PREFETCH_MIN_Y = 1.06;
   const BENTO_LITE_PREFETCH_MIN_X = 1.0;
   const BENTO_LITE_PREFETCH_MIN_Y = 1.0;
+  const BENTO_ULTRA_PREFETCH_X = 1.01;
+  const BENTO_ULTRA_PREFETCH_Y = 1.01;
+  const BENTO_ULTRA_LITE_PREFETCH_X = 1.0;
+  const BENTO_ULTRA_LITE_PREFETCH_Y = 1.0;
   const BENTO_CULL_MARGIN = 2600;
   const BENTO_MAX_ITEMS_IN_DOM = 700;
   const BENTO_MAX_NEW_PER_PASS = 132;
@@ -5569,6 +5577,11 @@
     return Math.max(0, Math.min(1, t));
   };
   const getDynamicPrefetch = (lite = false) => {
+    if (camScale <= CAM_LOD_ULTRA) {
+      return lite
+        ? { x: BENTO_ULTRA_LITE_PREFETCH_X, y: BENTO_ULTRA_LITE_PREFETCH_Y }
+        : { x: BENTO_ULTRA_PREFETCH_X, y: BENTO_ULTRA_PREFETCH_Y };
+    }
     const t = getZoomProgress();
     const baseX = lite ? BENTO_LITE_PREFETCH_MIN_X : BENTO_PREFETCH_MIN_X;
     const baseY = lite ? BENTO_LITE_PREFETCH_MIN_Y : BENTO_PREFETCH_MIN_Y;
@@ -5578,6 +5591,9 @@
     };
   };
   const getDynamicMaxNewPerPass = (lite = false) => {
+    if (camScale <= CAM_LOD_ULTRA) {
+      return lite ? 6 : 22;
+    }
     const t = getZoomProgress();
     if (lite) {
       return Math.round(BENTO_MAX_NEW_PER_PASS_LITE_MIN + ((BENTO_MAX_NEW_PER_PASS_LITE - BENTO_MAX_NEW_PER_PASS_LITE_MIN) * t));
@@ -6050,7 +6066,7 @@
     updateZoomButtons();
     if (isBento) refreshViewportSize();
     if (!isBento && plane) {
-      plane.classList.remove('is-lod-far', 'is-lod-mid', 'is-lod-near');
+      plane.classList.remove('is-lod-ultra', 'is-lod-far', 'is-lod-mid', 'is-lod-near');
       currentLodMode = '';
       setInteractionActive(false);
       if (interactionSettleTimer !== null) {
@@ -6084,10 +6100,12 @@
     const { top, bottom } = getViewportBounds();
     const minVisible = top - BENTO_CULL_MARGIN;
     const maxVisible = bottom + BENTO_CULL_MARGIN;
-    const dynamicMaxItemsInDom = Math.round(300 + (340 * getZoomProgress()));
+    const dynamicMaxItemsInDom = camScale <= CAM_LOD_ULTRA
+      ? 220
+      : Math.round(300 + (340 * getZoomProgress()));
     let removed = 0;
     const aggressive = total > dynamicMaxItemsInDom;
-    const removeLimit = aggressive ? 220 : 70;
+    const removeLimit = camScale <= CAM_LOD_ULTRA ? 260 : (aggressive ? 220 : 70);
 
     for (let idx = children.length - 1; idx >= 0; idx--) {
       const el = children[idx];
