@@ -2,6 +2,10 @@
   const $ = s => document.querySelector(s);
   const viewport = $("#ref2dViewport"),
         plane    = $("#ref2dPlane");
+  // PERF:
+  if (plane) {
+    plane.style.willChange = 'transform';
+  }
   const search  = $("#ref2dSearch"),
         count   = $("#ref2dCount");
   const searchClearBtn = $("#ref2dSearchClear");
@@ -5518,8 +5522,10 @@
   const BENTO_PREFETCH_MIN_Y = 1.06;
   const BENTO_LITE_PREFETCH_MIN_X = 1.0;
   const BENTO_LITE_PREFETCH_MIN_Y = 1.0;
-  const BENTO_CULL_MARGIN = 2600;
-  const BENTO_MAX_ITEMS_IN_DOM = 700;
+  // PERF:
+  const BENTO_CULL_MARGIN = 1800;
+  // PERF:
+  const BENTO_MAX_ITEMS_IN_DOM = 400;
   const BENTO_MAX_NEW_PER_PASS = 140;
   const BENTO_MAX_NEW_PER_PASS_MIN = 56;
   const BENTO_MAX_NEW_PER_PASS_LITE = 28;
@@ -5609,7 +5615,8 @@
 
   /* Crear tarjeta */
   let globalId = 0;
-  function makeCard(i, dir, meta){
+  // PERF:
+  function makeCard(i, dir, meta, fragment){
     if(!meta) return;
     const orient = normalizeOrientation(meta.orientation);
     const span2  = getBentoSpan(meta) === 2;
@@ -5708,7 +5715,9 @@
     });
     el.appendChild(metaBox);
 
-    plane.appendChild(el);
+    // PERF:
+    if (fragment) fragment.appendChild(el);
+    else plane.appendChild(el);
     globalId++;
   }
 
@@ -6125,6 +6134,8 @@
   /* Relleno alrededor de la vista */
   function fillAround(lite = false){
     if(activeList.length===0) return;
+    // PERF:
+    const fragment = document.createDocumentFragment();
     const { vw, vh, top, left, right } = getViewportBounds();
     const prefetch = getDynamicPrefetch(lite);
     const maxNewPerPass = getDynamicMaxNewPerPass(lite);
@@ -6139,10 +6150,13 @@
     for(let i=startIdx; i<=endIdx; i++){
       const col = ensureColumn(i);
       while(col.yDown < bottom){
-        makeCard(i,'down', nextMeta());
+        // PERF:
+        makeCard(i,'down', nextMeta(), fragment);
         created++;
         if(col.yDown > yBotLimit-(COL_W*2)) yBotLimit += 1500;
         if (created >= maxNewPerPass) {
+          // PERF:
+          if (fragment.childElementCount > 0) plane.appendChild(fragment);
           if (!lite) cullFarItems();
           if (lite) requestFillAroundLite();
           else requestFillAround();
@@ -6150,10 +6164,13 @@
         }
       }
       while(col.yUp > topV){
-        makeCard(i,'up',   nextMeta());
+        // PERF:
+        makeCard(i,'up',   nextMeta(), fragment);
         created++;
         if(col.yUp   < yTopLimit+(COL_W*2)) yTopLimit -= 1500;
         if (created >= maxNewPerPass) {
+          // PERF:
+          if (fragment.childElementCount > 0) plane.appendChild(fragment);
           if (!lite) cullFarItems();
           if (lite) requestFillAroundLite();
           else requestFillAround();
@@ -6161,6 +6178,8 @@
         }
       }
     }
+    // PERF:
+    if (fragment.childElementCount > 0) plane.appendChild(fragment);
     if (!lite) cullFarItems();
   }
 
@@ -6354,7 +6373,6 @@
       lastX = currentX;
       lastY = currentY;
       
-      if (e.cancelable) e.preventDefault();
     }
   }
   
@@ -6387,7 +6405,8 @@
   
   // Agregar listeners normales
   viewport.addEventListener('pointerdown', onPointerDown, { passive: false });
-  window.addEventListener('pointermove', onPointerMove, { passive: false });
+  // PERF:
+  window.addEventListener('pointermove', onPointerMove, { passive: true });
   window.addEventListener('pointerup', onPointerUp, { passive: false });
   window.addEventListener('pointercancel', onPointerCancel, { passive: false });
   
