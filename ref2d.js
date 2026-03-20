@@ -5426,6 +5426,246 @@
       area: "Branding / Identidad visual",
       year: "2024",
       url: "https://www.behance.net/gallery/220938527/MODO-Branding-Strategy"
+    },
+
+    /* ------------------ They were friends — Antonia Berger ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/S2849442492904910184930297197251/Lifelong-Friends-Part-1.png",
+      orientation: "h",
+      span: 1,
+      tags: ["ilustración", "gráfico"],
+      title: "They were friends",
+      author: "Antonia Berger",
+      role: "",
+      collab: "",
+      area: "Ilustración / Gráfico",
+      year: "2024",
+      url: "https://antoniaberger.com"
+    },
+
+    /* ------------------ Sonder — Antonia Berger ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/B2849442492886463440856587645635/Sonder_HalfRes.jpg",
+      orientation: "h",
+      span: 1,
+      tags: ["ilustración", "gráfico"],
+      title: "Sonder",
+      author: "Antonia Berger",
+      role: "",
+      collab: "",
+      area: "Ilustración / Gráfico",
+      year: "2024",
+      url: "https://antoniaberger.com"
+    },
+
+    /* ------------------ Comic for ministry of education chile 2023 — Antonia Berger ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/F2849442492868016696782878094019/comic-chat-gpt.png",
+      orientation: "h",
+      span: 1,
+      tags: ["ilustración", "gráfico"],
+      title: "Comic for ministry of education chile 2023",
+      author: "Antonia Berger",
+      role: "",
+      collab: "",
+      area: "Ilustración / Gráfico",
+      year: "2023",
+      url: ""
+    },
+
+    /* ------------------ Escena Silvestre — Cristina Tapia Robles ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/R2849442848262988020871099527875/Captura-de-pantalla-2026-03-20-a-las-16.21.50.png",
+      orientation: "h",
+      span: 1,
+      tags: ["espacio", "servicio", "innovación"],
+      title: "Escena Silvestre",
+      author: "Cristina Tapia Robles",
+      role: "",
+      collab: "",
+      area: "Espacio / Servicio / Innovación",
+      year: "2025",
+      url: "https://laderasur.com/articulo/biodiversidad-que-sana-proyecto-artistico-lleva-la-fauna-silvestre-a-dos-hospitales-de-chile-a-traves-de-murales/"
+    },
+
+    /* ------------------ Afiche Día de los Patrimonios 2024 — Cristina Tapia Robles ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/S2849442492831123208635458990787/312ff7244196121.69925f9773b6d.png.jpg",
+      orientation: "h",
+      span: 1,
+      tags: ["ilustración", "gráfico", "afiche"],
+      title: "Afiche Día de los Patrimonios 2024",
+      author: "Cristina Tapia Robles",
+      role: "",
+      collab: "Ministerio de las Culturas, las Artes y el Patrimonio. Secretaría de Comunicaciones. Director del Departamento Creativo y Dirección de Arte: Maximiliano Andrade. Ilustraciones de apoyo y lettering: Carla Marrazo.",
+      area: "Ilustración / Gráfico / Afiche",
+      year: "2024",
+      url: "https://www.behance.net/gallery/244196121/Afiche-Dia-de-los-Patrimonios-2024"
+    },
+
+    /* ------------------ Cuenta Pública 2024 (gráfica) — Cristina Tapia Robles ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/U2849442848465902205681904595651/Captura-de-pantalla-2026-03-20-a-las-16.26.04.png",
+      orientation: "h",
+      span: 1,
+      tags: ["identidad visual", "dirección creativa"],
+      title: "Cuenta Pública 2024 (gráfica)",
+      author: "Cristina Tapia Robles",
+      role: "",
+      collab: "Año 2024. Subcreteraría de Comunicaciones de Gobierno. Director Creativo: Maximiliano Andrade. Apoyo en diseño de Redes Sociales: Camilo Castillo.",
+      area: "Identidad visual / Dirección creativa",
+      year: "2024",
+      url: "https://www.behance.net/gallery/243783229/Linea-grafica-Cuenta-Publica-2024"
+    },
+
+    /* ------------------ La Distancia Adecuada entre Dos Puntos — Sebastián Cobo ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/U2849442492849569952709168542403/KSTNINAU.jpg",
+      orientation: "v",
+      span: 1,
+      tags: ["arte", "exhibición"],
+      title: "La Distancia Adecuada entre Dos Puntos",
+      author: "Sebastián Cobo",
+      role: "Diseñador / Artista",
+      collab: "",
+      area: "Arte / Exhibición",
+      year: "2024",
+      url: "https://sebastiancobo.com/Work"
+    },
+
+    /* ------------------ DIOPTRÍA -397 — Sebastián Cobo ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/W2849442848429008717534485492419/Captura-de-pantalla-2026-03-20-a-las-16.40.28.png",
+      orientation: "h",
+      span: 1,
+      tags: ["arte", "exhibición", "luminaria", "objeto"],
+      title: "DIOPTRÍA -397",
+      author: "Sebastián Cobo",
+      role: "Diseñador / Artista",
+      collab: "Arte, Diseño y Dirección Proyecto: Sebastián Cobo. Arquitecto Colaborador: Victoria Mohr (@vmohrf). Construcción: Arturo Parada + Sebastián Cobo. Montaje: Carlos León + Sebastián Cobo. Fotografía: Felipe Ugalde (@fugalde).",
+      area: "Arte / Exhibición / Luminaria / Objeto",
+      year: "2023",
+      url: "https://sebastiancobo.com/Work"
+    },
+
+    /* ------------------ Diagrama del Agua I y Diagrama del Agua II (Incompleto) — Sebastián Cobo ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/Q2849442848410561973460775940803/Captura-de-pantalla-2026-03-20-a-las-16.41.34.png",
+      orientation: "h",
+      span: 1,
+      tags: ["arte", "exhibición"],
+      title: "Diagrama del Agua I y Diagrama del Agua II (Incompleto)",
+      author: "Sebastián Cobo",
+      role: "Diseñador / Artista",
+      collab: "Editados e Impresos por Diego Romo. Registros por Felipe Ugalde (@fugalde) y Pia Bahamondes (@plataforma_visual).",
+      area: "Arte / Exhibición",
+      year: "2022",
+      url: "https://sebastiancobo.com/Work"
+    },
+
+    /* ------------------ Campo Difuso — Exposición Colectiva Taller Las Nieves — Sebastián Cobo ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/D2849442848392115229387066389187/Captura-de-pantalla-2026-03-20-a-las-16.42.51.png",
+      orientation: "h",
+      span: 1,
+      tags: ["arte", "exhibición"],
+      title: "Campo Difuso — Exposición Colectiva Taller Las Nieves",
+      author: "Sebastián Cobo",
+      role: "Diseñador / Artista",
+      collab: "",
+      area: "Arte / Exhibición",
+      year: "2022",
+      url: "https://sebastiancobo.com/Work"
+    },
+
+    /* ------------------ Wildscapes - Manquehue — Juan Croxatto ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/U2849442848373668485313356837571/Captura-de-pantalla-2026-03-20-a-las-16.47.05.png",
+      orientation: "h",
+      span: 1,
+      tags: ["audiovisual", "fotografía", "dirección creativa"],
+      title: "Wildscapes - Manquehue",
+      author: "Juan Croxatto",
+      role: "Diseñador",
+      collab: "",
+      area: "Audiovisual / Fotografía / Dirección creativa",
+      year: "2025",
+      url: "https://www.youtube.com/watch?v=BrlIZ78BVPs"
+    },
+
+    /* ------------------ Fotografía producto — josefa diaz moller ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/D2849442848355221741239647285955/Captura-de-pantalla-2026-03-20-a-las-16.49.49.png",
+      orientation: "h",
+      span: 1,
+      tags: ["fotografía"],
+      title: "Fotografía producto",
+      author: "josefa diaz moller",
+      role: "Diseñadora / fotógrafa",
+      collab: "",
+      area: "Fotografía",
+      year: "n/a",
+      url: "https://josefadiaz.cl/producto/"
+    },
+
+    /* ------------------ Fotografía producto — josefa diaz moller ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/R2849442848336774997165937734339/Captura-de-pantalla-2026-03-20-a-las-16.52.52.png",
+      orientation: "h",
+      span: 1,
+      tags: ["fotografía"],
+      title: "Fotografía producto",
+      author: "josefa diaz moller",
+      role: "Diseñadora / fotógrafa",
+      collab: "",
+      area: "Fotografía",
+      year: "n/a",
+      url: "https://josefadiaz.cl/moda/"
+    },
+
+    /* ------------------ Fotografía gastronomía — josefa diaz moller ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/T2849442848318328253092228182723/Captura-de-pantalla-2026-03-20-a-las-16.53.26.png",
+      orientation: "h",
+      span: 1,
+      tags: ["fotografía"],
+      title: "Fotografía gastronomía",
+      author: "josefa diaz moller",
+      role: "Diseñadora / fotógrafa",
+      collab: "",
+      area: "Fotografía",
+      year: "n/a",
+      url: "https://josefadiaz.cl/gastronomia/"
+    },
+
+    /* ------------------ Fotografía montaña — josefa diaz moller ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/J2849442848299881509018518631107/Captura-de-pantalla-2026-03-20-a-las-16.55.06.png",
+      orientation: "h",
+      span: 1,
+      tags: ["fotografía"],
+      title: "Fotografía montaña",
+      author: "josefa diaz moller",
+      role: "Diseñadora / fotógrafa",
+      collab: "",
+      area: "Fotografía",
+      year: "n/a",
+      url: "https://josefadiaz.cl/montana/"
+    },
+
+    /* ------------------ Fotografía interiores — josefa diaz moller ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/F2849442848281434764944809079491/Captura-de-pantalla-2026-03-20-a-las-16.55.22.png",
+      orientation: "h",
+      span: 1,
+      tags: ["fotografía"],
+      title: "Fotografía interiores",
+      author: "josefa diaz moller",
+      role: "Diseñadora / fotógrafa",
+      collab: "",
+      area: "Fotografía",
+      year: "n/a",
+      url: "https://josefadiaz.cl/interiores/"
     }
     
   ];
