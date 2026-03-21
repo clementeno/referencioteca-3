@@ -5682,6 +5682,156 @@
       area: "Fotografía",
       year: "n/a",
       url: "https://josefadiaz.cl/interiores/"
+    },
+
+    /* ------------------ Infografías para el Parque Humedal del Río Maipo — Catalina Hildebrandt ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/J2850922353802367897247599243971/Captura-de-pantalla-2025-03-12-a-las-20.40.12.png.jpg",
+      orientation: "h",
+      span: 1,
+      tags: ["infografía", "ilustración", "editorial"],
+      title: "Infografías para el Parque Humedal del Río Maipo",
+      author: "Catalina Hildebrandt",
+      role: "Diseñadora / Ilustradora",
+      collab: "Dirección de arte: Camila Pascual.",
+      area: "Infografía / Ilustración / Editorial",
+      year: "n/a",
+      url: "https://www.catalinahildebrandt.com/phrm-infographics-1"
+    },
+
+    /* ------------------ Proyecto de Preservación de Tradiciones Chilenas — Catalina Hildebrandt ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/A2850922353820814641321308795587/Captura-de-pantalla-2025-03-13-a-las-18.05.50.png.jpg",
+      orientation: "h",
+      span: 1,
+      tags: ["ilustración", "gráfico"],
+      title: "Proyecto de Preservación de Tradiciones Chilenas",
+      author: "Catalina Hildebrandt",
+      role: "Diseñadora / Ilustradora",
+      collab: "Colaboración con la FAO (Organización de las Naciones Unidas para la Alimentación y la Agricultura)",
+      area: "Ilustración / Gráfico",
+      year: "n/a",
+      url: "https://www.catalinahildebrandt.com/un-project"
+    },
+
+    /* ------------------ Chincol — Catalina Hildebrandt ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/I2850921871604477810479920001731/Captura-de-pantalla-2026-03-21-a-las-14.44.41.png",
+      orientation: "h",
+      span: 1,
+      tags: ["ilustración", "gráfico"],
+      title: "Chincol",
+      author: "Catalina Hildebrandt",
+      role: "Diseñadora / Ilustradora",
+      collab: "",
+      area: "Ilustración / Gráfico",
+      year: "2025",
+      url: "https://www.instagram.com/p/DS0WTRfgF8y/"
+    },
+
+    /* ------------------ Vestido Letualle Pesto — Luz María Hurtado ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/W2850921871715158274922177311427/Captura-de-pantalla-2026-03-21-a-las-14.48.43.png",
+      orientation: "h",
+      span: 1,
+      tags: ["moda", "textil", "indumentaria"],
+      title: "Vestido Letualle Pesto",
+      author: "Luz María Hurtado",
+      role: "Diseñadora / Fundadora",
+      collab: "Desarrollado en Luz Hurtado",
+      area: "Moda / Textil / Indumentaria",
+      year: "2025",
+      url: "https://luzhurtado.cl/products/vestido-arles-pesto"
+    },
+
+    /* ------------------ Traje Velour Negro — Luz María Hurtado ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/J2850921871696711530848467759811/Captura-de-pantalla-2026-03-21-a-las-14.50.50.png",
+      orientation: "h",
+      span: 1,
+      tags: ["moda", "textil", "indumentaria"],
+      title: "Traje Velour Negro",
+      author: "Luz María Hurtado",
+      role: "Diseñadora / Fundadora",
+      collab: "Desarrollado en Luz Hurtado",
+      area: "Moda / Textil / Indumentaria",
+      year: "2025",
+      url: "https://luzhurtado.cl/products/traje-avignon-negro"
+    },
+
+    /* ------------------ Vestido Lune Rosa print — Luz María Hurtado ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/A2850921871678264786774758208195/Captura-de-pantalla-2026-03-21-a-las-14.51.46.png",
+      orientation: "h",
+      span: 1,
+      tags: ["moda", "textil", "indumentaria"],
+      title: "Vestido Lune Rosa print",
+      author: "Luz María Hurtado",
+      role: "Diseñadora / Fundadora",
+      collab: "Desarrollado en Luz Hurtado",
+      area: "Moda / Textil / Indumentaria",
+      year: "2025",
+      url: "https://luzhurtado.cl/products/vestido-vence-rosa-print"
+    },
+
+    /* ------------------ Terraneo — Jacinta Navarro ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/S2850921871659818042701048656579/Captura-de-pantalla-2026-03-21-a-las-14.56.39.png",
+      orientation: "h",
+      span: 1,
+      tags: ["branding", "identidad visual"],
+      title: "Terraneo",
+      author: "Jacinta Navarro",
+      role: "",
+      collab: "",
+      area: "Branding / Identidad visual",
+      year: "n/a",
+      url: "https://www.jacintanavarro.com/branding"
+    },
+
+    /* ------------------ CAFEXPRESS (Rebranding y diseño de servicio) — Antonia Paulsen ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/E2850921871641371298627339104963/Captura-de-pantalla-2026-03-21-a-las-15.01.13.png",
+      orientation: "h",
+      span: 1,
+      tags: ["branding", "identidad visual", "diseño de servicio"],
+      title: "CAFEXPRESS (Rebranding y diseño de servicio)",
+      author: "Antonia Paulsen",
+      role: "",
+      collab: "Desarrollado en Zooma.design estudio",
+      area: "Branding / Identidad visual / Diseño de servicio",
+      year: "2025",
+      url: "https://www.linkedin.com/feed/update/urn:li:activity:7440397315829440512/"
+    },
+
+    /* ------------------ Educación Ciudadana — Antonia Paulsen ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/J2850921671881579724426604655299/12.jpg",
+      orientation: "h",
+      span: 1,
+      tags: ["editorial", "ilustración"],
+      title: "Educación Ciudadana",
+      author: "Antonia Paulsen",
+      role: "",
+      collab: "Desarrollado en Zooma.design estudio",
+      area: "Editorial / Ilustración",
+      year: "n/a",
+      url: "https://www.zooma.cl/proyecto_post/educacion-ciudadana/"
+    },
+
+    /* ------------------ mycoloop — Ana Schacht ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/V2850921871622924554553629553347/Captura-de-pantalla-2026-03-21-a-las-15.10.36.png",
+      orientation: "h",
+      span: 1,
+      tags: ["investigación", "biomaterial", "innovación"],
+      title: "mycoloop",
+      author: "Ana Schacht",
+      role: "",
+      collab: "",
+      area: "Investigación / Biomaterial / Innovación",
+      year: "2023",
+      url: "https://www.instagram.com/p/Cs0aovjIXRN/?img_index=1"
     }
     
   ];
