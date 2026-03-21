@@ -27,6 +27,10 @@
         sYear   = $("#sheetYear"),
         sTags   = $("#sheetTags"),
         sLink   = $("#sheetLink");
+  const sheetCitation = $("#sheetCitation");
+  const sheetCitationText = $("#sheetCitationText");
+  const sheetCitationInText = $("#sheetCitationInText");
+  const sheetCitationCopy = $("#sheetCitationCopy");
   const sheetReportActions = $("#sheetReportActions");
   const sheetRequestPanel = $("#sheetRequestPanel");
   const sheetRequestTitle = $("#sheetRequestTitle");
@@ -80,6 +84,7 @@
   let activeRequestType = "";
   let activeSpotlightMeta = null;
   let isRequestSending = false;
+  let sheetCitationFeedbackTimer = null;
 
   /* Si falta el contenedor principal, salimos en silencio (para no romper otras páginas) */
   if (!viewport || !plane) {
@@ -6120,8 +6125,6 @@
       metaBox.appendChild(c);
     });
     el.appendChild(metaBox);
-    el.appendChild(createCitationBlock(meta, { compact: true }));
-
     // PERF:
     if (fragment) fragment.appendChild(el);
     else plane.appendChild(el);
@@ -6159,11 +6162,11 @@
     return parts.length ? parts[parts.length - 1].replace(/[.,;:]+$/g, '') : 'Autor';
   }
 
-  function buildApaCitation(meta) {
+  function buildApaCitation(meta, urlOverride) {
     const author = getCitationAuthor(meta);
     const year = getCitationYear(meta);
     const title = getCitationTitle(meta);
-    const url = getCitationUrl(meta);
+    const url = String(urlOverride || '').trim() || getCitationUrl(meta);
     return `${author}. (${year}). ${title}. Referencioteca. ${url}`;
   }
 
@@ -6194,75 +6197,43 @@
     });
   }
 
-  function createCitationBlock(meta, options = {}) {
-    const compact = Boolean(options.compact);
-    const citation = buildApaCitation(meta);
+  function renderSheetCitation(meta) {
+    if (!sheetCitation || !sheetCitationText || !sheetCitationInText || !sheetCitationCopy) return;
+    if (!meta) {
+      sheetCitation.hidden = true;
+      return;
+    }
+    const firstUrl = Array.isArray(meta.urls) ? (meta.urls[0] || "") : (meta.url || "");
+    const citation = buildApaCitation(meta, firstUrl);
     const inText = buildInTextCitation(meta);
+    sheetCitationText.textContent = citation;
+    sheetCitationInText.textContent = `Cita en texto: ${inText}`;
+    sheetCitationCopy.dataset.citation = citation;
+    sheetCitationCopy.textContent = "Copiar cita APA";
+    sheetCitationCopy.classList.remove("is-error");
+    sheetCitation.hidden = false;
+  }
 
-    const wrap = document.createElement('div');
-    wrap.className = `ref2d__cite${compact ? ' is-compact' : ''}`;
-    wrap.addEventListener('click', (e) => e.stopPropagation());
-    wrap.addEventListener('pointerdown', (e) => e.stopPropagation());
-
-    const toggle = document.createElement('button');
-    toggle.type = 'button';
-    toggle.className = 'ref2d__cite-toggle';
-    toggle.textContent = 'Cómo citar este proyecto';
-    toggle.setAttribute('aria-expanded', 'false');
-
-    const panel = document.createElement('div');
-    panel.className = 'ref2d__cite-panel';
-    panel.hidden = true;
-
-    const text = document.createElement('p');
-    text.className = 'ref2d__cite-text';
-    text.textContent = citation;
-
-    const hint = document.createElement('p');
-    hint.className = 'ref2d__cite-hint';
-    hint.textContent = `Cita en texto: ${inText}`;
-
-    const copyBtn = document.createElement('button');
-    copyBtn.type = 'button';
-    copyBtn.className = 'ref2d__cite-copy';
-    copyBtn.textContent = 'Copiar cita APA';
-
-    let feedbackTimer = null;
-    const setCopyFeedback = (message, isError = false) => {
-      clearTimeout(feedbackTimer);
-      copyBtn.textContent = message;
-      copyBtn.classList.toggle('is-error', isError);
-      feedbackTimer = setTimeout(() => {
-        copyBtn.textContent = 'Copiar cita APA';
-        copyBtn.classList.remove('is-error');
-      }, 1800);
-    };
-
-    toggle.addEventListener('click', (e) => {
+  if (sheetCitationCopy) {
+    sheetCitationCopy.addEventListener("click", async (e) => {
       e.preventDefault();
       e.stopPropagation();
-      const willOpen = panel.hidden;
-      panel.hidden = !panel.hidden;
-      toggle.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
-    });
-
-    copyBtn.addEventListener('click', async (e) => {
-      e.preventDefault();
-      e.stopPropagation();
+      const citation = String(sheetCitationCopy.dataset.citation || "").trim();
+      if (!citation) return;
+      clearTimeout(sheetCitationFeedbackTimer);
       try {
         await copyToClipboardText(citation);
-        setCopyFeedback('Copiado');
+        sheetCitationCopy.textContent = "Copiado";
+        sheetCitationCopy.classList.remove("is-error");
       } catch (_err) {
-        setCopyFeedback('No se pudo copiar', true);
+        sheetCitationCopy.textContent = "No se pudo copiar";
+        sheetCitationCopy.classList.add("is-error");
       }
+      sheetCitationFeedbackTimer = setTimeout(() => {
+        sheetCitationCopy.textContent = "Copiar cita APA";
+        sheetCitationCopy.classList.remove("is-error");
+      }, 1800);
     });
-
-    panel.appendChild(text);
-    panel.appendChild(hint);
-    panel.appendChild(copyBtn);
-    wrap.appendChild(toggle);
-    wrap.appendChild(panel);
-    return wrap;
   }
 
   function createSharedCardElement(meta, className, options = {}) {
@@ -6334,7 +6305,6 @@
       tagsWrap.appendChild(chip);
     });
     body.appendChild(tagsWrap);
-    body.appendChild(createCitationBlock(meta));
     el.appendChild(body);
 
     el.addEventListener('click', () => openSpotlight(el));
@@ -7388,6 +7358,8 @@
       }
     }
 
+    renderSheetCitation(activeSpotlightMeta);
+
     // Imagen - prioriza la miniatura existente y cae a meta.src (clave para vista lista)
     const imgNode = el.querySelector("img");
     const src =
@@ -7424,6 +7396,7 @@
   function closeSpotlight(){
     closeRequestPanel();
     activeSpotlightMeta = null;
+    renderSheetCitation(null);
     if (overlay) {
       overlay.setAttribute('hidden','');
     }
