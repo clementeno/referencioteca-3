@@ -612,29 +612,31 @@ a.ref2d__header-btn{text-decoration:none; color:var(--ink);}
 .sheet__link:hover{ filter:brightness(1.1); }
 .sheet__citation{
   margin-top:12px;
-  border:1px solid #2a2a2e;
-  border-radius:12px;
-  background:#111218;
 }
 .sheet__citationToggle{
-  width:100%;
+  width:auto;
+  display:inline-flex;
+  align-items:center;
   margin:0;
-  padding:12px;
-  border:none;
-  background:transparent;
-  color:#c7cdde;
+  padding:8px 12px;
+  border:1px solid #2a2a2e;
+  border-radius:999px;
+  background:#15151a;
+  color:var(--ink);
   text-align:left;
-  font-size:0.84rem;
-  letter-spacing:0.06em;
-  text-transform:uppercase;
-  font-weight:600;
+  font-size:0.76rem;
+  letter-spacing:0.02em;
+  font-weight:500;
   cursor:pointer;
 }
 .sheet__citationToggle:hover{
-  background:#171922;
+  background:#1f1f24;
 }
 .sheet__citationPanel{
-  border-top:1px solid #252936;
+  margin-top:8px;
+  border:1px solid #2a2a2e;
+  border-radius:12px;
+  background:#111218;
   padding:12px;
 }
 .sheet__citationPanel[hidden]{
