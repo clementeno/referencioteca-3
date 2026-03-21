@@ -725,12 +725,27 @@
   }
 
   function cleanAuthorName(raw) {
-    return String(raw || "")
+    const cleaned = String(raw || "")
       .replace(/\(([^)]*)\)/g, " ")
       .replace(/\s+/g, " ")
       .replace(/\s+,/g, ",")
       .replace(/,\s*$/, "")
       .trim();
+
+    if (!cleaned) return "";
+
+    const lower = cleaned.toLocaleLowerCase("es-CL");
+    const upper = cleaned.toLocaleUpperCase("es-CL");
+    const needsCaseNormalization = cleaned === lower || cleaned === upper;
+    if (!needsCaseNormalization) return cleaned;
+
+    const particles = new Set(["y", "and", "de", "del", "la", "las", "los", "da", "do", "dos", "van", "von"]);
+    return lower.replace(/@?[\p{L}][\p{L}'’.-]*/gu, (word) => {
+      const normalizedWord = String(word || "");
+      const key = normalizedWord.toLocaleLowerCase("es-CL");
+      if (particles.has(key)) return key;
+      return key.charAt(0).toLocaleUpperCase("es-CL") + key.slice(1);
+    });
   }
 
   function splitAuthorNames(raw) {
@@ -950,6 +965,7 @@
 
   function normalizeProjectTags(p) {
     const people = deriveDisplayPeople(p);
+    p.author = people.author || p.author || "—";
     p._displayAuthor = people.author || "—";
     p._displayRole = people.role || "Diseñador/a";
     p._displayCredits = people.credits || "";
@@ -1673,7 +1689,7 @@
 /* ------------------ (Mobiliario) Librero Rubén — Diego Gajardo ------------------ */
 {
   src: "https://freight.cargo.site/t/original/i/R2846189121560049538601876665027/Captura-de-pantalla-2026-03-18-a-las-15.33.20.png",
-  orientation: "h",
+  orientation: "v",
   span: 1,
   tags: ["mobiliario", "objeto", "industrial"],
   title: "(Mobiliario) Librero Rubén",
@@ -1688,7 +1704,7 @@
 /* ------------------ [Banca Cafecito] — Diego Gajardo ------------------ */
 {
   src: "https://freight.cargo.site/t/original/i/L2846189121541602794528167113411/Captura-de-pantalla-2026-03-18-a-las-15.36.53.png",
-  orientation: "h",
+  orientation: "v",
   span: 1,
   tags: ["mobiliario", "objeto", "industrial"],
   title: "[Banca Cafecito]",
