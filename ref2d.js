@@ -7575,9 +7575,26 @@
       if (search) search.value = '';
       applyFilter('');
     } else {
-      // Aplicar filtro por tag
+      // Filtrar por categoría exacta para que coincida con el contador del panel.
+      const list = DB_ORDERED.filter((p) => {
+        const keys = (p._tagKeys && p._tagKeys.length)
+          ? p._tagKeys
+          : (p.tags || []).map(canonicalTagKey).filter(Boolean);
+        return keys.includes(key);
+      });
+
       if (search) search.value = key;
-      applyFilter(key);
+      updateSearchClearVisibility();
+      activeList = list;
+
+      if (activeView === 'bento') {
+        camX = 0;
+        camY = 0;
+        applyTransform();
+      }
+      closeSpotlight();
+      renderActiveView();
+      updateCount();
     }
     highlightActiveCategory(key);
   }
