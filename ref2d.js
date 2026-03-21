@@ -28,8 +28,9 @@
         sTags   = $("#sheetTags"),
         sLink   = $("#sheetLink");
   const sheetCitation = $("#sheetCitation");
+  const sheetCitationToggle = $("#sheetCitationToggle");
+  const sheetCitationPanel = $("#sheetCitationPanel");
   const sheetCitationText = $("#sheetCitationText");
-  const sheetCitationInText = $("#sheetCitationInText");
   const sheetCitationCopy = $("#sheetCitationCopy");
   const sheetReportActions = $("#sheetReportActions");
   const sheetRequestPanel = $("#sheetRequestPanel");
@@ -6153,27 +6154,12 @@
     return window.location.href.split('#')[0];
   }
 
-  function getFirstSurname(authorRaw) {
-    const firstAuthor = String(authorRaw || '')
-      .split(',')
-      .map((part) => part.trim())
-      .filter(Boolean)[0] || '';
-    const parts = firstAuthor.split(/\s+/).filter(Boolean);
-    return parts.length ? parts[parts.length - 1].replace(/[.,;:]+$/g, '') : 'Autor';
-  }
-
   function buildApaCitation(meta, urlOverride) {
     const author = getCitationAuthor(meta);
     const year = getCitationYear(meta);
     const title = getCitationTitle(meta);
     const url = String(urlOverride || '').trim() || getCitationUrl(meta);
     return `${author}. (${year}). ${title}. Referencioteca. ${url}`;
-  }
-
-  function buildInTextCitation(meta) {
-    const surname = getFirstSurname(getCitationAuthor(meta));
-    const year = getCitationYear(meta);
-    return `(${surname}, ${year})`;
   }
 
   function copyToClipboardText(text) {
@@ -6198,20 +6184,30 @@
   }
 
   function renderSheetCitation(meta) {
-    if (!sheetCitation || !sheetCitationText || !sheetCitationInText || !sheetCitationCopy) return;
+    if (!sheetCitation || !sheetCitationText || !sheetCitationCopy || !sheetCitationPanel || !sheetCitationToggle) return;
     if (!meta) {
       sheetCitation.hidden = true;
       return;
     }
     const firstUrl = Array.isArray(meta.urls) ? (meta.urls[0] || "") : (meta.url || "");
     const citation = buildApaCitation(meta, firstUrl);
-    const inText = buildInTextCitation(meta);
     sheetCitationText.textContent = citation;
-    sheetCitationInText.textContent = `Cita en texto: ${inText}`;
     sheetCitationCopy.dataset.citation = citation;
     sheetCitationCopy.textContent = "Copiar cita APA";
     sheetCitationCopy.classList.remove("is-error");
+    sheetCitationPanel.hidden = true;
+    sheetCitationToggle.setAttribute("aria-expanded", "false");
     sheetCitation.hidden = false;
+  }
+
+  if (sheetCitationToggle && sheetCitationPanel) {
+    sheetCitationToggle.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const willOpen = sheetCitationPanel.hidden;
+      sheetCitationPanel.hidden = !willOpen;
+      sheetCitationToggle.setAttribute("aria-expanded", willOpen ? "true" : "false");
+    });
   }
 
   if (sheetCitationCopy) {

@@ -136,10 +136,11 @@
         <a class="sheet__link" id="sheetLink" target="_blank" rel="noopener"></a>
 
         <section class="sheet__citation" id="sheetCitation" hidden>
-          <h4 class="sheet__citationTitle">Cómo citar este proyecto</h4>
-          <p class="sheet__citationText" id="sheetCitationText"></p>
-          <p class="sheet__citationHint" id="sheetCitationInText"></p>
-          <button class="sheet__citationCopy" id="sheetCitationCopy" type="button">Copiar cita APA</button>
+          <button class="sheet__citationToggle" id="sheetCitationToggle" type="button" aria-expanded="false" aria-controls="sheetCitationPanel">CÓMO CITAR ESTE PROYECTO</button>
+          <div class="sheet__citationPanel" id="sheetCitationPanel" hidden>
+            <p class="sheet__citationText" id="sheetCitationText"></p>
+            <button class="sheet__citationCopy" id="sheetCitationCopy" type="button">Copiar cita APA</button>
+          </div>
         </section>
 
         <div class="sheet__support">

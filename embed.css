@@ -612,17 +612,33 @@ a.ref2d__header-btn{text-decoration:none; color:var(--ink);}
 .sheet__link:hover{ filter:brightness(1.1); }
 .sheet__citation{
   margin-top:12px;
-  padding:12px;
   border:1px solid #2a2a2e;
   border-radius:12px;
   background:#111218;
 }
-.sheet__citationTitle{
-  margin:0 0 8px 0;
+.sheet__citationToggle{
+  width:100%;
+  margin:0;
+  padding:12px;
+  border:none;
+  background:transparent;
+  color:#c7cdde;
+  text-align:left;
   font-size:0.84rem;
   letter-spacing:0.06em;
   text-transform:uppercase;
-  color:#c7cdde;
+  font-weight:600;
+  cursor:pointer;
+}
+.sheet__citationToggle:hover{
+  background:#171922;
+}
+.sheet__citationPanel{
+  border-top:1px solid #252936;
+  padding:12px;
+}
+.sheet__citationPanel[hidden]{
+  display:none !important;
 }
 .sheet__citationText{
   margin:0;
@@ -630,11 +646,6 @@ a.ref2d__header-btn{text-decoration:none; color:var(--ink);}
   font-size:0.82rem;
   line-height:1.45;
   overflow-wrap:anywhere;
-}
-.sheet__citationHint{
-  margin:8px 0 0 0;
-  color:var(--ink-dim);
-  font-size:0.78rem;
 }
 .sheet__citationCopy{
   margin-top:10px;
