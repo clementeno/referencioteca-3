@@ -6203,6 +6203,7 @@
   let listSortDir = 1;
   let gridRenderToken = 0;
   let filterDebounceTimer = null;
+  let activeTagFilterKey = '';
   const FILTER_DEBOUNCE_MS = 220;
   let fillAroundRaf = null;
   let fillAroundLiteTimer = null;
@@ -6395,6 +6396,11 @@
       c.className='ref2d__chip';
       c.textContent=t;
       c.setAttribute('data-tag', t);
+      const chipKey = norm(canonicalTagKey(t));
+      c.dataset.tagKey = chipKey;
+      if (activeTagFilterKey && chipKey === activeTagFilterKey) {
+        c.classList.add('ref2d__chip--active');
+      }
       // Etiquetas de la grilla también son clickeables
       c.addEventListener('click', (e)=>{
         // Suprimir click si acabamos de hacer drag
@@ -6577,6 +6583,12 @@
       const chip = document.createElement('span');
       chip.className = 'ref2d__chip';
       chip.textContent = t;
+      chip.setAttribute('data-tag', t);
+      const chipKey = norm(canonicalTagKey(t));
+      chip.dataset.tagKey = chipKey;
+      if (activeTagFilterKey && chipKey === activeTagFilterKey) {
+        chip.classList.add('ref2d__chip--active');
+      }
       chip.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -7595,7 +7607,12 @@
         const chip = document.createElement('span');
         chip.className="ref2d__chip";
         chip.textContent=t;
-        chip.setAttribute('data-tag', t); // Para referencia si se necesita
+        chip.setAttribute('data-tag', t);
+        const chipKey = norm(canonicalTagKey(t));
+        chip.dataset.tagKey = chipKey;
+        if (activeTagFilterKey && chipKey === activeTagFilterKey) {
+          chip.classList.add('ref2d__chip--active');
+        }
         chip.addEventListener('click', (e)=>{
           e.stopPropagation(); // Evita que el click cierre el modal de otra forma
           if (search) search.value=t;
@@ -7849,6 +7866,26 @@
     }, FILTER_DEBOUNCE_MS);
   }
 
+  function getActiveTagKeyFromTerm(term) {
+    const normalized = norm(term).replace(/\s+/g, ' ').trim();
+    if (!normalized) return '';
+    return norm(canonicalTagKey(normalized));
+  }
+
+  function syncActiveTagChips() {
+    const chips = document.querySelectorAll('.ref2d__chip[data-tag]');
+    chips.forEach((chip) => {
+      const rawTag = chip.dataset.tag || chip.textContent || '';
+      const chipKey = norm(canonicalTagKey(rawTag));
+      chip.classList.toggle('ref2d__chip--active', !!activeTagFilterKey && chipKey === activeTagFilterKey);
+    });
+  }
+
+  function setActiveTagFilter(term) {
+    activeTagFilterKey = getActiveTagKeyFromTerm(term);
+    syncActiveTagChips();
+  }
+
   function tokenizeSearchTerm(term) {
     const normalized = norm(term).replace(/\s+/g, ' ').trim();
     if (!normalized) return [];
@@ -7897,6 +7934,7 @@
       const list = getFilteredProjects(tokens);
       if(list.length === 0){
         activeList = [];
+        setActiveTagFilter('');
         if (activeView === 'bento') {
           camX = 0;
           camY = 0;
@@ -7912,6 +7950,7 @@
         return;
       }
       activeList = list;
+      setActiveTagFilter(term);
       // Sincronizar highlight de categorías si el término coincide con una categoría
       const normalizedTerm = q.replace(/\s+/g, ' ').trim();
       const matchingCat = normalizedTerm ? canonicalTagKey(normalizedTerm) : '';
@@ -7919,6 +7958,7 @@
     }else{
       // Sin filtro: usar el orden reordenado inicial
       activeList = DB_ORDERED.slice();
+      setActiveTagFilter('');
       highlightActiveCategory('all');
     }
     if (activeView === 'bento') {
@@ -7929,6 +7969,7 @@
     }
     closeSpotlight();
     renderActiveView();
+    syncActiveTagChips();
   }
   if (search) {
     updateSearchClearVisibility();
@@ -8145,6 +8186,7 @@
       if (search) search.value = key;
       updateSearchClearVisibility();
       activeList = list;
+      setActiveTagFilter(key);
 
       if (activeView === 'bento') {
         camX = 0;
@@ -8153,6 +8195,7 @@
       }
       closeSpotlight();
       renderActiveView();
+      syncActiveTagChips();
       updateCount();
     }
     highlightActiveCategory(key);
