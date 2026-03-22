@@ -5838,6 +5838,291 @@
       area: "Investigación / Biomaterial / Innovación",
       year: "2023",
       url: "https://www.instagram.com/p/Cs0aovjIXRN/?img_index=1"
+    },
+
+    /* ------------------ Hack The Waste — Rayén Espinoza ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/N2852815603559739549928730866371/511533155_17844286302519564_1167360669655593300_n.jpg",
+      orientation: "v",
+      span: 1,
+      tags: ["investigación", "innovación", "tecnología"],
+      title: "Hack The Waste",
+      author: "Rayén Espinoza",
+      role: "",
+      collab: "Proyecto de título. Guiatura por: Tomás Vivanco",
+      area: "Investigación / Innovación / Tecnología",
+      year: "2025",
+      url: ["https://sprightly-scone-49459d.netlify.app", "https://www.instagram.com/reel/DLiuXM4MEfh/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="]
+    },
+
+    /* ------------------ THE ART OF DESTRUCTION — Sebastián Tala ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/O2852814018873743153835989742275/2131a770-aa3d-445d-a090-c91ec342000f_rw_1920.jpg",
+      orientation: "v",
+      span: 1,
+      tags: ["indumentaria", "textil", "moda"],
+      title: "THE ART OF DESTRUCTION",
+      author: "Sebastián Tala",
+      role: "",
+      collab: "Modelo & MAquillaje: Pascale Blanchard. Diseño, Confección, Fotografía & ESTILISMO: Sebastián Tala.",
+      area: "Indumentaria / Textil / Moda",
+      year: "2023",
+      url: "https://sebatala.myportfolio.com/the-art-of-destruction"
+    },
+
+    /* ------------------ Under Armour Chile Tienda Online — Victoria Schuwirth Montero ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/D2852814018855296409762280190659/1764867718402.jpeg",
+      orientation: "h",
+      span: 1,
+      tags: ["web", "tienda online"],
+      title: "Under Armour Chile Tienda Online",
+      author: "Victoria Schuwirth Montero",
+      role: "",
+      collab: "Desarrollado en LAB 51. Victoria Schuwirth Montero: UX/UI designer, product manager.",
+      area: "Web / Tienda online",
+      year: "2025",
+      url: "https://www.linkedin.com/posts/lab51-chile_lab51-shopifyplus-ecommerce-activity-7402440321755783168-CT6J?utm_source=share&utm_medium=member_desktop&rcm=ACoAAENdsFEB8cHH4aAjoEic9bK9fxqH37Fjuro"
+    },
+
+    /* ------------------ Rediseño tarjetas banco ripley — Andrés Valdivieso Vera ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/I2852814227893800253038919103171/Captura-de-pantalla-2026-03-22-a-las-18.18.16.png",
+      orientation: "h",
+      span: 1,
+      tags: ["diseño gráfico", "producto"],
+      title: "Rediseño tarjetas banco ripley",
+      author: "Andrés Valdivieso Vera",
+      role: "",
+      collab: "",
+      area: "Diseño gráfico / Producto",
+      year: "2022",
+      url: "https://www.behance.net/gallery/136507291/Rediseno-tarjetas-banco-ripley"
+    },
+
+    /* ------------------ Sin Nombre — Andrés Valdivieso Vera ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/D2852816694961352670954352227011/Captura-de-pantalla-2026-03-22-a-las-19.44.55.png",
+      orientation: "h",
+      span: 1,
+      tags: ["ilustración"],
+      title: "Sin Nombre",
+      author: "Andrés Valdivieso Vera",
+      role: "",
+      collab: "",
+      area: "Ilustración",
+      year: "2023",
+      url: "https://www.instagram.com/p/CxRHxY2Jq3Z/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
+    },
+
+    /* ------------------ Axis 1.1 — Pablo Gutiérrez ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/G2852814228059820949702305067715/Captura-de-pantalla-2026-03-22-a-las-18.21.11.png",
+      orientation: "h",
+      span: 1,
+      tags: ["producto", "3D", "objeto"],
+      title: "Axis 1.1",
+      author: "Pablo Gutiérrez",
+      role: "Diseñador / Cofundador",
+      collab: "Desarrollado en Itera Studio",
+      area: "Producto / 3D / Objeto",
+      year: "2026",
+      url: ["https://www.instagram.com/p/DV9rbzLFeOa/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==", "https://drive.google.com/file/d/1UwALiYZEpGeHibhGB-oHQfw3eYkwN7YY/view?fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGnAuwvC8CldrBtZxAcBrM4dPhmg0fBMGWpnQK2NYRiSYRVzxdWksDjYWCVQus_aem_DW5z4OxsLm2uIWMMfrodJA"]
+    },
+
+    /* ------------------ ABC Pediatrics Book — Claudia Zavala ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/K2852814228041374205628595516099/Captura-de-pantalla-2026-03-22-a-las-18.27.43.png",
+      orientation: "h",
+      span: 1,
+      tags: ["ilustración", "editorial"],
+      title: "ABC Pediatrics Book",
+      author: "Claudia Zavala",
+      role: "Diseñadora / Ilustradora",
+      collab: "",
+      area: "Ilustración / Editorial",
+      year: "2023",
+      url: "https://www.behance.net/gallery/163952093/ABC-Pediatrics-Book"
+    },
+
+    /* ------------------ Minie The Squirrel - Picture Book — Claudia Zavala ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/H2852814228022927461554885964483/Captura-de-pantalla-2026-03-22-a-las-18.29.27.png",
+      orientation: "h",
+      span: 1,
+      tags: ["ilustración", "editorial"],
+      title: "Minie The Squirrel - Picture Book",
+      author: "Claudia Zavala",
+      role: "Diseñadora / Ilustradora",
+      collab: "",
+      area: "Ilustración / Editorial",
+      year: "2022",
+      url: "https://www.behance.net/gallery/152520679/Minie-The-Squirrel-Picture-Book"
+    },
+
+    /* ------------------ Hacia un habitar regenerativo en la Patagonia: guía de diseño para Conjuntos Residenciales Rurales — Martita Apel ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/I2852814018836849665688570639043/1759151436277.jpeg",
+      orientation: "h",
+      span: 1,
+      tags: ["editorial"],
+      title: "Hacia un habitar regenerativo en la Patagonia: guía de diseño para Conjuntos Residenciales Rurales",
+      author: "Martita Apel",
+      role: "",
+      collab: "Desarrollada junto a Queule en Estudio Postal.",
+      area: "Editorial",
+      year: "2025",
+      url: "https://www.linkedin.com/posts/estudio-postal_diseaehoeditorial-estudiopostal-diseaehograerfico-ugcPost-7378415926003798016-zkUo?utm_source=share&utm_medium=member_desktop&rcm=ACoAAENdsFEB8cHH4aAjoEic9bK9fxqH37Fjuro"
+    },
+
+    /* ------------------ Ediciones ARQ - Portadas Nº 116-117-118 — Martita Apel ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/D2852814228004480717481176412867/Captura-de-pantalla-2026-03-22-a-las-18.36.49.png",
+      orientation: "h",
+      span: 1,
+      tags: ["editorial"],
+      title: "Ediciones ARQ - Portadas Nº 116-117-118",
+      author: "Martita Apel",
+      role: "",
+      collab: "",
+      area: "Editorial",
+      year: "2024",
+      url: "https://www.behance.net/gallery/233567245/Ediciones-ARQ-Portadas-N-116-117-118"
+    },
+
+    /* ------------------ Informe 8 años Meric — Antonio Batlle Lathrop ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/I2852814018818402921614861087427/fd757cff-a94d-4766-9369-786372051f8d_rw_1920.png",
+      orientation: "h",
+      span: 1,
+      tags: ["editorial"],
+      title: "Informe 8 años Meric",
+      author: "Antonio Batlle Lathrop",
+      role: "",
+      collab: "",
+      area: "Editorial",
+      year: "n/a",
+      url: "https://batlle.work/diseno-editorial-informe-10-anos-meric"
+    },
+
+    /* ------------------ Manual de Gestión APR - Fundación Huella Local — Antonio Batlle Lathrop ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/V2852814018799956177541151535811/13ef0933-9b95-4b11-aec2-ef96906a6450_rw_1920.png",
+      orientation: "h",
+      span: 1,
+      tags: ["editorial"],
+      title: "Manual de Gestión APR - Fundación Huella Local",
+      author: "Antonio Batlle Lathrop",
+      role: "",
+      collab: "",
+      area: "Editorial",
+      year: "n/a",
+      url: "https://batlle.work/manual-de-gestion-apr-fundacion-huella-local"
+    },
+
+    /* ------------------ NICOPOLY UX/UI - WEB DESIGN — Consuelo Burotto Sánchez ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/V2852814227986033973407466861251/Captura-de-pantalla-2026-03-22-a-las-19.08.42.png",
+      orientation: "h",
+      span: 1,
+      tags: ["web", "tienda online"],
+      title: "NICOPOLY UX/UI - WEB DESIGN",
+      author: "Consuelo Burotto Sánchez",
+      role: "",
+      collab: "",
+      area: "Web / Tienda online",
+      year: "2022",
+      url: "https://www.behance.net/gallery/140604569/NICOPOLY-UXUI-WEB-DESIGN"
+    },
+
+    /* ------------------ Audioteca Gabriela Mistral — Carmen di Girolamo Arteaga ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/P2852814227967587229333757309635/Captura-de-pantalla-2026-03-22-a-las-19.15.25.png",
+      orientation: "h",
+      span: 1,
+      tags: ["innovación", "cultura"],
+      title: "Audioteca Gabriela Mistral",
+      author: "Carmen di Girolamo Arteaga",
+      role: "",
+      collab: "Dirección y creación: Diego Boggioni.\nProducción ejecutiva: BT Cultura & Medios.\nProducción general: Diego Boggioni, Carmen Di Girolamo.\nDiseño sonoro y mezcla: David Capdepont, Diego Boggioni / colaboración Santiago Jara.\nDiseñadora gráfica: Carmen di Girolamo.\nProgramador: David Jiménez Lazo.",
+      area: "Innovación / Cultura",
+      year: "2025",
+      url: ["https://www.linkedin.com/posts/carmen-di-girolamo-arteaga-580275b9_no-me-hab%C3%ADa-dado-el-tiempo-de-sentarme-a-activity-7417601780492124160-Bcw3?utm_source=share&utm_medium=member_desktop&rcm=ACoAAENdsFEB8cHH4aAjoEic9bK9fxqH37Fjuro", "https://audiotecagm.cl"]
+    },
+
+    /* ------------------ PANTALÓN BEX — Maureen Echeverria Cox ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/O2852814018763062689393732432579/2L2A8101_resized_9166c410-1a49-4af8-a202-8936eb9721d6.jpg.jpg",
+      orientation: "h",
+      span: 1,
+      tags: ["moda", "textil", "indumentaria"],
+      title: "PANTALÓN BEX",
+      author: "Maureen Echeverria Cox",
+      role: "Diseñadora / coFundadora",
+      collab: "Cofundadora Adeu",
+      area: "Moda / Textil / Indumentaria",
+      year: "2019",
+      url: "https://www.adeu.cl/products/pantalon-bex-crudo"
+    },
+
+    /* ------------------ chaqueta indi — Maureen Echeverria Cox ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/I2852814018744615945320022880963/Sin_titulo-1-10.jpg.jpg",
+      orientation: "h",
+      span: 1,
+      tags: ["moda", "textil", "indumentaria"],
+      title: "chaqueta indi",
+      author: "Maureen Echeverria Cox",
+      role: "Diseñadora / coFundadora",
+      collab: "Cofundadora Adeu",
+      area: "Moda / Textil / Indumentaria",
+      year: "2019",
+      url: ["https://www.adeu.cl/products/chaqueta-indi-negra", "https://freight.cargo.site/t/original/i/O2852814018763062689393732432579/2L2A8101_resized_9166c410-1a49-4af8-a202-8936eb9721d6.jpg.jpg"]
+    },
+
+    /* ------------------ CHAQUETA KIOTO — Maureen Echeverria Cox ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/N2852814018726169201246313329347/lino_pantalon_chaqueta-51.jpg.jpg",
+      orientation: "h",
+      span: 1,
+      tags: ["moda", "textil", "indumentaria"],
+      title: "CHAQUETA KIOTO",
+      author: "Maureen Echeverria Cox",
+      role: "Diseñadora / coFundadora",
+      collab: "Cofundadora Adeu",
+      area: "Moda / Textil / Indumentaria",
+      year: "2019",
+      url: "https://www.adeu.cl/products/chaqueta-kioto-negro?pr_prod_strat=e5_desc&pr_rec_id=83040df97&pr_rec_pid=7931505574108&pr_ref_pid=8930887598300&pr_seq=uniform"
+    },
+
+    /* ------------------ Vestido Aranua flores rojo — Trinidad Murtagh ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/G2852814018781509433467441984195/MUTH_72591.jpg",
+      orientation: "h",
+      span: 1,
+      tags: ["moda", "textil", "indumentaria"],
+      title: "Vestido Aranua flores rojo",
+      author: "Trinidad Murtagh",
+      role: "",
+      collab: "",
+      area: "Moda / Textil / Indumentaria",
+      year: "2025",
+      url: "https://www.muthboutique.cl/products/vestido-aranua-flores-rojo?variant=45041238048905"
+    },
+
+    /* ------------------ Vest Anea café — Trinidad Murtagh ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/N2852819639836470086094591308483/Captura-de-pantalla-2026-03-22-a-las-19.47.35.png",
+      orientation: "h",
+      span: 1,
+      tags: ["moda", "textil", "indumentaria"],
+      title: "Vest Anea café",
+      author: "Trinidad Murtagh",
+      role: "",
+      collab: "",
+      area: "Moda / Textil / Indumentaria",
+      year: "2025",
+      url: "https://www.muthboutique.cl/products/vest-anea-cafe?variant=45046068510857"
     }
     
   ];
