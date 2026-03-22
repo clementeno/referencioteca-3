@@ -7114,7 +7114,7 @@
 
   function formatCountLine(projectTotal, designersTotal) {
     const projectLabel = projectTotal === 1 ? "artículo" : "artículos";
-    const designerLabel = designersTotal === 1 ? "diseñador UC" : "diseñadores UC";
+    const designerLabel = designersTotal === 1 ? "Diseñador UC" : "Diseñadores UC";
     return `${projectTotal} ${projectLabel} · ${designersTotal} ${designerLabel}`;
   }
 
