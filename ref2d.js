@@ -5843,7 +5843,7 @@
     /* ------------------ Hack The Waste — Rayén Espinoza ------------------ */
     {
       src: "https://freight.cargo.site/t/original/i/N2852815603559739549928730866371/511533155_17844286302519564_1167360669655593300_n.jpg",
-      orientation: "v",
+      orientation: "sq",
       span: 1,
       tags: ["investigación", "innovación", "tecnología"],
       title: "Hack The Waste",
@@ -5918,7 +5918,7 @@
     /* ------------------ Axis 1.1 — Pablo Gutiérrez ------------------ */
     {
       src: "https://freight.cargo.site/t/original/i/G2852814228059820949702305067715/Captura-de-pantalla-2026-03-22-a-las-18.21.11.png",
-      orientation: "h",
+      orientation: "v",
       span: 1,
       tags: ["producto", "3D", "objeto"],
       title: "Axis 1.1",
@@ -6038,7 +6038,7 @@
     /* ------------------ Audioteca Gabriela Mistral — Carmen di Girolamo Arteaga ------------------ */
     {
       src: "https://freight.cargo.site/t/original/i/P2852814227967587229333757309635/Captura-de-pantalla-2026-03-22-a-las-19.15.25.png",
-      orientation: "h",
+      orientation: "sq",
       span: 1,
       tags: ["innovación", "cultura"],
       title: "Audioteca Gabriela Mistral",
@@ -6053,7 +6053,7 @@
     /* ------------------ PANTALÓN BEX — Maureen Echeverria Cox ------------------ */
     {
       src: "https://freight.cargo.site/t/original/i/O2852814018763062689393732432579/2L2A8101_resized_9166c410-1a49-4af8-a202-8936eb9721d6.jpg.jpg",
-      orientation: "h",
+      orientation: "v",
       span: 1,
       tags: ["moda", "textil", "indumentaria"],
       title: "PANTALÓN BEX",
@@ -6068,7 +6068,7 @@
     /* ------------------ chaqueta indi — Maureen Echeverria Cox ------------------ */
     {
       src: "https://freight.cargo.site/t/original/i/I2852814018744615945320022880963/Sin_titulo-1-10.jpg.jpg",
-      orientation: "h",
+      orientation: "v",
       span: 1,
       tags: ["moda", "textil", "indumentaria"],
       title: "chaqueta indi",
@@ -6083,7 +6083,7 @@
     /* ------------------ CHAQUETA KIOTO — Maureen Echeverria Cox ------------------ */
     {
       src: "https://freight.cargo.site/t/original/i/N2852814018726169201246313329347/lino_pantalon_chaqueta-51.jpg.jpg",
-      orientation: "h",
+      orientation: "v",
       span: 1,
       tags: ["moda", "textil", "indumentaria"],
       title: "CHAQUETA KIOTO",
@@ -6098,7 +6098,7 @@
     /* ------------------ Vestido Aranua flores rojo — Trinidad Murtagh ------------------ */
     {
       src: "https://freight.cargo.site/t/original/i/G2852814018781509433467441984195/MUTH_72591.jpg",
-      orientation: "h",
+      orientation: "v",
       span: 1,
       tags: ["moda", "textil", "indumentaria"],
       title: "Vestido Aranua flores rojo",
@@ -6113,7 +6113,7 @@
     /* ------------------ Vest Anea café — Trinidad Murtagh ------------------ */
     {
       src: "https://freight.cargo.site/t/original/i/N2852819639836470086094591308483/Captura-de-pantalla-2026-03-22-a-las-19.47.35.png",
-      orientation: "h",
+      orientation: "v",
       span: 1,
       tags: ["moda", "textil", "indumentaria"],
       title: "Vest Anea café",
