@@ -7099,7 +7099,29 @@
     updateCount();
     requestFillAround();
   }
-  const updateCount = ()=> count && (count.textContent = activeList.length + " ítems");
+  function getUniqueDesignersCount(projects) {
+    const source = Array.isArray(projects) ? projects : [];
+    const seen = new Set();
+    source.forEach((project) => {
+      const authorRaw = project && (project._displayAuthor || project.author);
+      splitAuthorNames(authorRaw).forEach((name) => {
+        const key = toNameKey(name);
+        if (key) seen.add(key);
+      });
+    });
+    return seen.size;
+  }
+
+  function formatCountLine(projectTotal, designersTotal) {
+    const projectLabel = projectTotal === 1 ? "artículo" : "artículos";
+    const designerLabel = designersTotal === 1 ? "diseñador UC" : "diseñadores UC";
+    return `${projectTotal} ${projectLabel} · ${designersTotal} ${designerLabel}`;
+  }
+
+  const updateCount = ()=> {
+    if (!count) return;
+    count.textContent = formatCountLine(activeList.length, getUniqueDesignersCount(activeList));
+  };
 
   /* ===== Pan 2D mejorado: drag vs click ===== */
   const DRAG_THRESHOLD = 10; // px - umbral para distinguir drag de click (ajustado para desktop)
@@ -7943,7 +7965,7 @@
         closeSpotlight();
         renderActiveView();
         if (count) {
-          count.textContent = `0 ítems — sin resultados para “${term}”`;
+          count.textContent = `${formatCountLine(0, 0)} — sin resultados para “${term}”`;
         }
         // Limpiar highlight de categorías si no hay resultados
         highlightActiveCategory('');
