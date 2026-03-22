@@ -4955,7 +4955,7 @@
   src: "https://freight.cargo.site/t/original/i/F2843129278512147553184274395843/461857978_1514275622555722_4416919289787104457_n.jpg",
   orientation: "h",
   span: 1,
-  tags: ["ecología","producto","innovación"],
+  tags: ["gráfico","editorial","branding"],
   title: "Otros Pérez",
   author: "Catalina Pérez",
   role: "Diseñadora / Fundadora",
