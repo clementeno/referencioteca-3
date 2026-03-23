@@ -4967,6 +4967,395 @@
     "https://www.instagram.com/otrosperez/"
   ]
 },
+/* ------------------ Emotional Patches — Felipe Orellana Fuentealba ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/A2854371739087610904627789640387/Captura-de-pantalla-2026-03-23-a-las-16.27.15.png",
+  orientation: "h",
+  span: 1,
+  tags: ["moda", "fotografía"],
+  title: "Emotional Patches",
+  author: "Felipe Orellana Fuentealba",
+  role: "",
+  collab: "Team: @felipeorellanaf, @vallechi_, @tony_evan. Talents: @joana__nobre, @paquetenojai, @pedronuno_, @bellabellux, @4getmenot__, @thempresents, @leandroreitz.",
+  area: "Moda / Fotografía",
+  year: "2023",
+  url: "https://www.dazeddigital.com/art-photography/article/59888/1/felipe-orellana-these-photos-disclose-their-subjects-most-traumatic-secrets"
+},
+
+/* ------------------ Prints — Renata Scanavini Grazioli ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/T2854371739327418577586013811395/Captura-de-pantalla-2026-03-23-a-las-16.31.27.png",
+  orientation: "h",
+  span: 1,
+  tags: ["ilustración"],
+  title: "Prints",
+  author: "Renata Scanavini Grazioli",
+  role: "",
+  collab: "",
+  area: "Ilustración",
+  year: "n/a",
+  url: "https://www.renatascanavini.com/copia-de-amazonia-swimwear-1"
+},
+
+/* ------------------ Diseñadora Deco Hogar, Menaje — Renata Scanavini Grazioli ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/T2854371395959724389556420031171/paris-menaje-02.jpg.jpg",
+  orientation: "h",
+  span: 1,
+  tags: ["producto", "ilustración"],
+  title: "Diseñadora Deco Hogar, Menaje",
+  author: "Renata Scanavini Grazioli",
+  role: "",
+  collab: "Marcas Alaniz Home, Sarah Miller, Attimo y Umbrale en Paris Cencosud Retail S.A.",
+  area: "Producto / Ilustración",
+  year: "2020",
+  url: "https://www.renatascanavini.com/copia-de-amazonia-swimwear"
+},
+
+/* ------------------ ConservationReserves.org – Explora — Magdalena Aboitiz ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/D2854371739308971833512304259779/Captura-de-pantalla-2026-03-23-a-las-16.39.31.png",
+  orientation: "h",
+  span: 1,
+  tags: ["web", "ux ui"],
+  title: "ConservationReserves.org – Explora",
+  author: "Magdalena Aboitiz",
+  role: "",
+  collab: "",
+  area: "Web / UX UI",
+  year: "2025",
+  url: "https://www.behance.net/gallery/227399221/Diseno-web-para-ConservationReservesorg-Explora"
+},
+
+/* ------------------ Anillo Palmerae — Magdalena Aboitiz ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/W2854371395849043925114162721475/Anillopalmeraemaialen.jpg.jpg",
+  orientation: "v",
+  span: 1,
+  tags: ["artesanía", "orfebre"],
+  title: "Anillo Palmerae",
+  author: "Magdalena Aboitiz",
+  role: "",
+  collab: "",
+  area: "Artesanía / Orfebre",
+  year: "n/a",
+  url: "https://sagara.cl/products/anillo-palmerae"
+},
+
+/* ------------------ Living Bajamar — Maria Jesus Arestizabal ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/F2854371739290525089438594708163/Captura-de-pantalla-2026-03-23-a-las-16.46.04.png",
+  orientation: "h",
+  span: 1,
+  tags: ["diseño interior", "estudio"],
+  title: "Living Bajamar",
+  author: "Maria Jesus Arestizabal",
+  role: "",
+  collab: "",
+  area: "Diseño interior / Estudio",
+  year: "n/a",
+  url: "https://www.jainteriorismo.cl/living-bajamar.html"
+},
+
+/* ------------------ Quincho Pinares — Maria Jesus Arestizabal ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/G2854371739272078345364885156547/Captura-de-pantalla-2026-03-23-a-las-16.47.30.png",
+  orientation: "h",
+  span: 1,
+  tags: ["diseño interior", "estudio"],
+  title: "Quincho Pinares",
+  author: "Maria Jesus Arestizabal",
+  role: "",
+  collab: "",
+  area: "Diseño interior / Estudio",
+  year: "n/a",
+  url: "https://www.jainteriorismo.cl/quincho-pinares.html"
+},
+
+/* ------------------ Living Bosques de Montemar — Maria Jesus Arestizabal ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/T2854371739253631601291175604931/Captura-de-pantalla-2026-03-23-a-las-16.48.18.png",
+  orientation: "h",
+  span: 1,
+  tags: ["diseño interior", "estudio"],
+  title: "Living Bosques de Montemar",
+  author: "Maria Jesus Arestizabal",
+  role: "",
+  collab: "",
+  area: "Diseño interior / Estudio",
+  year: "n/a",
+  url: "https://www.jainteriorismo.cl/living-bosques.html"
+},
+
+/* ------------------ Pantalón Sintra Vichy — María Jesús Correa Ortúzar ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/N2854371395904384157335291376323/maco_BM_99_046a333d-1298-4d88-af26-7ab27a30b0d6.jpg.jpg",
+  orientation: "v",
+  span: 1,
+  tags: ["moda", "textil", "indumentaria"],
+  title: "Pantalón Sintra Vichy",
+  author: "María Jesús Correa Ortúzar",
+  role: "",
+  collab: "",
+  area: "Moda / Textil / Indumentaria",
+  year: "n/a",
+  url: "https://macodesign.cl/collections/pantalones/products/pantalon-sintra-vichy"
+},
+
+/* ------------------ SERENGETI — Gracia Covarrubias Prieto ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/I2854371395941277645482710479555/0b5183_f152a57dbd2f4a9f90a98ce6cc9f1483_mv2.jpg.jpg",
+  orientation: "h",
+  span: 1,
+  tags: ["juego de mesa", "producto"],
+  title: "SERENGETI",
+  author: "Gracia Covarrubias Prieto",
+  role: "",
+  collab: "Game created by Teresita Irarrázaval and Agustin Gómez in Santiago, Chile",
+  area: "Juego de mesa / Producto",
+  year: "2020",
+  url: "https://www.graciacovarrubias.com/serengueti"
+},
+
+/* ------------------ camino del ayuntamiento — Andrea Krauss ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/S2854371395922830901409000927939/e705e0_2514d333a77c4522beb53ac4182aca30_mv2.jpg.jpg",
+  orientation: "h",
+  span: 1,
+  tags: ["diseño interior", "estudio"],
+  title: "camino del ayuntamiento",
+  author: "Andrea Krauss",
+  role: "Diseñadora / Fundadora",
+  collab: "Desarrollado en Krauss Studio",
+  area: "Diseño interior / Estudio",
+  year: "n/a",
+  url: "https://www.studiokrauss.com/caminodelayuntamiento"
+},
+
+/* ------------------ Dormitorio | Brabanzón — Andrea Krauss ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/J2854371739235184857217466053315/Captura-de-pantalla-2026-03-23-a-las-17.04.32.png",
+  orientation: "sq",
+  span: 1,
+  tags: ["diseño interior", "estudio"],
+  title: "Dormitorio | Brabanzón",
+  author: "Andrea Krauss",
+  role: "Diseñadora / Fundadora",
+  collab: "Desarrollado en Krauss Studio",
+  area: "Diseño interior / Estudio",
+  year: "2026",
+  url: "https://www.instagram.com/p/DWM6a8qkVKF/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
+},
+
+/* ------------------ LIVING | PIEDRA ROJA — Andrea Krauss ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/Y2854371739216738113143756501699/Captura-de-pantalla-2026-03-23-a-las-17.05.33.png",
+  orientation: "h",
+  span: 1,
+  tags: ["diseño interior", "estudio"],
+  title: "LIVING | PIEDRA ROJA",
+  author: "Andrea Krauss",
+  role: "Diseñadora / Fundadora",
+  collab: "Desarrollado en Krauss Studio",
+  area: "Diseño interior / Estudio",
+  year: "2026",
+  url: "https://www.instagram.com/p/DVW5TTPES-n/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
+},
+
+/* ------------------ Publicidad en Aeropuerto de Santiago — Catalina Lagos ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/D2854371739198291369070046950083/Captura-de-pantalla-2026-03-23-a-las-17.11.37.png",
+  orientation: "h",
+  span: 1,
+  tags: ["diseño gráfico"],
+  title: "Publicidad en Aeropuerto de Santiago",
+  author: "Catalina Lagos",
+  role: "",
+  collab: "CLIENTE: Nuevo Capital",
+  area: "Diseño gráfico",
+  year: "2019",
+  url: "https://www.cslagos.cl/portfolio-1/publicidad-en-aeropuerto-de-santiago"
+},
+
+/* ------------------ Bikini Bottom Cala Bordo — Magdalena Maiz Hohlberg ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/I2854371395867490669187872273091/Captura_de_Pantalla_2025-11-07_a_la_s_16.47.08.png.jpg",
+  orientation: "v",
+  span: 1,
+  tags: ["moda", "textil", "indumentaria"],
+  title: "Bikini Bottom Cala Bordo",
+  author: "Magdalena Maiz Hohlberg",
+  role: "Diseñadora / Fundadora",
+  collab: "",
+  area: "Moda / Textil / Indumentaria",
+  year: "2021",
+  url: "https://mare.cl/products/bikini-bottom-cala-bordo"
+},
+
+/* ------------------ Raffia Bag Palma Cacao Brown — Magdalena Maiz Hohlberg ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/I2854370133040284871179387744963/WhatsApp_Image_2026-01-16_at_8.27.09_PM_1.jpg",
+  orientation: "v",
+  span: 1,
+  tags: ["moda", "textil", "indumentaria"],
+  title: "Raffia Bag Palma Cacao Brown",
+  author: "Magdalena Maiz Hohlberg",
+  role: "Diseñadora / Fundadora",
+  collab: "",
+  area: "Moda / Textil / Indumentaria",
+  year: "n/a",
+  url: "https://mare.cl/products/raffia-bag-palma-cacao-brown"
+},
+
+/* ------------------ Peto Crop Top Terracota Rib — Magdalena Maiz Hohlberg ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/U2854371395885937413261581824707/Peto-deportivo-mujer-naranjo.jpg.jpg",
+  orientation: "v",
+  span: 1,
+  tags: ["moda", "textil", "indumentaria"],
+  title: "Peto Crop Top Terracota Rib",
+  author: "Magdalena Maiz Hohlberg",
+  role: "Diseñadora / Fundadora",
+  collab: "",
+  area: "Moda / Textil / Indumentaria",
+  year: "n/a",
+  url: "https://mare.cl/products/peto-crop-top-terracora-rib"
+},
+
+/* ------------------ Mobiliario Escenográfico — José Miguel Pumpin ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/L2854371739179844624996337398467/Captura-de-pantalla-2026-03-23-a-las-17.27.29.png",
+  orientation: "v",
+  span: 1,
+  tags: ["mobiliario", "teatro"],
+  title: "Mobiliario Escenográfico",
+  author: "José Miguel Pumpin",
+  role: "",
+  collab: "Mobiliario diseñado y construido para escenografía de la obra \"Bodas de Sangre\" de la Escuela de Teatro UC",
+  area: "Mobiliario / Teatro",
+  year: "2021",
+  url: "https://www.behance.net/gallery/115804405/Mobiliaro-escenografico"
+},
+
+/* ------------------ The Umbrella Academy en Netflix Chile — Javiera Valiente ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/H2854370133021838127105678193347/4_KlausyReggietw_800.jpg",
+  orientation: "sq",
+  span: 1,
+  tags: ["ilustración"],
+  title: "The Umbrella Academy en Netflix Chile",
+  author: "Javiera Valiente",
+  role: "",
+  collab: "Netflix Chile",
+  area: "Ilustración",
+  year: "2022",
+  url: "https://cargocollective.com/javieravaliente/The-Umbrella-Academy-Ilustraciones-para-Netflix-Chile"
+},
+
+/* ------------------ Días Nublados - Novela Gráfica — Javiera Valiente ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/Y2854370133003391383031968641731/7e2db477036851.5c7c482df3229_1200.png",
+  orientation: "v",
+  span: 1,
+  tags: ["ilustración"],
+  title: "Días Nublados - Novela Gráfica",
+  author: "Javiera Valiente",
+  role: "",
+  collab: "",
+  area: "Ilustración",
+  year: "2018",
+  url: "https://cargocollective.com/javieravaliente/Dias-Nublados-Novela-Grafica"
+},
+
+/* ------------------ PETRA Y EL SOL — Javiera Valiente ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/A2854370132984944638958259090115/process_1000.png",
+  orientation: "h",
+  span: 1,
+  tags: ["animación", "stop motion"],
+  title: "PETRA Y EL SOL",
+  author: "Javiera Valiente",
+  role: "",
+  collab: "Dirección: Stefania Malacchini y Malu Furche. Dirección de Arte: Antonia Piña. Construcción de set y props: Carla Calzadillas, Mercedes Castillo, Paula Baccelliere. Dirección de Fotografía: Paula Ramírez. Animador Stop Motion: Kike Ortega. Asistente de Dirección: Gabriela Villalobos. Vestuario: Andrea Arancibia, Elio Vallejos, Mota. Asistente de Arte: Javiera Valiente. Fabricación moldes cabezas: Milodón Estudio.",
+  area: "Animación / Stop motion",
+  year: "2023",
+  url: "https://cargocollective.com/javieravaliente/filter/development/Petra-y-el-Sol-Asistencia-de-Arte-Stop-Motion"
+},
+
+/* ------------------ Sucursal Volvo — Tamara Schwarz Appelt ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/O2854371739161397880922627846851/Captura-de-pantalla-2026-03-23-a-las-18.54.11.png",
+  orientation: "h",
+  span: 1,
+  tags: ["diseño interior", "estudio"],
+  title: "Sucursal Volvo",
+  author: "Tamara Schwarz Appelt",
+  role: "",
+  collab: "Directora de Diseño en Schwarz-Haus. Arquitecto: Siente Cinco. Fotografía: Equipo SH, Siente Cinco.",
+  area: "Diseño interior / Estudio",
+  year: "n/a",
+  url: "https://schwarzhaus.cl/pages/sucursales-volvo"
+},
+
+/* ------------------ Elaboración de un simulador de trauma torácico a partir de un torso cadavérico utilizando tecnología de imágenes digitales e impresión 3D — Sebastian Spoerer ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/E2854371739142951136848918295235/Captura-de-pantalla-2026-03-23-a-las-18.58.50.png",
+  orientation: "v",
+  span: 1,
+  tags: ["investigación", "publicación académica"],
+  title: "Elaboración de un simulador de trauma torácico a partir de un torso cadavérico utilizando tecnología de imágenes digitales e impresión 3D",
+  author: "Sebastian Spoerer",
+  role: "",
+  collab: "",
+  area: "Investigación / Publicación académica",
+  year: "2021",
+  url: "https://www.researchgate.net/profile/Sebastian_Spoerer"
+},
+
+/* ------------------ Web Design - KE-ZU Furniture — Maria Jesus Sotoluque ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/F2854371739124504392775208743619/Captura-de-pantalla-2026-03-23-a-las-19.00.22.png",
+  orientation: "h",
+  span: 1,
+  tags: ["web", "ux ui"],
+  title: "Web Design - KE-ZU Furniture",
+  author: "Maria Jesus Sotoluque",
+  role: "",
+  collab: "",
+  area: "Web / UX UI",
+  year: "2025",
+  url: "https://www.behance.net/gallery/222464357/Web-Design-KE-ZU-Furniture"
+},
+
+/* ------------------ “Poner en valor a los objetos”, en: Diseña, 9 (2015): 190-191 — Lilian Calderón ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/A2854371739106057648701499192003/Captura-de-pantalla-2026-03-23-a-las-19.06.03.png",
+  orientation: "v",
+  span: 1,
+  tags: ["investigación", "publicación académica"],
+  title: "“Poner en valor a los objetos”, en: Diseña, 9 (2015): 190-191",
+  author: "Lilian Calderón",
+  role: "Colaboración en publicación junto a Nicole Cristi y Hugo Palmarola",
+  collab: "",
+  area: "Investigación / Publicación académica",
+  year: "2015",
+  url: "https://www.linkedin.com/in/lilian-calderon-aguirre-b3371814b/overlay/1607973714450/single-media-viewer/?type=DOCUMENT&profileId=ACoAACQ8UVcBMG3tdkfLOMXUc70s1j93g7UGL10"
+},
+
+/* ------------------ Un origen desconocido del diseño industrial — Lilian Calderón ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/S2854370132966497894884549538499/1755358947622.jpeg",
+  orientation: "v",
+  span: 1,
+  tags: ["investigación", "publicación académica"],
+  title: "Un origen desconocido del diseño industrial",
+  author: "Lilian Calderón",
+  role: "Colaboración en conjunto a Federico Monroy",
+  collab: "",
+  area: "Investigación / Publicación académica",
+  year: "2018",
+  url: "https://foroalfa.org/articulos/un-origen-desconocido-del-diseno-industrial"
+},
 
 /* ------------------ Patitas Perdidas — Nicole Cavada ------------------ */
 {
