@@ -5186,7 +5186,7 @@
   title: "Bikini Bottom Cala Bordo",
   author: "Magdalena Maiz Hohlberg",
   role: "Diseñadora / Fundadora",
-  collab: "",
+  collab: "Desarrollado en MARÊ.",
   area: "Moda / Textil / Indumentaria",
   year: "2021",
   url: "https://mare.cl/products/bikini-bottom-cala-bordo"
@@ -5201,7 +5201,7 @@
   title: "Raffia Bag Palma Cacao Brown",
   author: "Magdalena Maiz Hohlberg",
   role: "Diseñadora / Fundadora",
-  collab: "",
+  collab: "Desarrollado en MARÊ.",
   area: "Moda / Textil / Indumentaria",
   year: "n/a",
   url: "https://mare.cl/products/raffia-bag-palma-cacao-brown"
@@ -5216,7 +5216,7 @@
   title: "Peto Crop Top Terracota Rib",
   author: "Magdalena Maiz Hohlberg",
   role: "Diseñadora / Fundadora",
-  collab: "",
+  collab: "Desarrollado en MARÊ.",
   area: "Moda / Textil / Indumentaria",
   year: "n/a",
   url: "https://mare.cl/products/peto-crop-top-terracora-rib"
