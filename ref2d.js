@@ -218,7 +218,6 @@
     "objeto editorial": "editorial",
     "libro de artista": "editorial",
     "publicacion digital": "editorial",
-    "infantil": "editorial",
     "book design": "editorial",
 
     // Branding / Identidad
@@ -471,6 +470,7 @@
     "tipografía":         "Tipografía",
     "lettering":          "Tipografía",
     "experimental":       "Experimental",
+    "infantil":           "Infantil",
     "impresion":          "Impresión",
     "impresión":          "Impresión",
     "impreso":            "Impreso",
@@ -555,7 +555,7 @@
 
   const canonicalTagKey = (tag) => {
     const k = norm(tag);
-    return TAG_ALIASES[k] || k;
+    return norm(TAG_ALIASES[k] || k);
   };
 
   const prettyTag = (canonicalKey) => {
@@ -1049,6 +1049,7 @@
       "tipografía": "Tipografía",
       "tipografia": "Tipografía",
       "experimental": "Experimental",
+      "infantil": "Infantil",
       "impresión": "Impresión",
       "impresion": "Impresión",
       "curaduría": "Curaduría",
@@ -6592,7 +6593,7 @@
   let listSortDir = 1;
   let gridRenderToken = 0;
   let filterDebounceTimer = null;
-  let activeTagFilterKey = '';
+  let activeTagFilterKeys = new Set();
   const FILTER_DEBOUNCE_MS = 220;
   let fillAroundRaf = null;
   let fillAroundLiteTimer = null;
@@ -6787,7 +6788,7 @@
       c.setAttribute('data-tag', t);
       const chipKey = norm(canonicalTagKey(t));
       c.dataset.tagKey = chipKey;
-      if (activeTagFilterKey && chipKey === activeTagFilterKey) {
+      if (activeTagFilterKeys.has(chipKey)) {
         c.classList.add('ref2d__chip--active');
       }
       // Etiquetas de la grilla también son clickeables
@@ -6800,8 +6801,7 @@
         }
         e.preventDefault();
         e.stopPropagation(); // Evita que se abra el modal al hacer click en la etiqueta
-        if (search) search.value=t;
-        applyFilter(t);
+        toggleTagFilter(t);
       }); // Sin capture phase
       metaBox.appendChild(c);
     });
@@ -6975,14 +6975,13 @@
       chip.setAttribute('data-tag', t);
       const chipKey = norm(canonicalTagKey(t));
       chip.dataset.tagKey = chipKey;
-      if (activeTagFilterKey && chipKey === activeTagFilterKey) {
+      if (activeTagFilterKeys.has(chipKey)) {
         chip.classList.add('ref2d__chip--active');
       }
       chip.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
-        if (search) search.value = t;
-        applyFilter(t);
+        toggleTagFilter(t);
       });
       tagsWrap.appendChild(chip);
     });
@@ -8021,13 +8020,12 @@
         chip.setAttribute('data-tag', t);
         const chipKey = norm(canonicalTagKey(t));
         chip.dataset.tagKey = chipKey;
-        if (activeTagFilterKey && chipKey === activeTagFilterKey) {
+        if (activeTagFilterKeys.has(chipKey)) {
           chip.classList.add('ref2d__chip--active');
         }
         chip.addEventListener('click', (e)=>{
           e.stopPropagation(); // Evita que el click cierre el modal de otra forma
-          if (search) search.value=t;
-          applyFilter(t); // Esta función ya cierra el modal automáticamente
+          toggleTagFilter(t); // Esta función ya cierra el modal automáticamente
         });
         sTags.appendChild(chip);
       });
@@ -8277,23 +8275,41 @@
     }, FILTER_DEBOUNCE_MS);
   }
 
-  function getActiveTagKeyFromTerm(term) {
+  function normalizeTagKey(term) {
     const normalized = norm(term).replace(/\s+/g, ' ').trim();
     if (!normalized) return '';
     return norm(canonicalTagKey(normalized));
+  }
+
+  function getActiveTagKeysFromTerm(term) {
+    const normalized = norm(term).replace(/\s+/g, ' ').trim();
+    if (!normalized) return [];
+
+    const parts = normalized
+      .split(/\s*\+\s*|,/)
+      .map((part) => part.trim())
+      .filter(Boolean);
+
+    if (parts.length <= 1) return [];
+
+    const keys = parts.map((part) => normalizeTagKey(part)).filter(Boolean);
+    if (!keys.length) return [];
+    const allKnown = keys.every((key) => isKnownTagKey(key));
+    return allKnown ? Array.from(new Set(keys)) : [];
   }
 
   function syncActiveTagChips() {
     const chips = document.querySelectorAll('.ref2d__chip[data-tag]');
     chips.forEach((chip) => {
       const rawTag = chip.dataset.tag || chip.textContent || '';
-      const chipKey = norm(canonicalTagKey(rawTag));
-      chip.classList.toggle('ref2d__chip--active', !!activeTagFilterKey && chipKey === activeTagFilterKey);
+      const chipKey = normalizeTagKey(rawTag);
+      chip.classList.toggle('ref2d__chip--active', !!chipKey && activeTagFilterKeys.has(chipKey));
     });
   }
 
-  function setActiveTagFilter(term) {
-    activeTagFilterKey = getActiveTagKeyFromTerm(term);
+  function setActiveTagFilters(keys) {
+    const next = Array.isArray(keys) ? keys.map((k) => normalizeTagKey(k)).filter(Boolean) : [];
+    activeTagFilterKeys = new Set(next);
     syncActiveTagChips();
   }
 
@@ -8303,8 +8319,17 @@
       : (project.tags || []).map(canonicalTagKey).filter(Boolean);
   }
 
+  function filterProjectsByTagKeys(tagKeys) {
+    const keys = Array.isArray(tagKeys) ? tagKeys.map((k) => normalizeTagKey(k)).filter(Boolean) : [];
+    if (!keys.length) return DB_ORDERED.slice();
+    return DB_ORDERED.filter((project) => {
+      const projectKeys = getProjectTagKeys(project).map((k) => normalizeTagKey(k)).filter(Boolean);
+      return keys.every((key) => projectKeys.includes(key));
+    });
+  }
+
   function filterProjectsByTagKey(tagKey) {
-    return DB_ORDERED.filter((project) => getProjectTagKeys(project).includes(tagKey));
+    return filterProjectsByTagKeys([tagKey]);
   }
 
   function isKnownTagKey(tagKey) {
@@ -8314,7 +8339,7 @@
   }
 
   function tokenizeSearchTerm(term) {
-    const normalized = norm(term).replace(/\s+/g, ' ').trim();
+    const normalized = norm(term).replace(/\+/g, ' ').replace(/\s+/g, ' ').trim();
     if (!normalized) return [];
 
     // Prioriza alias de frase completa para búsquedas semánticas:
@@ -8330,6 +8355,24 @@
       .filter(Boolean);
 
     return Array.from(new Set(tokens));
+  }
+
+  function updateSearchWithActiveTagFilters() {
+    if (!search) return;
+    const labels = Array.from(activeTagFilterKeys).map((key) => prettyTag(key));
+    search.value = labels.join(' + ');
+    updateSearchClearVisibility();
+  }
+
+  function toggleTagFilter(tag) {
+    const key = normalizeTagKey(tag);
+    if (!key) return;
+    const next = new Set(activeTagFilterKeys);
+    if (next.has(key)) next.delete(key);
+    else next.add(key);
+    setActiveTagFilters(Array.from(next));
+    updateSearchWithActiveTagFilters();
+    applyFilter(Array.from(activeTagFilterKeys));
   }
 
   function getFilteredProjects(tokens) {
@@ -8355,9 +8398,45 @@
       filterDebounceTimer = null;
     }
     updateSearchClearVisibility();
+    const tagKeysFromInput = Array.isArray(term)
+      ? term.map((k) => normalizeTagKey(k)).filter(Boolean)
+      : getActiveTagKeysFromTerm(term);
+
+    if (tagKeysFromInput.length) {
+      const list = filterProjectsByTagKeys(tagKeysFromInput);
+      setActiveTagFilters(tagKeysFromInput);
+      if (list.length === 0) {
+        activeList = [];
+        if (activeView === 'bento') {
+          camX = 0;
+          camY = 0;
+          applyTransform();
+        }
+        closeSpotlight();
+        renderActiveView();
+        if (count) {
+          const tagsLabel = tagKeysFromInput.map((k) => prettyTag(k)).join(' + ');
+          count.textContent = `${formatCountLine(0, 0)} — sin resultados para “${tagsLabel}”`;
+        }
+        highlightActiveCategory(tagKeysFromInput.length === 1 ? tagKeysFromInput[0] : '');
+        return;
+      }
+      activeList = list;
+      highlightActiveCategory(tagKeysFromInput.length === 1 ? tagKeysFromInput[0] : '');
+      if (activeView === 'bento') {
+        camX = 0;
+        camY = 0;
+        applyTransform();
+      }
+      closeSpotlight();
+      renderActiveView();
+      syncActiveTagChips();
+      return;
+    }
+
     const q = norm(term);
     const normalizedTerm = q.replace(/\s+/g, ' ').trim();
-    const exactTagKey = normalizedTerm ? norm(canonicalTagKey(normalizedTerm)) : '';
+    const exactTagKey = normalizedTerm ? normalizeTagKey(normalizedTerm) : '';
     const shouldUseExactTag = isKnownTagKey(exactTagKey);
     const tokens = tokenizeSearchTerm(term);
     if(q){
@@ -8366,7 +8445,7 @@
         : getFilteredProjects(tokens);
       if(list.length === 0){
         activeList = [];
-        setActiveTagFilter('');
+        setActiveTagFilters([]);
         if (activeView === 'bento') {
           camX = 0;
           camY = 0;
@@ -8382,7 +8461,7 @@
         return;
       }
       activeList = list;
-      setActiveTagFilter(shouldUseExactTag ? exactTagKey : term);
+      setActiveTagFilters(shouldUseExactTag ? [exactTagKey] : []);
       // Sincronizar highlight de categorías si el término coincide con una categoría
       const matchingCat = shouldUseExactTag
         ? exactTagKey
@@ -8391,7 +8470,7 @@
     }else{
       // Sin filtro: usar el orden reordenado inicial
       activeList = DB_ORDERED.slice();
-      setActiveTagFilter('');
+      setActiveTagFilters([]);
       highlightActiveCategory('all');
     }
     if (activeView === 'bento') {
@@ -8608,23 +8687,8 @@
       if (search) search.value = '';
       applyFilter('');
     } else {
-      // Filtrar por categoría exacta para que coincida con el contador del panel.
-      const list = filterProjectsByTagKey(key);
-
-      if (search) search.value = key;
-      updateSearchClearVisibility();
-      activeList = list;
-      setActiveTagFilter(key);
-
-      if (activeView === 'bento') {
-        camX = 0;
-        camY = 0;
-        applyTransform();
-      }
-      closeSpotlight();
-      renderActiveView();
-      syncActiveTagChips();
-      updateCount();
+      if (search) search.value = prettyTag(key);
+      applyFilter([key]);
     }
     highlightActiveCategory(key);
   }
