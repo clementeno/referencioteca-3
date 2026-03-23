@@ -425,7 +425,6 @@
     "product design": "producto",
     "product": "producto",
     "prototipo": "producto",
-    "diseno integral": "branding",
     "embalaje": "packaging",
     "envase": "packaging",
     "empaque": "packaging",
@@ -535,6 +534,7 @@
     "cultura":            "Cultura",
     "direccion creativa": "Dirección Creativa",
     "direccion de arte":  "Dirección de Arte",
+    "diseno integral":    "Diseño Integral",
     "diseno conceptual":  "Diseño Conceptual",
     "diseno de informacion":"Diseño de Información",
     "ecologia":           "Ecología",
@@ -8297,6 +8297,22 @@
     syncActiveTagChips();
   }
 
+  function getProjectTagKeys(project) {
+    return (project._tagKeys && project._tagKeys.length)
+      ? project._tagKeys
+      : (project.tags || []).map(canonicalTagKey).filter(Boolean);
+  }
+
+  function filterProjectsByTagKey(tagKey) {
+    return DB_ORDERED.filter((project) => getProjectTagKeys(project).includes(tagKey));
+  }
+
+  function isKnownTagKey(tagKey) {
+    if (!tagKey) return false;
+    if (tagKey !== 'all' && Object.prototype.hasOwnProperty.call(CAT_LABELS, tagKey)) return true;
+    return DB.some((project) => getProjectTagKeys(project).includes(tagKey));
+  }
+
   function tokenizeSearchTerm(term) {
     const normalized = norm(term).replace(/\s+/g, ' ').trim();
     if (!normalized) return [];
@@ -8340,9 +8356,14 @@
     }
     updateSearchClearVisibility();
     const q = norm(term);
+    const normalizedTerm = q.replace(/\s+/g, ' ').trim();
+    const exactTagKey = normalizedTerm ? norm(canonicalTagKey(normalizedTerm)) : '';
+    const shouldUseExactTag = isKnownTagKey(exactTagKey);
     const tokens = tokenizeSearchTerm(term);
     if(q){
-      const list = getFilteredProjects(tokens);
+      const list = shouldUseExactTag
+        ? filterProjectsByTagKey(exactTagKey)
+        : getFilteredProjects(tokens);
       if(list.length === 0){
         activeList = [];
         setActiveTagFilter('');
@@ -8361,10 +8382,11 @@
         return;
       }
       activeList = list;
-      setActiveTagFilter(term);
+      setActiveTagFilter(shouldUseExactTag ? exactTagKey : term);
       // Sincronizar highlight de categorías si el término coincide con una categoría
-      const normalizedTerm = q.replace(/\s+/g, ' ').trim();
-      const matchingCat = normalizedTerm ? canonicalTagKey(normalizedTerm) : '';
+      const matchingCat = shouldUseExactTag
+        ? exactTagKey
+        : (normalizedTerm ? canonicalTagKey(normalizedTerm) : '');
       highlightActiveCategory(matchingCat || '');
     }else{
       // Sin filtro: usar el orden reordenado inicial
@@ -8587,12 +8609,7 @@
       applyFilter('');
     } else {
       // Filtrar por categoría exacta para que coincida con el contador del panel.
-      const list = DB_ORDERED.filter((p) => {
-        const keys = (p._tagKeys && p._tagKeys.length)
-          ? p._tagKeys
-          : (p.tags || []).map(canonicalTagKey).filter(Boolean);
-        return keys.includes(key);
-      });
+      const list = filterProjectsByTagKey(key);
 
       if (search) search.value = key;
       updateSearchClearVisibility();
