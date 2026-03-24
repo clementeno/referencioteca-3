@@ -1,0 +1,22 @@
+{
+  "sources": 360,
+  "updated_fields_inserted": 1086,
+  "generation": {
+    "avif_base_generated": 360,
+    "avif_base_cached": 0,
+    "avif_variants_generated": 547,
+    "avif_variants_cached": 0,
+    "webp_variants_generated": 547,
+    "webp_variants_cached": 0
+  },
+  "errors": [],
+  "target_widths": [
+    640,
+    1280
+  ],
+  "quality": {
+    "webp": 78,
+    "avif": 50,
+    "avif_speed": 6
+  }
+}
