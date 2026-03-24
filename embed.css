@@ -305,6 +305,20 @@ a.ref2d__header-btn{text-decoration:none; color:var(--ink);}
   outline-offset:-1px;
 }
 
+.ref2d__suggestion-group + .ref2d__suggestion-group{
+  border-top:1px solid #1f1f24;
+  margin-top:4px;
+  padding-top:4px;
+}
+
+.ref2d__suggestion-groupTitle{
+  padding:6px 16px 4px;
+  font-size:10px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:#8f9099;
+}
+
 .ref2d__viewport{position:relative; width:100vw; height: calc(100vh - 64px); overflow:hidden; touch-action:none; cursor:grab; user-select:none;}
 .ref2d__viewport.is-dragging,
 .ref2d__viewport.is-panning{ cursor:grabbing; }
@@ -613,6 +627,10 @@ a.ref2d__header-btn{text-decoration:none; color:var(--ink);}
   white-space:pre-line;
   line-height:1.4;
   overflow-wrap:anywhere;
+}
+.ref2d__chip--inline{
+  display:inline-flex;
+  vertical-align:baseline;
 }
 .sheet__tags{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px;}
 .sheet__link{ display:inline-block; padding:10px 12px; border-radius:10px; background:#1f1f24; border:1px solid #2a2a2e; color:#fff; text-decoration:none;}

@@ -807,6 +807,152 @@
       .trim();
   }
 
+  const PERSON_NAME_PARTICLES = new Set([
+    "de", "del", "la", "las", "los", "y", "da", "do", "dos", "van", "von", "di"
+  ]);
+
+  const PERSON_BLACKLIST_KEYS = new Set([
+    "direccion", "direccion de arte", "direccion creativa", "diseno", "diseño",
+    "operacion", "produccion", "produccion ejecutiva", "produccion general",
+    "colaboracion", "colaboracion con", "cofundadora", "cofundador", "fundadora",
+    "fundador", "proyecto", "proyecto de titulo", "ano", "año", "subsecretaria",
+    "secretaria", "ministerio", "universidad", "fundacion", "estudio", "modelo",
+    "maquillaje", "fotografia", "fotografía", "confeccion", "confección",
+    "estilismo", "guiatura", "programador", "disenadora", "disenador",
+    "ilustradora", "ilustrador", "artista", "visualista", "vjing", "show",
+    "shows", "backup", "entorno", "3d", "zooma", "lab", "adeu", "itera", "bt",
+    "festival de vina del mar", "lollapaloozacl", "elfestivaldevina"
+  ]);
+
+  const PERSON_BLACKLIST_WORDS = new Set([
+    "cliente", "clientes", "desarrollado", "desarrollada", "desarrollados", "desarrolladas",
+    "realizado", "realizada", "realizados", "realizadas", "equipo", "creative", "creativo",
+    "creativa", "produccion", "production", "direccion", "diseno", "diseño", "programador",
+    "programadora", "editorial", "estudio", "studio", "fundacion", "fundación", "ministerio",
+    "universidad", "empresa", "marca", "secretaria", "subsecretaria", "servicio", "proyecto",
+    "campana", "campaña", "fotografia", "fotografía", "maquillaje", "modelo", "confeccion",
+    "confección", "estilismo", "guiatura", "identidad", "visuales", "autor", "autora",
+    "autores", "autoras", "libro", "isbn", "isbnn", "producido", "producida", "producer",
+    "produced", "producido por", "desarrollado por", "colaboracion", "colaboración",
+    "coordinacion", "coordinación", "creacion", "creación", "edicion", "edición",
+    "impreso", "impresa", "impresion", "impresión", "diseno sonoro", "mezcla", "programacion",
+    "programación", "direccion y creacion", "dirección y creación"
+  ]);
+
+  function canonicalPersonLabel(raw) {
+    const value = String(raw || "").replace(/\s+/g, " ").trim();
+    if (!value) return "";
+    if (value.startsWith("@")) {
+      const clean = value.replace(/[^@A-Za-z0-9._-]+/g, "");
+      return clean || "";
+    }
+    return cleanAuthorName(value);
+  }
+
+  function isLikelyPersonCandidate(raw) {
+    const value = canonicalPersonLabel(raw);
+    if (!value) return false;
+    if (/https?:\/\//i.test(value)) return false;
+    if (/\.(com|cl|org|net|io|gov|edu)\b/i.test(value)) return false;
+    if (value.startsWith("@")) return value.length >= 3;
+    if (/\d/.test(value)) return false;
+
+    const key = toNameKey(value);
+    if (!key || PERSON_BLACKLIST_KEYS.has(key)) return false;
+    if (key.includes("festival de ")) return false;
+    if (key.includes("ministerio de ")) return false;
+    if (key.includes("fundacion ")) return false;
+    if (key.includes("universidad ")) return false;
+    if (key.length < 3) return false;
+
+    const words = value.split(/\s+/).filter(Boolean);
+    if (!words.length || words.length > 6) return false;
+
+    // Debe tener al menos 1 token con mayúscula inicial real.
+    const hasUpperToken = words.some((word) => /^[A-ZÁÉÍÓÚÜÑ]/u.test(word));
+    if (!hasUpperToken) return false;
+
+    if (words.length === 1) {
+      // Para evitar falsos positivos (Autores, Libro, etc.) solo aceptamos
+      // palabra única cuando es handle tipo @usuario.
+      return false;
+    } else {
+      const valid = words.every((word) => {
+        const low = norm(word);
+        if (PERSON_NAME_PARTICLES.has(low)) return true;
+        if (PERSON_BLACKLIST_WORDS.has(low)) return false;
+        if (!/^[A-ZÁÉÍÓÚÜÑ][\p{L}'’.-]*$/u.test(word)) return false;
+        // Evita siglas o palabras totalmente en mayúsculas tipo ISBNN.
+        if (word.length > 2 && word === word.toLocaleUpperCase("es-CL")) return false;
+        return true;
+      });
+      if (!valid) return false;
+      const significantWords = words.filter((word) => {
+        const low = norm(word);
+        return !PERSON_NAME_PARTICLES.has(low);
+      });
+      if (significantWords.length < 2) return false;
+      if (significantWords.some((word) => PERSON_BLACKLIST_WORDS.has(norm(word)))) return false;
+    }
+
+    return true;
+  }
+
+  function extractPersonCandidates(rawText) {
+    const text = String(rawText || "");
+    if (!text.trim()) return [];
+    const matches = text.match(/@[A-Za-z0-9._-]{2,}|[A-ZÁÉÍÓÚÜÑ][\p{L}'’.-]+(?:\s+(?:de|del|la|las|los|y|da|do|dos|van|von|di)\s+[A-ZÁÉÍÓÚÜÑ][\p{L}'’.-]+|\s+[A-ZÁÉÍÓÚÜÑ][\p{L}'’.-]+){0,3}/gu) || [];
+    const out = [];
+    const seen = new Set();
+    matches.forEach((match) => {
+      const candidate = canonicalPersonLabel(match);
+      const key = toNameKey(candidate);
+      if (!candidate || !key || seen.has(key)) return;
+      if (!isLikelyPersonCandidate(candidate)) return;
+      seen.add(key);
+      out.push(candidate);
+    });
+    return out;
+  }
+
+  function extractPeopleFromCredits(creditsRaw) {
+    const list = [];
+    const seen = new Set();
+    splitCreditSegments(creditsRaw).forEach((segment) => {
+      const labeled = extractCreditLabel(segment);
+      const source = labeled ? labeled.details : segment;
+      extractPersonCandidates(source).forEach((name) => {
+        const key = toNameKey(name);
+        if (!key || seen.has(key)) return;
+        seen.add(key);
+        list.push(name);
+      });
+    });
+    return list;
+  }
+
+  function deriveProjectPeople(meta, displayAuthor, displayCredits) {
+    const people = [];
+    const seen = new Set();
+    const addPerson = (raw) => {
+      const label = canonicalPersonLabel(raw);
+      const key = toNameKey(label);
+      if (!label || !key || seen.has(key)) return;
+      if (!isLikelyPersonCandidate(label)) return;
+      seen.add(key);
+      people.push(label);
+    };
+
+    splitAuthorNames(displayAuthor || meta.author || "").forEach(addPerson);
+    extractPeopleFromCredits(displayCredits || meta.collab || "").forEach(addPerson);
+    extractPersonCandidates(meta.collab || "").forEach(addPerson);
+
+    return {
+      names: people,
+      keys: people.map((name) => toNameKey(name)).filter(Boolean)
+    };
+  }
+
   function escapeRegExp(value) {
     return String(value || "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   }
@@ -975,6 +1121,9 @@
     p._displayAuthor = people.author || "—";
     p._displayRole = people.role || "Diseñador/a";
     p._displayCredits = people.credits || "";
+    const projectPeople = deriveProjectPeople(p, p._displayAuthor, p._displayCredits);
+    p._peopleNames = projectPeople.names;
+    p._peopleKeys = projectPeople.keys;
 
     const rawPrimary = Array.isArray(p.primaryCategories)
       ? p.primaryCategories.slice()
@@ -1026,6 +1175,8 @@
       p.area || "",
       p.collab || "",
       p._displayCredits || "",
+      p._peopleNames.join(" "),
+      p._peopleKeys.join(" "),
       rawPrimary.join(" "),
       rawSecondary.join(" "),
       rawKeywords.join(" "),
@@ -5829,7 +5980,7 @@
   srcOriginal: "https://freight.cargo.site/t/original/i/S2842814634077136000069929480899/Nauto-Carlos-Captura-de-pantalla-2026-03-16-a-las-12.58.03.png",
   orientation: "sq",
   span: 1,
-  tags: ["vjing","visuales","música"],
+  tags: ["vjing","visuales"],
   title: "Pedro Ruminot - Festival de Viña del Mar 2027",
   author: "Carlos Nauto Paez",
   role: "Visualista / Diseñador",
@@ -8170,6 +8321,21 @@
     // Normalizar tags + crear índice de búsqueda
     DB.forEach(normalizeProjectTags);
 
+  function buildPeopleIndex(projects) {
+    const byKey = new Map();
+    (projects || []).forEach((project) => {
+      const names = Array.isArray(project && project._peopleNames) ? project._peopleNames : [];
+      names.forEach((name) => {
+        const key = toNameKey(name);
+        if (!key) return;
+        if (!byKey.has(key)) byKey.set(key, name);
+      });
+    });
+    return byKey;
+  }
+
+  let PEOPLE_BY_KEY = buildPeopleIndex(DB);
+
   /* ===== Reordenamiento de proyectos al cargar ===== */
   // Opción A: Shuffle aleatorio (Fisher-Yates)
   // Opción B: Rotación persistente (por defecto)
@@ -8345,6 +8511,7 @@
   let gridRenderToken = 0;
   let filterDebounceTimer = null;
   let activeTagFilterKeys = new Set();
+  let activePersonFilterKeys = new Set();
   const FILTER_DEBOUNCE_MS = 220;
   let fillAroundRaf = null;
   let fillAroundLiteTimer = null;
@@ -8528,6 +8695,31 @@
 
     const metaBox = document.createElement('div');
     metaBox.className='ref2d__meta';
+    if (Array.isArray(meta._peopleNames) && meta._peopleNames.length) {
+      const personName = meta._peopleNames[0];
+      const personKey = toNameKey(personName);
+      if (personKey) {
+        const personChip = document.createElement('span');
+        personChip.className = 'ref2d__chip ref2d__chip--person';
+        personChip.textContent = personName;
+        personChip.setAttribute('data-person', personName);
+        personChip.dataset.personKey = personKey;
+        if (activePersonFilterKeys.has(personKey)) {
+          personChip.classList.add('ref2d__chip--active');
+        }
+        personChip.addEventListener('click', (e) => {
+          if (performance.now() < suppressClickUntil) {
+            e.preventDefault();
+            e.stopPropagation();
+            return;
+          }
+          e.preventDefault();
+          e.stopPropagation();
+          togglePersonFilter(personName);
+        });
+        metaBox.appendChild(personChip);
+      }
+    }
     tags.slice(0,3).forEach(t=>{
       const c=document.createElement('span');
       c.className='ref2d__chip';
@@ -8659,6 +8851,102 @@
     });
   }
 
+  function getPersonDisplayName(key) {
+    return PEOPLE_BY_KEY.get(key) || key;
+  }
+
+  function createPersonChip(name, className = '') {
+    const key = toNameKey(name);
+    if (!key) return null;
+    const chip = document.createElement('span');
+    chip.className = `ref2d__chip ref2d__chip--person ${className}`.trim();
+    chip.textContent = getPersonDisplayName(key);
+    chip.setAttribute('data-person', getPersonDisplayName(key));
+    chip.dataset.personKey = key;
+    if (activePersonFilterKeys.has(key)) {
+      chip.classList.add('ref2d__chip--active');
+    }
+    chip.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      togglePersonFilter(getPersonDisplayName(key));
+    });
+    return chip;
+  }
+
+  function renderPeopleInContainer(container, names) {
+    if (!container) return;
+    container.innerHTML = "";
+    const people = Array.isArray(names) ? names : [];
+    if (!people.length) {
+      container.textContent = "—";
+      return;
+    }
+    const frag = document.createDocumentFragment();
+    people.forEach((name, idx) => {
+      const chip = createPersonChip(name, 'ref2d__chip--inline');
+      if (!chip) return;
+      if (idx > 0 && frag.childNodes.length > 0) {
+        frag.appendChild(document.createTextNode(" "));
+      }
+      frag.appendChild(chip);
+    });
+    if (!frag.childNodes.length) {
+      container.textContent = "—";
+      return;
+    }
+    container.appendChild(frag);
+  }
+
+  function renderCreditsWithClickablePeople(container, rawCredits, projectPeople) {
+    if (!container) return;
+    container.innerHTML = "";
+    const lines = splitCreditSegments(rawCredits);
+    if (!lines.length) {
+      container.textContent = "—";
+      return;
+    }
+    const candidates = (Array.isArray(projectPeople) ? projectPeople : [])
+      .map((name) => canonicalPersonLabel(name))
+      .filter(Boolean);
+    const uniqueCandidates = Array.from(new Set(candidates.map((n) => toNameKey(n))))
+      .map((key) => getPersonDisplayName(key))
+      .filter(Boolean)
+      .sort((a, b) => b.length - a.length);
+
+    const regex = uniqueCandidates.length
+      ? new RegExp(uniqueCandidates.map((name) => escapeRegExp(name)).join("|"), "gi")
+      : null;
+
+    const frag = document.createDocumentFragment();
+    lines.forEach((line, lineIndex) => {
+      if (lineIndex > 0) frag.appendChild(document.createElement("br"));
+      if (!regex) {
+        frag.appendChild(document.createTextNode(line));
+        return;
+      }
+      let cursor = 0;
+      line.replace(regex, (match, offset) => {
+        if (offset > cursor) {
+          frag.appendChild(document.createTextNode(line.slice(cursor, offset)));
+        }
+        const chip = createPersonChip(match, 'ref2d__chip--inline');
+        if (chip) frag.appendChild(chip);
+        else frag.appendChild(document.createTextNode(match));
+        cursor = offset + match.length;
+        return match;
+      });
+      if (cursor < line.length) {
+        frag.appendChild(document.createTextNode(line.slice(cursor)));
+      }
+    });
+    if (!frag.childNodes.length) {
+      container.textContent = "—";
+      return;
+    }
+    container.appendChild(frag);
+  }
+
   function createSharedCardElement(meta, className, options = {}) {
     const maxTags = Number.isFinite(options.maxTags) ? options.maxTags : 4;
     const onImageLoad = typeof options.onImageLoad === 'function' ? options.onImageLoad : null;
@@ -8695,7 +8983,7 @@
     title.textContent = meta.title || '—';
     const author = document.createElement('p');
     author.className = 'ref2d__view-card-author';
-    author.textContent = meta._displayAuthor || meta.author || '—';
+    renderPeopleInContainer(author, [meta._displayAuthor || meta.author || '—']);
     const role = document.createElement('p');
     role.className = 'ref2d__view-card-role';
     role.textContent = `Rol: ${meta._displayRole || 'Diseñador/a'}`;
@@ -8724,6 +9012,7 @@
       tagsWrap.appendChild(chip);
     });
     body.appendChild(tagsWrap);
+
     el.appendChild(body);
 
     el.addEventListener('click', () => openSpotlight(el));
@@ -9454,11 +9743,6 @@
     // El CSS con max-width, max-height y object-fit: contain se encarga de todo
   }
 
-  function formatCreditsText(raw) {
-    const lines = splitCreditSegments(raw);
-    return lines.length ? lines.join("\n") : "—";
-  }
-
   function closeRequestPanel() {
     isRequestSending = false;
     activeRequestType = "";
@@ -9732,14 +10016,15 @@
     closeRequestPanel();
 
     sTitle.textContent  = el.dataset.title  || meta.title  || "—";
-    sAuthor.textContent = el.dataset.author || meta._displayAuthor || meta.author || "—";
+    const authorText = el.dataset.author || meta._displayAuthor || meta.author || "—";
+    renderPeopleInContainer(sAuthor, splitAuthorNames(authorText));
     if (sRole) {
       sRole.textContent = el.dataset.role || meta._displayRole || "Diseñador/a";
     }
 
     const creditsText = meta._displayCredits || el.dataset.credits || meta.collab || el.dataset.collab || "";
     if (sCredits) {
-      sCredits.textContent = formatCreditsText(creditsText);
+      renderCreditsWithClickablePeople(sCredits, creditsText, meta._peopleNames || []);
     }
 
     sArea.textContent   = el.dataset.area   || meta.area   || "—";
@@ -9924,43 +10209,105 @@
   /* ===== Sugerencias de búsqueda ===== */
   let activeSuggestIndex = -1;
 
+  function buildSuggestionGroups(query) {
+    const q = norm(query).trim();
+    if (!q) return [];
+
+    const MAX_PER_GROUP = 6;
+    const dedupeGlobal = new Set();
+
+    const buildGroup = (type, title, values) => {
+      const starts = [];
+      const includes = [];
+      values.forEach((raw) => {
+        const value = String(raw || "").trim();
+        if (!value) return;
+        const key = norm(value);
+        if (!key || dedupeGlobal.has(`${type}:${key}`)) return;
+        if (key.startsWith(q)) starts.push(value);
+        else if (key.includes(q)) includes.push(value);
+      });
+      const items = starts.concat(includes).slice(0, MAX_PER_GROUP);
+      items.forEach((value) => dedupeGlobal.add(`${type}:${norm(value)}`));
+      if (!items.length) return null;
+      return { type, title, items };
+    };
+
+    const categoryLabels = Array.from(new Set(
+      DB.flatMap((project) => getProjectTagKeys(project).map((key) => prettyTag(key)))
+    ));
+    const personLabels = Array.from(PEOPLE_BY_KEY.values());
+    const projectTitles = DB.map((project) => project.title || "").filter(Boolean);
+
+    return [
+      buildGroup('category', 'Categorías', categoryLabels.concat(SUGGESTIONS)),
+      buildGroup('person', 'Nombres', personLabels),
+      buildGroup('project', 'Proyectos', projectTitles)
+    ].filter(Boolean);
+  }
+
   function showSuggestions(query) {
     if (!suggestionsBox) return;
-    
-    const q = query.trim().toLowerCase();
 
     // Resetear índice activo cuando cambian las sugerencias
     activeSuggestIndex = -1;
 
-    if (!q) {
+    const groups = buildSuggestionGroups(query);
+    if (!groups.length) {
       suggestionsBox.innerHTML = '';
       suggestionsBox.hidden = true;
       return;
     }
 
-    const matches = SUGGESTIONS.filter(s =>
-      s.toLowerCase().startsWith(q)
-    );
-
-    if (!matches.length) {
-      suggestionsBox.innerHTML = '';
-      suggestionsBox.hidden = true;
-      return;
-    }
-
-    suggestionsBox.innerHTML = matches.map(s => (
-      `<div class="ref2d__suggestion-item" data-suggestion="${s}" role="option" tabindex="-1">${s}</div>`
-    )).join('');
+    suggestionsBox.innerHTML = groups.map((group) => {
+      const items = group.items.map((value) => (
+        `<div class="ref2d__suggestion-item" data-suggestion="${value}" data-kind="${group.type}" role="option" tabindex="-1">${value}</div>`
+      )).join('');
+      return `<div class="ref2d__suggestion-group"><div class="ref2d__suggestion-groupTitle">${group.title}</div>${items}</div>`;
+    }).join('');
 
     suggestionsBox.hidden = false;
     suggestionsBox.setAttribute('role', 'listbox');
   }
 
   // Función para aplicar una sugerencia (reutilizable desde click y teclado)
-  function applySuggestion(value) {
+  function applySuggestion(value, kind = '') {
     if (!search) return;
-    search.value = value;
-    queueFilter(value, true);
+    const clean = String(value || '').trim();
+    if (!clean) return;
+    const normalizedKind = String(kind || '').trim();
+
+    if (normalizedKind === 'person') {
+      const key = normalizePersonKey(clean);
+      if (isKnownPersonKey(key)) {
+        setActivePersonFilters([key]);
+        updateSearchWithActiveFilters();
+        applyFilter({
+          tagKeys: Array.from(activeTagFilterKeys),
+          personKeys: Array.from(activePersonFilterKeys)
+        });
+      } else {
+        search.value = clean;
+        queueFilter(clean, true);
+      }
+    } else if (normalizedKind === 'category') {
+      const key = normalizeTagKey(clean);
+      if (isKnownTagKey(key)) {
+        setActiveTagFilters([key]);
+        updateSearchWithActiveFilters();
+        applyFilter({
+          tagKeys: Array.from(activeTagFilterKeys),
+          personKeys: Array.from(activePersonFilterKeys)
+        });
+      } else {
+        search.value = clean;
+        queueFilter(clean, true);
+      }
+    } else {
+      search.value = clean;
+      queueFilter(clean, true);
+    }
+
     if (suggestionsBox) {
       suggestionsBox.hidden = true;
     }
@@ -10024,6 +10371,19 @@
     return norm(canonicalTagKey(normalized));
   }
 
+  function normalizePersonKey(term) {
+    return toNameKey(canonicalPersonLabel(term));
+  }
+
+  function getProjectPersonKeys(project) {
+    return (project && Array.isArray(project._peopleKeys)) ? project._peopleKeys : [];
+  }
+
+  function isKnownPersonKey(personKey) {
+    if (!personKey) return false;
+    return PEOPLE_BY_KEY.has(personKey);
+  }
+
   function getActiveTagKeysFromTerm(term) {
     const normalized = norm(term).replace(/\s+/g, ' ').trim();
     if (!normalized) return [];
@@ -10050,10 +10410,25 @@
     });
   }
 
+  function syncActivePersonChips() {
+    const chips = document.querySelectorAll('.ref2d__chip[data-person]');
+    chips.forEach((chip) => {
+      const rawPerson = chip.dataset.person || chip.textContent || '';
+      const chipKey = normalizePersonKey(rawPerson);
+      chip.classList.toggle('ref2d__chip--active', !!chipKey && activePersonFilterKeys.has(chipKey));
+    });
+  }
+
   function setActiveTagFilters(keys) {
     const next = Array.isArray(keys) ? keys.map((k) => normalizeTagKey(k)).filter(Boolean) : [];
     activeTagFilterKeys = new Set(next);
     syncActiveTagChips();
+  }
+
+  function setActivePersonFilters(keys) {
+    const next = Array.isArray(keys) ? keys.map((k) => normalizePersonKey(k)).filter(Boolean) : [];
+    activePersonFilterKeys = new Set(next);
+    syncActivePersonChips();
   }
 
   function getProjectTagKeys(project) {
@@ -10071,6 +10446,19 @@
     });
   }
 
+  function filterProjectsByTagAndPersonKeys(tagKeys, personKeys) {
+    const normTagKeys = Array.isArray(tagKeys) ? tagKeys.map((k) => normalizeTagKey(k)).filter(Boolean) : [];
+    const normPersonKeys = Array.isArray(personKeys) ? personKeys.map((k) => normalizePersonKey(k)).filter(Boolean) : [];
+    if (!normTagKeys.length && !normPersonKeys.length) return DB_ORDERED.slice();
+    return DB_ORDERED.filter((project) => {
+      const projectTagKeys = getProjectTagKeys(project).map((k) => normalizeTagKey(k)).filter(Boolean);
+      const projectPersonKeys = getProjectPersonKeys(project).map((k) => normalizePersonKey(k)).filter(Boolean);
+      const matchesTags = normTagKeys.every((key) => projectTagKeys.includes(key));
+      const matchesPeople = normPersonKeys.every((key) => projectPersonKeys.includes(key));
+      return matchesTags && matchesPeople;
+    });
+  }
+
   function filterProjectsByTagKey(tagKey) {
     return filterProjectsByTagKeys([tagKey]);
   }
@@ -10079,6 +10467,34 @@
     if (!tagKey) return false;
     if (tagKey !== 'all' && Object.prototype.hasOwnProperty.call(CAT_LABELS, tagKey)) return true;
     return DB.some((project) => getProjectTagKeys(project).includes(tagKey));
+  }
+
+  function getCombinedKeysFromTerm(term) {
+    const normalized = String(term || '').replace(/\s+/g, ' ').trim();
+    if (!normalized) return { tagKeys: [], personKeys: [] };
+    const parts = normalized
+      .split(/\s*\+\s*|,/)
+      .map((part) => part.trim())
+      .filter(Boolean);
+    if (parts.length <= 1) return { tagKeys: [], personKeys: [] };
+
+    const tagKeys = [];
+    const personKeys = [];
+    for (let i = 0; i < parts.length; i += 1) {
+      const part = parts[i];
+      const tagKey = normalizeTagKey(part);
+      if (isKnownTagKey(tagKey)) {
+        if (!tagKeys.includes(tagKey)) tagKeys.push(tagKey);
+        continue;
+      }
+      const personKey = normalizePersonKey(part);
+      if (isKnownPersonKey(personKey)) {
+        if (!personKeys.includes(personKey)) personKeys.push(personKey);
+        continue;
+      }
+      return { tagKeys: [], personKeys: [] };
+    }
+    return { tagKeys, personKeys };
   }
 
   function tokenizeSearchTerm(term) {
@@ -10100,9 +10516,11 @@
     return Array.from(new Set(tokens));
   }
 
-  function updateSearchWithActiveTagFilters() {
+  function updateSearchWithActiveFilters() {
     if (!search) return;
-    const labels = Array.from(activeTagFilterKeys).map((key) => prettyTag(key));
+    const tagLabels = Array.from(activeTagFilterKeys).map((key) => prettyTag(key));
+    const personLabels = Array.from(activePersonFilterKeys).map((key) => getPersonDisplayName(key));
+    const labels = tagLabels.concat(personLabels);
     search.value = labels.join(' + ');
     updateSearchClearVisibility();
   }
@@ -10114,8 +10532,25 @@
     if (next.has(key)) next.delete(key);
     else next.add(key);
     setActiveTagFilters(Array.from(next));
-    updateSearchWithActiveTagFilters();
-    applyFilter(Array.from(activeTagFilterKeys));
+    updateSearchWithActiveFilters();
+    applyFilter({
+      tagKeys: Array.from(activeTagFilterKeys),
+      personKeys: Array.from(activePersonFilterKeys)
+    });
+  }
+
+  function togglePersonFilter(name) {
+    const key = normalizePersonKey(name);
+    if (!key) return;
+    const next = new Set(activePersonFilterKeys);
+    if (next.has(key)) next.delete(key);
+    else next.add(key);
+    setActivePersonFilters(Array.from(next));
+    updateSearchWithActiveFilters();
+    applyFilter({
+      tagKeys: Array.from(activeTagFilterKeys),
+      personKeys: Array.from(activePersonFilterKeys)
+    });
   }
 
   function getFilteredProjects(tokens) {
@@ -10141,13 +10576,26 @@
       filterDebounceTimer = null;
     }
     updateSearchClearVisibility();
-    const tagKeysFromInput = Array.isArray(term)
+    const forcedTagKeys = Array.isArray(term)
       ? term.map((k) => normalizeTagKey(k)).filter(Boolean)
-      : getActiveTagKeysFromTerm(term);
+      : (term && typeof term === 'object' && !Array.isArray(term))
+        ? (Array.isArray(term.tagKeys) ? term.tagKeys.map((k) => normalizeTagKey(k)).filter(Boolean) : null)
+        : null;
+    const forcedPersonKeys = (term && typeof term === 'object' && !Array.isArray(term))
+      ? (Array.isArray(term.personKeys) ? term.personKeys.map((k) => normalizePersonKey(k)).filter(Boolean) : null)
+      : null;
+    const textTerm = (term && typeof term === 'object' && !Array.isArray(term))
+      ? String(term.term || '')
+      : String(Array.isArray(term) ? '' : (term || ''));
 
-    if (tagKeysFromInput.length) {
-      const list = filterProjectsByTagKeys(tagKeysFromInput);
+    const combinedFromInput = getCombinedKeysFromTerm(textTerm);
+    const tagKeysFromInput = forcedTagKeys || combinedFromInput.tagKeys || [];
+    const personKeysFromInput = forcedPersonKeys || combinedFromInput.personKeys || [];
+
+    if (tagKeysFromInput.length || personKeysFromInput.length) {
+      const list = filterProjectsByTagAndPersonKeys(tagKeysFromInput, personKeysFromInput);
       setActiveTagFilters(tagKeysFromInput);
+      setActivePersonFilters(personKeysFromInput);
       if (list.length === 0) {
         activeList = [];
         if (activeView === 'bento') {
@@ -10158,8 +10606,8 @@
         closeSpotlight();
         renderActiveView();
         if (count) {
-          const tagsLabel = tagKeysFromInput.map((k) => prettyTag(k)).join(' + ');
-          count.textContent = `${formatCountLine(0, 0)} — sin resultados para “${tagsLabel}”`;
+          const labels = tagKeysFromInput.map((k) => prettyTag(k)).concat(personKeysFromInput.map((k) => getPersonDisplayName(k)));
+          count.textContent = `${formatCountLine(0, 0)} — sin resultados para “${labels.join(' + ')}”`;
         }
         highlightActiveCategory(tagKeysFromInput.length === 1 ? tagKeysFromInput[0] : '');
         return;
@@ -10174,21 +10622,28 @@
       closeSpotlight();
       renderActiveView();
       syncActiveTagChips();
+      syncActivePersonChips();
       return;
     }
 
-    const q = norm(term);
+    const q = norm(textTerm);
     const normalizedTerm = q.replace(/\s+/g, ' ').trim();
     const exactTagKey = normalizedTerm ? normalizeTagKey(normalizedTerm) : '';
     const shouldUseExactTag = isKnownTagKey(exactTagKey);
-    const tokens = tokenizeSearchTerm(term);
+    const exactPersonKey = normalizedTerm ? normalizePersonKey(normalizedTerm) : '';
+    const shouldUseExactPerson = isKnownPersonKey(exactPersonKey);
+    const tokens = tokenizeSearchTerm(textTerm);
     if(q){
-      const list = shouldUseExactTag
-        ? filterProjectsByTagKey(exactTagKey)
+      const list = (shouldUseExactTag || shouldUseExactPerson)
+        ? filterProjectsByTagAndPersonKeys(
+            shouldUseExactTag ? [exactTagKey] : [],
+            shouldUseExactPerson ? [exactPersonKey] : []
+          )
         : getFilteredProjects(tokens);
       if(list.length === 0){
         activeList = [];
         setActiveTagFilters([]);
+        setActivePersonFilters([]);
         if (activeView === 'bento') {
           camX = 0;
           camY = 0;
@@ -10197,7 +10652,7 @@
         closeSpotlight();
         renderActiveView();
         if (count) {
-          count.textContent = `${formatCountLine(0, 0)} — sin resultados para “${term}”`;
+          count.textContent = `${formatCountLine(0, 0)} — sin resultados para “${textTerm}”`;
         }
         // Limpiar highlight de categorías si no hay resultados
         highlightActiveCategory('');
@@ -10205,6 +10660,7 @@
       }
       activeList = list;
       setActiveTagFilters(shouldUseExactTag ? [exactTagKey] : []);
+      setActivePersonFilters(shouldUseExactPerson ? [exactPersonKey] : []);
       // Sincronizar highlight de categorías si el término coincide con una categoría
       const matchingCat = shouldUseExactTag
         ? exactTagKey
@@ -10214,6 +10670,7 @@
       // Sin filtro: usar el orden reordenado inicial
       activeList = DB_ORDERED.slice();
       setActiveTagFilters([]);
+      setActivePersonFilters([]);
       highlightActiveCategory('all');
     }
     if (activeView === 'bento') {
@@ -10225,6 +10682,7 @@
     closeSpotlight();
     renderActiveView();
     syncActiveTagChips();
+    syncActivePersonChips();
   }
   if (search) {
     updateSearchClearVisibility();
@@ -10275,7 +10733,7 @@
           e.preventDefault();
           const item = items[activeSuggestIndex];
           const value = item.dataset.suggestion || item.textContent.trim();
-          applySuggestion(value);
+          applySuggestion(value, item.dataset.kind || '');
         } else {
           queueFilter(search.value, true);
         }
@@ -10311,7 +10769,7 @@
       if (!item) return;
 
       const term = item.dataset.suggestion || item.textContent.trim();
-      applySuggestion(term);
+      applySuggestion(term, item.dataset.kind || '');
     });
   }
 
@@ -10335,6 +10793,7 @@
       );
       normalizeProjectTags(newItem);
       DB.push(newItem);
+      PEOPLE_BY_KEY = buildPeopleIndex(DB);
       rebuildBentoRandomSpans();
       // Reordenar DB_ORDERED cuando se agrega un nuevo proyecto
       if (USE_RANDOM_SHUFFLE) {
