@@ -4823,7 +4823,7 @@
   title: "Ciencia Ficción (Obra de teatro)",
   author: "Felipe Ilabaca",
   role: "",
-  collab: "Música Pablo Ilabaca y elenco. Diseño de escenografía Luis Cifuentes. Diseño de iluminación Claudio Rojas.",
+  collab: "Música: Felipe Ilabaca y elenco. Diseño de escenografía Luis Cifuentes. Diseño de iluminación Claudio Rojas.",
   area: "Música / Teatro",
   year: "2012",
   url: "https://www.uc.cl/site/assets/files/15652/revista-universitaria-167.pdf"
