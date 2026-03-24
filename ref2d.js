@@ -4529,7 +4529,7 @@
 /* ------------------ Las piedras — Daniel Riveros (Gepe) ------------------ */
 {
   src: "https://freight.cargo.site/t/original/i/C2855431241926796885038952035011/ab67616d0000b273f73874ab4b03ad2a23876e0c.jpeg",
-  orientation: "v",
+  orientation: "sq",
   span: 1,
   tags: ["portada de disco", "música"],
   title: "Las piedras",
@@ -4544,7 +4544,7 @@
 /* ------------------ Logo sello Jacobino Discos — Daniel Riveros (Gepe) ------------------ */
 {
   src: "https://freight.cargo.site/t/original/i/M2855431241945243629112661586627/Logo-Jacobino-Discos.jpg",
-  orientation: "h",
+  orientation: "sq",
   span: 1,
   tags: ["logo", "música"],
   title: "Logo sello Jacobino Discos",
@@ -4559,7 +4559,7 @@
 /* ------------------ Hungría — Daniel Riveros (Gepe) ------------------ */
 {
   src: "https://freight.cargo.site/t/original/i/U2855431241963690373186371138243/0x1900-000000-80-0-0.jpg",
-  orientation: "v",
+  orientation: "sq",
   span: 1,
   tags: ["portada de disco", "música"],
   title: "Hungría",
@@ -4574,7 +4574,7 @@
 /* ------------------ Ciencia Exacta — Daniel Riveros (Gepe) ------------------ */
 {
   src: "https://freight.cargo.site/t/original/i/Y2855434570752445450369798451907/Captura-de-pantalla-2026-03-24-a-las-11.10.11.png",
-  orientation: "h",
+  orientation: "sq",
   span: 1,
   tags: ["portada de disco", "música"],
   title: "Ciencia Exacta",
@@ -4589,7 +4589,7 @@
 /* ------------------ Afiche Voy y Vuelvo (Chancho en Piedra) — Felipe Ilabaca ------------------ */
 {
   src: "https://freight.cargo.site/t/original/i/J2855431065243882147048866656963/Captura-de-pantalla-2026-03-24-a-las-10.50.06.png",
-  orientation: "h",
+  orientation: "v",
   span: 1,
   tags: ["afiche", "ilustración", "gráfico", "música"],
   title: "Afiche Voy y Vuelvo (Chancho en Piedra)",
@@ -4604,7 +4604,7 @@
 /* ------------------ Ciencia Ficción (Obra de teatro) — Felipe Ilabaca ------------------ */
 {
   src: "https://freight.cargo.site/t/original/i/F2855431065262328891122576208579/Captura-de-pantalla-2026-03-24-a-las-10.56.20.png",
-  orientation: "h",
+  orientation: "v",
   span: 1,
   tags: ["música", "teatro"],
   title: "Ciencia Ficción (Obra de teatro)",
