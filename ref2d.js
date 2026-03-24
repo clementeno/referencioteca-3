@@ -4528,7 +4528,11 @@
 
 /* ------------------ Las piedras — Daniel Riveros (Gepe) ------------------ */
 {
-  src: "https://freight.cargo.site/t/original/i/C2855431241926796885038952035011/ab67616d0000b273f73874ab4b03ad2a23876e0c.jpeg",
+  src: "IMG/webp/ab67616d0000b273f73874ab4b03ad2a23876e0c_d6a934c0b8.webp",
+  srcAvif: "IMG/avif/ab67616d0000b273f73874ab4b03ad2a23876e0c_d6a934c0b8.avif",
+  srcSetAvif: "IMG/avif/ab67616d0000b273f73874ab4b03ad2a23876e0c_d6a934c0b8.avif 640w",
+  srcSetWebp: "IMG/webp/ab67616d0000b273f73874ab4b03ad2a23876e0c_d6a934c0b8.webp 640w",
+  srcOriginal: "https://freight.cargo.site/t/original/i/C2855431241926796885038952035011/ab67616d0000b273f73874ab4b03ad2a23876e0c.jpeg",
   orientation: "sq",
   span: 1,
   tags: ["portada de disco", "música"],
@@ -4543,7 +4547,11 @@
 
 /* ------------------ Logo sello Jacobino Discos — Daniel Riveros (Gepe) ------------------ */
 {
-  src: "https://freight.cargo.site/t/original/i/M2855431241945243629112661586627/Logo-Jacobino-Discos.jpg",
+  src: "IMG/webp/Logo-Jacobino-Discos_3dad796b76.webp",
+  srcAvif: "IMG/avif/Logo-Jacobino-Discos_3dad796b76.avif",
+  srcSetAvif: "IMG/avif/Logo-Jacobino-Discos_3dad796b76.avif 621w",
+  srcSetWebp: "IMG/webp/Logo-Jacobino-Discos_3dad796b76.webp 621w",
+  srcOriginal: "https://freight.cargo.site/t/original/i/M2855431241945243629112661586627/Logo-Jacobino-Discos.jpg",
   orientation: "sq",
   span: 1,
   tags: ["logo", "música"],
@@ -4558,7 +4566,11 @@
 
 /* ------------------ Hungría — Daniel Riveros (Gepe) ------------------ */
 {
-  src: "https://freight.cargo.site/t/original/i/U2855431241963690373186371138243/0x1900-000000-80-0-0.jpg",
+  src: "IMG/webp/0x1900-000000-80-0-0_3673e4b4f9.webp",
+  srcAvif: "IMG/avif/0x1900-000000-80-0-0_3673e4b4f9.avif",
+  srcSetAvif: "IMG/avif/variants/0x1900-000000-80-0-0_3673e4b4f9-640.avif 640w, IMG/avif/0x1900-000000-80-0-0_3673e4b4f9.avif 1200w",
+  srcSetWebp: "IMG/webp/variants/0x1900-000000-80-0-0_3673e4b4f9-640.webp 640w, IMG/webp/0x1900-000000-80-0-0_3673e4b4f9.webp 1200w",
+  srcOriginal: "https://freight.cargo.site/t/original/i/U2855431241963690373186371138243/0x1900-000000-80-0-0.jpg",
   orientation: "sq",
   span: 1,
   tags: ["portada de disco", "música"],
@@ -4573,7 +4585,11 @@
 
 /* ------------------ Ciencia Exacta — Daniel Riveros (Gepe) ------------------ */
 {
-  src: "https://freight.cargo.site/t/original/i/Y2855434570752445450369798451907/Captura-de-pantalla-2026-03-24-a-las-11.10.11.png",
+  src: "IMG/webp/Captura-de-pantalla-2026-03-24-a-las-11.10.11_6b94897ca9.webp",
+  srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-24-a-las-11.10.11_6b94897ca9.avif",
+  srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-24-a-las-11.10.11_6b94897ca9-640.avif 640w, IMG/avif/Captura-de-pantalla-2026-03-24-a-las-11.10.11_6b94897ca9.avif 956w",
+  srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-24-a-las-11.10.11_6b94897ca9-640.webp 640w, IMG/webp/Captura-de-pantalla-2026-03-24-a-las-11.10.11_6b94897ca9.webp 956w",
+  srcOriginal: "https://freight.cargo.site/t/original/i/Y2855434570752445450369798451907/Captura-de-pantalla-2026-03-24-a-las-11.10.11.png",
   orientation: "sq",
   span: 1,
   tags: ["portada de disco", "música"],
@@ -4588,7 +4604,11 @@
 
 /* ------------------ Afiche Voy y Vuelvo (Chancho en Piedra) — Felipe Ilabaca ------------------ */
 {
-  src: "https://freight.cargo.site/t/original/i/J2855431065243882147048866656963/Captura-de-pantalla-2026-03-24-a-las-10.50.06.png",
+  src: "IMG/webp/Captura-de-pantalla-2026-03-24-a-las-10.50.06_2bbff29ced.webp",
+  srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-24-a-las-10.50.06_2bbff29ced.avif",
+  srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-24-a-las-10.50.06_2bbff29ced-640.avif 640w, IMG/avif/Captura-de-pantalla-2026-03-24-a-las-10.50.06_2bbff29ced.avif 958w",
+  srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-24-a-las-10.50.06_2bbff29ced-640.webp 640w, IMG/webp/Captura-de-pantalla-2026-03-24-a-las-10.50.06_2bbff29ced.webp 958w",
+  srcOriginal: "https://freight.cargo.site/t/original/i/J2855431065243882147048866656963/Captura-de-pantalla-2026-03-24-a-las-10.50.06.png",
   orientation: "v",
   span: 1,
   tags: ["afiche", "ilustración", "gráfico", "música"],
@@ -4603,7 +4623,11 @@
 
 /* ------------------ Ciencia Ficción (Obra de teatro) — Felipe Ilabaca ------------------ */
 {
-  src: "https://freight.cargo.site/t/original/i/F2855431065262328891122576208579/Captura-de-pantalla-2026-03-24-a-las-10.56.20.png",
+  src: "IMG/webp/Captura-de-pantalla-2026-03-24-a-las-10.56.20_d57328dc2b.webp",
+  srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-24-a-las-10.56.20_d57328dc2b.avif",
+  srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-24-a-las-10.56.20_d57328dc2b-640.avif 640w, IMG/avif/Captura-de-pantalla-2026-03-24-a-las-10.56.20_d57328dc2b.avif 1054w",
+  srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-24-a-las-10.56.20_d57328dc2b-640.webp 640w, IMG/webp/Captura-de-pantalla-2026-03-24-a-las-10.56.20_d57328dc2b.webp 1054w",
+  srcOriginal: "https://freight.cargo.site/t/original/i/F2855431065262328891122576208579/Captura-de-pantalla-2026-03-24-a-las-10.56.20.png",
   orientation: "v",
   span: 1,
   tags: ["música", "teatro"],
