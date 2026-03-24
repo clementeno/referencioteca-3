@@ -4526,6 +4526,95 @@
   url: "https://www.behance.net/gallery/224614769/2025-PORTAFOLIO-DISENO-DG"
 },
 
+/* ------------------ Las piedras — Daniel Riveros (Gepe) ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/C2855431241926796885038952035011/ab67616d0000b273f73874ab4b03ad2a23876e0c.jpeg",
+  orientation: "v",
+  span: 1,
+  tags: ["portada de disco", "música"],
+  title: "Las piedras",
+  author: "Daniel Riveros (Gepe)",
+  role: "Diseñador / Músico",
+  collab: "Diseñado por Daniel Riveros (Gepe)",
+  area: "Portada de disco / Música",
+  year: "2007",
+  url: "https://www.discogs.com/release/1565503-Gepe-Las-Piedras?srsltid=AfmBOopK1cqpOPpW1z8HEra8cLp8fOq3n8wttN5Id0Fna5EIwMoxCpnG"
+},
+
+/* ------------------ Logo sello Jacobino Discos — Daniel Riveros (Gepe) ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/M2855431241945243629112661586627/Logo-Jacobino-Discos.jpg",
+  orientation: "h",
+  span: 1,
+  tags: ["logo", "música"],
+  title: "Logo sello Jacobino Discos",
+  author: "Daniel Riveros (Gepe)",
+  role: "Diseñador / Músico",
+  collab: "Diseñado por Daniel Riveros y finalmente trazado y retocado por Rodrigo Araya.",
+  area: "Logo / Música",
+  year: "2008",
+  url: "https://jacobinodiscos.cl/about-us/"
+},
+
+/* ------------------ Hungría — Daniel Riveros (Gepe) ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/U2855431241963690373186371138243/0x1900-000000-80-0-0.jpg",
+  orientation: "v",
+  span: 1,
+  tags: ["portada de disco", "música"],
+  title: "Hungría",
+  author: "Daniel Riveros (Gepe)",
+  role: "Diseñador / Músico",
+  collab: "",
+  area: "Portada de disco / Música",
+  year: "2008",
+  url: "https://es.wikipedia.org/wiki/Hungría_(álbum)"
+},
+
+/* ------------------ Ciencia Exacta — Daniel Riveros (Gepe) ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/Y2855434570752445450369798451907/Captura-de-pantalla-2026-03-24-a-las-11.10.11.png",
+  orientation: "h",
+  span: 1,
+  tags: ["portada de disco", "música"],
+  title: "Ciencia Exacta",
+  author: "Daniel Riveros (Gepe)",
+  role: "Diseñador / Músico",
+  collab: "Diseño y Arte del disco: Camilo Huinca y Gepe. Logo e Ilustraciones: Camilo Huinca.",
+  area: "Portada de disco / Música",
+  year: "2017",
+  url: "https://www.youtube.com/watch?app=desktop&v=KWIJqE8Rqrc"
+},
+
+/* ------------------ Afiche Voy y Vuelvo (Chancho en Piedra) — Felipe Ilabaca ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/J2855431065243882147048866656963/Captura-de-pantalla-2026-03-24-a-las-10.50.06.png",
+  orientation: "h",
+  span: 1,
+  tags: ["afiche", "ilustración", "gráfico", "música"],
+  title: "Afiche Voy y Vuelvo (Chancho en Piedra)",
+  author: "Felipe Ilabaca",
+  role: "",
+  collab: "",
+  area: "Afiche / Ilustración / Gráfico / Música",
+  year: "2023",
+  url: "https://www.instagram.com/p/CuvPhZfOdyW/?utm_source=ig_web_copy_link&igsh=NTc4MTIwNjQ2YQ=="
+},
+
+/* ------------------ Ciencia Ficción (Obra de teatro) — Felipe Ilabaca ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/F2855431065262328891122576208579/Captura-de-pantalla-2026-03-24-a-las-10.56.20.png",
+  orientation: "h",
+  span: 1,
+  tags: ["música", "teatro"],
+  title: "Ciencia Ficción (Obra de teatro)",
+  author: "Felipe Ilabaca",
+  role: "",
+  collab: "Música Pablo Ilabaca y elenco. Diseño de escenografía Luis Cifuentes. Diseño de iluminación Claudio Rojas.",
+  area: "Música / Teatro",
+  year: "2012",
+  url: "https://www.uc.cl/site/assets/files/15652/revista-universitaria-167.pdf"
+},
 /* ------------------ Restaurant KrossBar — Catalina Harasic ------------------ */
 {
   src: "IMG/webp/148_Harasic-Catalina_b6af6f4f43.webp",
