@@ -6010,7 +6010,6 @@
     /* ------------------ Cerámicas — Antonia Grunefeld ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2026-03-19-a-las-18.32.32_34f36c9d60.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-19-a-las-18.32.32_34f36c9d60.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/V2848001385849739725324507624131/Captura-de-pantalla-2026-03-19-a-las-18.32.32.png",
       orientation: "h",
       span: 1,
@@ -6027,7 +6026,6 @@
     /* ------------------ Ilustraciones — Antonia Grunefeld ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2026-03-19-a-las-18.33.37_d4a5bf7b6f.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-19-a-las-18.33.37_d4a5bf7b6f.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/E2848001385831292981250798072515/Captura-de-pantalla-2026-03-19-a-las-18.33.37.png",
       orientation: "h",
       span: 1,
@@ -6044,7 +6042,6 @@
     /* ------------------ Ilustraciones — Juan de Dios Urrutia Izquierdo ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2026-03-19-a-las-18.43.03_30323bceea.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-19-a-las-18.43.03_30323bceea.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/H2848001385812846237177088520899/Captura-de-pantalla-2026-03-19-a-las-18.43.03.png",
       orientation: "h",
       span: 1,
@@ -6061,7 +6058,6 @@
     /* ------------------ BOHO — MANUELA VILLANUEVA WALKER ------------------ */
     {
       src: "IMG/webp/Captura-de-Pantalla-2023-01-12-a-la_s_-22_55_36.png_ad2dc768ec.webp",
-      srcAvif: "IMG/avif/Captura-de-Pantalla-2023-01-12-a-la_s_-22_55_36.png_ad2dc768ec.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/L2848000653827594648308370846403/Captura-de-Pantalla-2023-01-12-a-la_s_-22_55_36.png.jpg",
       orientation: "h",
       span: 1,
@@ -6078,7 +6074,6 @@
     /* ------------------ DREAMY WINTER 22 — MANUELA VILLANUEVA WALKER ------------------ */
     {
       src: "IMG/webp/c1d4c5_2fecf120d07d4edcbc2e4f654eea64e6_mv2.png_93d973a38a.webp",
-      srcAvif: "IMG/avif/c1d4c5_2fecf120d07d4edcbc2e4f654eea64e6_mv2.png_93d973a38a.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/E2848000225309729816035486806723/c1d4c5_2fecf120d07d4edcbc2e4f654eea64e6_mv2.png.jpg",
       orientation: "h",
       span: 1,
@@ -6095,7 +6090,6 @@
     /* ------------------ LOUNGE HOME S23 — MANUELA VILLANUEVA WALKER ------------------ */
     {
       src: "IMG/webp/c1d4c5_9c88194a79b7451391aa4d7d02c62f69_mv2.png_cb7e72b6ee.webp",
-      srcAvif: "IMG/avif/c1d4c5_9c88194a79b7451391aa4d7d02c62f69_mv2.png_cb7e72b6ee.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/N2848000225291283071961777255107/c1d4c5_9c88194a79b7451391aa4d7d02c62f69_mv2.png.jpg",
       orientation: "v",
       span: 1,
@@ -6112,7 +6106,6 @@
     /* ------------------ Armenté — Francisca Villela Armenté ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2026-03-19-a-las-19.17.10_09e1a61917.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-19-a-las-19.17.10_09e1a61917.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/A2848004591045309508653939110595/Captura-de-pantalla-2026-03-19-a-las-19.17.10.png",
       orientation: "v",
       span: 1,
@@ -6129,7 +6122,6 @@
     /* ------------------ Japo Set — Francisca Villela Armenté ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2026-03-19-a-las-18.53.25_ff1e1ded03.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-19-a-las-18.53.25_ff1e1ded03.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/X2848001385794399493103378969283/Captura-de-pantalla-2026-03-19-a-las-18.53.25.png",
       orientation: "v",
       span: 1,
@@ -6146,7 +6138,6 @@
     /* ------------------ BEST SELLER — Francisca Villela Armenté ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2026-03-19-a-las-18.55.17_343394c64e.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-19-a-las-18.55.17_343394c64e.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/Q2848001385775952749029669417667/Captura-de-pantalla-2026-03-19-a-las-18.55.17.png",
       orientation: "v",
       span: 1,
@@ -6163,7 +6154,6 @@
     /* ------------------ Top Nostalgia — Francisca Villela Armenté ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2026-03-19-a-las-18.56.46_ffbca33dac.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-19-a-las-18.56.46_ffbca33dac.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/X2848001385757506004955959866051/Captura-de-pantalla-2026-03-19-a-las-18.56.46.png",
       orientation: "v",
       span: 1,
@@ -6180,7 +6170,6 @@
     /* ------------------ NoJockey — Francisca Villela Armenté ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2026-03-19-a-las-18.57.36_15921fb424.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-19-a-las-18.57.36_15921fb424.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/F2848001385739059260882250314435/Captura-de-pantalla-2026-03-19-a-las-18.57.36.png",
       orientation: "v",
       span: 1,
@@ -6197,7 +6186,6 @@
     /* ------------------ Señalética Club Manquehue — Carolina Correa ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2026-03-19-a-las-19.03.56_c44e3b6aff.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-19-a-las-19.03.56_c44e3b6aff.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/M2848001385720612516808540762819/Captura-de-pantalla-2026-03-19-a-las-19.03.56.png",
       orientation: "h",
       span: 1,
@@ -6214,7 +6202,6 @@
     /* ------------------ Tawa Refugio del Puelo — Carolina Correa ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2026-03-19-a-las-19.05.27_860437249b.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-19-a-las-19.05.27_860437249b.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/F2848001385702165772734831211203/Captura-de-pantalla-2026-03-19-a-las-19.05.27.png",
       orientation: "h",
       span: 1,
@@ -6231,7 +6218,6 @@
     /* ------------------ Adagio Teas® | Rebranding — Carla Marrazzo ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2026-03-19-a-las-19.08.02_68660e2140.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-19-a-las-19.08.02_68660e2140.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/F2848001385683719028661121659587/Captura-de-pantalla-2026-03-19-a-las-19.08.02.png",
       orientation: "h",
       span: 1,
@@ -6248,7 +6234,6 @@
     /* ------------------ MODO — Carla Marrazzo ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2026-03-19-a-las-19.09.51_a35bb8d930.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-19-a-las-19.09.51_a35bb8d930.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/G2848001385665272284587412107971/Captura-de-pantalla-2026-03-19-a-las-19.09.51.png",
       orientation: "h",
       span: 1,
@@ -6265,7 +6250,6 @@
     /* ------------------ They were friends — Antonia Berger ------------------ */
     {
       src: "IMG/webp/Lifelong-Friends-Part-1_9c91f1d0e9.webp",
-      srcAvif: "IMG/avif/Lifelong-Friends-Part-1_9c91f1d0e9.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/S2849442492904910184930297197251/Lifelong-Friends-Part-1.png",
       orientation: "h",
       span: 1,
@@ -6282,7 +6266,6 @@
     /* ------------------ Sonder — Antonia Berger ------------------ */
     {
       src: "IMG/webp/Sonder_HalfRes_dc03014223.webp",
-      srcAvif: "IMG/avif/Sonder_HalfRes_dc03014223.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/B2849442492886463440856587645635/Sonder_HalfRes.jpg",
       orientation: "h",
       span: 1,
@@ -6299,7 +6282,6 @@
     /* ------------------ Comic for ministry of education chile 2023 — Antonia Berger ------------------ */
     {
       src: "IMG/webp/comic-chat-gpt_a25fd8cacc.webp",
-      srcAvif: "IMG/avif/comic-chat-gpt_a25fd8cacc.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/F2849442492868016696782878094019/comic-chat-gpt.png",
       orientation: "h",
       span: 1,
@@ -6316,7 +6298,6 @@
     /* ------------------ Escena Silvestre — Cristina Tapia Robles ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2026-03-20-a-las-16.21.50_3f9d2be00a.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-20-a-las-16.21.50_3f9d2be00a.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/R2849442848262988020871099527875/Captura-de-pantalla-2026-03-20-a-las-16.21.50.png",
       orientation: "h",
       span: 1,
@@ -6333,7 +6314,6 @@
     /* ------------------ Afiche Día de los Patrimonios 2024 — Cristina Tapia Robles ------------------ */
     {
       src: "IMG/webp/312ff7244196121.69925f9773b6d.png_dbdf2d3404.webp",
-      srcAvif: "IMG/avif/312ff7244196121.69925f9773b6d.png_dbdf2d3404.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/S2849442492831123208635458990787/312ff7244196121.69925f9773b6d.png.jpg",
       orientation: "h",
       span: 1,
@@ -6350,7 +6330,6 @@
     /* ------------------ Cuenta Pública 2024 (gráfica) — Cristina Tapia Robles ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2026-03-20-a-las-16.26.04_80199ec066.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-20-a-las-16.26.04_80199ec066.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/U2849442848465902205681904595651/Captura-de-pantalla-2026-03-20-a-las-16.26.04.png",
       orientation: "h",
       span: 1,
@@ -6367,7 +6346,6 @@
     /* ------------------ La Distancia Adecuada entre Dos Puntos — Sebastián Cobo ------------------ */
     {
       src: "IMG/webp/KSTNINAU_acce78b5ec.webp",
-      srcAvif: "IMG/avif/KSTNINAU_acce78b5ec.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/U2849442492849569952709168542403/KSTNINAU.jpg",
       orientation: "v",
       span: 1,
@@ -6384,7 +6362,6 @@
     /* ------------------ DIOPTRÍA -397 — Sebastián Cobo ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2026-03-20-a-las-16.40.28_8d627722c4.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-20-a-las-16.40.28_8d627722c4.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/W2849442848429008717534485492419/Captura-de-pantalla-2026-03-20-a-las-16.40.28.png",
       orientation: "h",
       span: 1,
@@ -6401,7 +6378,6 @@
     /* ------------------ Diagrama del Agua I y Diagrama del Agua II (Incompleto) — Sebastián Cobo ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2026-03-20-a-las-16.41.34_d75f7bad4a.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-20-a-las-16.41.34_d75f7bad4a.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/Q2849442848410561973460775940803/Captura-de-pantalla-2026-03-20-a-las-16.41.34.png",
       orientation: "h",
       span: 1,
@@ -6418,7 +6394,6 @@
     /* ------------------ Campo Difuso — Exposición Colectiva Taller Las Nieves — Sebastián Cobo ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2026-03-20-a-las-16.42.51_19a3979456.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-20-a-las-16.42.51_19a3979456.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/D2849442848392115229387066389187/Captura-de-pantalla-2026-03-20-a-las-16.42.51.png",
       orientation: "h",
       span: 1,
@@ -6435,7 +6410,6 @@
     /* ------------------ Wildscapes - Manquehue — Juan Croxatto ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2026-03-20-a-las-16.47.05_7bb5444ddb.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-20-a-las-16.47.05_7bb5444ddb.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/U2849442848373668485313356837571/Captura-de-pantalla-2026-03-20-a-las-16.47.05.png",
       orientation: "h",
       span: 1,
@@ -6452,7 +6426,6 @@
     /* ------------------ Fotografía producto — josefa diaz moller ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2026-03-20-a-las-16.49.49_e002462c17.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-20-a-las-16.49.49_e002462c17.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/D2849442848355221741239647285955/Captura-de-pantalla-2026-03-20-a-las-16.49.49.png",
       orientation: "h",
       span: 1,
@@ -6469,7 +6442,6 @@
     /* ------------------ Fotografía producto — josefa diaz moller ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2026-03-20-a-las-16.52.52_7ce23b7290.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-20-a-las-16.52.52_7ce23b7290.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/R2849442848336774997165937734339/Captura-de-pantalla-2026-03-20-a-las-16.52.52.png",
       orientation: "h",
       span: 1,
@@ -6486,7 +6458,6 @@
     /* ------------------ Fotografía gastronomía — josefa diaz moller ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2026-03-20-a-las-16.53.26_7f0fd20e45.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-20-a-las-16.53.26_7f0fd20e45.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/T2849442848318328253092228182723/Captura-de-pantalla-2026-03-20-a-las-16.53.26.png",
       orientation: "h",
       span: 1,
@@ -6503,7 +6474,6 @@
     /* ------------------ Fotografía montaña — josefa diaz moller ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2026-03-20-a-las-16.55.06_5330f112bf.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-20-a-las-16.55.06_5330f112bf.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/J2849442848299881509018518631107/Captura-de-pantalla-2026-03-20-a-las-16.55.06.png",
       orientation: "h",
       span: 1,
@@ -6520,7 +6490,6 @@
     /* ------------------ Fotografía interiores — josefa diaz moller ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2026-03-20-a-las-16.55.22_cc4cc5b5f3.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-20-a-las-16.55.22_cc4cc5b5f3.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/F2849442848281434764944809079491/Captura-de-pantalla-2026-03-20-a-las-16.55.22.png",
       orientation: "h",
       span: 1,
@@ -6537,7 +6506,6 @@
     /* ------------------ Infografías para el Parque Humedal del Río Maipo — Catalina Hildebrandt ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2025-03-12-a-las-20.40.12.png_0c487ee9b0.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2025-03-12-a-las-20.40.12.png_0c487ee9b0.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/J2850922353802367897247599243971/Captura-de-pantalla-2025-03-12-a-las-20.40.12.png.jpg",
       orientation: "h",
       span: 1,
@@ -6554,7 +6522,6 @@
     /* ------------------ Proyecto de Preservación de Tradiciones Chilenas — Catalina Hildebrandt ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2025-03-13-a-las-18.05.50.png_eebeef280f.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2025-03-13-a-las-18.05.50.png_eebeef280f.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/A2850922353820814641321308795587/Captura-de-pantalla-2025-03-13-a-las-18.05.50.png.jpg",
       orientation: "h",
       span: 1,
@@ -6571,7 +6538,6 @@
     /* ------------------ Chincol — Catalina Hildebrandt ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2026-03-21-a-las-14.44.41_eca9b00c2a.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-21-a-las-14.44.41_eca9b00c2a.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/I2850921871604477810479920001731/Captura-de-pantalla-2026-03-21-a-las-14.44.41.png",
       orientation: "h",
       span: 1,
@@ -6588,7 +6554,6 @@
     /* ------------------ Vestido Letualle Pesto — Luz María Hurtado ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2026-03-21-a-las-14.48.43_52eeb8be5c.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-21-a-las-14.48.43_52eeb8be5c.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/W2850921871715158274922177311427/Captura-de-pantalla-2026-03-21-a-las-14.48.43.png",
       orientation: "h",
       span: 1,
@@ -6605,7 +6570,6 @@
     /* ------------------ Traje Velour Negro — Luz María Hurtado ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2026-03-21-a-las-14.50.50_96c2019b0a.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-21-a-las-14.50.50_96c2019b0a.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/J2850921871696711530848467759811/Captura-de-pantalla-2026-03-21-a-las-14.50.50.png",
       orientation: "h",
       span: 1,
@@ -6622,7 +6586,6 @@
     /* ------------------ Vestido Lune Rosa print — Luz María Hurtado ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2026-03-21-a-las-14.51.46_a71e56e14b.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-21-a-las-14.51.46_a71e56e14b.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/A2850921871678264786774758208195/Captura-de-pantalla-2026-03-21-a-las-14.51.46.png",
       orientation: "h",
       span: 1,
@@ -6639,7 +6602,6 @@
     /* ------------------ Terraneo — Jacinta Navarro ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2026-03-21-a-las-14.56.39_225d4d9d70.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-21-a-las-14.56.39_225d4d9d70.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/S2850921871659818042701048656579/Captura-de-pantalla-2026-03-21-a-las-14.56.39.png",
       orientation: "h",
       span: 1,
@@ -6656,7 +6618,6 @@
     /* ------------------ CAFEXPRESS (Rebranding y diseño de servicio) — Antonia Paulsen ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2026-03-21-a-las-15.01.13_010b0e2d51.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-21-a-las-15.01.13_010b0e2d51.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/E2850921871641371298627339104963/Captura-de-pantalla-2026-03-21-a-las-15.01.13.png",
       orientation: "h",
       span: 1,
@@ -6673,7 +6634,6 @@
     /* ------------------ Educación Ciudadana — Antonia Paulsen ------------------ */
     {
       src: "IMG/webp/12_d021726e6b.webp",
-      srcAvif: "IMG/avif/12_d021726e6b.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/J2850921671881579724426604655299/12.jpg",
       orientation: "h",
       span: 1,
@@ -6690,7 +6650,6 @@
     /* ------------------ mycoloop — Ana Schacht ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2026-03-21-a-las-15.10.36_8b3af43d7b.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-21-a-las-15.10.36_8b3af43d7b.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/V2850921871622924554553629553347/Captura-de-pantalla-2026-03-21-a-las-15.10.36.png",
       orientation: "h",
       span: 1,
@@ -6707,7 +6666,6 @@
     /* ------------------ Hack The Waste — Rayén Espinoza ------------------ */
     {
       src: "IMG/webp/511533155_17844286302519564_1167360669655593300_n_819e324d57.webp",
-      srcAvif: "IMG/avif/511533155_17844286302519564_1167360669655593300_n_819e324d57.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/N2852815603559739549928730866371/511533155_17844286302519564_1167360669655593300_n.jpg",
       orientation: "sq",
       span: 1,
@@ -6724,7 +6682,6 @@
     /* ------------------ THE ART OF DESTRUCTION — Sebastián Tala ------------------ */
     {
       src: "IMG/webp/2131a770-aa3d-445d-a090-c91ec342000f_rw_1920_748c6801cd.webp",
-      srcAvif: "IMG/avif/2131a770-aa3d-445d-a090-c91ec342000f_rw_1920_748c6801cd.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/O2852814018873743153835989742275/2131a770-aa3d-445d-a090-c91ec342000f_rw_1920.jpg",
       orientation: "v",
       span: 1,
@@ -6741,7 +6698,6 @@
     /* ------------------ Under Armour Chile Tienda Online — Victoria Schuwirth Montero ------------------ */
     {
       src: "IMG/webp/1764867718402_ac2420b8d1.webp",
-      srcAvif: "IMG/avif/1764867718402_ac2420b8d1.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/D2852814018855296409762280190659/1764867718402.jpeg",
       orientation: "h",
       span: 1,
@@ -6758,7 +6714,6 @@
     /* ------------------ Rediseño tarjetas banco ripley — Andrés Valdivieso Vera ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2026-03-22-a-las-18.18.16_4fcf9fc643.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-22-a-las-18.18.16_4fcf9fc643.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/I2852814227893800253038919103171/Captura-de-pantalla-2026-03-22-a-las-18.18.16.png",
       orientation: "h",
       span: 1,
@@ -6775,7 +6730,6 @@
     /* ------------------ Sin Nombre — Andrés Valdivieso Vera ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2026-03-22-a-las-19.44.55_5372f1d386.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-22-a-las-19.44.55_5372f1d386.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/D2852816694961352670954352227011/Captura-de-pantalla-2026-03-22-a-las-19.44.55.png",
       orientation: "h",
       span: 1,
@@ -6792,7 +6746,6 @@
     /* ------------------ Axis 1.1 — Pablo Gutiérrez ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2026-03-22-a-las-18.21.11_650544f058.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-22-a-las-18.21.11_650544f058.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/G2852814228059820949702305067715/Captura-de-pantalla-2026-03-22-a-las-18.21.11.png",
       orientation: "v",
       span: 1,
@@ -6809,7 +6762,6 @@
     /* ------------------ ABC Pediatrics Book — Claudia Zavala ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2026-03-22-a-las-18.27.43_32e135a381.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-22-a-las-18.27.43_32e135a381.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/K2852814228041374205628595516099/Captura-de-pantalla-2026-03-22-a-las-18.27.43.png",
       orientation: "h",
       span: 1,
@@ -6826,7 +6778,6 @@
     /* ------------------ Minie The Squirrel - Picture Book — Claudia Zavala ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2026-03-22-a-las-18.29.27_3aa46b8e31.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-22-a-las-18.29.27_3aa46b8e31.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/H2852814228022927461554885964483/Captura-de-pantalla-2026-03-22-a-las-18.29.27.png",
       orientation: "h",
       span: 1,
@@ -6843,7 +6794,6 @@
     /* ------------------ Hacia un habitar regenerativo en la Patagonia: guía de diseño para Conjuntos Residenciales Rurales — Martita Apel ------------------ */
     {
       src: "IMG/webp/1759151436277_9126a73eb7.webp",
-      srcAvif: "IMG/avif/1759151436277_9126a73eb7.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/I2852814018836849665688570639043/1759151436277.jpeg",
       orientation: "h",
       span: 1,
@@ -6860,7 +6810,6 @@
     /* ------------------ Ediciones ARQ - Portadas Nº 116-117-118 — Martita Apel ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2026-03-22-a-las-18.36.49_515aca71ed.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-22-a-las-18.36.49_515aca71ed.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/D2852814228004480717481176412867/Captura-de-pantalla-2026-03-22-a-las-18.36.49.png",
       orientation: "h",
       span: 1,
@@ -6877,7 +6826,6 @@
     /* ------------------ Informe 8 años Meric — Antonio Batlle Lathrop ------------------ */
     {
       src: "IMG/webp/fd757cff-a94d-4766-9369-786372051f8d_rw_1920_e2bb161c8f.webp",
-      srcAvif: "IMG/avif/fd757cff-a94d-4766-9369-786372051f8d_rw_1920_e2bb161c8f.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/I2852814018818402921614861087427/fd757cff-a94d-4766-9369-786372051f8d_rw_1920.png",
       orientation: "h",
       span: 1,
@@ -6894,7 +6842,6 @@
     /* ------------------ Manual de Gestión APR - Fundación Huella Local — Antonio Batlle Lathrop ------------------ */
     {
       src: "IMG/webp/13ef0933-9b95-4b11-aec2-ef96906a6450_rw_1920_cc732e5b8b.webp",
-      srcAvif: "IMG/avif/13ef0933-9b95-4b11-aec2-ef96906a6450_rw_1920_cc732e5b8b.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/V2852814018799956177541151535811/13ef0933-9b95-4b11-aec2-ef96906a6450_rw_1920.png",
       orientation: "h",
       span: 1,
@@ -6911,7 +6858,6 @@
     /* ------------------ NICOPOLY UX/UI - WEB DESIGN — Consuelo Burotto Sánchez ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2026-03-22-a-las-19.08.42_405e339a20.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-22-a-las-19.08.42_405e339a20.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/V2852814227986033973407466861251/Captura-de-pantalla-2026-03-22-a-las-19.08.42.png",
       orientation: "h",
       span: 1,
@@ -6928,7 +6874,6 @@
     /* ------------------ Audioteca Gabriela Mistral — Carmen di Girolamo Arteaga ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2026-03-22-a-las-19.15.25_649d9f2614.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-22-a-las-19.15.25_649d9f2614.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/P2852814227967587229333757309635/Captura-de-pantalla-2026-03-22-a-las-19.15.25.png",
       orientation: "sq",
       span: 1,
@@ -6945,7 +6890,6 @@
     /* ------------------ PANTALÓN BEX — Maureen Echeverria Cox ------------------ */
     {
       src: "IMG/webp/2L2A8101_resized_9166c410-1a49-4af8-a202-8936eb9721d6.jpg_dde1113d8d.webp",
-      srcAvif: "IMG/avif/2L2A8101_resized_9166c410-1a49-4af8-a202-8936eb9721d6.jpg_dde1113d8d.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/O2852814018763062689393732432579/2L2A8101_resized_9166c410-1a49-4af8-a202-8936eb9721d6.jpg.jpg",
       orientation: "v",
       span: 1,
@@ -6962,7 +6906,6 @@
     /* ------------------ chaqueta indi — Maureen Echeverria Cox ------------------ */
     {
       src: "IMG/webp/Sin_titulo-1-10.jpg_571fb56b4c.webp",
-      srcAvif: "IMG/avif/Sin_titulo-1-10.jpg_571fb56b4c.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/I2852814018744615945320022880963/Sin_titulo-1-10.jpg.jpg",
       orientation: "v",
       span: 1,
@@ -6979,7 +6922,6 @@
     /* ------------------ CHAQUETA KIOTO — Maureen Echeverria Cox ------------------ */
     {
       src: "IMG/webp/lino_pantalon_chaqueta-51.jpg_ba2772e420.webp",
-      srcAvif: "IMG/avif/lino_pantalon_chaqueta-51.jpg_ba2772e420.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/N2852814018726169201246313329347/lino_pantalon_chaqueta-51.jpg.jpg",
       orientation: "v",
       span: 1,
@@ -6996,7 +6938,6 @@
     /* ------------------ Vestido Aranua flores rojo — Trinidad Murtagh ------------------ */
     {
       src: "IMG/webp/MUTH_72591_d6d6c9dc21.webp",
-      srcAvif: "IMG/avif/MUTH_72591_d6d6c9dc21.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/G2852814018781509433467441984195/MUTH_72591.jpg",
       orientation: "v",
       span: 1,
@@ -7013,7 +6954,6 @@
     /* ------------------ Vest Anea café — Trinidad Murtagh ------------------ */
     {
       src: "IMG/webp/Captura-de-pantalla-2026-03-22-a-las-19.47.35_b2a949d9ef.webp",
-      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-22-a-las-19.47.35_b2a949d9ef.avif",
       srcOriginal: "https://freight.cargo.site/t/original/i/N2852819639836470086094591308483/Captura-de-pantalla-2026-03-22-a-las-19.47.35.png",
       orientation: "v",
       span: 1,
@@ -7094,84 +7034,31 @@
     return 1;
   }
 
-  function getProjectImageCandidates(meta) {
-    if (!meta) return [];
-    const out = [];
-    const seen = new Set();
-    [meta.srcAvif, meta.src, meta.srcOriginal].forEach((value) => {
-      const src = String(value || "").trim();
-      if (!src || seen.has(src)) return;
-      seen.add(src);
-      out.push(src);
-    });
-    return out;
-  }
-
   function getProjectPrimarySrc(meta) {
-    const list = getProjectImageCandidates(meta);
-    return list[0] || "";
+    return (meta && (meta.src || meta.srcOriginal)) || "";
   }
 
   function getProjectFallbackSrc(meta) {
-    const list = getProjectImageCandidates(meta);
-    return list[1] || "";
-  }
-
-  function setImageSrcChain(img, sources) {
-    if (!img) return;
-    const queue = Array.isArray(sources)
-      ? sources.map((v) => String(v || "").trim()).filter(Boolean)
-      : [];
-    if (!queue.length) return;
-    let index = 0;
-    const loadAt = (nextIndex) => {
-      index = nextIndex;
-      img.src = queue[nextIndex];
-    };
-    img.onerror = () => {
-      if (index + 1 >= queue.length) {
-        img.onerror = null;
-        return;
-      }
-      loadAt(index + 1);
-    };
-    loadAt(0);
+    if (!meta) return "";
+    const primary = meta.src || "";
+    const fallback = meta.srcOriginal || "";
+    if (!fallback || fallback === primary) return "";
+    return fallback;
   }
 
   function setImageSrcWithFallback(img, meta) {
-    setImageSrcChain(img, getProjectImageCandidates(meta));
-  }
-
-  const IMAGE_LAZY_ROOT_MARGIN = '900px 0px';
-  let imageLoadObserver = null;
-
-  function ensureImageLoadObserver() {
-    if (imageLoadObserver || typeof IntersectionObserver === 'undefined') return imageLoadObserver;
-    imageLoadObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        const img = entry.target;
-        observer.unobserve(img);
-        if (img.dataset.loaded === '1') return;
-        const meta = img._meta || null;
-        if (!meta) return;
-        setImageSrcWithFallback(img, meta);
-        img.dataset.loaded = '1';
-      });
-    }, { root: null, rootMargin: IMAGE_LAZY_ROOT_MARGIN, threshold: 0.01 });
-    return imageLoadObserver;
-  }
-
-  function observeImageForLoad(img, meta) {
     if (!img || !meta) return;
-    img._meta = meta;
-    const observer = ensureImageLoadObserver();
-    if (!observer) {
-      setImageSrcWithFallback(img, meta);
-      img.dataset.loaded = '1';
-      return;
+    const primary = getProjectPrimarySrc(meta);
+    if (!primary) return;
+    const fallback = getProjectFallbackSrc(meta);
+    if (fallback) {
+      const onError = () => {
+        img.removeEventListener('error', onError);
+        if (img.src !== fallback) img.src = fallback;
+      };
+      img.addEventListener('error', onError);
     }
-    observer.observe(img);
+    img.src = primary;
   }
 
   rebuildBentoRandomSpans();
@@ -7363,11 +7250,11 @@
 
     if (getProjectPrimarySrc(meta)) {
       const img = new Image();
+      setImageSrcWithFallback(img, meta);
       img.loading='lazy';
       img.decoding='async';
       img.fetchPriority = 'low';
       Object.assign(img.style,{position:'absolute',inset:'0',width:'100%',height:'100%',objectFit:'cover'});
-      observeImageForLoad(img, meta);
       el.appendChild(img);
     }
 
@@ -7530,11 +7417,11 @@
     imgWrap.style.aspectRatio = ORIENTATION_ASPECT_CSS[orient];
     if (getProjectPrimarySrc(meta)) {
       const img = new Image();
+      setImageSrcWithFallback(img, meta);
       img.loading = 'lazy';
       img.decoding = 'async';
       img.fetchPriority = 'low';
       img.alt = meta.title || '';
-      observeImageForLoad(img, meta);
       if (onImageLoad) {
         img.addEventListener('load', onImageLoad);
         img.addEventListener('error', onImageLoad);
@@ -8678,12 +8565,16 @@
 
     sheetImg.alt = el.dataset.title || meta.title || "";
     if (sheetImg.src !== src) {
-      const sourceChain = [];
-      if (src) sourceChain.push(src);
-      getProjectImageCandidates(meta).forEach((candidate) => {
-        if (!sourceChain.includes(candidate)) sourceChain.push(candidate);
-      });
-      setImageSrcChain(sheetImg, sourceChain);
+      const fallback = getProjectFallbackSrc(meta);
+      if (fallback) {
+        sheetImg.onerror = () => {
+          sheetImg.onerror = null;
+          if (sheetImg.src !== fallback) sheetImg.src = fallback;
+        };
+      } else {
+        sheetImg.onerror = null;
+      }
+      sheetImg.src = src;
     }
     // Ya no necesitamos calcular tamaños - el CSS se encarga de todo
     // Mantenemos el listener de resize por si se necesita en el futuro
