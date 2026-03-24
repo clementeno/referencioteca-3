@@ -32,6 +32,8 @@
   const sheetCitationPanel = $("#sheetCitationPanel");
   const sheetCitationText = $("#sheetCitationText");
   const sheetCitationCopy = $("#sheetCitationCopy");
+  const sheetSupportToggle = $("#sheetSupportToggle");
+  const sheetSupportOptions = $("#sheetSupportOptions");
   const sheetReportActions = $("#sheetReportActions");
   const sheetRequestPanel = $("#sheetRequestPanel");
   const sheetRequestTitle = $("#sheetRequestTitle");
@@ -74,12 +76,12 @@
     remove: {
       title: "Solicitud de Baja",
       subject: "Solicitud de baja de proyecto",
-      prompt: "Indica por qué se solicita eliminar este proyecto."
+      prompt: "Describe brevemente por qué solicitas la baja."
     },
     link: {
       title: "Notificar Enlace con Error",
       subject: "Reporte de enlace con error",
-      prompt: "Indica qué enlace falla y, si existe, comparte enlace correcto."
+      prompt: "Indica qué enlace falla y, si existe, comparte el enlace correcto."
     }
   };
   let activeRequestType = "";
@@ -9803,11 +9805,30 @@
     if (sheetRequestMessage) sheetRequestMessage.disabled = false;
   }
 
+  function setSupportOptionsOpen(isOpen) {
+    if (sheetSupportOptions) sheetSupportOptions.hidden = !isOpen;
+    if (sheetSupportToggle) sheetSupportToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  }
+  setSupportOptionsOpen(false);
+
   function buildRequestBaseText(typeKey) {
     const cfg = REQUEST_TYPES[typeKey] || REQUEST_TYPES.modify;
     const meta = activeSpotlightMeta || {};
     const urls = Array.isArray(meta.urls) ? meta.urls.filter(Boolean) : [];
     const firstUrl = urls[0] || meta.url || "";
+
+    if (typeKey === "remove") {
+      return `${cfg.prompt}\n`;
+    }
+
+    if (typeKey === "link") {
+      return [
+        firstUrl ? `Link a revisar: ${firstUrl}` : "Link a revisar:",
+        "Detalle del problema:",
+        ""
+      ].join("\n");
+    }
+
     const base = [
       `[Tipo] ${cfg.title}`,
       `[Proyecto] ${meta.title || "—"}`,
@@ -9835,6 +9856,7 @@
       sheetRequestStatus.classList.remove('is-loading');
       sheetRequestStatus.textContent = "";
     }
+    setSupportOptionsOpen(true);
     sheetRequestPanel.hidden = false;
     requestAnimationFrame(() => sheetRequestMessage.focus());
   }
@@ -10052,6 +10074,7 @@
       urls: Array.isArray(meta.url) ? meta.url.slice() : [meta.url || el.dataset.url || ""].filter(Boolean)
     };
     closeRequestPanel();
+    setSupportOptionsOpen(false);
 
     sTitle.textContent  = el.dataset.title  || meta.title  || "—";
     const authorText = el.dataset.author || meta._displayAuthor || meta.author || "—";
@@ -10168,6 +10191,7 @@
 
   function closeSpotlight(){
     closeRequestPanel();
+    setSupportOptionsOpen(false);
     activeSpotlightMeta = null;
     renderSheetCitation(null);
     if (overlay) {
@@ -10200,6 +10224,14 @@
       e.preventDefault();
       e.stopPropagation();
       openRequestPanel(btn.dataset.requestType || "");
+    });
+  }
+  if (sheetSupportToggle) {
+    sheetSupportToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const expanded = sheetSupportToggle.getAttribute('aria-expanded') === 'true';
+      setSupportOptionsOpen(!expanded);
     });
   }
   if (sheetRequestSend) {

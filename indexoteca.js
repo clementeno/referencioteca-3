@@ -4,14 +4,14 @@
  */
 
 const studios = [
-  { name: "Felicidad Pública", url: "https://felicidadpublica.cl", field: "Dirección Creativa / Branding / Editorial", city: "Santiago, Chile", tags: ["branding", "identidad", "editorial"], previews: ["felicidad-1", "felicidad-2", "felicidad-3", "felicidad-4"] },
-  { name: "Otros Pérez", url: "http://otrosperez.com/", field: "Branding / Editorial / Campañas", city: "Santiago, Chile", tags: ["identidad", "editorial", "gráfico"], previews: ["otrosperez-1", "otrosperez-2", "otrosperez-3"] },
-  { name: "Gaggeroworks", url: "http://gaggeroworks.co.uk/", field: "Dirección Creativa / Diseño Gráfico / Museografía", city: "London, UK", tags: ["direction", "graphic", "art"], previews: ["gaggero-1", "gaggero-2", "gaggero-3", "gaggero-4"] },
-  { name: "Estudio Postal", url: "https://www.estudiopostal.cl/", field: "Branding / Packaging / Corporativo / Editorial", city: "Santiago, Chile", tags: ["branding", "packaging", "identidad"], previews: ["postal-1", "postal-2", "postal-3"] },
-  { name: "10:10", url: "https://www.diezdiez.com/", field: "Digital / Web", city: "Santiago, Chile", tags: ["digital", "web", "experiencia"], previews: ["diezdiez-1", "diezdiez-2", "diezdiez-3", "diezdiez-4"] },
-  { name: "Design Systems International", url: "https://designsystems.international/", field: "Design Systems / Digital / Multidisciplinario", city: "International", tags: ["design systems", "digital", "product"], previews: ["dsi-1", "dsi-2", "dsi-3"] },
-  { name: "searchsystem", url: "#", field: "Digital / Technology", city: "Santiago, Chile", tags: ["digital", "tech", "systems"], previews: ["search-1", "search-2", "search-3"] },
-  { name: "IV Studio", url: "https://www.ivestudio.com", field: "Branding / Dirección Creativa", city: "Santiago, Chile", tags: ["dirección de arte", "branding", "gráfico"], previews: ["iv-1.avif", "iv-2.avif", "iv-3.avif"] },
+  { name: "Felicidad Pública", url: "https://felicidadpublica.cl", field: "Dirección Creativa / Branding / Editorial", city: "Santiago, Chile", tags: ["branding", "identidad", "editorial"], previews: [] },
+  { name: "Otros Pérez", url: "http://otrosperez.com/", field: "Branding / Editorial / Campañas", city: "Santiago, Chile", tags: ["identidad", "editorial", "gráfico"], previews: [] },
+  { name: "Gaggeroworks", url: "http://gaggeroworks.co.uk/", field: "Dirección Creativa / Diseño Gráfico / Museografía", city: "London, UK", tags: ["direction", "graphic", "art"], previews: [] },
+  { name: "Estudio Postal", url: "https://www.estudiopostal.cl/", field: "Branding / Packaging / Corporativo / Editorial", city: "Santiago, Chile", tags: ["branding", "packaging", "identidad"], previews: [] },
+  { name: "10:10", url: "https://www.diezdiez.com/", field: "Digital / Web", city: "Santiago, Chile", tags: ["digital", "web", "experiencia"], previews: [] },
+  { name: "Design Systems International", url: "https://designsystems.international/", field: "Design Systems / Digital / Multidisciplinario", city: "International", tags: ["design systems", "digital", "product"], previews: [] },
+  { name: "searchsystem", url: "#", field: "Digital / Technology", city: "Santiago, Chile", tags: ["digital", "tech", "systems"], previews: [] },
+  { name: "IV Studio", url: "https://www.ivestudio.com", field: "Branding / Dirección Creativa", city: "Santiago, Chile", tags: ["dirección de arte", "branding", "gráfico"], previews: [] },
   { name: "Almabrands", url: "https://www.almabrands.com", field: "Consultoría Estratégica / Branding / Cultura de Marca", city: "Santiago, Chile", tags: ["branding", "estrategia", "consultoría"], previews: [] },
 { name: "ANTS", url: "https://ants.cl", field: "Branding / Señalética / Espacios", city: "Santiago, Chile", tags: ["branding", "señalética", "espacios"], previews: [] },
 { name: "BAFE Studio", url: "https://bafestudio.com", field: "Branding / Diseño Gráfico / Editorial", city: "Santiago, Chile", tags: ["branding", "editorial", "identidad"], previews: [] },
@@ -53,7 +53,7 @@ const studios = [
 { name: "Siente Cinco", url: "https://branding.sientecinco.cl", field: "Branding / Estrategia / Arquitectura de Marca", city: "Chile", tags: ["branding", "estrategia", "identidad"], previews: [] },
 { name: "Draft", url: "https://draft.cl", field: "Branding / Identidad Visual / Diseño", city: "Chile", tags: ["branding", "identidad", "gráfico"], previews: [] },
 { name: "SUMO", url: "https://www.sumo.cl", field: "Museografía / Espacios / Diseño", city: "Santiago, Chile", tags: ["museografía", "espacios", "exhibiciones"], previews: [] },
-  { name: "JVD", url: "https://www.instagram.com/jvd_estudio/?hl=es", field: "Dirección de arte / Arquitectura", city: "Santiago, Chile", tags: ["dirección de arte", "arquitectura", "gráfico"], previews: ["jvd-1", "jvd-2", "jvd-3"] },
+  { name: "JVD", url: "https://www.instagram.com/jvd_estudio/?hl=es", field: "Dirección de arte / Arquitectura", city: "Santiago, Chile", tags: ["dirección de arte", "arquitectura", "gráfico"], previews: [] },
 ];
 
 let filtered = [...studios];
@@ -67,7 +67,6 @@ const sortSelect = document.getElementById("sort-select");
 const headerMoreBtn = document.getElementById("idxHeaderMore");
 const headerMoreDropdown = document.getElementById("idxHeaderMoreDropdown");
 
-const isCoarsePointer = window.matchMedia("(hover: none), (pointer: coarse)").matches;
 const SEARCH_DEBOUNCE_MS = 130;
 let searchDebounceTimer = null;
 
@@ -112,9 +111,7 @@ function syncSortSelect() {
   sortSelect.value = getSortOptionValue();
 }
 
-function getPreviewUrl(seed) {
-  return `https://picsum.photos/seed/${encodeURIComponent(seed)}/600/400`;
-}
+const DRAWER_PLACEHOLDER_COUNT = 5;
 
 function render() {
   filtered.sort(compare);
@@ -129,12 +126,12 @@ function render() {
   let html = "";
   filtered.forEach((studio, i) => {
     const canOpen = hasLink(studio.url);
-    const hasPreviews = (studio.previews || []).length > 0;
+    const hasPreviews = true;
     const linkCell = canOpen
       ? `<a href="${escapeHtml(studio.url)}" target="_blank" rel="noopener" onclick="event.stopPropagation();"><span class="idx-link-desktop">→</span><span class="idx-link-mobile">Abrir ↗</span></a>`
       : `<span aria-hidden="true">—</span>`;
-    const thumbs = (studio.previews || [])
-      .map((seed) => `<img class="drawer-thumb" src="${getPreviewUrl(seed)}" alt="" loading="lazy">`)
+    const thumbs = Array.from({ length: DRAWER_PLACEHOLDER_COUNT })
+      .map(() => `<div class="drawer-thumb is-wip" role="img" aria-label="Work in progress">WORK IN PROGRESS</div>`)
       .join("");
 
     html += `
@@ -173,6 +170,7 @@ function openDrawer(dataRow) {
   if (wrapper) {
     wrapper.classList.add("is-open");
     drawerRow.setAttribute("aria-hidden", "false");
+    dataRow.classList.add("is-expanded");
   }
 }
 
@@ -183,63 +181,40 @@ function closeDrawer(dataRow) {
   if (wrapper) {
     wrapper.classList.remove("is-open");
     drawerRow.setAttribute("aria-hidden", "true");
+    dataRow.classList.remove("is-expanded");
   }
 }
 
-function closeAllDrawers() {
-  tableBody.querySelectorAll(".drawer-wrapper.is-open").forEach((w) => {
-    w.classList.remove("is-open");
-    const row = w.closest("tr.drawer-row");
-    if (row) row.setAttribute("aria-hidden", "true");
+function closeAllDrawers(exceptDataRow = null) {
+  tableBody.querySelectorAll("tr.data-row").forEach((row) => {
+    if (exceptDataRow && row === exceptDataRow) return;
+    closeDrawer(row);
   });
 }
 
 function bindRowEvents() {
   tableBody.querySelectorAll("tr.data-row").forEach((row) => {
-    if (!isCoarsePointer) {
-      row.addEventListener("mouseenter", () => openDrawer(row));
-      row.addEventListener("mouseleave", () => closeDrawer(row));
-    }
-    row.addEventListener("focus", () => openDrawer(row));
-    row.addEventListener("blur", (e) => {
-      const next = e.relatedTarget;
-      const drawer = getDrawerRow(row);
-      if (!next || (!row.contains(next) && (!drawer || !drawer.contains(next)))) closeDrawer(row);
-    });
     row.addEventListener("click", (e) => {
       const link = e.target.closest("a[href]");
       if (link && link.getAttribute("href") !== "#") return;
-      const href = row.dataset.href;
-      const hasPreviews = row.dataset.hasPreviews === "1";
-      if (isCoarsePointer && hasPreviews) {
-        const drawerRow = getDrawerRow(row);
-        const wrapper = drawerRow ? drawerRow.querySelector(".drawer-wrapper") : null;
-        const alreadyOpen = Boolean(wrapper && wrapper.classList.contains("is-open"));
-        closeAllDrawers();
-        if (!alreadyOpen) openDrawer(row);
-        return;
-      }
-      if (href && href !== "#") window.open(href, "_blank", "noopener");
+      const drawerRow = getDrawerRow(row);
+      const wrapper = drawerRow ? drawerRow.querySelector(".drawer-wrapper") : null;
+      const alreadyOpen = Boolean(wrapper && wrapper.classList.contains("is-open"));
+      closeAllDrawers(row);
+      if (!alreadyOpen) openDrawer(row);
+      else closeDrawer(row);
     });
     row.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
-        const href = row.dataset.href;
-        if (href && href !== "#") window.open(href, "_blank", "noopener");
+        const drawerRow = getDrawerRow(row);
+        const wrapper = drawerRow ? drawerRow.querySelector(".drawer-wrapper") : null;
+        const alreadyOpen = Boolean(wrapper && wrapper.classList.contains("is-open"));
+        closeAllDrawers(row);
+        if (!alreadyOpen) openDrawer(row);
+        else closeDrawer(row);
       }
     });
-  });
-  tableBody.querySelectorAll("tr.drawer-row").forEach((drawerRow) => {
-    if (!isCoarsePointer) {
-      drawerRow.addEventListener("mouseenter", () => {
-        const dataRow = tableBody.querySelector(`tr.data-row[data-index="${drawerRow.dataset.index}"]`);
-        if (dataRow) openDrawer(dataRow);
-      });
-      drawerRow.addEventListener("mouseleave", () => {
-        const dataRow = tableBody.querySelector(`tr.data-row[data-index="${drawerRow.dataset.index}"]`);
-        if (dataRow) closeDrawer(dataRow);
-      });
-    }
   });
 }
 
@@ -304,13 +279,11 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-if (isCoarsePointer) {
-  document.addEventListener("click", (e) => {
-    if (!e.target.closest("tr.data-row") && !e.target.closest("tr.drawer-row")) {
-      closeAllDrawers();
-    }
-  });
-}
+document.addEventListener("click", (e) => {
+  if (!e.target.closest("tr.data-row") && !e.target.closest("tr.drawer-row")) {
+    closeAllDrawers();
+  }
+});
 
 filtered = [...studios];
 render();
