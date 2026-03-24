@@ -4552,7 +4552,7 @@
   srcSetAvif: "IMG/avif/Logo-Jacobino-Discos_3dad796b76.avif 621w",
   srcSetWebp: "IMG/webp/Logo-Jacobino-Discos_3dad796b76.webp 621w",
   srcOriginal: "https://freight.cargo.site/t/original/i/M2855431241945243629112661586627/Logo-Jacobino-Discos.jpg",
-  orientation: "sq",
+  orientation: "v",
   span: 1,
   tags: ["logo", "música"],
   title: "Logo sello Jacobino Discos",
