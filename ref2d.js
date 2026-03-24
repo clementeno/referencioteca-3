@@ -4437,6 +4437,96 @@
   url: "https://joaquinrosas.com/GUBII-BAGS"
 },
 
+/* ------------------ Antiquity Collection — Sebastián Errázuriz ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/I2854633759702593391334728872643/The-Antiquity-Shelf-by-Sebastian-Errazuriz-1.jpg.jpg",
+  orientation: "h",
+  span: 1,
+  tags: ["objeto", "diseño conceptual"],
+  title: "Antiquity Collection",
+  author: "Sebastián Errázuriz",
+  role: "",
+  collab: "Desarrollado en Sebastian Studio",
+  area: "Objeto / Diseño conceptual",
+  year: "2021",
+  url: "https://sebastian.studio/storage-antiquity-bookshelf"
+},
+
+/* ------------------ IMAGINE ARTIFICIAL GENERAL INTELLIGENCE — Sebastián Errázuriz ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/R2854632112943303187209346560707/Captura-de-pantalla-2026-03-23-a-las-22.57.22.png",
+  orientation: "h",
+  span: 1,
+  tags: ["editorial"],
+  title: "IMAGINE ARTIFICIAL GENERAL INTELLIGENCE",
+  author: "Sebastián Errázuriz",
+  role: "",
+  collab: "Desarrollado en Sebastian Studio",
+  area: "Editorial",
+  year: "2025",
+  url: "https://sebastian.studio/imagine-book"
+},
+
+/* ------------------ Melissa + Sebastián — Sebastián Errázuriz ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/H2854633759757933623555857527491/melissa.jpeg.jpg",
+  orientation: "h",
+  span: 1,
+  tags: ["objeto", "indumentaria", "moda"],
+  title: "Melissa + Sebastián",
+  author: "Sebastián Errázuriz",
+  role: "",
+  collab: "Melissa plastic shoes. Desarrollado en Sebastian Studio",
+  area: "Objeto / Indumentaria / Moda",
+  year: "2015",
+  url: "https://sebastian.studio/brands-melissa-sebastian"
+},
+
+/* ------------------ Encuentros — Ignacia Murtagh ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/M2854633759739486879482147975875/Volume-3.jpg.jpg",
+  orientation: "v",
+  span: 1,
+  tags: ["objeto", "artesanía", "exhibición"],
+  title: "Encuentros",
+  author: "Ignacia Murtagh",
+  role: "",
+  collab: "",
+  area: "Objeto / Artesanía / Exhibición",
+  year: "n/a",
+  url: "https://ignaciamurtagh.com/collections/#/encuentros/"
+},
+
+/* ------------------ Bancas Lapis. Palacio Pereira — Ignacia Murtagh ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/F2854633759721040135408438424259/Lapis-2.jpg.jpg",
+  orientation: "h",
+  span: 1,
+  tags: ["objeto", "artesanía", "exhibición"],
+  title: "Bancas Lapis. Palacio Pereira",
+  author: "Ignacia Murtagh",
+  role: "",
+  collab: "",
+  area: "Objeto / Artesanía / Exhibición",
+  year: "n/a",
+  url: "https://ignaciamurtagh.com/collections#/palacio-pereira/"
+},
+
+/* ------------------ Woven Landscapes. Gallura — Ignacia Murtagh ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/G2854632390308547079506164658883/Screen-Shot-2025-04-02-at-22.22.07.png",
+  orientation: "h",
+  span: 1,
+  tags: ["objeto", "artesanía", "exhibición"],
+  title: "Woven Landscapes. Gallura",
+  author: "Ignacia Murtagh",
+  role: "",
+  collab: "",
+  area: "Objeto / Artesanía / Exhibición",
+  year: "n/a",
+  url: "https://ignaciamurtagh.com/collections#/woven-landscapes/"
+},
+
 /* ------------------ Across Andes 2025 Volcano Edition — Joaquín Rosas ------------------ */
 {
   src: "IMG/remote-originals/188_rosas-joaquin-MAPAAA-2025-Final_1340_c.jpeg",
