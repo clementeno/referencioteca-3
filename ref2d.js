@@ -834,10 +834,16 @@
     "confección", "estilismo", "guiatura", "identidad", "visuales", "autor", "autora",
     "autores", "autoras", "libro", "isbn", "isbnn", "producido", "producida", "producer",
     "produced", "producido por", "desarrollado por", "colaboracion", "colaboración",
+    "colaborador", "colaboradora", "colaboradores", "colaboradoras",
     "coordinacion", "coordinación", "creacion", "creación", "edicion", "edición",
     "impreso", "impresa", "impresion", "impresión", "diseno sonoro", "mezcla", "programacion",
-    "programación", "direccion y creacion", "dirección y creación"
+    "programación", "direccion y creacion", "dirección y creación", "logo", "logos",
+    "revista", "revistas"
   ]);
+
+  function normalizeWordToken(value) {
+    return norm(value).replace(/[^a-z0-9@]+/g, "");
+  }
 
   function canonicalPersonLabel(raw) {
     const value = String(raw || "").replace(/\s+/g, " ").trim();
@@ -878,7 +884,7 @@
       return false;
     } else {
       const valid = words.every((word) => {
-        const low = norm(word);
+        const low = normalizeWordToken(word);
         if (PERSON_NAME_PARTICLES.has(low)) return true;
         if (PERSON_BLACKLIST_WORDS.has(low)) return false;
         if (!/^[A-ZÁÉÍÓÚÜÑ][\p{L}'’.-]*$/u.test(word)) return false;
@@ -888,29 +894,61 @@
       });
       if (!valid) return false;
       const significantWords = words.filter((word) => {
-        const low = norm(word);
+        const low = normalizeWordToken(word);
         return !PERSON_NAME_PARTICLES.has(low);
       });
       if (significantWords.length < 2) return false;
-      if (significantWords.some((word) => PERSON_BLACKLIST_WORDS.has(norm(word)))) return false;
+      if (significantWords.some((word) => PERSON_BLACKLIST_WORDS.has(normalizeWordToken(word)))) return false;
     }
 
     return true;
   }
 
   function extractPersonCandidates(rawText) {
-    const text = String(rawText || "");
+    const text = String(rawText || "")
+      .replace(/\.\s+(?=[A-ZÁÉÍÓÚÜÑ@])/g, "\n")
+      .replace(/;\s+(?=[A-ZÁÉÍÓÚÜÑ@])/g, "\n");
     if (!text.trim()) return [];
-    const matches = text.match(/@[A-Za-z0-9._-]{2,}|[A-ZÁÉÍÓÚÜÑ][\p{L}'’.-]+(?:\s+(?:de|del|la|las|los|y|da|do|dos|van|von|di)\s+[A-ZÁÉÍÓÚÜÑ][\p{L}'’.-]+|\s+[A-ZÁÉÍÓÚÜÑ][\p{L}'’.-]+){0,3}/gu) || [];
+    const matches = text.match(/@[A-Za-z0-9._-]{2,}|[A-ZÁÉÍÓÚÜÑ][\p{L}'’-]+(?:\s+(?:de|del|la|las|los|y|da|do|dos|van|von|di)\s+[A-ZÁÉÍÓÚÜÑ][\p{L}'’-]+|\s+[A-ZÁÉÍÓÚÜÑ][\p{L}'’-]+){0,3}/gu) || [];
     const out = [];
     const seen = new Set();
+    const trimTrailingNoise = (value) => {
+      const words = String(value || "").split(/\s+/).filter(Boolean);
+      while (words.length) {
+        const last = normalizeWordToken(words[words.length - 1]);
+        if (!last) {
+          words.pop();
+          continue;
+        }
+        if (PERSON_BLACKLIST_WORDS.has(last)) {
+          words.pop();
+          continue;
+        }
+        break;
+      }
+      while (words.length) {
+        const last = normalizeWordToken(words[words.length - 1]);
+        if (last === "y" || last === "and" || last === "&") {
+          words.pop();
+          continue;
+        }
+        break;
+      }
+      return words.join(" ").trim();
+    };
     matches.forEach((match) => {
-      const candidate = canonicalPersonLabel(match);
-      const key = toNameKey(candidate);
-      if (!candidate || !key || seen.has(key)) return;
-      if (!isLikelyPersonCandidate(candidate)) return;
-      seen.add(key);
-      out.push(candidate);
+      const fragments = String(match || "")
+        .split(/\s+(?:y|and|&)\s+/i)
+        .map((part) => trimTrailingNoise(part))
+        .filter(Boolean);
+      fragments.forEach((fragment) => {
+        const candidate = canonicalPersonLabel(fragment);
+        const key = toNameKey(candidate);
+        if (!candidate || !key || seen.has(key)) return;
+        if (!isLikelyPersonCandidate(candidate)) return;
+        seen.add(key);
+        out.push(candidate);
+      });
     });
     return out;
   }
