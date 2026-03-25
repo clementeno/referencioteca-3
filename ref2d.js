@@ -5201,8 +5201,8 @@
   tags: ["investigación","publicación académica"],
   title: "Desde la bio-imitación a la bioextrapolación: Diseño basado en Simbiogénesis",
   author: "Daniela Rojas-Levy",
-  role: "",
-  collab: "Durán-Vargas, A., & Rojas-Levy, D. (2021)",
+  role: "co-autora",
+  collab: "Alejandro Durán, Daniela Rojas-Levy (2021)",
   area: "Investigación / Publicación académica",
   year: "2021",
   url: "https://dspace.palermo.edu/ojs/index.php/cdc/article/view/5004"
