@@ -6885,11 +6885,71 @@
   tags: ["investigación", "publicación académica"],
   title: "Un origen desconocido del diseño industrial",
   author: "Lilian Calderón",
-  role: "Colaboración en conjunto a Federico Monroy",
-  collab: "",
+  role: "Investigadora / Diseñadora",
+  collab: "Colaboración en conjunto a Federico Monroy",
   area: "Investigación / Publicación académica",
   year: "2018",
   url: "https://foroalfa.org/articulos/un-origen-desconocido-del-diseno-industrial"
+},
+
+/* ------------------ Línea de Ensamble — Vicente Múñoz ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/J2855459556498358408483271291587/Captura-de-pantalla-2026-03-24-a-las-11.32.45.png",
+  orientation: "h",
+  span: 1,
+  tags: ["web", "investigación", "diseño industrial"],
+  title: "Línea de Ensamble",
+  author: "Vicente Múñoz",
+  role: "Profesor Guía: Nicolás Morales",
+  collab: "",
+  area: "Web / Investigación / Diseño Industrial",
+  year: "2025",
+  url: "https://chilean-design-chronicles.lovable.app/"
+},
+
+/* ------------------ La fête de la vie — Rosario Balmaceda Espinosa ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/A2856199837158523504017759744707/1774382425609.jpeg",
+  orientation: "h",
+  span: 1,
+  tags: ["diseño gráfico", "producto"],
+  title: "La fête de la vie",
+  author: "Rosario Balmaceda Espinosa",
+  role: "Desarrollado en La Fête Chocolat Chile",
+  collab: "",
+  area: "Diseño gráfico / Producto",
+  year: "2026",
+  url: "https://www.linkedin.com/posts/rosariobe_campa%C3%B1a-pascua-de-resurrecci%C3%B3n-la-f%C3%AAte-activity-7442299314976112640-xQu0?utm_source=share&utm_medium=member_desktop&rcm=ACoAAENdsFEB8cHH4aAjoEic9bK9fxqH37Fjuro"
+},
+
+/* ------------------ La Fête de L'Amour — Rosario Balmaceda Espinosa ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/G2856199837195416992165178847939/1769178432698.jpeg",
+  orientation: "h",
+  span: 1,
+  tags: ["diseño gráfico", "producto"],
+  title: "La Fête de L'Amour",
+  author: "Rosario Balmaceda Espinosa",
+  role: "Desarrollado en La Fête Chocolat Chile",
+  collab: "",
+  area: "Diseño gráfico / Producto",
+  year: "2026",
+  url: "https://www.linkedin.com/posts/angeles-alvarez-casta%C3%B1o-b289311b9_campa%C3%B1a-la-f%C3%AAte-de-lamour-muy-emocionada-ugcPost-7420472189377826816-wATc?utm_source=share&utm_medium=member_desktop&rcm=ACoAAENdsFEB8cHH4aAjoEic9bK9fxqH37Fjuro"
+},
+
+/* ------------------ EL SOL IMPLORA (Video Oficial) — Juan Pablo Bustamante ------------------ */
+{
+  src: "https://freight.cargo.site/t/original/i/T2856199837176970248091469296323/unnamed-2.jpg",
+  orientation: "h",
+  span: 1,
+  tags: ["styling"],
+  title: "EL SOL IMPLORA (Video Oficial)",
+  author: "Juan Pablo Bustamante",
+  role: "",
+  collab: "Dirección: @ramozz_dir @juanjoramozz_. Concepto Original: @_jambeau. Produccion: @hi.marlyc & @jacoinsignares. Asistencia de Produccion: @alejandro_vanegasr @el.rolo__. DP/Color: @ramozz_dir. Gaffer/Fotofija: @mari.gargo. Styling: @_jambeau. Producción Musical: @exilesdreams.",
+  area: "Styling",
+  year: "2026",
+  url: "https://www.youtube.com/watch?v=ZgqHKwb2Gnk"
 },
 
 /* ------------------ Patitas Perdidas — Nicole Cavada ------------------ */
