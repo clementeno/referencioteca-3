@@ -328,6 +328,8 @@
     "costume design": "textil",
     "fashion": "moda",
     "diseno de moda": "moda",
+    "styling": "estilismo",
+    "stylist": "estilismo",
 
     // Museografía
     "museografia": "museografía",
@@ -541,6 +543,7 @@
     "diseno de informacion":"Diseño de Información",
     "ecologia":           "Ecología",
     "estilismo":          "Estilismo",
+    "styling":            "Estilismo",
     "experiencia":        "Experiencia",
     "galeria":            "Galería",
     "innovacion":         "Innovación",
@@ -1285,7 +1288,9 @@
       "mobiliario": "Mobiliario",
       "espacios": "Espacios",
       "social": "Social",
-      "afiche": "Afiche"
+      "afiche": "Afiche",
+      "estilismo": "Estilismo",
+      "styling": "Estilismo"
     };
 
   /* Config desde CSS */
