@@ -12,6 +12,10 @@ window.REF2D_TAXONOMY_OVERRIDES = {
   // "foto producto": "fotografia",
   // "fotito": "fotografia",
   aliases: {
+    // Mantener audiovisual separado de animación
+    "audiovisual": "audiovisual",
+    "pieza audiovisual": "audiovisual",
+    "video audiovisual": "audiovisual"
   },
 
   // Solo se usarán si importSuggestions=true.

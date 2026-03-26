@@ -274,7 +274,6 @@
     "animacion 2d": "animación",
     "animacion 3d": "animación",
     "diseno en movimiento": "animación",
-    "audiovisual": "animación",
     "stop-motion": "animación",
     "stop motion": "animación",
 
@@ -11481,7 +11480,23 @@
     add(item){
       const id = DB.length;
       const newItem = Object.assign(
-        {id, src:"", srcOriginal:"", orientation:"h", span:1, tags:[], title:"—", author:"—", role:"", collab:"", area:"—", year:"—", url:""},
+        {
+          id,
+          src:"",
+          srcOriginal:"",
+          orientation:"h",
+          span:1,
+          tags:[],
+          secondaryTags:[], // Categorías vinculadas opcionales (solo búsqueda interna)
+          keywords:[], // Palabras clave libres para ampliar lenguaje de búsqueda
+          title:"—",
+          author:"—",
+          role:"",
+          collab:"",
+          area:"—",
+          year:"—",
+          url:""
+        },
         item
       );
       normalizeProjectTags(newItem);
