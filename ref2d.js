@@ -11598,25 +11598,39 @@
       .split(/\s*\+\s*|,/)
       .map((part) => part.trim())
       .filter(Boolean);
-    if (parts.length <= 1) return { tagKeys: [], personKeys: [] };
-
-    const tagKeys = [];
-    const personKeys = [];
-    for (let i = 0; i < parts.length; i += 1) {
-      const part = parts[i];
-      const tagKey = normalizeTagKey(part);
-      if (isKnownTagKey(tagKey)) {
-        if (!tagKeys.includes(tagKey)) tagKeys.push(tagKey);
-        continue;
+    if (parts.length > 1) {
+      const tagKeys = [];
+      const personKeys = [];
+      for (let i = 0; i < parts.length; i += 1) {
+        const part = parts[i];
+        const tagKey = normalizeTagKey(part);
+        if (isKnownTagKey(tagKey)) {
+          if (!tagKeys.includes(tagKey)) tagKeys.push(tagKey);
+          continue;
+        }
+        const personKey = normalizePersonKey(part);
+        if (isKnownPersonKey(personKey)) {
+          if (!personKeys.includes(personKey)) personKeys.push(personKey);
+          continue;
+        }
+        return { tagKeys: [], personKeys: [] };
       }
-      const personKey = normalizePersonKey(part);
-      if (isKnownPersonKey(personKey)) {
-        if (!personKeys.includes(personKey)) personKeys.push(personKey);
-        continue;
-      }
-      return { tagKeys: [], personKeys: [] };
+      return { tagKeys, personKeys };
     }
-    return { tagKeys, personKeys };
+
+    // Soporte para escritura manual de múltiples categorías separadas por espacio:
+    // "textil cultura" => equivalente a "textil + cultura".
+    const bySpaces = normalized.split(/\s+/).filter(Boolean);
+    if (bySpaces.length > 1) {
+      const tagKeys = [];
+      for (let i = 0; i < bySpaces.length; i += 1) {
+        const key = normalizeTagKey(bySpaces[i]);
+        if (!isKnownTagKey(key)) return { tagKeys: [], personKeys: [] };
+        if (!tagKeys.includes(key)) tagKeys.push(key);
+      }
+      if (tagKeys.length > 1) return { tagKeys, personKeys: [] };
+    }
+    return { tagKeys: [], personKeys: [] };
   }
 
   function tokenizeSearchTerm(term) {
