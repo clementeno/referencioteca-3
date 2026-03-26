@@ -465,6 +465,61 @@
     "musica": "música",
   };
 
+  // SAFE snapshot (pre-import): se mantiene para rollback rápido.
+  const TAXONOMY_SAFE = Object.freeze({
+    tags: TAGS.slice(),
+    suggestions: SUGGESTIONS.slice(),
+    aliases: Object.freeze({ ...TAG_ALIASES })
+  });
+  if (typeof window !== "undefined") {
+    window.REF2D_TAXONOMY_SAFE = TAXONOMY_SAFE;
+  }
+
+  function mergeTaxonomyPayload(payload) {
+    if (!payload || typeof payload !== "object") return;
+
+    const dedupePush = (list, value) => {
+      const raw = String(value || "").trim();
+      if (!raw) return;
+      const key = norm(raw);
+      if (!key) return;
+      if (list.some((item) => norm(item) === key)) return;
+      list.push(raw);
+    };
+
+    const canonicalForMerge = (value) => {
+      const key = norm(value);
+      return norm(TAG_ALIASES[key] || key);
+    };
+
+    if (payload.aliases && typeof payload.aliases === "object") {
+      Object.entries(payload.aliases).forEach(([rawAlias, rawTarget]) => {
+        const alias = norm(rawAlias);
+        const target = canonicalForMerge(rawTarget);
+        if (!alias || !target) return;
+        TAG_ALIASES[alias] = target;
+      });
+    }
+
+    // Por defecto NO importamos sugerencias ni tags visibles:
+    // este payload expande lenguaje para búsqueda sin ensuciar el autosuggest.
+    if (payload.importSuggestions === true && Array.isArray(payload.suggestions)) {
+      payload.suggestions.forEach((item) => dedupePush(SUGGESTIONS, item));
+    }
+
+    if (payload.importProjectTags === true && Array.isArray(payload.projectTags)) {
+      payload.projectTags.forEach((item) => dedupePush(TAGS, item));
+    }
+  }
+
+  function applyTaxonomyEnhancementsFromWindow() {
+    if (typeof window === "undefined") return;
+    mergeTaxonomyPayload(window.REF2D_TAXONOMY_ENHANCEMENTS);
+    mergeTaxonomyPayload(window.REF2D_TAXONOMY_OVERRIDES);
+  }
+
+  applyTaxonomyEnhancementsFromWindow();
+
   /* ---- TAG DISPLAY (cómo se muestran los canónicos) ---- */
   const TAG_DISPLAY = {
     "editorial":          "Editorial",
@@ -8420,6 +8475,409 @@
       area: "Moda / Textil / Indumentaria",
       year: "2025",
       url: "https://www.muthboutique.cl/products/vest-anea-cafe?variant=45046068510857"
+    },
+
+    /* ------------------ OKWU — Consuelo Yávar Larraín ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/A2858616679576384489717603185347/1730141673143.jpeg",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["diseño interior", "estudio"],
+      keywords: [],
+      title: "OKWU",
+      author: "Consuelo Yávar Larraín",
+      role: "Diseñadora / coFundadora Flux",
+      collab: "Proyecto diseñado por DAW GLOBAL, implementado por CROMOLUX. Muebles y equipamientos con cubiertas Flux.",
+      area: "diseño interior",
+      year: "2026",
+      url: [
+        "https://www.linkedin.com/posts/consueloyavarlarrain_cuando-nos-embarcamos-en-el-proyecto-de-las-activity-7442659278425047040-uTXT?utm_source=share&utm_medium=member_desktop&rcm=ACoAAENdsFEB8cHH4aAjoEic9bK9fxqH37Fjuro",
+        "https://www.linkedin.com/posts/consueloyavarlarrain_circularidad-sin-renuncia-dado-que-la-circularidad-activity-7256740148552372226-cbKi?utm_source=share&utm_medium=member_desktop&rcm=ACoAAENdsFEB8cHH4aAjoEic9bK9fxqH37Fjuro"
+      ]
+    },
+
+    /* ------------------ Majen — Consuelo Yávar Larraín ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/T2858622597199649615373213840067/1772131344479.jpeg",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["diseño interior", "estudio"],
+      keywords: [],
+      title: "Majen",
+      author: "Consuelo Yávar Larraín",
+      role: "Diseñadora / coFundadora Flux",
+      collab: "Diseño: DAW GLOBAL. Desarrollado por Flux.",
+      area: "diseño interior",
+      year: "2025",
+      url: [
+        "https://www.linkedin.com/posts/consueloyavarlarrain_el-dise%C3%B1o-no-es-decoraci%C3%B3n-es-conversi%C3%B3n-activity-7432857595671044096-9M4T?utm_source=share&utm_medium=member_desktop&rcm=ACoAAENdsFEB8cHH4aAjoEic9bK9fxqH37Fjuro"
+      ]
+    },
+
+    /* ------------------ María y el fuego — Josefina M. Gajardo ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/R2858617561533665397844975497923/Captura-de-pantalla-2026-03-25-a-las-19.31.42.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["editorial"],
+      keywords: ["portada de libro", "fotomontaje digital"],
+      title: "María y el fuego",
+      author: "Josefina M. Gajardo",
+      role: "",
+      collab: "",
+      area: "editorial",
+      year: "2022",
+      url: [
+        "https://www.behance.net/gallery/157906793/Maria-y-el-fuego"
+      ]
+    },
+
+    /* ------------------ Mona — Josefina M. Gajardo ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/O2858617561275410980813041775299/Captura-de-pantalla-2026-03-25-a-las-19.31.24.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["editorial", "ilustración"],
+      keywords: ["portada de libro", "ilustración digital"],
+      title: "Mona",
+      author: "Josefina M. Gajardo",
+      role: "",
+      collab: "",
+      area: "editorial",
+      year: "2022",
+      url: [
+        "https://www.behance.net/gallery/157681053/Mona"
+      ]
+    },
+
+    /* ------------------ APP Fuerza de Ventas — Isidora Hernández ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/X2858622147984537932398212887235/Mockup-_3_.png.jpg",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["app"],
+      keywords: ["retail"],
+      title: "APP Fuerza de Ventas",
+      author: "Isidora Hernández",
+      role: "",
+      collab: "",
+      area: "app",
+      year: "n/a",
+      url: [
+        "https://www.isidorahernandez.com/proyecto-fuerza-de-ventas"
+      ]
+    },
+
+    /* ------------------ APP Canal Moderno — Isidora Hernández ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/S2858617204127998969722412937923/82f8e9_f32cea179cff4ddba5b95b34b1492b36_mv2.png.jpg",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["app"],
+      keywords: ["retail"],
+      title: "APP Canal Moderno",
+      author: "Isidora Hernández",
+      role: "",
+      collab: "",
+      area: "app",
+      year: "n/a",
+      url: [
+        "https://www.isidorahernandez.com/proyecto-canal-moderno"
+      ]
+    },
+
+    /* ------------------ VIO — Sofia Hinostroza ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/L2858617561515218653771265946307/Captura-de-pantalla-2026-03-25-a-las-19.40.34.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["investigación", "biomaterial", "innovación"],
+      keywords: [],
+      title: "VIO",
+      author: "Sofia Hinostroza",
+      role: "",
+      collab: "Guiatura: Lina Cárdenas",
+      area: "investigación",
+      year: "2019",
+      url: [
+        "https://www.instagram.com/p/CrjCEJgOpP-/?img_index=1",
+        "https://diseno.uc.cl/memorias/pdf/memoria_dno_uc_2019_1_HINOSTROZA_MONTECINO_S.pdf"
+      ]
+    },
+
+    /* ------------------ DISEÑO DE VESTUARIO WILD LAMA — Alejandra Lange ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/Q2858617561496771909697556394691/Captura-de-pantalla-2026-03-25-a-las-19.42.37.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["indumentaria", "textil", "moda"],
+      keywords: ["ropa retail"],
+      title: "DISEÑO DE VESTUARIO WILD LAMA",
+      author: "Alejandra Lange",
+      role: "",
+      collab: "Desarrollado en Wild Lama",
+      area: "indumentaria",
+      year: "2025",
+      url: [
+        "https://www.behance.net/gallery/219375411/DISENO-DE-VESTUARIO-WILD-LAMA"
+      ]
+    },
+
+    /* ------------------ DISEÑO DE VESTUARIO MUJER Y HOMBRE - BAJO VERANO 2025 — Alejandra Lange ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/X2858617561478325165623846843075/Captura-de-pantalla-2026-03-25-a-las-19.44.31.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["indumentaria", "textil", "moda"],
+      keywords: ["ropa retail"],
+      title: "DISEÑO DE VESTUARIO MUJER Y HOMBRE - BAJO VERANO 2025",
+      author: "Alejandra Lange",
+      role: "",
+      collab: "Desarrollado en Wild Lama",
+      area: "indumentaria",
+      year: "2025",
+      url: [
+        "https://www.behance.net/gallery/233144891/DISENO-DE-VESTUARIO-WILD-LAMA"
+      ]
+    },
+
+    /* ------------------ Museo del Holocausto - RECORRIDO HOLOCAUSTO (SHOÁ) — Camila Minzer ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/V2858617561441431677476427739843/Captura-de-pantalla-2026-03-25-a-las-19.49.16.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["museografía", "exhibición"],
+      keywords: ["exposición", "historia"],
+      title: "Museo del Holocausto - RECORRIDO HOLOCAUSTO (SHOÁ)",
+      author: "Camila Minzer",
+      role: "Dirección de arte y diseño",
+      collab: "Jefatura del proyecto: Sofía Cohen. Curatoría: Beate Wenker, Deborah Roitman.",
+      area: "museografía",
+      year: "2020",
+      url: [
+        "https://www.behance.net/gallery/96172895/Museo-del-Holocausto",
+        "https://museojudio.cl/recorrido-holocausto/"
+      ]
+    },
+
+    /* ------------------ REVERSE — Camila Minzer ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/X2858617561422984933402718188227/Captura-de-pantalla-2026-03-25-a-las-19.54.09.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["objeto", "producto"],
+      keywords: [],
+      title: "REVERSE",
+      author: "Camila Minzer",
+      role: "",
+      collab: "",
+      area: "objeto",
+      year: "2020",
+      url: [
+        "https://www.behance.net/gallery/96173081/Reverse"
+      ]
+    },
+
+    /* ------------------ Patrimonio cultural en cifras — Isidora Val Valdivielso ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/Y2858617561404538189329008636611/Captura-de-pantalla-2026-03-25-a-las-19.58.59.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["editorial"],
+      keywords: ["memoria institucional", "informa"],
+      title: "Patrimonio cultural en cifras",
+      author: "Isidora Val Valdivielso",
+      role: "",
+      collab: "",
+      area: "editorial",
+      year: "2022",
+      url: [
+        "https://www.archivonacional.gob.cl/sites/www.archivonacional.gob.cl/files/2023-12/Patrimonio%20cultural%20en%20cifras%202022.pdf"
+      ]
+    },
+
+    /* ------------------ Derecho de la Competencia — Isidora Val Valdivielso ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/P2858617561386091445255299084995/Captura-de-pantalla-2026-03-25-a-las-20.01.11.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["editorial"],
+      keywords: [],
+      title: "Derecho de la Competencia",
+      author: "Isidora Val Valdivielso",
+      role: "",
+      collab: "Una guía global. David J. Gerber. Investigación Centro Competencia UAI.",
+      area: "editorial",
+      year: "2024",
+      url: [
+        "https://www.behance.net/gallery/212458209/Libro-Derecho-de-la-competencia"
+      ]
+    },
+
+    /* ------------------ Dialogos sobre Patrimonios — Isidora Val Valdivielso ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/A2858617561367644701181589533379/Captura-de-pantalla-2026-03-25-a-las-20.01.49.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["editorial"],
+      keywords: [],
+      title: "Dialogos sobre Patrimonios",
+      author: "Isidora Val Valdivielso",
+      role: "",
+      collab: "Departamento de Estudios y Educación Patrimonial, Subsecretaría del Patrimonio Cultural",
+      area: "editorial",
+      year: "2022",
+      url: [
+        "https://www.behance.net/gallery/159140225/Dialogos-sobre-Patrimonio"
+      ]
+    },
+
+    /* ------------------ Atlas del Patrimonio Cultural en Chile — Isidora Val Valdivielso ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/Z2858617561349197957107879981763/Captura-de-pantalla-2026-03-25-a-las-20.02.30.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["editorial"],
+      keywords: [],
+      title: "Atlas del Patrimonio Cultural en Chile",
+      author: "Isidora Val Valdivielso",
+      role: "",
+      collab: "",
+      area: "editorial",
+      year: "2023",
+      url: [
+        "https://www.behance.net/gallery/235654997/Atlas-del-Patrimonio-en-Chile"
+      ]
+    },
+
+    /* ------------------ Sin Nombre — Daniela Collarte ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/P2858617561330751213034170430147/Captura-de-pantalla-2026-03-25-a-las-20.05.25.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["artesanía"],
+      keywords: ["cerámica", "cerámica grez"],
+      title: "Sin Nombre",
+      author: "Daniela Collarte",
+      role: "",
+      collab: "",
+      area: "artesanía",
+      year: "2025",
+      url: [
+        "https://www.instagram.com/p/DEvYHQIy8Hw/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
+      ]
+    },
+
+    /* ------------------ Sin Nombre — Daniela Collarte ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/Q2858617561312304468960460878531/Captura-de-pantalla-2026-03-25-a-las-20.05.54.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["artesanía"],
+      keywords: ["cerámica", "cerámica grez"],
+      title: "Sin Nombre",
+      author: "Daniela Collarte",
+      role: "",
+      collab: "",
+      area: "artesanía",
+      year: "2025",
+      url: [
+        "https://www.instagram.com/p/C-AxgNSpNxQ/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
+      ]
+    },
+
+    /* ------------------ Plan Maestro Zona de Interés Público Arenal – Talcahuano — Isidora Millas Simosen ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/J2858616679594831233791312736963/1773157773235.jpeg",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["diseño gráfico"],
+      keywords: ["tríptico informativo"],
+      title: "Plan Maestro Zona de Interés Público Arenal – Talcahuano",
+      author: "Isidora Millas Simosen",
+      role: "",
+      collab: "",
+      area: "diseño gráfico",
+      year: "2025",
+      url: [
+        "https://www.linkedin.com/posts/isidoramilllas_como-dise%C3%B1adora-en-la-direcci%C3%B3n-de-extensi%C3%B3n-activity-7437162747932577794-UmQn?utm_source=share&utm_medium=member_desktop&rcm=ACoAAENdsFEB8cHH4aAjoEic9bK9fxqH37Fjuro"
+      ]
+    },
+
+    /* ------------------ Vans — Florencia Alcalde R. ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/T2858616679613277977865022288579/4f00b34f-7ccc-4708-b99d-f8893a3283c7_rw_1920.jpg",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["fotografía", "dirección de arte"],
+      keywords: ["retail"],
+      title: "Vans",
+      author: "Florencia Alcalde R.",
+      role: "",
+      collab: "Modelo: @gabriel_torresj. Estilista: @ariedelpalma. Maquillaje: @maquillajetereyavar. Asistente fotografía: @manealcalder. Video: @agustinmunozrocha, @davidperlaza, @domingo_streeter. Art: @jotawork_, @jisepulve. Equipo Vans: @agus7ita, @negra_ipinza, @diegosoruco, @tomaasguzmaan.",
+      area: "fotografía",
+      year: "2025",
+      url: [
+        "https://farfotografia.myportfolio.com/vans",
+        "https://www.instagram.com/p/DH7AqcLv_JH/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
+      ]
+    },
+
+    /* ------------------ Madre Tierra — Florencia Alcalde R. ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/I2858616679631724721938731840195/4ea73515-6866-4fc1-bf06-6f365e977345_rw_3840.jpg",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["fotografía", "dirección de arte"],
+      keywords: [],
+      title: "Madre Tierra",
+      author: "Florencia Alcalde R.",
+      role: "",
+      collab: "Editorial cuatro elementos, conexión profunda con la naturaleza y sus fuerzas elementales. Modelo: @simonamaass. Maquillaje y pelo: @marsss.makeup. Estilismo: @ariedelpalma. Estudio: @toomanyflash.",
+      area: "fotografía",
+      year: "2024",
+      url: [
+        "https://farfotografia.myportfolio.com/madre-tierra"
+      ]
+    },
+
+    /* ------------------ Summer Collection — María Jesús Aldunce ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/P2858617561293857724886751326915/Captura-de-pantalla-2026-03-26-a-las-10.52.57.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["styling", "dirección de arte"],
+      keywords: ["moda"],
+      title: "Summer Collection",
+      author: "María Jesús Aldunce",
+      role: "",
+      collab: "",
+      area: "styling",
+      year: "2025",
+      url: [
+        "https://www.behance.net/gallery/235148269/Portafolio"
+      ]
     }
     
   ];
