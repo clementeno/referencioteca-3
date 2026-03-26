@@ -8977,6 +8977,435 @@
       url: [
         "https://www.behance.net/gallery/235148269/Portafolio"
       ]
+    },
+
+    /* ------------------ KIPO — Margarita Ham Uribe ------------------ */
+    {
+      src: "IMG/webp/Captura-de-pantalla-2026-03-26-a-las-12.31.21_1acad31c96.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-26-a-las-12.31.21_1acad31c96.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-26-a-las-12.31.21_1acad31c96-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-26-a-las-12.31.21_1acad31c96-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-26-a-las-12.31.21_1acad31c96.avif 1424w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-26-a-las-12.31.21_1acad31c96-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-26-a-las-12.31.21_1acad31c96-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-26-a-las-12.31.21_1acad31c96.webp 1424w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/B2858839589884197243349654516419/Captura-de-pantalla-2026-03-26-a-las-12.31.21.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["identidad visual", "branding"],
+      keywords: ["logo"],
+      title: "KIPO",
+      author: "Margarita Ham Uribe",
+      role: "",
+      collab: "Diseño de logo, material gráfico y medios de difusión de la marca KIPO",
+      area: "identidad visual",
+      year: "2020",
+      url: ["https://www.behance.net/gallery/96766445/Diseno-de-marca-KIPO"]
+    },
+
+    /* ------------------ Kumiko — Margarita Ham Uribe ------------------ */
+    {
+      src: "IMG/webp/Captura-de-pantalla-2026-03-26-a-las-12.33.30_3f686000a8.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-26-a-las-12.33.30_3f686000a8.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-26-a-las-12.33.30_3f686000a8-640.avif 640w, IMG/avif/Captura-de-pantalla-2026-03-26-a-las-12.33.30_3f686000a8.avif 1224w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-26-a-las-12.33.30_3f686000a8-640.webp 640w, IMG/webp/Captura-de-pantalla-2026-03-26-a-las-12.33.30_3f686000a8.webp 1224w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/I2858839589865750499275944964803/Captura-de-pantalla-2026-03-26-a-las-12.33.30.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["rrss"],
+      keywords: ["redes sociales"],
+      title: "Kumiko",
+      author: "Margarita Ham Uribe",
+      role: "",
+      collab: "",
+      area: "rrss",
+      year: "2020",
+      url: ["https://www.behance.net/gallery/104365375/Disenadora-de-graficas-para-RRSS-de-Kumiko"]
+    },
+
+    /* ------------------ LAMPOON MAGAZINE / Iván Pellicer / Editorial — Josefina Maiza ------------------ */
+    {
+      src: "IMG/webp/dysomnia-imagenes-02_8bc67e7a02.webp",
+      srcAvif: "IMG/avif/dysomnia-imagenes-02_8bc67e7a02.avif",
+      srcSetAvif: "IMG/avif/variants/dysomnia-imagenes-02_8bc67e7a02-640.avif 640w, IMG/avif/variants/dysomnia-imagenes-02_8bc67e7a02-1280.avif 1280w, IMG/avif/dysomnia-imagenes-02_8bc67e7a02.avif 1500w",
+      srcSetWebp: "IMG/webp/variants/dysomnia-imagenes-02_8bc67e7a02-640.webp 640w, IMG/webp/variants/dysomnia-imagenes-02_8bc67e7a02-1280.webp 1280w, IMG/webp/dysomnia-imagenes-02_8bc67e7a02.webp 1500w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/V2858837873931170018739744092867/dysomnia-imagenes-02.jpg",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["dirección creativa"],
+      keywords: ["editorial moda"],
+      title: "LAMPOON MAGAZINE / Iván Pellicer / Editorial",
+      author: "Josefina Maiza",
+      role: "",
+      collab: "Photography: Arden / Art Direction: Josefina Maiza, Uri Serra / Styling: Manu Mendi / Talents: Iván Pellicer from Antonio Abeledo / Production: Zerek Green from Zerek Studio",
+      area: "dirección creativa",
+      year: "2023",
+      url: ["https://josefinamaiza.work/02"]
+    },
+
+    /* ------------------ WOW CONCEPT / SS23 / Campaign — Josefina Maiza ------------------ */
+    {
+      src: "IMG/webp/dysomnia-imagenes-03_dcd2ee2ae8.webp",
+      srcAvif: "IMG/avif/dysomnia-imagenes-03_dcd2ee2ae8.avif",
+      srcSetAvif: "IMG/avif/variants/dysomnia-imagenes-03_dcd2ee2ae8-640.avif 640w, IMG/avif/variants/dysomnia-imagenes-03_dcd2ee2ae8-1280.avif 1280w, IMG/avif/dysomnia-imagenes-03_dcd2ee2ae8.avif 1500w",
+      srcSetWebp: "IMG/webp/variants/dysomnia-imagenes-03_dcd2ee2ae8-640.webp 640w, IMG/webp/variants/dysomnia-imagenes-03_dcd2ee2ae8-1280.webp 1280w, IMG/webp/dysomnia-imagenes-03_dcd2ee2ae8.webp 1500w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/M2858837874097190715403130057411/dysomnia-imagenes-03.jpg",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["dirección de arte"],
+      keywords: ["editorial moda", "campaña"],
+      title: "WOW CONCEPT / SS23 / Campaign",
+      author: "Josefina Maiza",
+      role: "",
+      collab: "Creative Direction: Rubén Gómez / Photography: Daniel Jordán Pompa, Gabriel Galindez / Art Direction & Set Design: Josefina Maiza / Production: Josefina Maiza",
+      area: "dirección de arte",
+      year: "2023",
+      url: ["https://josefinamaiza.work/03"]
+    },
+
+    /* ------------------ ELLE VIETNAM — Josefina Maiza ------------------ */
+    {
+      src: "IMG/webp/fotos-home-josemaiza-04_b8919ad1d3.webp",
+      srcAvif: "IMG/avif/fotos-home-josemaiza-04_b8919ad1d3.avif",
+      srcSetAvif: "IMG/avif/variants/fotos-home-josemaiza-04_b8919ad1d3-640.avif 640w, IMG/avif/fotos-home-josemaiza-04_b8919ad1d3.avif 900w",
+      srcSetWebp: "IMG/webp/variants/fotos-home-josemaiza-04_b8919ad1d3-640.webp 640w, IMG/webp/fotos-home-josemaiza-04_b8919ad1d3.webp 900w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/A2858837874078743971329420505795/fotos-home-josemaiza-04.jpg",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["dirección de arte"],
+      keywords: ["editorial moda", "campaña"],
+      title: "ELLE VIETNAM",
+      author: "Josefina Maiza",
+      role: "",
+      collab: "Photography & Creative Direction: Leire Cavia / Art direction: Josefina Maiza / Styling: Manu Mendi / Set Design: Luis Campos",
+      area: "dirección de arte",
+      year: "n/a",
+      url: [
+        "https://josefinamaiza.work/06",
+        "https://josefinamaiza.work/05"
+      ]
+    },
+
+    /* ------------------ THE HOUSE OF THE SPIRITS: BOOK COVER REDESIGN — Valentina Marquez Villablanca ------------------ */
+    {
+      src: "IMG/webp/a61c7ea1-ee36-4ba7-8e2d-46353ed67b9f_rw_1920_ece838fffb.webp",
+      srcAvif: "IMG/avif/a61c7ea1-ee36-4ba7-8e2d-46353ed67b9f_rw_1920_ece838fffb.avif",
+      srcSetAvif: "IMG/avif/variants/a61c7ea1-ee36-4ba7-8e2d-46353ed67b9f_rw_1920_ece838fffb-640.avif 640w, IMG/avif/a61c7ea1-ee36-4ba7-8e2d-46353ed67b9f_rw_1920_ece838fffb.avif 1280w",
+      srcSetWebp: "IMG/webp/variants/a61c7ea1-ee36-4ba7-8e2d-46353ed67b9f_rw_1920_ece838fffb-640.webp 640w, IMG/webp/a61c7ea1-ee36-4ba7-8e2d-46353ed67b9f_rw_1920_ece838fffb.webp 1280w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/L2858837874060297227255710954179/a61c7ea1-ee36-4ba7-8e2d-46353ed67b9f_rw_1920.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["ilustración"],
+      keywords: ["portada de libro", "ilustración digital"],
+      title: "THE HOUSE OF THE SPIRITS: BOOK COVER REDESIGN",
+      author: "Valentina Marquez Villablanca",
+      role: "",
+      collab: "",
+      area: "ilustración",
+      year: "n/a",
+      url: ["https://vcmv.myportfolio.com/the-house-of-the-spirits-book-cover-redesign"]
+    },
+
+    /* ------------------ CULTURNAUTS — Valentina Marquez Villablanca ------------------ */
+    {
+      src: "IMG/webp/be752e61-934c-48e3-87d8-305a9cf57ef4_rw_3840_a0dedee9e3.webp",
+      srcAvif: "IMG/avif/be752e61-934c-48e3-87d8-305a9cf57ef4_rw_3840_a0dedee9e3.avif",
+      srcSetAvif: "IMG/avif/variants/be752e61-934c-48e3-87d8-305a9cf57ef4_rw_3840_a0dedee9e3-640.avif 640w, IMG/avif/variants/be752e61-934c-48e3-87d8-305a9cf57ef4_rw_3840_a0dedee9e3-1280.avif 1280w, IMG/avif/be752e61-934c-48e3-87d8-305a9cf57ef4_rw_3840_a0dedee9e3.avif 3840w",
+      srcSetWebp: "IMG/webp/variants/be752e61-934c-48e3-87d8-305a9cf57ef4_rw_3840_a0dedee9e3-640.webp 640w, IMG/webp/variants/be752e61-934c-48e3-87d8-305a9cf57ef4_rw_3840_a0dedee9e3-1280.webp 1280w, IMG/webp/be752e61-934c-48e3-87d8-305a9cf57ef4_rw_3840_a0dedee9e3.webp 3840w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/F2858837874041850483182001402563/be752e61-934c-48e3-87d8-305a9cf57ef4_rw_3840.jpg",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["diseño conceptual", "diseño de servicio", "diseño especulativo"],
+      keywords: ["especulativo", "conceptual", "integral"],
+      title: "CULTURNAUTS",
+      author: "Valentina Marquez Villablanca",
+      role: "",
+      collab: "",
+      area: "diseño conceptual",
+      year: "n/a",
+      url: ["https://vcmv.myportfolio.com/culturnauts"]
+    },
+
+    /* ------------------ Nyulu Beauty — Josefina Pollarolo ------------------ */
+    {
+      src: "IMG/webp/Captura-de-pantalla-2026-03-26-a-las-14.25.55_99c6fdb27b.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-26-a-las-14.25.55_99c6fdb27b.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-26-a-las-14.25.55_99c6fdb27b-640.avif 640w, IMG/avif/Captura-de-pantalla-2026-03-26-a-las-14.25.55_99c6fdb27b.avif 712w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-26-a-las-14.25.55_99c6fdb27b-640.webp 640w, IMG/webp/Captura-de-pantalla-2026-03-26-a-las-14.25.55_99c6fdb27b.webp 712w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/W2858839589755070034833687655107/Captura-de-pantalla-2026-03-26-a-las-14.25.55.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["branding", "packaging", "digital design"],
+      keywords: ["diseño digital"],
+      title: "Nyulu Beauty",
+      author: "Josefina Pollarolo",
+      role: "",
+      collab: "Desarrollado en Estudio 22",
+      area: "branding",
+      year: "n/a",
+      url: ["https://www.josefinapollarolo.com/nyulu-beauty"]
+    },
+
+    /* ------------------ Five O' Six — Josefina Pollarolo ------------------ */
+    {
+      src: "IMG/webp/Captura-de-pantalla-2026-03-26-a-las-14.26.10_ea09eeefd7.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-26-a-las-14.26.10_ea09eeefd7.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-26-a-las-14.26.10_ea09eeefd7-640.avif 640w, IMG/avif/Captura-de-pantalla-2026-03-26-a-las-14.26.10_ea09eeefd7.avif 890w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-26-a-las-14.26.10_ea09eeefd7-640.webp 640w, IMG/webp/Captura-de-pantalla-2026-03-26-a-las-14.26.10_ea09eeefd7.webp 890w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/S2858839589736623290759978103491/Captura-de-pantalla-2026-03-26-a-las-14.26.10.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["branding", "packaging"],
+      keywords: [],
+      title: "Five O' Six",
+      author: "Josefina Pollarolo",
+      role: "",
+      collab: "Desarrollado en Estudio 22",
+      area: "branding",
+      year: "n/a",
+      url: ["https://www.josefinapollarolo.com/five-o-six"]
+    },
+
+    /* ------------------ Martín Pescador — Pati Prat Errázuriz ------------------ */
+    {
+      src: "IMG/webp/Captura-de-pantalla-2026-03-26-a-las-13.07.07_fe2ea8c641.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-26-a-las-13.07.07_fe2ea8c641.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-26-a-las-13.07.07_fe2ea8c641-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-26-a-las-13.07.07_fe2ea8c641-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-26-a-las-13.07.07_fe2ea8c641.avif 1862w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-26-a-las-13.07.07_fe2ea8c641-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-26-a-las-13.07.07_fe2ea8c641-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-26-a-las-13.07.07_fe2ea8c641.webp 1862w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/Y2858839589847303755202235413187/Captura-de-pantalla-2026-03-26-a-las-13.07.07.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["arte"],
+      keywords: ["acuarela"],
+      title: "Martín Pescador",
+      author: "Pati Prat Errázuriz",
+      role: "",
+      collab: "Desarrollado en pitaprat.cl",
+      area: "arte",
+      year: "2026",
+      url: ["https://www.instagram.com/p/DTL7-OyETFo/"]
+    },
+
+    /* ------------------ Sin Nombre — Josefa Ballacey Cobo ------------------ */
+    {
+      src: "IMG/webp/Captura-de-pantalla-2026-03-26-a-las-13.27.43_765288d050.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-26-a-las-13.27.43_765288d050.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-26-a-las-13.27.43_765288d050-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-26-a-las-13.27.43_765288d050-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-26-a-las-13.27.43_765288d050.avif 1340w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-26-a-las-13.27.43_765288d050-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-26-a-las-13.27.43_765288d050-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-26-a-las-13.27.43_765288d050.webp 1340w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/N2858839589828857011128525861571/Captura-de-pantalla-2026-03-26-a-las-13.27.43.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["artesanía"],
+      keywords: ["cerámica", "cerámica grez"],
+      title: "Sin Nombre",
+      author: "Josefa Ballacey Cobo",
+      role: "",
+      collab: "",
+      area: "artesanía",
+      year: "n/a",
+      url: ["https://www.instagram.com/p/DQAsMJuDeNp/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="]
+    },
+
+    /* ------------------ Sin Nombre — Josefa Ballacey Cobo ------------------ */
+    {
+      src: "IMG/webp/Captura-de-pantalla-2026-03-26-a-las-13.28.19_e57308d1df.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-26-a-las-13.28.19_e57308d1df.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-26-a-las-13.28.19_e57308d1df-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-26-a-las-13.28.19_e57308d1df-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-26-a-las-13.28.19_e57308d1df.avif 1330w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-26-a-las-13.28.19_e57308d1df-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-26-a-las-13.28.19_e57308d1df-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-26-a-las-13.28.19_e57308d1df.webp 1330w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/Z2858839589810410267054816309955/Captura-de-pantalla-2026-03-26-a-las-13.28.19.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["artesanía"],
+      keywords: ["cerámica", "cerámica grez"],
+      title: "Sin Nombre",
+      author: "Josefa Ballacey Cobo",
+      role: "",
+      collab: "",
+      area: "artesanía",
+      year: "n/a",
+      url: ["https://www.instagram.com/p/DM8H8QQMdgk/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="]
+    },
+
+    /* ------------------ Obra: Reparaciones para la convivencia - Quiebres y Reparaciones - Exposición — Yael Berkowitz ------------------ */
+    {
+      src: "IMG/webp/bb697a52-19ea-433e-b6df-a07677307d3b_rw_3840_f452c43da5.webp",
+      srcAvif: "IMG/avif/bb697a52-19ea-433e-b6df-a07677307d3b_rw_3840_f452c43da5.avif",
+      srcSetAvif: "IMG/avif/variants/bb697a52-19ea-433e-b6df-a07677307d3b_rw_3840_f452c43da5-640.avif 640w, IMG/avif/variants/bb697a52-19ea-433e-b6df-a07677307d3b_rw_3840_f452c43da5-1280.avif 1280w, IMG/avif/bb697a52-19ea-433e-b6df-a07677307d3b_rw_3840_f452c43da5.avif 3840w",
+      srcSetWebp: "IMG/webp/variants/bb697a52-19ea-433e-b6df-a07677307d3b_rw_3840_f452c43da5-640.webp 640w, IMG/webp/variants/bb697a52-19ea-433e-b6df-a07677307d3b_rw_3840_f452c43da5-1280.webp 1280w, IMG/webp/bb697a52-19ea-433e-b6df-a07677307d3b_rw_3840_f452c43da5.webp 3840w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/A2858837874023403739108291850947/bb697a52-19ea-433e-b6df-a07677307d3b_rw_3840.jpg",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["museografía", "exhibición"],
+      keywords: ["exposición", "historia"],
+      title: "Obra: Reparaciones para la convivencia - Quiebres y Reparaciones - Exposición",
+      author: "Yael Berkowitz",
+      role: "",
+      collab: "Exhibición de la obra presentada por Colectivo Ronda en la Vitrina Dinámica de la exposición “Quiebres y Reparaciones”. Museo de Arte Precolombino",
+      area: "museografía",
+      year: "n/a",
+      url: ["https://ypberkowitz.myportfolio.com/exhibicion-museo-de-arte-precolombino"]
+    },
+
+    /* ------------------ Web: Monica Perić — Yael Berkowitz ------------------ */
+    {
+      src: "IMG/webp/df8e36be-ae68-479b-bb71-001c1d7df186_rw_3840_c00c18d396.webp",
+      srcAvif: "IMG/avif/df8e36be-ae68-479b-bb71-001c1d7df186_rw_3840_c00c18d396.avif",
+      srcSetAvif: "IMG/avif/variants/df8e36be-ae68-479b-bb71-001c1d7df186_rw_3840_c00c18d396-640.avif 640w, IMG/avif/variants/df8e36be-ae68-479b-bb71-001c1d7df186_rw_3840_c00c18d396-1280.avif 1280w, IMG/avif/df8e36be-ae68-479b-bb71-001c1d7df186_rw_3840_c00c18d396.avif 3840w",
+      srcSetWebp: "IMG/webp/variants/df8e36be-ae68-479b-bb71-001c1d7df186_rw_3840_c00c18d396-640.webp 640w, IMG/webp/variants/df8e36be-ae68-479b-bb71-001c1d7df186_rw_3840_c00c18d396-1280.webp 1280w, IMG/webp/df8e36be-ae68-479b-bb71-001c1d7df186_rw_3840_c00c18d396.webp 3840w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/K2858837874004956995034582299331/df8e36be-ae68-479b-bb71-001c1d7df186_rw_3840.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["diseño web", "identidad visual"],
+      keywords: ["página web"],
+      title: "Web: Monica Perić",
+      author: "Yael Berkowitz",
+      role: "",
+      collab: "",
+      area: "diseño web",
+      year: "n/a",
+      url: ["https://ypberkowitz.myportfolio.com/identidad-visual-y-diseno-web"]
+    },
+
+    /* ------------------ Render Ambiente VPL Kunstmann — Martín Campos ------------------ */
+    {
+      src: "IMG/webp/Captura-de-pantalla-2026-03-26-a-las-13.40.08_6bbdf79063.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-26-a-las-13.40.08_6bbdf79063.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-26-a-las-13.40.08_6bbdf79063-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-26-a-las-13.40.08_6bbdf79063-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-26-a-las-13.40.08_6bbdf79063.avif 1800w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-26-a-las-13.40.08_6bbdf79063-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-26-a-las-13.40.08_6bbdf79063-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-26-a-las-13.40.08_6bbdf79063.webp 1800w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/A2858839589773516778907397206723/Captura-de-pantalla-2026-03-26-a-las-13.40.08.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["diseño conceptual", "3d"],
+      keywords: ["render"],
+      title: "Render Ambiente VPL Kunstmann",
+      author: "Martín Campos",
+      role: "",
+      collab: "Campaña de Valdivia Pale Lager de la cervecería Kunstmann, en colaboración con Liquid Latam",
+      area: "3d",
+      year: "2024",
+      url: ["https://www.instagram.com/p/C6MfbYrp13R/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="]
+    },
+
+    /* ------------------ Coleccion 3 Chol1; Bichos — Martín Campos ------------------ */
+    {
+      src: "IMG/webp/Captura-de-pantalla-2026-03-11-a-las-15.39.07_9f6b955ec1.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-11-a-las-15.39.07_9f6b955ec1.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-11-a-las-15.39.07_9f6b955ec1-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-11-a-las-15.39.07_9f6b955ec1-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-11-a-las-15.39.07_9f6b955ec1.avif 1942w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-11-a-las-15.39.07_9f6b955ec1-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-11-a-las-15.39.07_9f6b955ec1-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-11-a-las-15.39.07_9f6b955ec1.webp 1942w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/A2835041680310883817648411849411/Captura-de-pantalla-2026-03-11-a-las-15.39.07.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["productos", "industrial"],
+      keywords: ["cnc"],
+      title: "Coleccion 3 Chol1; Bichos",
+      author: "Martín Campos",
+      role: "",
+      collab: "Producido en Chol1. Coproducido por Antonino Reinoso",
+      area: "producto",
+      year: "2019",
+      url: [
+        "https://www.behance.net/gallery/84664443/Coleccion-3-Chol1-Bichos",
+        "https://www.instagram.com/p/COYzGQwjo2x/?img_index=1"
+      ]
+    },
+
+    /* ------------------ Silla Al.Ma — Martín Campos ------------------ */
+    {
+      src: "IMG/webp/Captura-de-pantalla-2026-03-26-a-las-13.39.47_dc622368d0.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-26-a-las-13.39.47_dc622368d0.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-26-a-las-13.39.47_dc622368d0-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-26-a-las-13.39.47_dc622368d0-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-26-a-las-13.39.47_dc622368d0.avif 1920w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-26-a-las-13.39.47_dc622368d0-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-26-a-las-13.39.47_dc622368d0-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-26-a-las-13.39.47_dc622368d0.webp 1920w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/I2858839589791963522981106758339/Captura-de-pantalla-2026-03-26-a-las-13.39.47.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["productos", "industrial"],
+      keywords: ["silla", "cnc"],
+      title: "Silla Al.Ma",
+      author: "Martín Campos",
+      role: "",
+      collab: "",
+      area: "producto",
+      year: "2024",
+      url: [
+        "https://www.behance.net/gallery/197129999/Silla-Alma",
+        "https://www.instagram.com/p/C6KK_ggJ0MV/?img_index=1"
+      ]
+    },
+
+    /* ------------------ Cover Art “Neruda en el tiempo” — María Jesús Darrigrande ------------------ */
+    {
+      src: "IMG/webp/mockup-of-a-vinyl-record-against-a-customizable-background-2349-el1-1_8acce35a16.webp",
+      srcAvif: "IMG/avif/mockup-of-a-vinyl-record-against-a-customizable-background-2349-el1-1_8acce35a16.avif",
+      srcSetAvif: "IMG/avif/variants/mockup-of-a-vinyl-record-against-a-customizable-background-2349-el1-1_8acce35a16-640.avif 640w, IMG/avif/variants/mockup-of-a-vinyl-record-against-a-customizable-background-2349-el1-1_8acce35a16-1280.avif 1280w, IMG/avif/mockup-of-a-vinyl-record-against-a-customizable-background-2349-el1-1_8acce35a16.avif 1920w",
+      srcSetWebp: "IMG/webp/variants/mockup-of-a-vinyl-record-against-a-customizable-background-2349-el1-1_8acce35a16-640.webp 640w, IMG/webp/variants/mockup-of-a-vinyl-record-against-a-customizable-background-2349-el1-1_8acce35a16-1280.webp 1280w, IMG/webp/mockup-of-a-vinyl-record-against-a-customizable-background-2349-el1-1_8acce35a16.webp 1920w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/L2858837873986510250960872747715/mockup-of-a-vinyl-record-against-a-customizable-background-2349-el1-1.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["coverart"],
+      keywords: ["música"],
+      title: "Cover Art “Neruda en el tiempo”",
+      author: "María Jesús Darrigrande",
+      role: "",
+      collab: "Compositor e intérprete: Leonardo Pérez / Diseño cover art: María Jesús Darrigrande",
+      area: "coverart",
+      year: "2022",
+      url: ["https://jesudarrigrande.com/Cover-Art"]
+    },
+
+    /* ------------------ Videodanza “PLEAMAR” — María Jesús Darrigrande ------------------ */
+    {
+      src: "IMG/webp/mockup-of-an-art-print-frame-in-a-gallery-2638-el1_7caa46a5ac.webp",
+      srcAvif: "IMG/avif/mockup-of-an-art-print-frame-in-a-gallery-2638-el1_7caa46a5ac.avif",
+      srcSetAvif: "IMG/avif/variants/mockup-of-an-art-print-frame-in-a-gallery-2638-el1_7caa46a5ac-640.avif 640w, IMG/avif/variants/mockup-of-an-art-print-frame-in-a-gallery-2638-el1_7caa46a5ac-1280.avif 1280w, IMG/avif/mockup-of-an-art-print-frame-in-a-gallery-2638-el1_7caa46a5ac.avif 1920w",
+      srcSetWebp: "IMG/webp/variants/mockup-of-an-art-print-frame-in-a-gallery-2638-el1_7caa46a5ac-640.webp 640w, IMG/webp/variants/mockup-of-an-art-print-frame-in-a-gallery-2638-el1_7caa46a5ac-1280.webp 1280w, IMG/webp/mockup-of-an-art-print-frame-in-a-gallery-2638-el1_7caa46a5ac.webp 1920w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/V2858837873968063506887163196099/mockup-of-an-art-print-frame-in-a-gallery-2638-el1.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["diseño gráfico", "afiche"],
+      keywords: ["afiche"],
+      title: "Videodanza “PLEAMAR”",
+      author: "María Jesús Darrigrande",
+      role: "",
+      collab: "Diseño piezas gráficas, teaser de la obra, animación tipográfica y montaje: María Jesús Darrigrande",
+      area: "diseño gráfico",
+      year: "2021",
+      url: ["https://jesudarrigrande.com/Pleamar"]
+    },
+
+    /* ------------------ Yaikinova “Pequeña historia nocturna” — María Jesús Darrigrande ------------------ */
+    {
+      src: "IMG/webp/mockup-of-two-square-books-against-a-customizable-surface-1566-el_8dd2dd5f2f.webp",
+      srcAvif: "IMG/avif/mockup-of-two-square-books-against-a-customizable-surface-1566-el_8dd2dd5f2f.avif",
+      srcSetAvif: "IMG/avif/variants/mockup-of-two-square-books-against-a-customizable-surface-1566-el_8dd2dd5f2f-640.avif 640w, IMG/avif/variants/mockup-of-two-square-books-against-a-customizable-surface-1566-el_8dd2dd5f2f-1280.avif 1280w, IMG/avif/mockup-of-two-square-books-against-a-customizable-surface-1566-el_8dd2dd5f2f.avif 1920w",
+      srcSetWebp: "IMG/webp/variants/mockup-of-two-square-books-against-a-customizable-surface-1566-el_8dd2dd5f2f-640.webp 640w, IMG/webp/variants/mockup-of-two-square-books-against-a-customizable-surface-1566-el_8dd2dd5f2f-1280.webp 1280w, IMG/webp/mockup-of-two-square-books-against-a-customizable-surface-1566-el_8dd2dd5f2f.webp 1920w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/Y2858837873949616762813453644483/mockup-of-two-square-books-against-a-customizable-surface-1566-el.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["editorial", "ilustración"],
+      keywords: ["portada de libro", "ilustración digital"],
+      title: "Yaikinova “Pequeña historia nocturna”",
+      author: "María Jesús Darrigrande",
+      role: "",
+      collab: "Autor: Sergio Panizza / Diseño de cubierta: María Jesús Darrigrande / Diseño editorial e ilustraciones: María Jesús Darrigrande / Prólogo por Manuel Silva Acevedo, Premio Nacional de Literatura, 2016",
+      area: "editorial",
+      year: "2021",
+      url: ["https://jesudarrigrande.com/Yaikinova"]
     }
     
   ];
