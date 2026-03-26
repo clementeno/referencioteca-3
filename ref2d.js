@@ -6954,7 +6954,11 @@
 
 /* ------------------ Línea de Ensamble — Vicente Múñoz ------------------ */
 {
-  src: "https://freight.cargo.site/t/original/i/J2855459556498358408483271291587/Captura-de-pantalla-2026-03-24-a-las-11.32.45.png",
+  src: "IMG/webp/Captura-de-pantalla-2026-03-24-a-las-11.32.45_2a9d24dbaa.webp",
+  srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-24-a-las-11.32.45_2a9d24dbaa.avif",
+  srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-24-a-las-11.32.45_2a9d24dbaa-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-24-a-las-11.32.45_2a9d24dbaa-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-24-a-las-11.32.45_2a9d24dbaa.avif 3456w",
+  srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-24-a-las-11.32.45_2a9d24dbaa-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-24-a-las-11.32.45_2a9d24dbaa-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-24-a-las-11.32.45_2a9d24dbaa.webp 3456w",
+  srcOriginal: "https://freight.cargo.site/t/original/i/J2855459556498358408483271291587/Captura-de-pantalla-2026-03-24-a-las-11.32.45.png",
   orientation: "h",
   span: 1,
   tags: ["web", "investigación", "diseño industrial"],
@@ -6969,7 +6973,11 @@
 
 /* ------------------ La fête de la vie — Rosario Balmaceda Espinosa ------------------ */
 {
-  src: "https://freight.cargo.site/t/original/i/A2856199837158523504017759744707/1774382425609.jpeg",
+  src: "IMG/webp/1774382425609_bf0423da5b.webp",
+  srcAvif: "IMG/avif/1774382425609_bf0423da5b.avif",
+  srcSetAvif: "IMG/avif/variants/1774382425609_bf0423da5b-640.avif 640w, IMG/avif/1774382425609_bf0423da5b.avif 1080w",
+  srcSetWebp: "IMG/webp/variants/1774382425609_bf0423da5b-640.webp 640w, IMG/webp/1774382425609_bf0423da5b.webp 1080w",
+  srcOriginal: "https://freight.cargo.site/t/original/i/A2856199837158523504017759744707/1774382425609.jpeg",
   orientation: "h",
   span: 1,
   tags: ["diseño gráfico", "producto"],
@@ -6984,7 +6992,11 @@
 
 /* ------------------ La Fête de L'Amour — Rosario Balmaceda Espinosa ------------------ */
 {
-  src: "https://freight.cargo.site/t/original/i/G2856199837195416992165178847939/1769178432698.jpeg",
+  src: "IMG/webp/1769178432698_40bf8843f6.webp",
+  srcAvif: "IMG/avif/1769178432698_40bf8843f6.avif",
+  srcSetAvif: "IMG/avif/variants/1769178432698_40bf8843f6-640.avif 640w, IMG/avif/variants/1769178432698_40bf8843f6-1280.avif 1280w, IMG/avif/1769178432698_40bf8843f6.avif 1500w",
+  srcSetWebp: "IMG/webp/variants/1769178432698_40bf8843f6-640.webp 640w, IMG/webp/variants/1769178432698_40bf8843f6-1280.webp 1280w, IMG/webp/1769178432698_40bf8843f6.webp 1500w",
+  srcOriginal: "https://freight.cargo.site/t/original/i/G2856199837195416992165178847939/1769178432698.jpeg",
   orientation: "h",
   span: 1,
   tags: ["diseño gráfico", "producto"],
@@ -6999,7 +7011,11 @@
 
 /* ------------------ EL SOL IMPLORA (Video Oficial) — Juan Pablo Bustamante ------------------ */
 {
-  src: "https://freight.cargo.site/t/original/i/T2856199837176970248091469296323/unnamed-2.jpg",
+  src: "IMG/webp/unnamed-2_427f03b380.webp",
+  srcAvif: "IMG/avif/unnamed-2_427f03b380.avif",
+  srcSetAvif: "IMG/avif/unnamed-2_427f03b380.avif 512w",
+  srcSetWebp: "IMG/webp/unnamed-2_427f03b380.webp 512w",
+  srcOriginal: "https://freight.cargo.site/t/original/i/T2856199837176970248091469296323/unnamed-2.jpg",
   orientation: "h",
   span: 1,
   tags: ["styling"],
@@ -8479,7 +8495,11 @@
 
     /* ------------------ OKWU — Consuelo Yávar Larraín ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/A2858616679576384489717603185347/1730141673143.jpeg",
+      src: "IMG/webp/1730141673143_c81292c441.webp",
+      srcAvif: "IMG/avif/1730141673143_c81292c441.avif",
+      srcSetAvif: "IMG/avif/variants/1730141673143_c81292c441-640.avif 640w, IMG/avif/1730141673143_c81292c441.avif 1200w",
+      srcSetWebp: "IMG/webp/variants/1730141673143_c81292c441-640.webp 640w, IMG/webp/1730141673143_c81292c441.webp 1200w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/A2858616679576384489717603185347/1730141673143.jpeg",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -8499,7 +8519,11 @@
 
     /* ------------------ Majen — Consuelo Yávar Larraín ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/T2858622597199649615373213840067/1772131344479.jpeg",
+      src: "IMG/webp/1772131344479_cae4565d8f.webp",
+      srcAvif: "IMG/avif/1772131344479_cae4565d8f.avif",
+      srcSetAvif: "IMG/avif/variants/1772131344479_cae4565d8f-640.avif 640w, IMG/avif/1772131344479_cae4565d8f.avif 1280w",
+      srcSetWebp: "IMG/webp/variants/1772131344479_cae4565d8f-640.webp 640w, IMG/webp/1772131344479_cae4565d8f.webp 1280w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/T2858622597199649615373213840067/1772131344479.jpeg",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -8518,7 +8542,11 @@
 
     /* ------------------ María y el fuego — Josefina M. Gajardo ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/R2858617561533665397844975497923/Captura-de-pantalla-2026-03-25-a-las-19.31.42.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-25-a-las-19.31.42_45c0115311.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-25-a-las-19.31.42_45c0115311.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-25-a-las-19.31.42_45c0115311-640.avif 640w, IMG/avif/Captura-de-pantalla-2026-03-25-a-las-19.31.42_45c0115311.avif 1212w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-25-a-las-19.31.42_45c0115311-640.webp 640w, IMG/webp/Captura-de-pantalla-2026-03-25-a-las-19.31.42_45c0115311.webp 1212w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/R2858617561533665397844975497923/Captura-de-pantalla-2026-03-25-a-las-19.31.42.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -8537,7 +8565,11 @@
 
     /* ------------------ Mona — Josefina M. Gajardo ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/O2858617561275410980813041775299/Captura-de-pantalla-2026-03-25-a-las-19.31.24.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-25-a-las-19.31.24_f01a922d7c.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-25-a-las-19.31.24_f01a922d7c.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-25-a-las-19.31.24_f01a922d7c-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-25-a-las-19.31.24_f01a922d7c-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-25-a-las-19.31.24_f01a922d7c.avif 1368w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-25-a-las-19.31.24_f01a922d7c-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-25-a-las-19.31.24_f01a922d7c-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-25-a-las-19.31.24_f01a922d7c.webp 1368w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/O2858617561275410980813041775299/Captura-de-pantalla-2026-03-25-a-las-19.31.24.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -8556,7 +8588,11 @@
 
     /* ------------------ APP Fuerza de Ventas — Isidora Hernández ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/X2858622147984537932398212887235/Mockup-_3_.png.jpg",
+      src: "IMG/webp/Mockup-_3_.png_97485a0864.webp",
+      srcAvif: "IMG/avif/Mockup-_3_.png_97485a0864.avif",
+      srcSetAvif: "IMG/avif/variants/Mockup-_3_.png_97485a0864-640.avif 640w, IMG/avif/Mockup-_3_.png_97485a0864.avif 716w",
+      srcSetWebp: "IMG/webp/variants/Mockup-_3_.png_97485a0864-640.webp 640w, IMG/webp/Mockup-_3_.png_97485a0864.webp 716w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/X2858622147984537932398212887235/Mockup-_3_.png.jpg",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -8575,7 +8611,11 @@
 
     /* ------------------ APP Canal Moderno — Isidora Hernández ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/S2858617204127998969722412937923/82f8e9_f32cea179cff4ddba5b95b34b1492b36_mv2.png.jpg",
+      src: "IMG/webp/82f8e9_f32cea179cff4ddba5b95b34b1492b36_mv2.png_8acd7a1c14.webp",
+      srcAvif: "IMG/avif/82f8e9_f32cea179cff4ddba5b95b34b1492b36_mv2.png_8acd7a1c14.avif",
+      srcSetAvif: "IMG/avif/variants/82f8e9_f32cea179cff4ddba5b95b34b1492b36_mv2.png_8acd7a1c14-640.avif 640w, IMG/avif/82f8e9_f32cea179cff4ddba5b95b34b1492b36_mv2.png_8acd7a1c14.avif 980w",
+      srcSetWebp: "IMG/webp/variants/82f8e9_f32cea179cff4ddba5b95b34b1492b36_mv2.png_8acd7a1c14-640.webp 640w, IMG/webp/82f8e9_f32cea179cff4ddba5b95b34b1492b36_mv2.png_8acd7a1c14.webp 980w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/S2858617204127998969722412937923/82f8e9_f32cea179cff4ddba5b95b34b1492b36_mv2.png.jpg",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -8594,7 +8634,11 @@
 
     /* ------------------ VIO — Sofia Hinostroza ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/L2858617561515218653771265946307/Captura-de-pantalla-2026-03-25-a-las-19.40.34.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-25-a-las-19.40.34_25acf11264.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-25-a-las-19.40.34_25acf11264.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-25-a-las-19.40.34_25acf11264-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-25-a-las-19.40.34_25acf11264-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-25-a-las-19.40.34_25acf11264.avif 1332w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-25-a-las-19.40.34_25acf11264-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-25-a-las-19.40.34_25acf11264-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-25-a-las-19.40.34_25acf11264.webp 1332w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/L2858617561515218653771265946307/Captura-de-pantalla-2026-03-25-a-las-19.40.34.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -8614,7 +8658,11 @@
 
     /* ------------------ DISEÑO DE VESTUARIO WILD LAMA — Alejandra Lange ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/Q2858617561496771909697556394691/Captura-de-pantalla-2026-03-25-a-las-19.42.37.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-25-a-las-19.42.37_47c0d4645e.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-25-a-las-19.42.37_47c0d4645e.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-25-a-las-19.42.37_47c0d4645e-640.avif 640w, IMG/avif/Captura-de-pantalla-2026-03-25-a-las-19.42.37_47c0d4645e.avif 1064w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-25-a-las-19.42.37_47c0d4645e-640.webp 640w, IMG/webp/Captura-de-pantalla-2026-03-25-a-las-19.42.37_47c0d4645e.webp 1064w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/Q2858617561496771909697556394691/Captura-de-pantalla-2026-03-25-a-las-19.42.37.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -8633,7 +8681,11 @@
 
     /* ------------------ DISEÑO DE VESTUARIO MUJER Y HOMBRE - BAJO VERANO 2025 — Alejandra Lange ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/X2858617561478325165623846843075/Captura-de-pantalla-2026-03-25-a-las-19.44.31.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-25-a-las-19.44.31_ecbdf4196b.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-25-a-las-19.44.31_ecbdf4196b.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-25-a-las-19.44.31_ecbdf4196b-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-25-a-las-19.44.31_ecbdf4196b-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-25-a-las-19.44.31_ecbdf4196b.avif 1316w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-25-a-las-19.44.31_ecbdf4196b-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-25-a-las-19.44.31_ecbdf4196b-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-25-a-las-19.44.31_ecbdf4196b.webp 1316w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/X2858617561478325165623846843075/Captura-de-pantalla-2026-03-25-a-las-19.44.31.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -8652,7 +8704,11 @@
 
     /* ------------------ Museo del Holocausto - RECORRIDO HOLOCAUSTO (SHOÁ) — Camila Minzer ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/V2858617561441431677476427739843/Captura-de-pantalla-2026-03-25-a-las-19.49.16.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-25-a-las-19.49.16_d3ff3bec7e.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-25-a-las-19.49.16_d3ff3bec7e.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-25-a-las-19.49.16_d3ff3bec7e-640.avif 640w, IMG/avif/Captura-de-pantalla-2026-03-25-a-las-19.49.16_d3ff3bec7e.avif 658w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-25-a-las-19.49.16_d3ff3bec7e-640.webp 640w, IMG/webp/Captura-de-pantalla-2026-03-25-a-las-19.49.16_d3ff3bec7e.webp 658w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/V2858617561441431677476427739843/Captura-de-pantalla-2026-03-25-a-las-19.49.16.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -8672,7 +8728,11 @@
 
     /* ------------------ REVERSE — Camila Minzer ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/X2858617561422984933402718188227/Captura-de-pantalla-2026-03-25-a-las-19.54.09.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-25-a-las-19.54.09_37ab067b4f.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-25-a-las-19.54.09_37ab067b4f.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-25-a-las-19.54.09_37ab067b4f-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-25-a-las-19.54.09_37ab067b4f-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-25-a-las-19.54.09_37ab067b4f.avif 1782w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-25-a-las-19.54.09_37ab067b4f-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-25-a-las-19.54.09_37ab067b4f-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-25-a-las-19.54.09_37ab067b4f.webp 1782w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/X2858617561422984933402718188227/Captura-de-pantalla-2026-03-25-a-las-19.54.09.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -8691,7 +8751,11 @@
 
     /* ------------------ Patrimonio cultural en cifras — Isidora Val Valdivielso ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/Y2858617561404538189329008636611/Captura-de-pantalla-2026-03-25-a-las-19.58.59.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-25-a-las-19.58.59_fc6d89eb30.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-25-a-las-19.58.59_fc6d89eb30.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-25-a-las-19.58.59_fc6d89eb30-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-25-a-las-19.58.59_fc6d89eb30-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-25-a-las-19.58.59_fc6d89eb30.avif 1350w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-25-a-las-19.58.59_fc6d89eb30-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-25-a-las-19.58.59_fc6d89eb30-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-25-a-las-19.58.59_fc6d89eb30.webp 1350w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/Y2858617561404538189329008636611/Captura-de-pantalla-2026-03-25-a-las-19.58.59.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -8710,7 +8774,11 @@
 
     /* ------------------ Derecho de la Competencia — Isidora Val Valdivielso ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/P2858617561386091445255299084995/Captura-de-pantalla-2026-03-25-a-las-20.01.11.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-25-a-las-20.01.11_d332c8ce03.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-25-a-las-20.01.11_d332c8ce03.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-25-a-las-20.01.11_d332c8ce03-640.avif 640w, IMG/avif/Captura-de-pantalla-2026-03-25-a-las-20.01.11_d332c8ce03.avif 1066w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-25-a-las-20.01.11_d332c8ce03-640.webp 640w, IMG/webp/Captura-de-pantalla-2026-03-25-a-las-20.01.11_d332c8ce03.webp 1066w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/P2858617561386091445255299084995/Captura-de-pantalla-2026-03-25-a-las-20.01.11.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -8729,7 +8797,11 @@
 
     /* ------------------ Dialogos sobre Patrimonios — Isidora Val Valdivielso ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/A2858617561367644701181589533379/Captura-de-pantalla-2026-03-25-a-las-20.01.49.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-25-a-las-20.01.49_1c55f17124.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-25-a-las-20.01.49_1c55f17124.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-25-a-las-20.01.49_1c55f17124-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-25-a-las-20.01.49_1c55f17124-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-25-a-las-20.01.49_1c55f17124.avif 1848w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-25-a-las-20.01.49_1c55f17124-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-25-a-las-20.01.49_1c55f17124-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-25-a-las-20.01.49_1c55f17124.webp 1848w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/A2858617561367644701181589533379/Captura-de-pantalla-2026-03-25-a-las-20.01.49.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -8748,7 +8820,11 @@
 
     /* ------------------ Atlas del Patrimonio Cultural en Chile — Isidora Val Valdivielso ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/Z2858617561349197957107879981763/Captura-de-pantalla-2026-03-25-a-las-20.02.30.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-25-a-las-20.02.30_3e75daf15b.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-25-a-las-20.02.30_3e75daf15b.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-25-a-las-20.02.30_3e75daf15b-640.avif 640w, IMG/avif/Captura-de-pantalla-2026-03-25-a-las-20.02.30_3e75daf15b.avif 1262w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-25-a-las-20.02.30_3e75daf15b-640.webp 640w, IMG/webp/Captura-de-pantalla-2026-03-25-a-las-20.02.30_3e75daf15b.webp 1262w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/Z2858617561349197957107879981763/Captura-de-pantalla-2026-03-25-a-las-20.02.30.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -8767,7 +8843,11 @@
 
     /* ------------------ Sin Nombre — Daniela Collarte ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/P2858617561330751213034170430147/Captura-de-pantalla-2026-03-25-a-las-20.05.25.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-25-a-las-20.05.25_b1b7c1729d.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-25-a-las-20.05.25_b1b7c1729d.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-25-a-las-20.05.25_b1b7c1729d-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-25-a-las-20.05.25_b1b7c1729d-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-25-a-las-20.05.25_b1b7c1729d.avif 1770w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-25-a-las-20.05.25_b1b7c1729d-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-25-a-las-20.05.25_b1b7c1729d-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-25-a-las-20.05.25_b1b7c1729d.webp 1770w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/P2858617561330751213034170430147/Captura-de-pantalla-2026-03-25-a-las-20.05.25.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -8786,7 +8866,11 @@
 
     /* ------------------ Sin Nombre — Daniela Collarte ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/Q2858617561312304468960460878531/Captura-de-pantalla-2026-03-25-a-las-20.05.54.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-25-a-las-20.05.54_7071b1b4b2.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-25-a-las-20.05.54_7071b1b4b2.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-25-a-las-20.05.54_7071b1b4b2-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-25-a-las-20.05.54_7071b1b4b2-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-25-a-las-20.05.54_7071b1b4b2.avif 1790w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-25-a-las-20.05.54_7071b1b4b2-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-25-a-las-20.05.54_7071b1b4b2-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-25-a-las-20.05.54_7071b1b4b2.webp 1790w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/Q2858617561312304468960460878531/Captura-de-pantalla-2026-03-25-a-las-20.05.54.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -8805,7 +8889,11 @@
 
     /* ------------------ Plan Maestro Zona de Interés Público Arenal – Talcahuano — Isidora Millas Simosen ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/J2858616679594831233791312736963/1773157773235.jpeg",
+      src: "IMG/webp/1773157773235_5a01016083.webp",
+      srcAvif: "IMG/avif/1773157773235_5a01016083.avif",
+      srcSetAvif: "IMG/avif/variants/1773157773235_5a01016083-640.avif 640w, IMG/avif/variants/1773157773235_5a01016083-1280.avif 1280w, IMG/avif/1773157773235_5a01016083.avif 1920w",
+      srcSetWebp: "IMG/webp/variants/1773157773235_5a01016083-640.webp 640w, IMG/webp/variants/1773157773235_5a01016083-1280.webp 1280w, IMG/webp/1773157773235_5a01016083.webp 1920w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/J2858616679594831233791312736963/1773157773235.jpeg",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -8824,7 +8912,11 @@
 
     /* ------------------ Vans — Florencia Alcalde R. ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/T2858616679613277977865022288579/4f00b34f-7ccc-4708-b99d-f8893a3283c7_rw_1920.jpg",
+      src: "IMG/webp/4f00b34f-7ccc-4708-b99d-f8893a3283c7_rw_1920_ae3ebc38ad.webp",
+      srcAvif: "IMG/avif/4f00b34f-7ccc-4708-b99d-f8893a3283c7_rw_1920_ae3ebc38ad.avif",
+      srcSetAvif: "IMG/avif/variants/4f00b34f-7ccc-4708-b99d-f8893a3283c7_rw_1920_ae3ebc38ad-640.avif 640w, IMG/avif/variants/4f00b34f-7ccc-4708-b99d-f8893a3283c7_rw_1920_ae3ebc38ad-1280.avif 1280w, IMG/avif/4f00b34f-7ccc-4708-b99d-f8893a3283c7_rw_1920_ae3ebc38ad.avif 1920w",
+      srcSetWebp: "IMG/webp/variants/4f00b34f-7ccc-4708-b99d-f8893a3283c7_rw_1920_ae3ebc38ad-640.webp 640w, IMG/webp/variants/4f00b34f-7ccc-4708-b99d-f8893a3283c7_rw_1920_ae3ebc38ad-1280.webp 1280w, IMG/webp/4f00b34f-7ccc-4708-b99d-f8893a3283c7_rw_1920_ae3ebc38ad.webp 1920w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/T2858616679613277977865022288579/4f00b34f-7ccc-4708-b99d-f8893a3283c7_rw_1920.jpg",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -8844,7 +8936,11 @@
 
     /* ------------------ Madre Tierra — Florencia Alcalde R. ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/I2858616679631724721938731840195/4ea73515-6866-4fc1-bf06-6f365e977345_rw_3840.jpg",
+      src: "IMG/webp/4ea73515-6866-4fc1-bf06-6f365e977345_rw_3840_6b68fe9782.webp",
+      srcAvif: "IMG/avif/4ea73515-6866-4fc1-bf06-6f365e977345_rw_3840_6b68fe9782.avif",
+      srcSetAvif: "IMG/avif/variants/4ea73515-6866-4fc1-bf06-6f365e977345_rw_3840_6b68fe9782-640.avif 640w, IMG/avif/variants/4ea73515-6866-4fc1-bf06-6f365e977345_rw_3840_6b68fe9782-1280.avif 1280w, IMG/avif/4ea73515-6866-4fc1-bf06-6f365e977345_rw_3840_6b68fe9782.avif 3840w",
+      srcSetWebp: "IMG/webp/variants/4ea73515-6866-4fc1-bf06-6f365e977345_rw_3840_6b68fe9782-640.webp 640w, IMG/webp/variants/4ea73515-6866-4fc1-bf06-6f365e977345_rw_3840_6b68fe9782-1280.webp 1280w, IMG/webp/4ea73515-6866-4fc1-bf06-6f365e977345_rw_3840_6b68fe9782.webp 3840w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/I2858616679631724721938731840195/4ea73515-6866-4fc1-bf06-6f365e977345_rw_3840.jpg",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -8863,7 +8959,11 @@
 
     /* ------------------ Summer Collection — María Jesús Aldunce ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/P2858617561293857724886751326915/Captura-de-pantalla-2026-03-26-a-las-10.52.57.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-26-a-las-10.52.57_6ba6a4973f.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-26-a-las-10.52.57_6ba6a4973f.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-26-a-las-10.52.57_6ba6a4973f-640.avif 640w, IMG/avif/Captura-de-pantalla-2026-03-26-a-las-10.52.57_6ba6a4973f.avif 906w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-26-a-las-10.52.57_6ba6a4973f-640.webp 640w, IMG/webp/Captura-de-pantalla-2026-03-26-a-las-10.52.57_6ba6a4973f.webp 906w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/P2858617561293857724886751326915/Captura-de-pantalla-2026-03-26-a-las-10.52.57.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
