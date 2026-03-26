@@ -5627,7 +5627,7 @@
   tags: ["museografía","exhibición","investigación"],
   title: "El Delantal Vestido",
   keywords: ["cultura", "textil", "exposición"],
-  author: "Camila Ríos",
+  author: "Camila Ríos Erazo",
   role: "",
   collab: "Curaduría: Camila Ríos Erazo. Diseño, investigación y desarrollo etapa Textiles domésticos: Camila Ríos Erazo y Loreto Casanueva Reyes",
   area: "Museografía / Exhibición / Investigación",
@@ -5874,7 +5874,7 @@
   span: 2,
   tags: ["producto","packaging","textil"],
   title: "AjuarParn",
-  author: "Camila Ríos",
+  author: "Camila Ríos Erazo",
   role: "",
   collab: "",
   area: "Producto / Packaging / Textil",
@@ -11705,6 +11705,20 @@
     });
   }
 
+  function filterProjectsBySemanticTagKeys(tagKeys) {
+    const keys = Array.isArray(tagKeys) ? tagKeys.map((k) => normalizeTagKey(k)).filter(Boolean) : [];
+    if (!keys.length) return DB_ORDERED.slice();
+    const strict = DB_ORDERED.filter((project) => {
+      const hay = project._search || '';
+      return keys.every((key) => hay.includes(key));
+    });
+    if (strict.length) return strict;
+    return DB_ORDERED.filter((project) => {
+      const hay = project._search || '';
+      return keys.some((key) => hay.includes(key));
+    });
+  }
+
   /* ===== Filtro que reordena (robusto) ===== */
   function applyFilter(term){
     if (filterDebounceTimer !== null) {
@@ -11729,7 +11743,20 @@
     const personKeysFromInput = forcedPersonKeys || combinedFromInput.personKeys || [];
 
     if (tagKeysFromInput.length || personKeysFromInput.length) {
-      const list = filterProjectsByTagAndPersonKeys(tagKeysFromInput, personKeysFromInput);
+      let list = [];
+      if (tagKeysFromInput.length > 1) {
+        const semanticByTags = filterProjectsBySemanticTagKeys(tagKeysFromInput);
+        if (personKeysFromInput.length) {
+          list = semanticByTags.filter((project) => {
+            const projectPersonKeys = getProjectPersonKeys(project).map((k) => normalizePersonKey(k)).filter(Boolean);
+            return personKeysFromInput.every((key) => projectPersonKeys.includes(key));
+          });
+        } else {
+          list = semanticByTags;
+        }
+      } else {
+        list = filterProjectsByTagAndPersonKeys(tagKeysFromInput, personKeysFromInput);
+      }
       setActiveTagFilters(tagKeysFromInput);
       setActivePersonFilters(personKeysFromInput);
       if (list.length === 0) {
