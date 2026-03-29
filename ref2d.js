@@ -10091,6 +10091,330 @@
       area: "3D",
       year: "2022",
       url: ["https://www.habitanodriza.cl/es/"]
+    },
+
+    /* ------------------ Baker — Matías Hagen Esper ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/N2863402583102204416425407754947/baker-1.jpg",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["industrial", "producto"],
+      keywords: ["pesca"],
+      title: "Baker",
+      author: "Matías Hagen Esper",
+      role: "",
+      collab: "",
+      area: "producto",
+      year: "n/a",
+      url: ["https://www.mati.cl/portafolio/baker/"]
+    },
+
+    /* ------------------ BANDANA AMÉRICA SOLIDARIA — Matías Hagen Esper ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/L2863402583083757672351698203331/america-solidaria-bandana-1.jpg",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["textil", "indumentaria"],
+      keywords: ["ropa deportiva", "ciclismo", "running"],
+      title: "BANDANA AMÉRICA SOLIDARIA",
+      author: "Matías Hagen Esper",
+      role: "",
+      collab: "Ilustraciones por Paula Herrera.",
+      area: "indumentaria",
+      year: "n/a",
+      url: ["https://www.mati.cl/portafolio/bandana-america-solidaria/"]
+    },
+
+    /* ------------------ Tricota Bupa — Matías Hagen Esper ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/O2863402583120651160499117306563/tricota-bupa.jpg",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["textil", "indumentaria"],
+      keywords: ["ropa deportiva", "ciclismo"],
+      title: "Tricota Bupa",
+      author: "Matías Hagen Esper",
+      role: "",
+      collab: "Bupa Santiago.",
+      area: "indumentaria",
+      year: "n/a",
+      url: ["https://www.mati.cl/portafolio/tricota-bupa/"]
+    },
+
+    /* ------------------ Señalética Outdoor — Felipe Lorenzini ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/F2863400340162592494081026765507/Captura-de-pantalla-2026-03-29-a-las-10.17.21.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["espacio"],
+      keywords: ["señalética", "wayfinding"],
+      title: "Señalética Outdoor",
+      author: "Felipe Lorenzini",
+      role: "",
+      collab: "",
+      area: "espacio",
+      year: "2025",
+      url: [
+        "https://zini.cl/senaletica/",
+        "https://www.instagram.com/p/DSZ8VOGDk15/?img_index=7"
+      ]
+    },
+
+    /* ------------------ Anillo Zafiro — Gianfranco Zoffoli ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/L2863409719686317932808189194947/Captura-de-pantalla-2026-03-29-a-las-11.15.20.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["artesanía", "orfebre"],
+      keywords: ["anillo", "joyería"],
+      title: "Anillo Zafiro",
+      author: "Gianfranco Zoffoli",
+      role: "",
+      collab: "",
+      area: "artesanía",
+      year: "n/a",
+      url: [
+        "https://yannzco.com/products/anillo-zafiro-diamantes?variant=48777628647767",
+        "https://www.instagram.com/yannz.co/"
+      ]
+    },
+
+    /* ------------------ Quintillo Diamante — Gianfranco Zoffoli ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/X2863409719667871188734479643331/Captura-de-pantalla-2026-03-29-a-las-11.15.43.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["artesanía", "orfebre"],
+      keywords: ["anillo", "joyería"],
+      title: "Quintillo Diamante",
+      author: "Gianfranco Zoffoli",
+      role: "",
+      collab: "",
+      area: "artesanía",
+      year: "n/a",
+      url: [
+        "https://yannzco.com/products/quintillo-diamante?variant=48879886926167",
+        "https://www.instagram.com/yannz.co/"
+      ]
+    },
+
+    /* ------------------ Attravels — Javiera Videla ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/I2863400340328613190744412730051/Captura-de-pantalla-2026-03-29-a-las-10.28.53.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["identidad visual", "branding"],
+      keywords: ["producto cosmético", "logo"],
+      title: "Attravels",
+      author: "Javiera Videla",
+      role: "",
+      collab: "",
+      area: "identidad visual",
+      year: "2025",
+      url: ["https://www.behance.net/gallery/230252985/Attravels"]
+    },
+
+    /* ------------------ Herbario de Criptógamas Subantárticas — Javiera Videla ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/J2863400340310166446670703178435/Captura-de-pantalla-2026-03-29-a-las-10.29.20.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["identidad visual", "gráfico"],
+      keywords: ["logo", "web"],
+      title: "Herbario de Criptógamas Subantárticas",
+      author: "Javiera Videla",
+      role: "",
+      collab: "",
+      area: "identidad visual",
+      year: "2025",
+      url: ["https://www.behance.net/gallery/230227499/Herbario-de-Criptogamas-Subantarticas-Brand-Identity"]
+    },
+
+    /* ------------------ MOON DOG — Abril Araneda ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/M2863400340291719702596993626819/Captura-de-pantalla-2026-03-29-a-las-10.35.20.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["animación", "animación 3d"],
+      keywords: ["modelado 3d", "blender", "3d"],
+      title: "MOON DOG",
+      author: "Abril Araneda",
+      role: "",
+      collab: "",
+      area: "animación",
+      year: "2025",
+      url: [
+        "https://abrilaraneda.myportfolio.com/moon-dog-2025",
+        "https://www.behance.net/gallery/238535991/Moon-Dog-(2025)"
+      ]
+    },
+
+    /* ------------------ FROM PATAGONIA TO THE WORLD — Abril Araneda ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/Z2863400340273272958523284075203/Captura-de-pantalla-2026-03-29-a-las-10.37.54.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["animación", "stop motion"],
+      keywords: ["audiovisual", "collage"],
+      title: "FROM PATAGONIA TO THE WORLD",
+      author: "Abril Araneda",
+      role: "",
+      collab: "Team project at Motion Studio for the client AquaChile / Verlasso, a salmon production company founded in southern Chile.",
+      area: "animación",
+      year: "2025",
+      url: [
+        "https://abrilaraneda.myportfolio.com/from-patagonia-to-the-world-2025",
+        "https://www.behance.net/gallery/238394121/From-Patagonia-to-the-World(2025)"
+      ]
+    },
+
+    /* ------------------ La hormiguitua y el ratón Pérez — Abril Araneda ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/P2863400340254826214449574523587/Captura-de-pantalla-2026-03-29-a-las-10.39.34.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["animación", "animación 3d"],
+      keywords: ["modelado 3d", "blender", "3d"],
+      title: "La hormiguitua y el ratón Pérez",
+      author: "Abril Araneda",
+      role: "",
+      collab: "Direction, script & production by Abril Araneda. Voiced by Daniela Gala. Music by Luis Orlandini.",
+      area: "animación",
+      year: "2021",
+      url: [
+        "https://www.behance.net/gallery/189506333/La-hormiguita-y-el-raton-Prez-(2021)",
+        "https://abrilaraneda.myportfolio.com/la-hormiguita-y-el-raton-perez-2021"
+      ]
+    },
+
+    /* ------------------ SERENO — Francisco Blümel Araya ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/F2863402583028417440130569548483/w_1920_quality_90_fit_scale-down.jpg",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["videojuego", "dirección de arte"],
+      keywords: ["unity"],
+      title: "SERENO",
+      author: "Francisco Blümel Araya",
+      role: "",
+      collab: "",
+      area: "videojuego",
+      year: "n/a",
+      url: ["https://franciscoblumel.super.site/sereno"]
+    },
+
+    /* ------------------ SLIDE DUNGEON — Francisco Blümel Araya ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/T2863402831413826392629682057923/19-w1920-quality90-fitscale-down.jpg",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["videojuego", "dirección de arte"],
+      keywords: ["unity"],
+      title: "SLIDE DUNGEON",
+      author: "Francisco Blümel Araya",
+      role: "",
+      collab: "",
+      area: "videojuego",
+      year: "n/a",
+      url: ["https://franciscoblumel.super.site/game-design/slide-dungeon"]
+    },
+
+    /* ------------------ TONY SOAP’S PRO DUCKER — Francisco Blümel Araya ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/E2863410648756583205189756334787/Captura-de-pantalla-2026-03-29-a-las-11.16.34.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["videojuego", "3d", "dirección de arte"],
+      keywords: ["unity", "diseño de juego", "dirección de arte", "modelado 3d"],
+      title: "TONY SOAP’S PRO DUCKER",
+      author: "Francisco Blümel Araya",
+      role: "",
+      collab: "",
+      area: "videojuego",
+      year: "n/a",
+      url: ["https://franciscoblumel.super.site/game-design/tony-soap-pro-ducker"]
+    },
+
+    /* ------------------ Vecinos Chilenos | Educación para la conservación — Debi Codriansky ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/M2863400340236379470375864971971/Captura-de-pantalla-2026-03-29-a-las-10.49.06.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["identidad visual", "web"],
+      keywords: ["plataforma online"],
+      title: "Vecinos Chilenos | Educación para la conservación",
+      author: "Debi Codriansky",
+      role: "",
+      collab: "",
+      area: "identidad visual",
+      year: "2021",
+      url: ["https://www.behance.net/gallery/133834359/Vecinos-Chilenos-Educacion-para-la-conservacion"]
+    },
+
+    /* ------------------ Centro de la sexoafectividad — Florencia Cood ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/A2863400340217932726302155420355/Captura-de-pantalla-2026-03-29-a-las-10.52.11.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["identidad visual", "gráfico"],
+      keywords: ["web", "logo"],
+      title: "Centro de la sexoafectividad",
+      author: "Florencia Cood",
+      role: "",
+      collab: "",
+      area: "identidad visual",
+      year: "n/a",
+      url: ["https://drive.google.com/file/d/11KOPLOoXgN1taJ1_oDgK2njgK8lYH0KW/view"]
+    },
+
+    /* ------------------ LOA — Bárbara Gelfenstein ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/L2863400340199485982228445868739/Captura-de-pantalla-2026-03-29-a-las-11.00.56.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["diseño gráfico", "producto"],
+      keywords: ["stickers", "etiqueta", "merch"],
+      title: "LOA",
+      author: "Bárbara Gelfenstein",
+      role: "",
+      collab: "Proyectos de diseño integral trabajando para Cervecería Loa en el área de marketing.",
+      area: "diseño gráfico",
+      year: "2024",
+      url: ["https://barbaragp.myportfolio.com/diseno-y-marketing"]
+    },
+
+    /* ------------------ Por los ojos que no ven — Bárbara Gelfenstein ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/Q2863400340181039238154736317123/Captura-de-pantalla-2026-03-29-a-las-11.02.36.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["editorial"],
+      keywords: ["publicación"],
+      title: "Por los ojos que no ven",
+      author: "Bárbara Gelfenstein",
+      role: "",
+      collab: "",
+      area: "editorial",
+      year: "2024",
+      url: ["https://barbaragp.myportfolio.com/diseno-editorial"]
     }
 
   ];
