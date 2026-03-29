@@ -3494,7 +3494,7 @@
       span: 1,
       tags: ["Fotografía"],
       title: "60 años Kérastase",
-      author: "Francisco Finat (fotografía)",
+      author: "Francisco Finat Soloduchin",
       role: "",
       collab: "Fotografía: Francisco Finat",
       area: "Fotografía",
@@ -9407,8 +9407,564 @@
       area: "editorial",
       year: "2021",
       url: ["https://jesudarrigrande.com/Yaikinova"]
+    },
+
+    /* ------------------ SAP Environments — Eduardo Romo ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/Y2862277120535381977949884854979/Captura-de-pantalla-2026-03-28-a-las-15.52.17.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["3d", "audiovisual"],
+      keywords: ["entorno digital", "render"],
+      title: "SAP Environments",
+      author: "Eduardo Romo",
+      role: "",
+      collab: "",
+      area: "3D",
+      year: "2024",
+      url: ["https://www.behance.net/gallery/214887345/SAP-Environments"]
+    },
+
+    /* ------------------ The Master Knife — Eduardo Romo ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/B2862277120812083139055528129219/Captura-de-pantalla-2026-03-28-a-las-15.54.44.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["3d", "audiovisual"],
+      keywords: ["entorno digital", "render", "objeto", "industrial"],
+      title: "The Master Knife",
+      author: "Eduardo Romo",
+      role: "",
+      collab: "Desarrollado en Clover Studio. Cliente: Black Bubba.",
+      area: "3D",
+      year: "2025",
+      url: ["https://www.behance.net/gallery/240298685/The-Master-Knife"]
+    },
+
+    /* ------------------ A.S.98 — María Jesús Maturana ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/Y2862276628284016371010499982019/85f87748-27e0-4f58-9efd-10477a895585.jpg",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["dirección creativa", "dirección de arte"],
+      keywords: ["moda", "zapatos", "campaña retail"],
+      title: "A.S.98",
+      author: "María Jesús Maturana",
+      role: "",
+      collab: "Dirección de campaña otoño-invierno 2026.",
+      area: "dirección creativa",
+      year: "2026",
+      url: ["https://jesumaturana.myportfolio.com/as98"]
+    },
+
+    /* ------------------ EXO — María Jesús Maturana ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/O2862276628302463115084209533635/7a8daf91-db13-4c24-864b-f10021590cc9.jpg",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["dirección creativa", "dirección de arte"],
+      keywords: ["moda", "accesorio"],
+      title: "EXO",
+      author: "María Jesús Maturana",
+      role: "",
+      collab: "Creación y producción de campaña de fin de año para EXO, marca chilena de prendedores.",
+      area: "dirección creativa",
+      year: "2023",
+      url: ["https://jesumaturana.myportfolio.com/exo"]
+    },
+
+    /* ------------------ ODEGI Chile: Visualización de Datos — Francisca Martina Espinosa ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/O2862277120793636394981818577603/Captura-de-pantalla-2026-03-28-a-las-16.22.27.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["diseño de información", "visualización de datos"],
+      keywords: ["data viz"],
+      title: "ODEGI Chile: Visualización de Datos",
+      author: "Francisca Martina Espinosa",
+      role: "",
+      collab: "",
+      area: "diseño de información",
+      year: "2022",
+      url: ["https://www.behance.net/gallery/155900301/ODEGI-Chile-Visualizacion-de-Datos"]
+    },
+
+    /* ------------------ lacerda.es — Francisca Martina Espinosa ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/Z2862277120775189650908109025987/Captura-de-pantalla-2026-03-28-a-las-16.23.59.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["diseño web"],
+      keywords: ["página web"],
+      title: "lacerda.es",
+      author: "Francisca Martina Espinosa",
+      role: "",
+      collab: "",
+      area: "diseño web",
+      year: "2025",
+      url: ["https://www.behance.net/gallery/216841887/lacerdaes"]
+    },
+
+    /* ------------------ Genias Podcast — Francisca Martina Espinosa ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/P2862277120756742906834399474371/Captura-de-pantalla-2026-03-28-a-las-16.25.43.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["diseño gráfico", "identidad visual"],
+      keywords: ["podcast"],
+      title: "Genias Podcast",
+      author: "Francisca Martina Espinosa",
+      role: "",
+      collab: "",
+      area: "identidad visual",
+      year: "2023",
+      url: ["https://www.behance.net/gallery/175530403/Genias-Podcast-Graficas-para-redes-y-merchandising"]
+    },
+
+    /* ------------------ Bitluxe — Francisca Beatriz Medina Concha ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/F2862276628320909859157919085251/bitluxe-cover.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["desarrollo web"],
+      keywords: ["página web", "wordpress"],
+      title: "Bitluxe",
+      author: "Francisca Beatriz Medina Concha",
+      role: "",
+      collab: "",
+      area: "desarrollo web",
+      year: "2023",
+      url: ["https://frani.be/project-detail.html?id=bitluxe"]
+    },
+
+    /* ------------------ Agencia de Borde — Francisca Beatriz Medina Concha ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/K2862276628339356603231628636867/borde-cover.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["desarrollo web"],
+      keywords: ["página web", "front end", "full stack"],
+      title: "Agencia de borde",
+      author: "Francisca Beatriz Medina Concha",
+      role: "",
+      collab: "Cliente: Agencia de Borde.",
+      area: "desarrollo web",
+      year: "2022",
+      url: ["https://frani.be/project-detail.html?id=agencia-de-borde"]
+    },
+
+    /* ------------------ Fotos Madre 2025 La Fête — Victoria Tirapeguy ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/D2862277120738296162760689922755/Captura-de-pantalla-2026-03-28-a-las-16.43.48.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["fotografía", "dirección de arte"],
+      keywords: ["comida", "campaña"],
+      title: "Fotos Madre 2025 La Fête",
+      author: "Victoria Tirapeguy",
+      role: "",
+      collab: "Fotos contexto campaña Madre 2025 La Fête Chocolat. Fotos para RRSS, ecommerce, email marketing y otros.",
+      area: "fotografía",
+      year: "2025",
+      url: ["https://www.behance.net/gallery/231852759/Fotos-Madre-2025-La-Fete"]
+    },
+
+    /* ------------------ Navidad 2024 La Fête Chocolat — Victoria Tirapeguy ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/Z2862277120719849418686980371139/Captura-de-pantalla-2026-03-28-a-las-16.46.39.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["fotografía", "dirección de arte"],
+      keywords: ["comida", "campaña"],
+      title: "Navidad 2024 La Fête Chocolat",
+      author: "Victoria Tirapeguy",
+      role: "",
+      collab: "",
+      area: "fotografía",
+      year: "2024",
+      url: ["https://www.behance.net/gallery/232014333/Fotos-Navidad-2024-La-Fete"]
+    },
+
+    /* ------------------ Fotografía para @sestracl — Lucia Vial Cosmelli ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/A2862277120701402674613270819523/Captura-de-pantalla-2026-03-28-a-las-16.50.37.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["fotografía", "dirección de arte"],
+      keywords: ["moda"],
+      title: "Fotografía para @sestracl",
+      author: "Lucia Vial Cosmelli",
+      role: "",
+      collab: "Desarrollado en Punto Focal: estudio de diseño y fotografía.",
+      area: "fotografía",
+      year: "2026",
+      url: ["https://www.instagram.com/p/DV9x2IulIav/?img_index=1"]
+    },
+
+    /* ------------------ campaña Diálogo Íntimo de @mardu.jewelry — Lucia Vial Cosmelli ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/R2862277120682955930539561267907/Captura-de-pantalla-2026-03-28-a-las-16.53.03.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["fotografía", "dirección de arte"],
+      keywords: ["moda"],
+      title: "campaña Diálogo Íntimo de @mardu.jewelry",
+      author: "Lucia Vial Cosmelli",
+      role: "",
+      collab: "Desarrollado en Punto Focal: estudio de diseño y fotografía.",
+      area: "fotografía",
+      year: "2025",
+      url: ["https://www.instagram.com/p/DJAWmxHRfX3/?img_index=1"]
+    },
+
+    /* ------------------ Fotos para @ochiandco_ — Lucia Vial Cosmelli ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/D2862277120664509186465851716291/Captura-de-pantalla-2026-03-28-a-las-16.54.07.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["fotografía", "dirección de arte"],
+      keywords: ["moda"],
+      title: "Fotos para @ochiandco_",
+      author: "Lucia Vial Cosmelli",
+      role: "",
+      collab: "Desarrollado en Punto Focal: estudio de diseño y fotografía.",
+      area: "fotografía",
+      year: "2025",
+      url: ["https://www.instagram.com/p/DPRXyLDkYnQ/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="]
+    },
+
+    /* ------------------ Libro Meteorología Marina — Maria Ignacia Casale Wevar ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/O2862277120646062442392142164675/Captura-de-pantalla-2026-03-28-a-las-16.59.47.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["editorial"],
+      keywords: ["diagramación"],
+      title: "Libro Meteorología Marina",
+      author: "Maria Ignacia Casale Wevar",
+      role: "",
+      collab: "Fundación Mar de Chile.",
+      area: "editorial",
+      year: "2023",
+      url: ["https://www.behance.net/gallery/180085711/Libro-Meteorologia-Marina"]
+    },
+
+    /* ------------------ Ángela - Set — María Granifo Correa ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/N2862277329850586982332167041731/WhatsApp_Image_2025-01-07_at_00.11.11_12.jpg.jpg",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["objeto", "industrial"],
+      keywords: ["decoración"],
+      title: "Ángela - Set",
+      author: "María Granifo Correa",
+      role: "Diseñadora / Fundadora",
+      collab: "Desarrollado en Ferro.",
+      area: "objeto",
+      year: "n/a",
+      url: [
+        "https://ferroestudio.cl/products/angela",
+        "https://www.instagram.com/ferro.estudio/"
+      ]
+    },
+
+    /* ------------------ Arrimo Lucrecia — María Granifo Correa ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/Y2862277329869033726405876593347/Arrimo_2.png.jpg",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["objeto", "industrial"],
+      keywords: ["decoración", "mueble", "mesa"],
+      title: "Arrimo Lucrecia",
+      author: "María Granifo Correa",
+      role: "Diseñadora / Fundadora",
+      collab: "Desarrollado en Ferro.",
+      area: "objeto",
+      year: "n/a",
+      url: [
+        "https://ferroestudio.cl/products/lucrecia",
+        "https://www.instagram.com/ferro.estudio/"
+      ]
+    },
+
+    /* ------------------ Bar Eloisa — María Granifo Correa ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/Z2862277329887480470479586144963/ChatGPTImage30jun2025_11_40_16.png.jpg",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["objeto", "industrial"],
+      keywords: ["decoración", "mueble", "mesa"],
+      title: "Bar Eloisa",
+      author: "María Granifo Correa",
+      role: "Diseñadora / Fundadora",
+      collab: "Desarrollado en Ferro.",
+      area: "objeto",
+      year: "n/a",
+      url: [
+        "https://ferroestudio.cl/products/bar-eloisa",
+        "https://www.instagram.com/ferro.estudio/"
+      ]
+    },
+
+    /* ------------------ Blanca - Set — María Granifo Correa ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/D2862277329905927214553295696579/WhatsApp_Image_2025-01-07_at_00.11.11_2.jpg.jpg",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["objeto", "industrial"],
+      keywords: ["decoración", "mueble", "mesa"],
+      title: "Blanca - Set",
+      author: "María Granifo Correa",
+      role: "Diseñadora / Fundadora",
+      collab: "Desarrollado en Ferro.",
+      area: "objeto",
+      year: "n/a",
+      url: [
+        "https://ferroestudio.cl/products/blanca",
+        "https://www.instagram.com/ferro.estudio/"
+      ]
+    },
+
+    /* ------------------ Éter Joyas — Paula Herrera Rivas ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/A2862277120627615698318432613059/Captura-de-pantalla-2026-03-28-a-las-17.57.24.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["identidad visual", "branding"],
+      keywords: ["logo", "marca"],
+      title: "Éter Joyas",
+      author: "Paula Herrera Rivas",
+      role: "",
+      collab: "",
+      area: "identidad visual",
+      year: "2025",
+      url: ["https://www.instagram.com/p/DKIKFoFyutD/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="]
+    },
+
+    /* ------------------ Krea — Paula Herrera Rivas ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/O2862276628357803347305338188483/449879159_8878394075520405_7173879344256406189_n.jpg",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["identidad visual", "branding"],
+      keywords: ["logo", "marca"],
+      title: "Krea",
+      author: "Paula Herrera Rivas",
+      role: "",
+      collab: "",
+      area: "identidad visual",
+      year: "2026",
+      url: ["https://www.instagram.com/p/C7XJzo2Jp-d/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="]
+    },
+
+    /* ------------------ Congreso Internacional de Educación Superior Inclusiva — Antonia Lasen Goldzveig ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/W2862277120609168954244723061443/Captura-de-pantalla-2026-03-28-a-las-18.02.55.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["dirección de arte", "identidad visual"],
+      keywords: ["contenido rrss", "merch"],
+      title: "Congreso Internacional de Educación Superior Inclusiva",
+      author: "Antonia Lasen Goldzveig",
+      role: "Diseñadora / Fundadora EDE",
+      collab: "Desarrollado en Estudio EDE.",
+      area: "dirección de arte",
+      year: "2025",
+      url: ["https://www.estudioede.com/portfolio/congreso-internacional-de-educación-superior-inclusiva"]
+    },
+
+    /* ------------------ Aloma — Antonia Lasen Goldzveig ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/K2862277120590722210171013509827/Captura-de-pantalla-2026-03-28-a-las-18.05.01.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["identidad visual", "branding"],
+      keywords: ["comida", "alimento"],
+      title: "Aloma",
+      author: "Antonia Lasen Goldzveig",
+      role: "Diseñadora / Fundadora EDE",
+      collab: "Desarrollado en Estudio EDE.",
+      area: "identidad visual",
+      year: "n/a",
+      url: ["https://www.estudioede.com/portfolio/aloma"]
+    },
+
+    /* ------------------ Congreso Internacional de Educación Superior Inclusiva — Consuelo González ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/H2862277120553828722023594406595/Captura-de-pantalla-2026-03-28-a-las-18.07.13.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["dirección de arte", "identidad visual"],
+      keywords: ["contenido rrss", "merch"],
+      title: "Congreso Internacional de Educación Superior Inclusiva",
+      author: "Consuelo González",
+      role: "",
+      collab: "Desarrollado en Estudio EDE.",
+      area: "dirección de arte",
+      year: "2025",
+      url: ["https://www.estudioede.com/portfolio/congreso-internacional-de-educación-superior-inclusiva"]
+    },
+
+    /* ------------------ Congreso Internacional de Educación Superior Inclusiva — Trinidad Rodríguez ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/B2862277120572275466097303958211/Captura-de-pantalla-2026-03-28-a-las-18.07.00.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["dirección de arte", "identidad visual"],
+      keywords: ["contenido rrss", "merch"],
+      title: "Congreso Internacional de Educación Superior Inclusiva",
+      author: "Trinidad Rodríguez",
+      role: "",
+      collab: "Desarrollado en Estudio EDE.",
+      area: "dirección de arte",
+      year: "2025",
+      url: ["https://www.estudioede.com/portfolio/congreso-internacional-de-educación-superior-inclusiva"]
+    },
+
+    /* ------------------ Sara & Emma — Yolanda Sande Guglielmetti ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/I2862318779223352005851909403331/Captura-de-pantalla-2026-03-28-a-las-18.34.22.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["ilustración"],
+      keywords: ["infantil"],
+      title: "Sara & Emma",
+      author: "Yolanda Sande Guglielmetti",
+      role: "",
+      collab: "Proyecto realizado en Igriega Estudio. Ilustración y gráfica: Yolanda Sande G.",
+      area: "ilustración",
+      year: "2026",
+      url: ["https://www.instagram.com/p/DT_QC6Wir93/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="]
+    },
+
+    /* ------------------ Studio X Design Lab — Yolanda Sande Guglielmetti ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/O2862318679592487263746621125315/603157719_17858502063573561_3929262352565734353_n.jpg",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["estudio"],
+      keywords: [],
+      title: "Studio X Design Lab",
+      author: "Yolanda Sande Guglielmetti",
+      role: "Diseñadora / Fundadora",
+      collab: "",
+      area: "estudio",
+      year: "2025",
+      url: ["https://www.instagram.com/studio.x_design/"]
+    },
+
+    /* ------------------ Filmoteca de Catalunya — Asunción Schwarzenberg ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/F2862318779204905261778199851715/Captura-de-pantalla-2026-03-28-a-las-18.41.14.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["animación", "stop motion"],
+      keywords: ["cine", "audiovisual"],
+      title: "Filmoteca de Catalunya",
+      author: "Asunción Schwarzenberg",
+      role: "",
+      collab: "",
+      area: "animación",
+      year: "2024",
+      url: ["https://www.behance.net/gallery/200249085/Filmoteca-de-Catalunya-3D-Animation"]
+    },
+
+    /* ------------------ Kuskalla — Anton Strabucchi Borregaard ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/J2862495179699991483370342658755/Captura-de-pantalla-2026-03-28-a-las-18.53.40.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["animación", "stop motion"],
+      keywords: ["cine", "audiovisual"],
+      title: "Kuskalla",
+      author: "Anton Strabucchi Borregaard",
+      role: "",
+      collab: "",
+      area: "animación",
+      year: "n/a",
+      url: ["https://antonstrabucchi.com/ANIMATION"]
+    },
+
+    /* ------------------ The Dry Years — Anton Strabucchi Borregaard ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/A2862495179718438227444052210371/Captura-de-pantalla-2026-03-28-a-las-18.54.55.png",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["animación", "stop motion"],
+      keywords: ["cine", "audiovisual"],
+      title: "The Dry Years",
+      author: "Anton Strabucchi Borregaard",
+      role: "",
+      collab: "",
+      area: "animación",
+      year: "n/a",
+      url: ["https://antonstrabucchi.com/ANIMATION"]
+    },
+
+    /* ------------------ Macetas Nodrizas — Antonia Valencia Talhouk ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/P2862495270236611397136821990083/IMG_2921_dkx0qp.jpg",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["3d", "objeto"],
+      keywords: ["impresión 3d", "modelado"],
+      title: "Macetas Nodrizas",
+      author: "Antonia Valencia Talhouk",
+      role: "",
+      collab: "Colaboradores: Nicolás García. Desarrollado en Habita Nodriza.",
+      area: "3D",
+      year: "2023",
+      url: ["https://www.habitanodriza.cl/es/"]
+    },
+
+    /* ------------------ Impresión 3D arcilla local en Puerto Williams — Tomás Espinosa ------------------ */
+    {
+      src: "https://freight.cargo.site/t/original/i/V2862495270255058141210531541699/IMG_9998_ovzjzt.jpg",
+      srcOriginal: "",
+      orientation: "h",
+      span: 1,
+      tags: ["3d", "objeto"],
+      keywords: ["impresión 3d", "modelado"],
+      title: "Impresión 3D arcilla local en Puerto Williams",
+      author: "Tomás Espinosa",
+      role: "",
+      collab: "Colaboradores: Anna De la Maza, Taller La Bandurria. FONDART Folio 637376. Desarrollado en Habita Nodriza.",
+      area: "3D",
+      year: "2022",
+      url: ["https://www.habitanodriza.cl/es/"]
     }
-    
+
   ];
     // Normalizar tags + crear índice de búsqueda
     DB.forEach(normalizeProjectTags);
