@@ -9411,7 +9411,11 @@
 
     /* ------------------ SAP Environments — Eduardo Romo ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/Y2862277120535381977949884854979/Captura-de-pantalla-2026-03-28-a-las-15.52.17.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-28-a-las-15.52.17_5f76aff879.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-28-a-las-15.52.17_5f76aff879.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-28-a-las-15.52.17_5f76aff879-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-28-a-las-15.52.17_5f76aff879-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-28-a-las-15.52.17_5f76aff879.avif 2234w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-28-a-las-15.52.17_5f76aff879-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-28-a-las-15.52.17_5f76aff879-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-28-a-las-15.52.17_5f76aff879.webp 2234w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/Y2862277120535381977949884854979/Captura-de-pantalla-2026-03-28-a-las-15.52.17.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -9428,7 +9432,11 @@
 
     /* ------------------ The Master Knife — Eduardo Romo ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/B2862277120812083139055528129219/Captura-de-pantalla-2026-03-28-a-las-15.54.44.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-28-a-las-15.54.44_4d86d85b19.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-28-a-las-15.54.44_4d86d85b19.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-28-a-las-15.54.44_4d86d85b19-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-28-a-las-15.54.44_4d86d85b19-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-28-a-las-15.54.44_4d86d85b19.avif 1374w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-28-a-las-15.54.44_4d86d85b19-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-28-a-las-15.54.44_4d86d85b19-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-28-a-las-15.54.44_4d86d85b19.webp 1374w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/B2862277120812083139055528129219/Captura-de-pantalla-2026-03-28-a-las-15.54.44.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -9445,7 +9453,11 @@
 
     /* ------------------ A.S.98 — María Jesús Maturana ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/Y2862276628284016371010499982019/85f87748-27e0-4f58-9efd-10477a895585.jpg",
+      src: "IMG/webp/85f87748-27e0-4f58-9efd-10477a895585_247c34fc0f.webp",
+      srcAvif: "IMG/avif/85f87748-27e0-4f58-9efd-10477a895585_247c34fc0f.avif",
+      srcSetAvif: "IMG/avif/variants/85f87748-27e0-4f58-9efd-10477a895585_247c34fc0f-640.avif 640w, IMG/avif/variants/85f87748-27e0-4f58-9efd-10477a895585_247c34fc0f-1280.avif 1280w, IMG/avif/85f87748-27e0-4f58-9efd-10477a895585_247c34fc0f.avif 4480w",
+      srcSetWebp: "IMG/webp/variants/85f87748-27e0-4f58-9efd-10477a895585_247c34fc0f-640.webp 640w, IMG/webp/variants/85f87748-27e0-4f58-9efd-10477a895585_247c34fc0f-1280.webp 1280w, IMG/webp/85f87748-27e0-4f58-9efd-10477a895585_247c34fc0f.webp 4480w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/Y2862276628284016371010499982019/85f87748-27e0-4f58-9efd-10477a895585.jpg",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -9462,7 +9474,11 @@
 
     /* ------------------ EXO — María Jesús Maturana ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/O2862276628302463115084209533635/7a8daf91-db13-4c24-864b-f10021590cc9.jpg",
+      src: "IMG/webp/7a8daf91-db13-4c24-864b-f10021590cc9_e8b288a6f7.webp",
+      srcAvif: "IMG/avif/7a8daf91-db13-4c24-864b-f10021590cc9_e8b288a6f7.avif",
+      srcSetAvif: "IMG/avif/variants/7a8daf91-db13-4c24-864b-f10021590cc9_e8b288a6f7-640.avif 640w, IMG/avif/variants/7a8daf91-db13-4c24-864b-f10021590cc9_e8b288a6f7-1280.avif 1280w, IMG/avif/7a8daf91-db13-4c24-864b-f10021590cc9_e8b288a6f7.avif 1765w",
+      srcSetWebp: "IMG/webp/variants/7a8daf91-db13-4c24-864b-f10021590cc9_e8b288a6f7-640.webp 640w, IMG/webp/variants/7a8daf91-db13-4c24-864b-f10021590cc9_e8b288a6f7-1280.webp 1280w, IMG/webp/7a8daf91-db13-4c24-864b-f10021590cc9_e8b288a6f7.webp 1765w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/O2862276628302463115084209533635/7a8daf91-db13-4c24-864b-f10021590cc9.jpg",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -9479,7 +9495,11 @@
 
     /* ------------------ ODEGI Chile: Visualización de Datos — Francisca Martina Espinosa ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/O2862277120793636394981818577603/Captura-de-pantalla-2026-03-28-a-las-16.22.27.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-28-a-las-16.22.27_2115b3f432.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-28-a-las-16.22.27_2115b3f432.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-28-a-las-16.22.27_2115b3f432-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-28-a-las-16.22.27_2115b3f432-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-28-a-las-16.22.27_2115b3f432.avif 1558w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-28-a-las-16.22.27_2115b3f432-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-28-a-las-16.22.27_2115b3f432-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-28-a-las-16.22.27_2115b3f432.webp 1558w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/O2862277120793636394981818577603/Captura-de-pantalla-2026-03-28-a-las-16.22.27.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -9496,7 +9516,11 @@
 
     /* ------------------ lacerda.es — Francisca Martina Espinosa ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/Z2862277120775189650908109025987/Captura-de-pantalla-2026-03-28-a-las-16.23.59.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-28-a-las-16.23.59_6c2bac4dbc.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-28-a-las-16.23.59_6c2bac4dbc.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-28-a-las-16.23.59_6c2bac4dbc-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-28-a-las-16.23.59_6c2bac4dbc-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-28-a-las-16.23.59_6c2bac4dbc.avif 3426w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-28-a-las-16.23.59_6c2bac4dbc-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-28-a-las-16.23.59_6c2bac4dbc-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-28-a-las-16.23.59_6c2bac4dbc.webp 3426w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/Z2862277120775189650908109025987/Captura-de-pantalla-2026-03-28-a-las-16.23.59.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -9513,7 +9537,11 @@
 
     /* ------------------ Genias Podcast — Francisca Martina Espinosa ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/P2862277120756742906834399474371/Captura-de-pantalla-2026-03-28-a-las-16.25.43.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-28-a-las-16.25.43_82265b5e05.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-28-a-las-16.25.43_82265b5e05.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-28-a-las-16.25.43_82265b5e05-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-28-a-las-16.25.43_82265b5e05-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-28-a-las-16.25.43_82265b5e05.avif 1966w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-28-a-las-16.25.43_82265b5e05-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-28-a-las-16.25.43_82265b5e05-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-28-a-las-16.25.43_82265b5e05.webp 1966w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/P2862277120756742906834399474371/Captura-de-pantalla-2026-03-28-a-las-16.25.43.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -9530,7 +9558,11 @@
 
     /* ------------------ Bitluxe — Francisca Beatriz Medina Concha ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/F2862276628320909859157919085251/bitluxe-cover.png",
+      src: "IMG/webp/bitluxe-cover_1d2dc054bd.webp",
+      srcAvif: "IMG/avif/bitluxe-cover_1d2dc054bd.avif",
+      srcSetAvif: "IMG/avif/variants/bitluxe-cover_1d2dc054bd-640.avif 640w, IMG/avif/variants/bitluxe-cover_1d2dc054bd-1280.avif 1280w, IMG/avif/bitluxe-cover_1d2dc054bd.avif 3584w",
+      srcSetWebp: "IMG/webp/variants/bitluxe-cover_1d2dc054bd-640.webp 640w, IMG/webp/variants/bitluxe-cover_1d2dc054bd-1280.webp 1280w, IMG/webp/bitluxe-cover_1d2dc054bd.webp 3584w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/F2862276628320909859157919085251/bitluxe-cover.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -9547,7 +9579,11 @@
 
     /* ------------------ Agencia de Borde — Francisca Beatriz Medina Concha ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/K2862276628339356603231628636867/borde-cover.png",
+      src: "IMG/webp/borde-cover_98a14fe2fe.webp",
+      srcAvif: "IMG/avif/borde-cover_98a14fe2fe.avif",
+      srcSetAvif: "IMG/avif/variants/borde-cover_98a14fe2fe-640.avif 640w, IMG/avif/variants/borde-cover_98a14fe2fe-1280.avif 1280w, IMG/avif/borde-cover_98a14fe2fe.avif 3584w",
+      srcSetWebp: "IMG/webp/variants/borde-cover_98a14fe2fe-640.webp 640w, IMG/webp/variants/borde-cover_98a14fe2fe-1280.webp 1280w, IMG/webp/borde-cover_98a14fe2fe.webp 3584w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/K2862276628339356603231628636867/borde-cover.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -9564,7 +9600,11 @@
 
     /* ------------------ Fotos Madre 2025 La Fête — Victoria Tirapeguy ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/D2862277120738296162760689922755/Captura-de-pantalla-2026-03-28-a-las-16.43.48.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-28-a-las-16.43.48_32a1194747.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-28-a-las-16.43.48_32a1194747.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-28-a-las-16.43.48_32a1194747-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-28-a-las-16.43.48_32a1194747-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-28-a-las-16.43.48_32a1194747.avif 2796w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-28-a-las-16.43.48_32a1194747-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-28-a-las-16.43.48_32a1194747-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-28-a-las-16.43.48_32a1194747.webp 2796w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/D2862277120738296162760689922755/Captura-de-pantalla-2026-03-28-a-las-16.43.48.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -9581,7 +9621,11 @@
 
     /* ------------------ Navidad 2024 La Fête Chocolat — Victoria Tirapeguy ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/Z2862277120719849418686980371139/Captura-de-pantalla-2026-03-28-a-las-16.46.39.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-28-a-las-16.46.39_840450d35a.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-28-a-las-16.46.39_840450d35a.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-28-a-las-16.46.39_840450d35a-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-28-a-las-16.46.39_840450d35a-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-28-a-las-16.46.39_840450d35a.avif 1354w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-28-a-las-16.46.39_840450d35a-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-28-a-las-16.46.39_840450d35a-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-28-a-las-16.46.39_840450d35a.webp 1354w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/Z2862277120719849418686980371139/Captura-de-pantalla-2026-03-28-a-las-16.46.39.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -9598,7 +9642,11 @@
 
     /* ------------------ Fotografía para @sestracl — Lucia Vial Cosmelli ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/A2862277120701402674613270819523/Captura-de-pantalla-2026-03-28-a-las-16.50.37.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-28-a-las-16.50.37_93c2d3b206.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-28-a-las-16.50.37_93c2d3b206.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-28-a-las-16.50.37_93c2d3b206-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-28-a-las-16.50.37_93c2d3b206-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-28-a-las-16.50.37_93c2d3b206.avif 1314w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-28-a-las-16.50.37_93c2d3b206-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-28-a-las-16.50.37_93c2d3b206-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-28-a-las-16.50.37_93c2d3b206.webp 1314w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/A2862277120701402674613270819523/Captura-de-pantalla-2026-03-28-a-las-16.50.37.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -9615,7 +9663,11 @@
 
     /* ------------------ campaña Diálogo Íntimo de @mardu.jewelry — Lucia Vial Cosmelli ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/R2862277120682955930539561267907/Captura-de-pantalla-2026-03-28-a-las-16.53.03.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-28-a-las-16.53.03_1f5c4937d6.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-28-a-las-16.53.03_1f5c4937d6.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-28-a-las-16.53.03_1f5c4937d6-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-28-a-las-16.53.03_1f5c4937d6-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-28-a-las-16.53.03_1f5c4937d6.avif 1420w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-28-a-las-16.53.03_1f5c4937d6-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-28-a-las-16.53.03_1f5c4937d6-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-28-a-las-16.53.03_1f5c4937d6.webp 1420w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/R2862277120682955930539561267907/Captura-de-pantalla-2026-03-28-a-las-16.53.03.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -9632,7 +9684,11 @@
 
     /* ------------------ Fotos para @ochiandco_ — Lucia Vial Cosmelli ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/D2862277120664509186465851716291/Captura-de-pantalla-2026-03-28-a-las-16.54.07.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-28-a-las-16.54.07_44b078e182.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-28-a-las-16.54.07_44b078e182.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-28-a-las-16.54.07_44b078e182-640.avif 640w, IMG/avif/Captura-de-pantalla-2026-03-28-a-las-16.54.07_44b078e182.avif 1224w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-28-a-las-16.54.07_44b078e182-640.webp 640w, IMG/webp/Captura-de-pantalla-2026-03-28-a-las-16.54.07_44b078e182.webp 1224w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/D2862277120664509186465851716291/Captura-de-pantalla-2026-03-28-a-las-16.54.07.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -9649,7 +9705,11 @@
 
     /* ------------------ Libro Meteorología Marina — Maria Ignacia Casale Wevar ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/O2862277120646062442392142164675/Captura-de-pantalla-2026-03-28-a-las-16.59.47.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-28-a-las-16.59.47_a2f0dd5daa.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-28-a-las-16.59.47_a2f0dd5daa.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-28-a-las-16.59.47_a2f0dd5daa-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-28-a-las-16.59.47_a2f0dd5daa-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-28-a-las-16.59.47_a2f0dd5daa.avif 2748w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-28-a-las-16.59.47_a2f0dd5daa-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-28-a-las-16.59.47_a2f0dd5daa-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-28-a-las-16.59.47_a2f0dd5daa.webp 2748w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/O2862277120646062442392142164675/Captura-de-pantalla-2026-03-28-a-las-16.59.47.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -9666,7 +9726,11 @@
 
     /* ------------------ Ángela - Set — María Granifo Correa ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/N2862277329850586982332167041731/WhatsApp_Image_2025-01-07_at_00.11.11_12.jpg.jpg",
+      src: "IMG/webp/WhatsApp_Image_2025-01-07_at_00.11.11_12.jpg_d43f51557f.webp",
+      srcAvif: "IMG/avif/WhatsApp_Image_2025-01-07_at_00.11.11_12.jpg_d43f51557f.avif",
+      srcSetAvif: "IMG/avif/variants/WhatsApp_Image_2025-01-07_at_00.11.11_12.jpg_d43f51557f-640.avif 640w, IMG/avif/WhatsApp_Image_2025-01-07_at_00.11.11_12.jpg_d43f51557f.avif 1067w",
+      srcSetWebp: "IMG/webp/variants/WhatsApp_Image_2025-01-07_at_00.11.11_12.jpg_d43f51557f-640.webp 640w, IMG/webp/WhatsApp_Image_2025-01-07_at_00.11.11_12.jpg_d43f51557f.webp 1067w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/N2862277329850586982332167041731/WhatsApp_Image_2025-01-07_at_00.11.11_12.jpg.jpg",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -9686,7 +9750,11 @@
 
     /* ------------------ Arrimo Lucrecia — María Granifo Correa ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/Y2862277329869033726405876593347/Arrimo_2.png.jpg",
+      src: "IMG/webp/Arrimo_2.png_f77d0988a7.webp",
+      srcAvif: "IMG/avif/Arrimo_2.png_f77d0988a7.avif",
+      srcSetAvif: "IMG/avif/variants/Arrimo_2.png_f77d0988a7-640.avif 640w, IMG/avif/Arrimo_2.png_f77d0988a7.avif 1024w",
+      srcSetWebp: "IMG/webp/variants/Arrimo_2.png_f77d0988a7-640.webp 640w, IMG/webp/Arrimo_2.png_f77d0988a7.webp 1024w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/Y2862277329869033726405876593347/Arrimo_2.png.jpg",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -9706,7 +9774,11 @@
 
     /* ------------------ Bar Eloisa — María Granifo Correa ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/Z2862277329887480470479586144963/ChatGPTImage30jun2025_11_40_16.png.jpg",
+      src: "IMG/webp/ChatGPTImage30jun2025_11_40_16.png_f42d1fd839.webp",
+      srcAvif: "IMG/avif/ChatGPTImage30jun2025_11_40_16.png_f42d1fd839.avif",
+      srcSetAvif: "IMG/avif/variants/ChatGPTImage30jun2025_11_40_16.png_f42d1fd839-640.avif 640w, IMG/avif/ChatGPTImage30jun2025_11_40_16.png_f42d1fd839.avif 1024w",
+      srcSetWebp: "IMG/webp/variants/ChatGPTImage30jun2025_11_40_16.png_f42d1fd839-640.webp 640w, IMG/webp/ChatGPTImage30jun2025_11_40_16.png_f42d1fd839.webp 1024w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/Z2862277329887480470479586144963/ChatGPTImage30jun2025_11_40_16.png.jpg",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -9726,7 +9798,11 @@
 
     /* ------------------ Blanca - Set — María Granifo Correa ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/D2862277329905927214553295696579/WhatsApp_Image_2025-01-07_at_00.11.11_2.jpg.jpg",
+      src: "IMG/webp/WhatsApp_Image_2025-01-07_at_00.11.11_2.jpg_4ce9fbe9ce.webp",
+      srcAvif: "IMG/avif/WhatsApp_Image_2025-01-07_at_00.11.11_2.jpg_4ce9fbe9ce.avif",
+      srcSetAvif: "IMG/avif/variants/WhatsApp_Image_2025-01-07_at_00.11.11_2.jpg_4ce9fbe9ce-640.avif 640w, IMG/avif/WhatsApp_Image_2025-01-07_at_00.11.11_2.jpg_4ce9fbe9ce.avif 1067w",
+      srcSetWebp: "IMG/webp/variants/WhatsApp_Image_2025-01-07_at_00.11.11_2.jpg_4ce9fbe9ce-640.webp 640w, IMG/webp/WhatsApp_Image_2025-01-07_at_00.11.11_2.jpg_4ce9fbe9ce.webp 1067w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/D2862277329905927214553295696579/WhatsApp_Image_2025-01-07_at_00.11.11_2.jpg.jpg",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -9746,7 +9822,11 @@
 
     /* ------------------ Éter Joyas — Paula Herrera Rivas ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/A2862277120627615698318432613059/Captura-de-pantalla-2026-03-28-a-las-17.57.24.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-28-a-las-17.57.24_d3f8316ed3.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-28-a-las-17.57.24_d3f8316ed3.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-28-a-las-17.57.24_d3f8316ed3-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-28-a-las-17.57.24_d3f8316ed3-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-28-a-las-17.57.24_d3f8316ed3.avif 1448w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-28-a-las-17.57.24_d3f8316ed3-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-28-a-las-17.57.24_d3f8316ed3-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-28-a-las-17.57.24_d3f8316ed3.webp 1448w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/A2862277120627615698318432613059/Captura-de-pantalla-2026-03-28-a-las-17.57.24.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -9763,7 +9843,11 @@
 
     /* ------------------ Krea — Paula Herrera Rivas ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/O2862276628357803347305338188483/449879159_8878394075520405_7173879344256406189_n.jpg",
+      src: "IMG/webp/449879159_8878394075520405_7173879344256406189_n_d8c0d34b52.webp",
+      srcAvif: "IMG/avif/449879159_8878394075520405_7173879344256406189_n_d8c0d34b52.avif",
+      srcSetAvif: "IMG/avif/variants/449879159_8878394075520405_7173879344256406189_n_d8c0d34b52-640.avif 640w, IMG/avif/449879159_8878394075520405_7173879344256406189_n_d8c0d34b52.avif 1080w",
+      srcSetWebp: "IMG/webp/variants/449879159_8878394075520405_7173879344256406189_n_d8c0d34b52-640.webp 640w, IMG/webp/449879159_8878394075520405_7173879344256406189_n_d8c0d34b52.webp 1080w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/O2862276628357803347305338188483/449879159_8878394075520405_7173879344256406189_n.jpg",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -9780,7 +9864,11 @@
 
     /* ------------------ Congreso Internacional de Educación Superior Inclusiva — Antonia Lasen Goldzveig ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/W2862277120609168954244723061443/Captura-de-pantalla-2026-03-28-a-las-18.02.55.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-28-a-las-18.02.55_84459e6565.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-28-a-las-18.02.55_84459e6565.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-28-a-las-18.02.55_84459e6565-640.avif 640w, IMG/avif/Captura-de-pantalla-2026-03-28-a-las-18.02.55_84459e6565.avif 1154w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-28-a-las-18.02.55_84459e6565-640.webp 640w, IMG/webp/Captura-de-pantalla-2026-03-28-a-las-18.02.55_84459e6565.webp 1154w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/W2862277120609168954244723061443/Captura-de-pantalla-2026-03-28-a-las-18.02.55.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -9797,7 +9885,11 @@
 
     /* ------------------ Aloma — Antonia Lasen Goldzveig ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/K2862277120590722210171013509827/Captura-de-pantalla-2026-03-28-a-las-18.05.01.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-28-a-las-18.05.01_cc3dc72ce6.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-28-a-las-18.05.01_cc3dc72ce6.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-28-a-las-18.05.01_cc3dc72ce6-640.avif 640w, IMG/avif/Captura-de-pantalla-2026-03-28-a-las-18.05.01_cc3dc72ce6.avif 1144w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-28-a-las-18.05.01_cc3dc72ce6-640.webp 640w, IMG/webp/Captura-de-pantalla-2026-03-28-a-las-18.05.01_cc3dc72ce6.webp 1144w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/K2862277120590722210171013509827/Captura-de-pantalla-2026-03-28-a-las-18.05.01.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -9814,7 +9906,11 @@
 
     /* ------------------ Congreso Internacional de Educación Superior Inclusiva — Consuelo González ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/H2862277120553828722023594406595/Captura-de-pantalla-2026-03-28-a-las-18.07.13.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-28-a-las-18.07.13_705453bc47.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-28-a-las-18.07.13_705453bc47.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-28-a-las-18.07.13_705453bc47-640.avif 640w, IMG/avif/Captura-de-pantalla-2026-03-28-a-las-18.07.13_705453bc47.avif 734w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-28-a-las-18.07.13_705453bc47-640.webp 640w, IMG/webp/Captura-de-pantalla-2026-03-28-a-las-18.07.13_705453bc47.webp 734w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/H2862277120553828722023594406595/Captura-de-pantalla-2026-03-28-a-las-18.07.13.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -9831,7 +9927,11 @@
 
     /* ------------------ Congreso Internacional de Educación Superior Inclusiva — Trinidad Rodríguez ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/B2862277120572275466097303958211/Captura-de-pantalla-2026-03-28-a-las-18.07.00.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-28-a-las-18.07.00_479b068b59.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-28-a-las-18.07.00_479b068b59.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-28-a-las-18.07.00_479b068b59-640.avif 640w, IMG/avif/Captura-de-pantalla-2026-03-28-a-las-18.07.00_479b068b59.avif 1148w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-28-a-las-18.07.00_479b068b59-640.webp 640w, IMG/webp/Captura-de-pantalla-2026-03-28-a-las-18.07.00_479b068b59.webp 1148w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/B2862277120572275466097303958211/Captura-de-pantalla-2026-03-28-a-las-18.07.00.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -9848,7 +9948,11 @@
 
     /* ------------------ Sara & Emma — Yolanda Sande Guglielmetti ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/I2862318779223352005851909403331/Captura-de-pantalla-2026-03-28-a-las-18.34.22.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-28-a-las-18.34.22_c866d6464e.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-28-a-las-18.34.22_c866d6464e.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-28-a-las-18.34.22_c866d6464e-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-28-a-las-18.34.22_c866d6464e-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-28-a-las-18.34.22_c866d6464e.avif 1398w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-28-a-las-18.34.22_c866d6464e-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-28-a-las-18.34.22_c866d6464e-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-28-a-las-18.34.22_c866d6464e.webp 1398w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/I2862318779223352005851909403331/Captura-de-pantalla-2026-03-28-a-las-18.34.22.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -9865,7 +9969,11 @@
 
     /* ------------------ Studio X Design Lab — Yolanda Sande Guglielmetti ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/O2862318679592487263746621125315/603157719_17858502063573561_3929262352565734353_n.jpg",
+      src: "IMG/webp/603157719_17858502063573561_3929262352565734353_n_6723f4621a.webp",
+      srcAvif: "IMG/avif/603157719_17858502063573561_3929262352565734353_n_6723f4621a.avif",
+      srcSetAvif: "IMG/avif/variants/603157719_17858502063573561_3929262352565734353_n_6723f4621a-640.avif 640w, IMG/avif/603157719_17858502063573561_3929262352565734353_n_6723f4621a.avif 1027w",
+      srcSetWebp: "IMG/webp/variants/603157719_17858502063573561_3929262352565734353_n_6723f4621a-640.webp 640w, IMG/webp/603157719_17858502063573561_3929262352565734353_n_6723f4621a.webp 1027w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/O2862318679592487263746621125315/603157719_17858502063573561_3929262352565734353_n.jpg",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -9882,7 +9990,11 @@
 
     /* ------------------ Filmoteca de Catalunya — Asunción Schwarzenberg ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/F2862318779204905261778199851715/Captura-de-pantalla-2026-03-28-a-las-18.41.14.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-28-a-las-18.41.14_e5a67b40b4.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-28-a-las-18.41.14_e5a67b40b4.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-28-a-las-18.41.14_e5a67b40b4-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-28-a-las-18.41.14_e5a67b40b4-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-28-a-las-18.41.14_e5a67b40b4.avif 1512w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-28-a-las-18.41.14_e5a67b40b4-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-28-a-las-18.41.14_e5a67b40b4-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-28-a-las-18.41.14_e5a67b40b4.webp 1512w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/F2862318779204905261778199851715/Captura-de-pantalla-2026-03-28-a-las-18.41.14.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -9899,7 +10011,11 @@
 
     /* ------------------ Kuskalla — Anton Strabucchi Borregaard ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/J2862495179699991483370342658755/Captura-de-pantalla-2026-03-28-a-las-18.53.40.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-28-a-las-18.53.40_6c86f0a82f.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-28-a-las-18.53.40_6c86f0a82f.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-28-a-las-18.53.40_6c86f0a82f-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-28-a-las-18.53.40_6c86f0a82f-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-28-a-las-18.53.40_6c86f0a82f.avif 1322w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-28-a-las-18.53.40_6c86f0a82f-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-28-a-las-18.53.40_6c86f0a82f-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-28-a-las-18.53.40_6c86f0a82f.webp 1322w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/J2862495179699991483370342658755/Captura-de-pantalla-2026-03-28-a-las-18.53.40.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -9916,7 +10032,11 @@
 
     /* ------------------ The Dry Years — Anton Strabucchi Borregaard ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/A2862495179718438227444052210371/Captura-de-pantalla-2026-03-28-a-las-18.54.55.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-28-a-las-18.54.55_7c0e78676f.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-28-a-las-18.54.55_7c0e78676f.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-28-a-las-18.54.55_7c0e78676f-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-28-a-las-18.54.55_7c0e78676f-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-28-a-las-18.54.55_7c0e78676f.avif 1486w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-28-a-las-18.54.55_7c0e78676f-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-28-a-las-18.54.55_7c0e78676f-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-28-a-las-18.54.55_7c0e78676f.webp 1486w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/A2862495179718438227444052210371/Captura-de-pantalla-2026-03-28-a-las-18.54.55.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -9933,7 +10053,11 @@
 
     /* ------------------ Macetas Nodrizas — Antonia Valencia Talhouk ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/P2862495270236611397136821990083/IMG_2921_dkx0qp.jpg",
+      src: "IMG/webp/IMG_2921_dkx0qp_71423c9d01.webp",
+      srcAvif: "IMG/avif/IMG_2921_dkx0qp_71423c9d01.avif",
+      srcSetAvif: "IMG/avif/IMG_2921_dkx0qp_71423c9d01.avif 600w",
+      srcSetWebp: "IMG/webp/IMG_2921_dkx0qp_71423c9d01.webp 600w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/P2862495270236611397136821990083/IMG_2921_dkx0qp.jpg",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -9950,7 +10074,11 @@
 
     /* ------------------ Impresión 3D arcilla local en Puerto Williams — Tomás Espinosa ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/V2862495270255058141210531541699/IMG_9998_ovzjzt.jpg",
+      src: "IMG/webp/IMG_9998_ovzjzt_8c3e9a8760.webp",
+      srcAvif: "IMG/avif/IMG_9998_ovzjzt_8c3e9a8760.avif",
+      srcSetAvif: "IMG/avif/IMG_9998_ovzjzt_8c3e9a8760.avif 600w",
+      srcSetWebp: "IMG/webp/IMG_9998_ovzjzt_8c3e9a8760.webp 600w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/V2862495270255058141210531541699/IMG_9998_ovzjzt.jpg",
       srcOriginal: "",
       orientation: "h",
       span: 1,

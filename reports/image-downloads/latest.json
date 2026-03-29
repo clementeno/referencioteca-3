@@ -1,171 +1,267 @@
 {
-  "generated_at": "2026-03-26T17:36:37.950Z",
+  "generated_at": "2026-03-29T00:37:30.540Z",
   "summary": {
-    "total": 20,
-    "downloaded": 20,
+    "total": 32,
+    "downloaded": 32,
     "cached": 0,
     "errors": 0,
-    "bytes": 49025069
+    "bytes": 53314152
   },
   "items": [
     {
       "index": 1,
       "status": "downloaded",
-      "bytes": 147388,
-      "file": "001_Captura-de-pantalla-2026-03-26-a-las-12.31.21.png",
-      "url": "https://freight.cargo.site/t/original/i/B2858839589884197243349654516419/Captura-de-pantalla-2026-03-26-a-las-12.31.21.png",
+      "bytes": 3955023,
+      "file": "001_Captura-de-pantalla-2026-03-28-a-las-15.52.17.png",
+      "url": "https://freight.cargo.site/t/original/i/Y2862277120535381977949884854979/Captura-de-pantalla-2026-03-28-a-las-15.52.17.png",
       "error": ""
     },
     {
       "index": 2,
       "status": "downloaded",
-      "bytes": 1298241,
-      "file": "002_Captura-de-pantalla-2026-03-26-a-las-12.33.30.png",
-      "url": "https://freight.cargo.site/t/original/i/I2858839589865750499275944964803/Captura-de-pantalla-2026-03-26-a-las-12.33.30.png",
+      "bytes": 1227317,
+      "file": "002_Captura-de-pantalla-2026-03-28-a-las-15.54.44.png",
+      "url": "https://freight.cargo.site/t/original/i/B2862277120812083139055528129219/Captura-de-pantalla-2026-03-28-a-las-15.54.44.png",
       "error": ""
     },
     {
       "index": 3,
       "status": "downloaded",
-      "bytes": 469353,
-      "file": "003_dysomnia-imagenes-02.jpg",
-      "url": "https://freight.cargo.site/t/original/i/V2858837873931170018739744092867/dysomnia-imagenes-02.jpg",
+      "bytes": 2124574,
+      "file": "003_85f87748-27e0-4f58-9efd-10477a895585.jpg",
+      "url": "https://freight.cargo.site/t/original/i/Y2862276628284016371010499982019/85f87748-27e0-4f58-9efd-10477a895585.jpg",
       "error": ""
     },
     {
       "index": 4,
       "status": "downloaded",
-      "bytes": 171473,
-      "file": "004_dysomnia-imagenes-03.jpg",
-      "url": "https://freight.cargo.site/t/original/i/M2858837874097190715403130057411/dysomnia-imagenes-03.jpg",
+      "bytes": 1020359,
+      "file": "004_7a8daf91-db13-4c24-864b-f10021590cc9.jpg",
+      "url": "https://freight.cargo.site/t/original/i/O2862276628302463115084209533635/7a8daf91-db13-4c24-864b-f10021590cc9.jpg",
       "error": ""
     },
     {
       "index": 5,
       "status": "downloaded",
-      "bytes": 118264,
-      "file": "005_fotos-home-josemaiza-04.jpg",
-      "url": "https://freight.cargo.site/t/original/i/A2858837874078743971329420505795/fotos-home-josemaiza-04.jpg",
+      "bytes": 2101387,
+      "file": "005_Captura-de-pantalla-2026-03-28-a-las-16.22.27.png",
+      "url": "https://freight.cargo.site/t/original/i/O2862277120793636394981818577603/Captura-de-pantalla-2026-03-28-a-las-16.22.27.png",
       "error": ""
     },
     {
       "index": 6,
       "status": "downloaded",
-      "bytes": 3990561,
-      "file": "006_a61c7ea1-ee36-4ba7-8e2d-46353ed67b9f_rw_1920.png",
-      "url": "https://freight.cargo.site/t/original/i/L2858837874060297227255710954179/a61c7ea1-ee36-4ba7-8e2d-46353ed67b9f_rw_1920.png",
+      "bytes": 5582796,
+      "file": "006_Captura-de-pantalla-2026-03-28-a-las-16.23.59.png",
+      "url": "https://freight.cargo.site/t/original/i/Z2862277120775189650908109025987/Captura-de-pantalla-2026-03-28-a-las-16.23.59.png",
       "error": ""
     },
     {
       "index": 7,
       "status": "downloaded",
-      "bytes": 2359286,
-      "file": "007_be752e61-934c-48e3-87d8-305a9cf57ef4_rw_3840.jpg",
-      "url": "https://freight.cargo.site/t/original/i/F2858837874041850483182001402563/be752e61-934c-48e3-87d8-305a9cf57ef4_rw_3840.jpg",
+      "bytes": 238285,
+      "file": "007_Captura-de-pantalla-2026-03-28-a-las-16.25.43.png",
+      "url": "https://freight.cargo.site/t/original/i/P2862277120756742906834399474371/Captura-de-pantalla-2026-03-28-a-las-16.25.43.png",
       "error": ""
     },
     {
       "index": 8,
       "status": "downloaded",
-      "bytes": 199275,
-      "file": "008_Captura-de-pantalla-2026-03-26-a-las-14.25.55.png",
-      "url": "https://freight.cargo.site/t/original/i/W2858839589755070034833687655107/Captura-de-pantalla-2026-03-26-a-las-14.25.55.png",
+      "bytes": 1572160,
+      "file": "008_bitluxe-cover.png",
+      "url": "https://freight.cargo.site/t/original/i/F2862276628320909859157919085251/bitluxe-cover.png",
       "error": ""
     },
     {
       "index": 9,
       "status": "downloaded",
-      "bytes": 750383,
-      "file": "009_Captura-de-pantalla-2026-03-26-a-las-14.26.10.png",
-      "url": "https://freight.cargo.site/t/original/i/S2858839589736623290759978103491/Captura-de-pantalla-2026-03-26-a-las-14.26.10.png",
+      "bytes": 2019278,
+      "file": "009_borde-cover.png",
+      "url": "https://freight.cargo.site/t/original/i/K2862276628339356603231628636867/borde-cover.png",
       "error": ""
     },
     {
       "index": 10,
       "status": "downloaded",
-      "bytes": 4023403,
-      "file": "010_Captura-de-pantalla-2026-03-26-a-las-13.07.07.png",
-      "url": "https://freight.cargo.site/t/original/i/Y2858839589847303755202235413187/Captura-de-pantalla-2026-03-26-a-las-13.07.07.png",
+      "bytes": 5076073,
+      "file": "010_Captura-de-pantalla-2026-03-28-a-las-16.43.48.png",
+      "url": "https://freight.cargo.site/t/original/i/D2862277120738296162760689922755/Captura-de-pantalla-2026-03-28-a-las-16.43.48.png",
       "error": ""
     },
     {
       "index": 11,
       "status": "downloaded",
-      "bytes": 2750907,
-      "file": "011_Captura-de-pantalla-2026-03-26-a-las-13.27.43.png",
-      "url": "https://freight.cargo.site/t/original/i/N2858839589828857011128525861571/Captura-de-pantalla-2026-03-26-a-las-13.27.43.png",
+      "bytes": 3917300,
+      "file": "011_Captura-de-pantalla-2026-03-28-a-las-16.46.39.png",
+      "url": "https://freight.cargo.site/t/original/i/Z2862277120719849418686980371139/Captura-de-pantalla-2026-03-28-a-las-16.46.39.png",
       "error": ""
     },
     {
       "index": 12,
       "status": "downloaded",
-      "bytes": 2886624,
-      "file": "012_Captura-de-pantalla-2026-03-26-a-las-13.28.19.png",
-      "url": "https://freight.cargo.site/t/original/i/Z2858839589810410267054816309955/Captura-de-pantalla-2026-03-26-a-las-13.28.19.png",
+      "bytes": 2791077,
+      "file": "012_Captura-de-pantalla-2026-03-28-a-las-16.50.37.png",
+      "url": "https://freight.cargo.site/t/original/i/A2862277120701402674613270819523/Captura-de-pantalla-2026-03-28-a-las-16.50.37.png",
       "error": ""
     },
     {
       "index": 13,
       "status": "downloaded",
-      "bytes": 3646022,
-      "file": "013_bb697a52-19ea-433e-b6df-a07677307d3b_rw_3840.jpg",
-      "url": "https://freight.cargo.site/t/original/i/A2858837874023403739108291850947/bb697a52-19ea-433e-b6df-a07677307d3b_rw_3840.jpg",
+      "bytes": 2079686,
+      "file": "013_Captura-de-pantalla-2026-03-28-a-las-16.53.03.png",
+      "url": "https://freight.cargo.site/t/original/i/R2862277120682955930539561267907/Captura-de-pantalla-2026-03-28-a-las-16.53.03.png",
       "error": ""
     },
     {
       "index": 14,
       "status": "downloaded",
-      "bytes": 4503540,
-      "file": "014_df8e36be-ae68-479b-bb71-001c1d7df186_rw_3840.png",
-      "url": "https://freight.cargo.site/t/original/i/K2858837874004956995034582299331/df8e36be-ae68-479b-bb71-001c1d7df186_rw_3840.png",
+      "bytes": 1518964,
+      "file": "014_Captura-de-pantalla-2026-03-28-a-las-16.54.07.png",
+      "url": "https://freight.cargo.site/t/original/i/D2862277120664509186465851716291/Captura-de-pantalla-2026-03-28-a-las-16.54.07.png",
       "error": ""
     },
     {
       "index": 15,
       "status": "downloaded",
-      "bytes": 4902815,
-      "file": "015_Captura-de-pantalla-2026-03-26-a-las-13.40.08.png",
-      "url": "https://freight.cargo.site/t/original/i/A2858839589773516778907397206723/Captura-de-pantalla-2026-03-26-a-las-13.40.08.png",
+      "bytes": 5930076,
+      "file": "015_Captura-de-pantalla-2026-03-28-a-las-16.59.47.png",
+      "url": "https://freight.cargo.site/t/original/i/O2862277120646062442392142164675/Captura-de-pantalla-2026-03-28-a-las-16.59.47.png",
       "error": ""
     },
     {
       "index": 16,
       "status": "downloaded",
-      "bytes": 1479217,
-      "file": "016_Captura-de-pantalla-2026-03-11-a-las-15.39.07.png",
-      "url": "https://freight.cargo.site/t/original/i/A2835041680310883817648411849411/Captura-de-pantalla-2026-03-11-a-las-15.39.07.png",
+      "bytes": 277992,
+      "file": "016_WhatsApp_Image_2025-01-07_at_00.11.11_12.jpg.jpg",
+      "url": "https://freight.cargo.site/t/original/i/N2862277329850586982332167041731/WhatsApp_Image_2025-01-07_at_00.11.11_12.jpg.jpg",
       "error": ""
     },
     {
       "index": 17,
       "status": "downloaded",
-      "bytes": 5677001,
-      "file": "017_Captura-de-pantalla-2026-03-26-a-las-13.39.47.png",
-      "url": "https://freight.cargo.site/t/original/i/I2858839589791963522981106758339/Captura-de-pantalla-2026-03-26-a-las-13.39.47.png",
+      "bytes": 558777,
+      "file": "017_Arrimo_2.png.jpg",
+      "url": "https://freight.cargo.site/t/original/i/Y2862277329869033726405876593347/Arrimo_2.png.jpg",
       "error": ""
     },
     {
       "index": 18,
       "status": "downloaded",
-      "bytes": 1625811,
-      "file": "018_mockup-of-a-vinyl-record-against-a-customizable-background-2349-el1-1.png",
-      "url": "https://freight.cargo.site/t/original/i/L2858837873986510250960872747715/mockup-of-a-vinyl-record-against-a-customizable-background-2349-el1-1.png",
+      "bytes": 1033941,
+      "file": "018_ChatGPTImage30jun2025_11_40_16.png.jpg",
+      "url": "https://freight.cargo.site/t/original/i/Z2862277329887480470479586144963/ChatGPTImage30jun2025_11_40_16.png.jpg",
       "error": ""
     },
     {
       "index": 19,
       "status": "downloaded",
-      "bytes": 4089305,
-      "file": "019_mockup-of-an-art-print-frame-in-a-gallery-2638-el1.png",
-      "url": "https://freight.cargo.site/t/original/i/V2858837873968063506887163196099/mockup-of-an-art-print-frame-in-a-gallery-2638-el1.png",
+      "bytes": 391999,
+      "file": "019_WhatsApp_Image_2025-01-07_at_00.11.11_2.jpg.jpg",
+      "url": "https://freight.cargo.site/t/original/i/D2862277329905927214553295696579/WhatsApp_Image_2025-01-07_at_00.11.11_2.jpg.jpg",
       "error": ""
     },
     {
       "index": 20,
       "status": "downloaded",
-      "bytes": 3936200,
-      "file": "020_mockup-of-two-square-books-against-a-customizable-surface-1566-el.png",
-      "url": "https://freight.cargo.site/t/original/i/Y2858837873949616762813453644483/mockup-of-two-square-books-against-a-customizable-surface-1566-el.png",
+      "bytes": 2395479,
+      "file": "020_Captura-de-pantalla-2026-03-28-a-las-17.57.24.png",
+      "url": "https://freight.cargo.site/t/original/i/A2862277120627615698318432613059/Captura-de-pantalla-2026-03-28-a-las-17.57.24.png",
+      "error": ""
+    },
+    {
+      "index": 21,
+      "status": "downloaded",
+      "bytes": 30739,
+      "file": "021_449879159_8878394075520405_7173879344256406189_n.jpg",
+      "url": "https://freight.cargo.site/t/original/i/O2862276628357803347305338188483/449879159_8878394075520405_7173879344256406189_n.jpg",
+      "error": ""
+    },
+    {
+      "index": 22,
+      "status": "downloaded",
+      "bytes": 1125872,
+      "file": "022_Captura-de-pantalla-2026-03-28-a-las-18.02.55.png",
+      "url": "https://freight.cargo.site/t/original/i/W2862277120609168954244723061443/Captura-de-pantalla-2026-03-28-a-las-18.02.55.png",
+      "error": ""
+    },
+    {
+      "index": 23,
+      "status": "downloaded",
+      "bytes": 1006109,
+      "file": "023_Captura-de-pantalla-2026-03-28-a-las-18.05.01.png",
+      "url": "https://freight.cargo.site/t/original/i/K2862277120590722210171013509827/Captura-de-pantalla-2026-03-28-a-las-18.05.01.png",
+      "error": ""
+    },
+    {
+      "index": 24,
+      "status": "downloaded",
+      "bytes": 390418,
+      "file": "024_Captura-de-pantalla-2026-03-28-a-las-18.07.13.png",
+      "url": "https://freight.cargo.site/t/original/i/H2862277120553828722023594406595/Captura-de-pantalla-2026-03-28-a-las-18.07.13.png",
+      "error": ""
+    },
+    {
+      "index": 25,
+      "status": "downloaded",
+      "bytes": 778979,
+      "file": "025_Captura-de-pantalla-2026-03-28-a-las-18.07.00.png",
+      "url": "https://freight.cargo.site/t/original/i/B2862277120572275466097303958211/Captura-de-pantalla-2026-03-28-a-las-18.07.00.png",
+      "error": ""
+    },
+    {
+      "index": 26,
+      "status": "downloaded",
+      "bytes": 2706764,
+      "file": "026_Captura-de-pantalla-2026-03-28-a-las-18.34.22.png",
+      "url": "https://freight.cargo.site/t/original/i/I2862318779223352005851909403331/Captura-de-pantalla-2026-03-28-a-las-18.34.22.png",
+      "error": ""
+    },
+    {
+      "index": 27,
+      "status": "downloaded",
+      "bytes": 32012,
+      "file": "027_603157719_17858502063573561_3929262352565734353_n.jpg",
+      "url": "https://freight.cargo.site/t/original/i/O2862318679592487263746621125315/603157719_17858502063573561_3929262352565734353_n.jpg",
+      "error": ""
+    },
+    {
+      "index": 28,
+      "status": "downloaded",
+      "bytes": 184171,
+      "file": "028_Captura-de-pantalla-2026-03-28-a-las-18.41.14.png",
+      "url": "https://freight.cargo.site/t/original/i/F2862318779204905261778199851715/Captura-de-pantalla-2026-03-28-a-las-18.41.14.png",
+      "error": ""
+    },
+    {
+      "index": 29,
+      "status": "downloaded",
+      "bytes": 340673,
+      "file": "029_Captura-de-pantalla-2026-03-28-a-las-18.53.40.png",
+      "url": "https://freight.cargo.site/t/original/i/J2862495179699991483370342658755/Captura-de-pantalla-2026-03-28-a-las-18.53.40.png",
+      "error": ""
+    },
+    {
+      "index": 30,
+      "status": "downloaded",
+      "bytes": 815164,
+      "file": "030_Captura-de-pantalla-2026-03-28-a-las-18.54.55.png",
+      "url": "https://freight.cargo.site/t/original/i/A2862495179718438227444052210371/Captura-de-pantalla-2026-03-28-a-las-18.54.55.png",
+      "error": ""
+    },
+    {
+      "index": 31,
+      "status": "downloaded",
+      "bytes": 61509,
+      "file": "031_IMG_2921_dkx0qp.jpg",
+      "url": "https://freight.cargo.site/t/original/i/P2862495270236611397136821990083/IMG_2921_dkx0qp.jpg",
+      "error": ""
+    },
+    {
+      "index": 32,
+      "status": "downloaded",
+      "bytes": 29199,
+      "file": "032_IMG_9998_ovzjzt.jpg",
+      "url": "https://freight.cargo.site/t/original/i/V2862495270255058141210531541699/IMG_9998_ovzjzt.jpg",
       "error": ""
     }
   ]
