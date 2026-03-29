@@ -519,6 +519,39 @@
 
   applyTaxonomyEnhancementsFromWindow();
 
+  /* ---- CLICKABLE ENTITIES OVERRIDES (personas/estudios) ---- */
+  const CLICKABLE_ENTITY_OVERRIDES = (() => {
+    const payload = (typeof window !== "undefined" && window.REF2D_CLICKABLE_OVERRIDES && typeof window.REF2D_CLICKABLE_OVERRIDES === "object")
+      ? window.REF2D_CLICKABLE_OVERRIDES
+      : {};
+
+    const aliasMap = new Map();
+    if (payload.aliases && typeof payload.aliases === "object") {
+      Object.entries(payload.aliases).forEach(([rawKey, rawValue]) => {
+        const key = norm(rawKey);
+        const value = String(rawValue || "").replace(/\s+/g, " ").trim();
+        if (!key || !value) return;
+        aliasMap.set(key, value);
+      });
+    }
+
+    const blocklist = new Set(
+      Array.isArray(payload.blocklist)
+        ? payload.blocklist.map((item) => norm(item)).filter(Boolean)
+        : []
+    );
+
+    const includePeople = Array.isArray(payload.includePeople)
+      ? payload.includePeople.map((item) => String(item || "").replace(/\s+/g, " ").trim()).filter(Boolean)
+      : [];
+
+    const includeStudios = Array.isArray(payload.includeStudios)
+      ? payload.includeStudios.map((item) => String(item || "").replace(/\s+/g, " ").trim()).filter(Boolean)
+      : [];
+
+    return { aliasMap, blocklist, includePeople, includeStudios };
+  })();
+
   /* ---- TAG DISPLAY (cómo se muestran los canónicos) ---- */
   const TAG_DISPLAY = {
     "editorial":          "Editorial",
@@ -897,11 +930,65 @@
     "coordinacion", "coordinación", "creacion", "creación", "edicion", "edición",
     "impreso", "impresa", "impresion", "impresión", "diseno sonoro", "mezcla", "programacion",
     "programación", "direccion y creacion", "dirección y creación", "logo", "logos",
-    "revista", "revistas"
+    "revista", "revistas", "departamento", "educacion", "educación",
+    "patrimonial", "patrimonio", "comunicaciones", "subsecretaria", "subsecretaría"
+  ]);
+  const ENTITY_BLACKLIST_WORDS = new Set([
+    "departamento", "depto", "area", "área", "secretaria", "secretaría",
+    "subsecretaria", "subsecretaría", "ministerio", "universidad", "fundacion",
+    "fundación", "educacion", "educación", "patrimonial", "patrimonio", "cultural",
+    "programa", "proyecto", "produccion", "producción", "direccion", "dirección",
+    "diseno", "diseño", "servicio", "servicios", "comunicaciones", "gobierno",
+    "cliente", "clientes"
+  ]);
+  const ACRONYM_BLACKLIST = new Set([
+    "RRSS", "ISBN", "ISBNN", "CEO", "CM", "UX", "UI", "WWW", "HTTP", "HTTPS", "API"
   ]);
 
   function normalizeWordToken(value) {
     return norm(value).replace(/[^a-z0-9@]+/g, "");
+  }
+
+  function applyClickableEntityOverrides(raw, kind = "person") {
+    let label = String(raw || "").replace(/\s+/g, " ").trim();
+    if (!label) return "";
+    label = label.replace(/[.,;:]+$/g, "").trim();
+    if (!label) return "";
+    const stripLead = (value) => value
+      .replace(/^(?:por|by)\s+/i, "")
+      .replace(/^(?:fotos?\s+de|ilustraciones?\s+de)\s+/i, "")
+      .trim();
+    const stripTailDescriptors = (value) => {
+      const DROP = new Set([
+        "ano", "año", "year", "equipo", "trabajo", "cliente", "financiamiento",
+        "cofinanciamiento", "montaje", "apoyo", "ilustraciones", "curatoria",
+        "curatoría", "museografia", "museografía", "journal", "design",
+        "direction", "graphic", "post", "postproduccion", "post-produccion",
+        "postproducción", "branding", "presentado"
+      ]);
+      const words = String(value || "").split(/\s+/).filter(Boolean);
+      while (words.length) {
+        const last = normalizeWordToken(words[words.length - 1]);
+        if (!last || DROP.has(last)) {
+          words.pop();
+          continue;
+        }
+        break;
+      }
+      return words.join(" ").trim();
+    };
+
+    label = stripTailDescriptors(stripLead(label));
+    if (!label) return "";
+
+    const key = toNameKey(label);
+    if (!key) return "";
+    if (CLICKABLE_ENTITY_OVERRIDES.blocklist.has(key)) return "";
+
+    const aliasTarget = CLICKABLE_ENTITY_OVERRIDES.aliasMap.get(key);
+    if (aliasTarget) return aliasTarget;
+
+    return label;
   }
 
   function canonicalPersonLabel(raw) {
@@ -911,7 +998,7 @@
       const clean = value.replace(/[^@A-Za-z0-9._-]+/g, "");
       return clean || "";
     }
-    return cleanAuthorName(value);
+    return cleanAuthorName(applyClickableEntityOverrides(value, "person"));
   }
 
   function isLikelyPersonCandidate(raw) {
@@ -1028,21 +1115,157 @@
     return list;
   }
 
+  function isLikelyStudioCandidate(raw) {
+    const value = applyClickableEntityOverrides(raw, "studio");
+    if (!value) return false;
+    if (/https?:\/\//i.test(value)) return false;
+    if (value.length < 4 || value.length > 80) return false;
+    const key = toNameKey(value);
+    if (!key) return false;
+    if (!/\b(estudio|studio)\b/i.test(value)) return false;
+    const words = value.split(/\s+/).filter(Boolean);
+    if (words.length < 2 || words.length > 7) return false;
+    return true;
+  }
+
+  function isLikelyCompanyCandidate(raw) {
+    const value = applyClickableEntityOverrides(raw, "studio");
+    if (!value) return false;
+    if (/https?:\/\//i.test(value)) return false;
+    if (/\b(estudio|studio)\b/i.test(value)) return false;
+    if (/^@/.test(value)) return false;
+    const key = toNameKey(value);
+    if (!key) return false;
+    const words = value.split(/\s+/).filter(Boolean);
+    if (!words.length || words.length > 5) return false;
+    const COMPANY_PARTICLES = new Set(["de", "del", "la", "las", "los", "y", "and", "for", "the", "&"]);
+    if (words.some((w) => {
+      const key = normalizeWordToken(w);
+      if (COMPANY_PARTICLES.has(key)) return false;
+      return ENTITY_BLACKLIST_WORDS.has(key);
+    })) return false;
+
+    if (words.length === 1) {
+      const token = words[0];
+      if (/^[A-ZÁÉÍÓÚÜÑ]{2,6}$/.test(token)) {
+        if (ACRONYM_BLACKLIST.has(token)) return false;
+        return true;
+      }
+      if (/[\p{L}]/u.test(token) && token.length >= 2) return true;
+      return false;
+    }
+
+    const allValid = words.every((word) => {
+      const cleaned = normalizeWordToken(word);
+      if (!cleaned) return false;
+      if (COMPANY_PARTICLES.has(cleaned)) return true;
+      if (ENTITY_BLACKLIST_WORDS.has(cleaned)) return false;
+      return (
+        /^[A-ZÁÉÍÓÚÜÑ][\p{L}0-9&.'’_™-]*$/u.test(word) ||
+        /^[A-ZÁÉÍÓÚÜÑ]{2,6}$/.test(word)
+      );
+    });
+    return allValid;
+  }
+
+  function extractStudioCandidates(rawText) {
+    const text = String(rawText || "");
+    if (!text.trim()) return [];
+    const out = [];
+    const seen = new Set();
+    const add = (candidate) => {
+      const label = applyClickableEntityOverrides(candidate, "studio");
+      const key = toNameKey(label);
+      if (!label || !key || seen.has(key)) return;
+      if (!isLikelyStudioCandidate(label)) return;
+      seen.add(key);
+      out.push(label);
+    };
+
+    const patterns = [
+      /\b(?:Estudio|Studio)\s*:\s*([A-ZÁÉÍÓÚÜÑ0-9@][\p{L}0-9@&.'’_-]*(?:\s+[A-ZÁÉÍÓÚÜÑ0-9@][\p{L}0-9@&.'’_-]*){0,4})/gu,
+      /\b(?:Estudio|Studio)\s+[A-ZÁÉÍÓÚÜÑ0-9@][\p{L}0-9@&.'’_-]*(?:\s+[A-ZÁÉÍÓÚÜÑ0-9@][\p{L}0-9@&.'’_-]*){0,4}/gu,
+      /\b[A-ZÁÉÍÓÚÜÑ0-9@][\p{L}0-9@&.'’_-]*(?:\s+[A-ZÁÉÍÓÚÜÑ0-9@][\p{L}0-9@&.'’_-]*){0,4}\s+(?:Estudio|Studio)\b/gu
+    ];
+    patterns.forEach((pattern) => {
+      const matches = text.matchAll(pattern);
+      for (const m of matches) {
+        if (m && m[1]) add(`Estudio ${m[1]}`);
+        else add(m && m[0] ? m[0] : "");
+      }
+    });
+    return out;
+  }
+
+  function extractContextualCompanyCandidates(rawText) {
+    const text = String(rawText || "");
+    if (!text.trim()) return [];
+    const out = [];
+    const seen = new Set();
+    const add = (candidate) => {
+      const label = applyClickableEntityOverrides(candidate, "studio");
+      const key = toNameKey(label);
+      if (!label || !key || seen.has(key)) return;
+      if (!isLikelyCompanyCandidate(label)) return;
+      seen.add(key);
+      out.push(label);
+    };
+
+    const ctx = /\b(?:desarrollad[oa]s?\s+en|realizad[oa]s?\s+en|implementad[oa]s?\s+por|cliente\s*:|marca\s*:|empresa\s*:)\s+([^.;\n|]{2,80})/giu;
+    for (const m of text.matchAll(ctx)) {
+      const raw = String(m[1] || "").split(/\s+(?:para|con)\s+/i)[0].trim();
+      if (!raw) continue;
+      // Si viene "Estudio X", lo toma extractor de estudio.
+      if (/\b(estudio|studio)\b/i.test(raw)) continue;
+      add(raw);
+    }
+
+    // Siglas sueltas en créditos (UC, UAI, UCH, etc.)
+    for (const m of text.matchAll(/\b[A-ZÁÉÍÓÚÜÑ]{2,6}\b/g)) {
+      const token = String(m[0] || "").trim();
+      if (!token || ACRONYM_BLACKLIST.has(token)) continue;
+      add(token);
+    }
+
+    return out;
+  }
+
   function deriveProjectPeople(meta, displayAuthor, displayCredits) {
     const people = [];
     const seen = new Set();
-    const addPerson = (raw) => {
-      const label = canonicalPersonLabel(raw);
+    const addEntity = (raw, kind = "person", force = false) => {
+      const label = kind === "studio"
+        ? applyClickableEntityOverrides(raw, "studio")
+        : canonicalPersonLabel(raw);
       const key = toNameKey(label);
       if (!label || !key || seen.has(key)) return;
-      if (!isLikelyPersonCandidate(label)) return;
+      if (!force) {
+        if (kind === "studio") {
+          if (!isLikelyStudioCandidate(label) && !isLikelyCompanyCandidate(label)) return;
+        } else if (!isLikelyPersonCandidate(label)) {
+          return;
+        }
+      }
       seen.add(key);
       people.push(label);
     };
 
-    splitAuthorNames(displayAuthor || meta.author || "").forEach(addPerson);
-    extractPeopleFromCredits(displayCredits || meta.collab || "").forEach(addPerson);
-    extractPersonCandidates(meta.collab || "").forEach(addPerson);
+    splitAuthorNames(displayAuthor || meta.author || "").forEach((name) => addEntity(name, "person"));
+    extractPeopleFromCredits(displayCredits || meta.collab || "").forEach((name) => addEntity(name, "person"));
+    extractPersonCandidates(meta.collab || "").forEach((name) => addEntity(name, "person"));
+    extractStudioCandidates(displayCredits || meta.collab || "").forEach((name) => addEntity(name, "studio"));
+    extractStudioCandidates(meta.collab || "").forEach((name) => addEntity(name, "studio"));
+    extractContextualCompanyCandidates(displayCredits || meta.collab || "").forEach((name) => addEntity(name, "studio"));
+    extractContextualCompanyCandidates(meta.collab || "").forEach((name) => addEntity(name, "studio"));
+    const creditsNorm = norm(`${displayCredits || meta.collab || ""} ${meta.collab || ""}`);
+    CLICKABLE_ENTITY_OVERRIDES.includePeople.forEach((name) => {
+      const token = norm(name);
+      if (token && creditsNorm.includes(token)) addEntity(name, "person", true);
+    });
+    CLICKABLE_ENTITY_OVERRIDES.includeStudios.forEach((name) => {
+      const token = norm(name);
+      if (token && creditsNorm.includes(token)) addEntity(name, "studio", true);
+    });
 
     return {
       names: people,
@@ -10423,18 +10646,41 @@
 
   function buildPeopleIndex(projects) {
     const byKey = new Map();
+    const aliasCandidates = new Map();
     (projects || []).forEach((project) => {
       const names = Array.isArray(project && project._peopleNames) ? project._peopleNames : [];
       names.forEach((name) => {
         const key = toNameKey(name);
         if (!key) return;
         if (!byKey.has(key)) byKey.set(key, name);
+
+        // Alias de apellido abreviado:
+        // "Constanza Weinreich Siraqyan" -> "Constanza Weinreich".
+        if (name && !String(name).trim().startsWith("@")) {
+          const words = String(name).replace(/\s+/g, " ").trim().split(" ").filter(Boolean);
+          if (words.length >= 3) {
+            const shortLabel = words.slice(0, words.length - 1).join(" ");
+            const shortKey = toNameKey(shortLabel);
+            if (shortKey && shortKey !== key) {
+              if (!aliasCandidates.has(shortKey)) aliasCandidates.set(shortKey, new Set());
+              aliasCandidates.get(shortKey).add(key);
+            }
+          }
+        }
       });
     });
-    return byKey;
+    const aliases = new Map();
+    aliasCandidates.forEach((targets, aliasKey) => {
+      if (!targets || targets.size !== 1) return; // ambiguo, no resolver automático
+      const [targetKey] = Array.from(targets);
+      if (byKey.has(targetKey)) aliases.set(aliasKey, targetKey);
+    });
+    return { byKey, aliases };
   }
 
-  let PEOPLE_BY_KEY = buildPeopleIndex(DB);
+  const PEOPLE_INDEX = buildPeopleIndex(DB);
+  let PEOPLE_BY_KEY = PEOPLE_INDEX.byKey;
+  let PEOPLE_KEY_ALIASES = PEOPLE_INDEX.aliases;
 
   /* ===== Reordenamiento de proyectos al cargar ===== */
   // Opción A: Shuffle aleatorio (Fisher-Yates)
@@ -10951,12 +11197,20 @@
     });
   }
 
+  function resolveKnownPersonKey(term) {
+    const key = toNameKey(canonicalPersonLabel(term));
+    if (!key) return "";
+    if (PEOPLE_BY_KEY.has(key)) return key;
+    return PEOPLE_KEY_ALIASES.get(key) || key;
+  }
+
   function getPersonDisplayName(key) {
-    return PEOPLE_BY_KEY.get(key) || key;
+    const resolvedKey = resolveKnownPersonKey(key);
+    return PEOPLE_BY_KEY.get(resolvedKey) || key;
   }
 
   function createPersonChip(name, className = '') {
-    const key = toNameKey(name);
+    const key = resolveKnownPersonKey(name);
     if (!key) return null;
     const chip = document.createElement('span');
     chip.className = `ref2d__chip ref2d__chip--person ${className}`.trim();
@@ -12502,7 +12756,7 @@
   }
 
   function normalizePersonKey(term) {
-    return toNameKey(canonicalPersonLabel(term));
+    return resolveKnownPersonKey(term);
   }
 
   function getProjectPersonKeys(project) {
@@ -12511,7 +12765,7 @@
 
   function isKnownPersonKey(personKey) {
     if (!personKey) return false;
-    return PEOPLE_BY_KEY.has(personKey);
+    return PEOPLE_BY_KEY.has(personKey) || PEOPLE_KEY_ALIASES.has(personKey);
   }
 
   function getActiveTagKeysFromTerm(term) {
