@@ -97,6 +97,7 @@
           <th scope="col">Rol</th>
           <th scope="col">Área</th>
           <th scope="col" data-sort="year">Año <span class="sort-icon" aria-hidden="true"></span></th>
+          <th scope="col">Guardar</th>
           <th scope="col">Link</th>
         </tr>
       </thead>
@@ -118,6 +119,7 @@
 
       <div class="sheet__figure">
         <img alt="" id="sheetImg">
+        <button class="sheet__saveBtn" id="sheetSaveBtn" type="button" aria-pressed="false">Guardar este proyecto</button>
       </div>
 
       <aside class="sheet__aside">
@@ -134,14 +136,6 @@
         <div class="sheet__tags" id="sheetTags"></div>
 
         <a class="sheet__link" id="sheetLink" target="_blank" rel="noopener"></a>
-
-        <section class="sheet__citation" id="sheetCitation" hidden>
-          <button class="sheet__citationToggle" id="sheetCitationToggle" type="button" aria-expanded="false" aria-controls="sheetCitationPanel">Cómo citar este proyecto</button>
-          <div class="sheet__citationPanel" id="sheetCitationPanel" hidden>
-            <p class="sheet__citationText" id="sheetCitationText"></p>
-            <button class="sheet__citationCopy" id="sheetCitationCopy" type="button">Copiar cita APA</button>
-          </div>
-        </section>
 
         <div class="sheet__support">
           <button class="sheet__supportToggle" id="sheetSupportToggle" type="button" aria-expanded="false" aria-controls="sheetSupportOptions">
@@ -177,6 +171,31 @@
     </div>
   </div>
 
+  <section class="ref2d__savedTray" id="ref2dSavedTray" aria-label="Proyectos guardados temporalmente" hidden>
+    <div class="ref2d__savedTrayInner">
+      <button class="ref2d__savedSend" id="ref2dSavedSend" type="button">Generar PDF</button>
+      <div class="ref2d__savedList" id="ref2dSavedList" aria-live="polite"></div>
+      <div class="ref2d__savedMeta" id="ref2dSavedMeta">0 visibles · 0 guardados</div>
+    </div>
+  </section>
+
+  <div class="ref2d__savedModalOverlay" id="ref2dSavedModalOverlay" hidden>
+    <div class="ref2d__savedModal" role="dialog" aria-modal="true" aria-labelledby="ref2dSavedModalTitle">
+      <button class="ref2d__savedModalClose" id="ref2dSavedModalClose" type="button" aria-label="Cerrar">×</button>
+      <h3 class="ref2d__savedModalTitle" id="ref2dSavedModalTitle">Generar selección</h3>
+      <p class="ref2d__savedModalText">Se generará un PDF tipo tabla. El correo se guardará solo para analítica interna (sin envío automático).</p>
+      <label class="ref2d__savedModalLabel" for="ref2dSavedCollectionName">Nombre de selección</label>
+      <input class="ref2d__savedModalInput" id="ref2dSavedCollectionName" type="text" maxlength="80" placeholder="Ej: Proyecto móvil" />
+      <label class="ref2d__savedModalLabel" for="ref2dSavedEmail">Correo</label>
+      <input class="ref2d__savedModalInput" id="ref2dSavedEmail" type="email" placeholder="tu-correo@dominio.com" />
+      <p class="ref2d__savedModalStatus" id="ref2dSavedModalStatus" hidden></p>
+      <div class="ref2d__savedModalActions">
+        <button class="ref2d__savedModalPrimary" id="ref2dSavedModalSend" type="button">Generar PDF</button>
+        <button class="ref2d__savedModalSecondary" id="ref2dSavedModalCancel" type="button">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
   <div class="ref2d__bentoControls" id="ref2dBentoControls" aria-label="Controles de vista infinita">
     <button class="ref2d__zoom" id="ref2dZoomOut" title="Alejar vista">Zoom -</button>
     <button class="ref2d__zoom" id="ref2dZoomIn" title="Acercar vista">Zoom +</button>
@@ -190,6 +209,8 @@
 <script src="taxonomy-enhancements.js?v=20260326b"></script>
 <script src="taxonomy-overrides.js?v=20260326b"></script>
 <script src="clickable-entities-overrides.js?v=20260329b"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.2/dist/jspdf.plugin.autotable.min.js"></script>
 <script src="ref2d.js?v=20260329b"></script>
 <script>
   (function () {

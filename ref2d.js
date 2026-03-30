@@ -43,6 +43,7 @@
   const sheetRequestClose = $("#sheetRequestClose");
   const sheetRequestSend = $("#sheetRequestSend");
   const sheetRequestCancel = $("#sheetRequestCancel");
+  const sheetSaveBtn = $("#sheetSaveBtn");
   const bentoControls = $("#ref2dBentoControls");
   const btnCenter = $("#ref2dCenter");
   const btnZoomOut = $("#ref2dZoomOut");
@@ -60,13 +61,29 @@
   const btnSearchRandom = $("#ref2dSearchRandom");
   const headerMoreBtn = $("#ref2dHeaderMore");
   const headerMoreDropdown = $("#ref2dHeaderMoreDropdown");
+  const savedTray = $("#ref2dSavedTray");
+  const savedList = $("#ref2dSavedList");
+  const savedMeta = $("#ref2dSavedMeta");
+  const savedSendBtn = $("#ref2dSavedSend");
+  const savedModalOverlay = $("#ref2dSavedModalOverlay");
+  const savedModalClose = $("#ref2dSavedModalClose");
+  const savedModalCancel = $("#ref2dSavedModalCancel");
+  const savedModalSend = $("#ref2dSavedModalSend");
+  const savedCollectionName = $("#ref2dSavedCollectionName");
+  const savedEmail = $("#ref2dSavedEmail");
+  const savedModalStatus = $("#ref2dSavedModalStatus");
   const MOBILE_MAX_WIDTH = 768;
   const MOBILE_ALLOWED_VIEWS = new Set(['grid', 'index']);
   const DESKTOP_ALLOWED_VIEWS = new Set(['bento', 'grid', 'index']);
   const REQUESTS_STORAGE_KEY = "ref2d_admin_requests_v1";
-  const REQUESTS_API_URL = "https://script.google.com/macros/s/AKfycbwxazNeMlGlw2aFNLCF1L3B-ceWtH54qWYa_7FHRs8GjN0V3zmzXYgosdCP4cjGEWdjWQ/exec";
+  const REQUESTS_API_URL = "https://script.google.com/macros/s/AKfycbxcvNK3PQCVfiHOrqbhxZcF1BueDSrIVpjS8pzhPKC2-LvASNdDWTVSVrYMmrb8PIh4Xw/exec";
   const REQUESTS_API_KEY = "ref123.teca";
   const REQUEST_EMAIL_ENDPOINT = "https://formsubmit.co/referencioteca.cl@gmail.com";
+  const SAVED_TRAY_VISIBLE_MAX = 5;
+  const SAVED_PDF_EMAIL_ENDPOINT = REQUESTS_API_URL;
+  const SAVED_PDF_TEMPLATE_IMAGE = "IMG/plantilla_exp_template.png";
+  const SAVED_PDF_PAGE_WIDTH = 612;
+  const SAVED_PDF_PAGE_HEIGHT = 792;
   const REQUEST_TYPES = {
     modify: {
       title: "Modificar Información",
@@ -86,8 +103,12 @@
   };
   let activeRequestType = "";
   let activeSpotlightMeta = null;
+  let activeSpotlightKey = "";
   let isRequestSending = false;
+  let isSavedBundleSending = false;
   let sheetCitationFeedbackTimer = null;
+  let savedBundle = [];
+  let savedPdfTemplateDataUrl = "";
 
   /* Si falta el contenedor principal, salimos en silencio (para no romper otras páginas) */
   if (!viewport || !plane) {
@@ -100,17 +121,84 @@
   }
   document.body.style.overflow = '';
 
-  /* ---- TAGS (filtros canónicos visibles en la interfaz) ---- */
-  const TAGS = [
-    'Editorial','Ilustración','Dirección de arte','Tipografía','Experimental',
-    'Publicación digital','Impresión','Curaduría','Señalética','Iluminación',
-    'Música','Visuales','Merchandising','Afiche','Moda','Motion Graphics',
-    'Sitio Web','Educación','Exhibición','Museografía','Branding','Fotografía',
-    'Gráfico','Animación','Audiovisual','Arte','Espacio','UX UI','Packaging',
-    'Producto','Industrial','Mobiliario','Textil','Artesanía','Biomateriales',
-    'Investigación','Pub. Académica','Videojuego','Teatro','Social','Salud',
-    'Muralismo','Infografía','RRSS','Web','Cover Art','Portafolio'
+  /* ---- CATEGORÍAS (FUENTE ÚNICA DE VERDAD) ---- */
+  const CATEGORY_DEFINITIONS = [
+    { key: "editorial", label: "Editorial" },
+    { key: "ilustracion", label: "Ilustración" },
+    { key: "direccion de arte", label: "Dirección de Arte" },
+    { key: "tipografia", label: "Tipografía" },
+    { key: "experimental", label: "Experimental" },
+    { key: "publicacion digital", label: "Publicación digital" },
+    { key: "impresion", label: "Impresión" },
+    { key: "impreso", label: "Impreso" },
+    { key: "curaduria", label: "Curaduría" },
+    { key: "iluminacion", label: "Iluminación" },
+    { key: "musica", label: "Música" },
+    { key: "visuales", label: "Visuales" },
+    { key: "merchandising", label: "Merchandising" },
+    { key: "afiche", label: "Afiche" },
+    { key: "moda", label: "Moda" },
+    { key: "motion graphics", label: "Motion Graphics" },
+    { key: "sitio web", label: "Sitio Web" },
+    { key: "educacion", label: "Educación" },
+    { key: "exhibicion", label: "Exhibición" },
+    { key: "museografia", label: "Museografía" },
+    { key: "branding", label: "Branding" },
+    { key: "fotografia", label: "Fotografía" },
+    { key: "grafico", label: "Gráfico" },
+    { key: "animacion", label: "Animación" },
+    { key: "audiovisual", label: "Audiovisual" },
+    { key: "arte", label: "Arte" },
+    { key: "espacio", label: "Espacio" },
+    { key: "ux ui", label: "UX/UI" },
+    { key: "packaging", label: "Packaging" },
+    { key: "producto", label: "Producto" },
+    { key: "industrial", label: "Industrial" },
+    { key: "mobiliario", label: "Mobiliario" },
+    { key: "textil", label: "Textil" },
+    { key: "artesania", label: "Artesanía" },
+    { key: "biomateriales", label: "Biomateriales" },
+    { key: "investigacion", label: "Investigación" },
+    { key: "pub academica", label: "Pub. Académica" },
+    { key: "videojuego", label: "Videojuego" },
+    { key: "teatro", label: "Teatro" },
+    { key: "social", label: "Social" },
+    { key: "salud", label: "Salud" },
+    { key: "muralismo", label: "Muralismo" },
+    { key: "infografia", label: "Infografía" },
+    { key: "rrss", label: "RRSS" },
+    { key: "web", label: "Web" },
+    { key: "diseno servicio", label: "Diseño Servicio" },
+    { key: "cover art", label: "Cover Art" },
+    { key: "portafolio", label: "Portafolio" },
+    { key: "app", label: "App" },
+    { key: "cultura", label: "Cultura" },
+    { key: "direccion creativa", label: "Dirección Creativa" },
+    { key: "diseno integral", label: "Diseño Integral" },
+    { key: "diseno conceptual", label: "Diseño Conceptual" },
+    { key: "diseno de informacion", label: "Diseño de Información" },
+    { key: "ecologia", label: "Ecología" },
+    { key: "estilismo", label: "Estilismo" },
+    { key: "experiencia", label: "Experiencia" },
+    { key: "galeria", label: "Galería" },
+    { key: "innovacion", label: "Innovación" },
+    { key: "juego de mesa", label: "Juego de Mesa" },
+    { key: "objeto", label: "Objeto" },
+    { key: "servicio", label: "Servicio" },
+    { key: "vitrinaje", label: "Vitrinaje" },
+    { key: "3d", label: "3D" }
   ];
+
+  const CATEGORY_LABELS = Object.freeze(
+    CATEGORY_DEFINITIONS.reduce((acc, entry) => {
+      acc[entry.key] = entry.label;
+      return acc;
+    }, {})
+  );
+  const CATEGORY_REMOVED_KEYS = new Set(["senaletica", "portada"]);
+
+  /* ---- TAGS (UI) derivados de CATEGORY_DEFINITIONS ---- */
+  const TAGS = CATEGORY_DEFINITIONS.map((entry) => entry.label);
 
   /* ---- SUGERENCIAS DE BÚSQUEDA ---- */
   const SUGGESTIONS = [
@@ -552,98 +640,31 @@
     return { aliasMap, blocklist, includePeople, includeStudios };
   })();
 
-  /* ---- TAG DISPLAY (cómo se muestran los canónicos) ---- */
-  const TAG_DISPLAY = {
-    "editorial":          "Editorial",
-    "ilustracion":        "Ilustración",
-    "ilustración":        "Ilustración",
-    "tipografia":         "Tipografía",
-    "tipografía":         "Tipografía",
-    "lettering":          "Tipografía",
-    "experimental":       "Experimental",
-    "infantil":           "Infantil",
-    "impresion":          "Impresión",
-    "impresión":          "Impresión",
-    "impreso":            "Impreso",
-    "curaduria":          "Curaduría",
-    "curaduría":          "Curaduría",
-    "branding":           "Branding",
-    "senaletica":         "Señalética",
-    "señaletica":         "Señalética",
-    "señalética":         "Señalética",
-    "fotografia":         "Fotografía",
-    "fotografía":         "Fotografía",
-    "exhibicion":         "Exhibición",
-    "espacio":            "Espacio",
-    "ux ui":              "UX UI",
-    "ux":                 "UX UI",
-    "ui":                 "UX UI",
-    "diseno servicio":    "Diseño Servicio",
-    "portada disco":      "Portada Disco",
-    "cover art":          "Cover Art",
-    "textil":             "Textil",
-    "pub academica":      "Pub. Académica",
-    "biomateriales":      "Biomateriales",
-    "artesania":          "Artesanía",
-    "artesanía":          "Artesanía",
-    "moda":               "Moda",
-    "vestuario":          "Moda",
-    "musica":             "Música",
-    "música":             "Música",
-    "museografia":        "Museografía",
-    "museografía":        "Museografía",
-    "web":                "Web",
-    "animación":          "Animación",
-    "animacion":          "Animación",
-    "gráfico":            "Gráfico",
-    "grafico":            "Gráfico",
-    "producto":           "Producto",
-    "servicio":           "Servicio",
-    "salud":              "Salud",
-    "investigacion":      "Investigación",
-    "investigación":      "Investigación",
-    "packaging":          "Packaging",
-    "serigrafia":         "Serigrafía",
-    "serigrafía":         "Serigrafía",
-    "industrial":         "Industrial",
-    "mobiliario":         "Mobiliario",
-    "espacios":           "Espacio",
-    "social":             "Social",
-    "afiche":             "Afiche",
-    "iluminacion":        "Iluminación",
-    "iluminación":        "Iluminación",
-    "rrss":               "RRSS",
-    "infografia":         "Infografía",
-    "infografía":         "Infografía",
-    "muralismo":          "Muralismo",
-    "teatro":             "Teatro",
-    "videojuego":         "Videojuego",
-    "visuales":           "Visuales",
-    "arte":               "Arte",
-    "3d":                 "3D",
-    "app":                "App",
-    "cultura":            "Cultura",
-    "direccion creativa": "Dirección Creativa",
-    "direccion de arte":  "Dirección de Arte",
-    "diseno integral":    "Diseño Integral",
-    "diseno conceptual":  "Diseño Conceptual",
-    "diseno de informacion":"Diseño de Información",
-    "ecologia":           "Ecología",
-    "estilismo":          "Estilismo",
-    "styling":            "Estilismo",
-    "experiencia":        "Experiencia",
-    "galeria":            "Galería",
-    "innovacion":         "Innovación",
-    "juego de mesa":      "Juego de Mesa",
-    "objeto":             "Objeto",
-    "portada":            "Portada",
-    "dirección de arte":  "Dirección de Arte",
-    "portafolio":         "Portafolio",
-    "vitrinaje":          "Vitrinaje",
-    "educacion":          "Educación",
-    "educación":          "Educación",
-    "diseño servicio":    "Diseño Servicio",
-  };
+  /* ---- TAG DISPLAY (derivado de CATEGORY_DEFINITIONS) ---- */
+  const TAG_DISPLAY = Object.freeze({
+    ...CATEGORY_LABELS,
+    // Compat legacy para llaves no canónicas que aún puedan aparecer.
+    "ilustración": "Ilustración",
+    "tipografía": "Tipografía",
+    "impresión": "Impresión",
+    "curaduría": "Curaduría",
+    "fotografía": "Fotografía",
+    "animación": "Animación",
+    "gráfico": "Gráfico",
+    "investigación": "Investigación",
+    "artesanía": "Artesanía",
+    "museografía": "Museografía",
+    "música": "Música",
+    "iluminación": "Iluminación",
+    "infografía": "Infografía",
+    "dirección de arte": "Dirección de Arte",
+    "diseño servicio": "Diseño Servicio",
+    "styling": "Estilismo",
+    "ux": "UX UI",
+    "ui": "UX UI",
+    "vestuario": "Moda",
+    "portada disco": "Portada Disco"
+  });
 
   const canonicalTagKey = (tag) => {
     const k = norm(tag);
@@ -1455,6 +1476,7 @@
     const primarySeen = new Set();
     rawPrimary.forEach((t) => {
       const k = canonicalTagKey(t);
+      if (CATEGORY_REMOVED_KEYS.has(k)) return;
       if (!k || primarySeen.has(k)) return;
       primarySeen.add(k);
       primaryKeys.push(k);
@@ -1464,6 +1486,7 @@
     const secondarySeen = new Set(primaryKeys);
     rawSecondary.forEach((t) => {
       const k = canonicalTagKey(t);
+      if (CATEGORY_REMOVED_KEYS.has(k)) return;
       if (!k || secondarySeen.has(k)) return;
       secondarySeen.add(k);
       secondaryKeys.push(k);
@@ -1509,66 +1532,11 @@
     p._search = norm(hay);
   }
 
-    /* Mapeo de labels para categorías (normalizado) */
-    const CAT_LABELS = {
-      "all": "ALL",
-      "editorial": "Editorial",
-      "ilustración": "Ilustración",
-      "ilustracion": "Ilustración",
-      "dirección de arte": "Dirección de arte",
-      "direccion de arte": "Dirección de arte",
-      "tipografía": "Tipografía",
-      "tipografia": "Tipografía",
-      "experimental": "Experimental",
-      "infantil": "Infantil",
-      "impresión": "Impresión",
-      "impresion": "Impresión",
-      "curaduría": "Curaduría",
-      "curaduria": "Curaduría",
-      "branding": "Branding",
-      "señalética": "Señalética",
-      "senaletica": "Señalética",
-      "museografía": "Museografía",
-      "museografia": "Museografía",
-      "web": "Web",
-      "ux ui": "UX UI",
-      "diseno servicio": "Diseño servicio",
-      "espacio": "Espacio",
-      "exhibicion": "Exhibición",
-      "portada disco": "Portada disco",
-      "impreso": "Impreso",
-      "textil": "Textil",
-      "pub academica": "Pub. Académica",
-      "biomateriales": "Biomateriales",
-      "artesania": "Artesanía",
-      "ux": "UX",
-      "ui": "UI",
-      "animación": "Animación",
-      "animacion": "Animación",
-      "fotografía": "Fotografía",
-      "fotografia": "Fotografía",
-      "moda": "Moda",
-      "vestuario": "Vestuario",
-      "música": "Música",
-      "musica": "Música",
-      "gráfico": "Gráfico",
-      "grafico": "Gráfico",
-      "producto": "Producto",
-      "servicio": "Servicio",
-      "salud": "Salud",
-      "investigación": "Investigación",
-      "investigacion": "Investigación",
-      "packaging": "Packaging",
-      "serigrafía": "Serigrafía",
-      "serigrafia": "Serigrafía",
-      "industrial": "Industrial",
-      "mobiliario": "Mobiliario",
-      "espacios": "Espacios",
-      "social": "Social",
-      "afiche": "Afiche",
-      "estilismo": "Estilismo",
-      "styling": "Estilismo"
-    };
+    /* Labels panel categorías (derivado de CATEGORY_DEFINITIONS) */
+    const CAT_LABELS = Object.freeze({
+      all: "ALL",
+      ...CATEGORY_LABELS
+    });
 
   /* Config desde CSS */
   const getPlanePadding = () => {
@@ -10319,7 +10287,11 @@
 
     /* ------------------ Baker — Matías Hagen Esper ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/N2863402583102204416425407754947/baker-1.jpg",
+      src: "IMG/webp/baker-1_94706c8380.webp",
+      srcAvif: "IMG/avif/baker-1_94706c8380.avif",
+      srcSetAvif: "IMG/avif/variants/baker-1_94706c8380-640.avif 640w, IMG/avif/baker-1_94706c8380.avif 1080w",
+      srcSetWebp: "IMG/webp/variants/baker-1_94706c8380-640.webp 640w, IMG/webp/baker-1_94706c8380.webp 1080w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/N2863402583102204416425407754947/baker-1.jpg",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -10336,7 +10308,11 @@
 
     /* ------------------ BANDANA AMÉRICA SOLIDARIA — Matías Hagen Esper ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/L2863402583083757672351698203331/america-solidaria-bandana-1.jpg",
+      src: "IMG/webp/america-solidaria-bandana-1_dc85a1e146.webp",
+      srcAvif: "IMG/avif/america-solidaria-bandana-1_dc85a1e146.avif",
+      srcSetAvif: "IMG/avif/variants/america-solidaria-bandana-1_dc85a1e146-640.avif 640w, IMG/avif/america-solidaria-bandana-1_dc85a1e146.avif 1080w",
+      srcSetWebp: "IMG/webp/variants/america-solidaria-bandana-1_dc85a1e146-640.webp 640w, IMG/webp/america-solidaria-bandana-1_dc85a1e146.webp 1080w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/L2863402583083757672351698203331/america-solidaria-bandana-1.jpg",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -10353,7 +10329,11 @@
 
     /* ------------------ Tricota Bupa — Matías Hagen Esper ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/O2863402583120651160499117306563/tricota-bupa.jpg",
+      src: "IMG/webp/tricota-bupa_38c4def510.webp",
+      srcAvif: "IMG/avif/tricota-bupa_38c4def510.avif",
+      srcSetAvif: "IMG/avif/variants/tricota-bupa_38c4def510-640.avif 640w, IMG/avif/variants/tricota-bupa_38c4def510-1280.avif 1280w, IMG/avif/tricota-bupa_38c4def510.avif 2000w",
+      srcSetWebp: "IMG/webp/variants/tricota-bupa_38c4def510-640.webp 640w, IMG/webp/variants/tricota-bupa_38c4def510-1280.webp 1280w, IMG/webp/tricota-bupa_38c4def510.webp 2000w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/O2863402583120651160499117306563/tricota-bupa.jpg",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -10370,7 +10350,11 @@
 
     /* ------------------ Señalética Outdoor — Felipe Lorenzini ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/F2863400340162592494081026765507/Captura-de-pantalla-2026-03-29-a-las-10.17.21.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-29-a-las-10.17.21_8eec65bd3b.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-29-a-las-10.17.21_8eec65bd3b.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-29-a-las-10.17.21_8eec65bd3b-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-29-a-las-10.17.21_8eec65bd3b-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-29-a-las-10.17.21_8eec65bd3b.avif 1672w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-29-a-las-10.17.21_8eec65bd3b-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-29-a-las-10.17.21_8eec65bd3b-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-29-a-las-10.17.21_8eec65bd3b.webp 1672w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/F2863400340162592494081026765507/Captura-de-pantalla-2026-03-29-a-las-10.17.21.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -10390,7 +10374,11 @@
 
     /* ------------------ Anillo Zafiro — Gianfranco Zoffoli ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/L2863409719686317932808189194947/Captura-de-pantalla-2026-03-29-a-las-11.15.20.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-29-a-las-11.15.20_9f17acb752.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-29-a-las-11.15.20_9f17acb752.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-29-a-las-11.15.20_9f17acb752-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-29-a-las-11.15.20_9f17acb752-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-29-a-las-11.15.20_9f17acb752.avif 1966w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-29-a-las-11.15.20_9f17acb752-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-29-a-las-11.15.20_9f17acb752-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-29-a-las-11.15.20_9f17acb752.webp 1966w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/L2863409719686317932808189194947/Captura-de-pantalla-2026-03-29-a-las-11.15.20.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -10410,7 +10398,11 @@
 
     /* ------------------ Quintillo Diamante — Gianfranco Zoffoli ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/X2863409719667871188734479643331/Captura-de-pantalla-2026-03-29-a-las-11.15.43.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-29-a-las-11.15.43_d4bbf070f1.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-29-a-las-11.15.43_d4bbf070f1.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-29-a-las-11.15.43_d4bbf070f1-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-29-a-las-11.15.43_d4bbf070f1-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-29-a-las-11.15.43_d4bbf070f1.avif 1826w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-29-a-las-11.15.43_d4bbf070f1-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-29-a-las-11.15.43_d4bbf070f1-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-29-a-las-11.15.43_d4bbf070f1.webp 1826w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/X2863409719667871188734479643331/Captura-de-pantalla-2026-03-29-a-las-11.15.43.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -10430,7 +10422,11 @@
 
     /* ------------------ Attravels — Javiera Videla ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/I2863400340328613190744412730051/Captura-de-pantalla-2026-03-29-a-las-10.28.53.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-29-a-las-10.28.53_ade0bbfb13.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-29-a-las-10.28.53_ade0bbfb13.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-29-a-las-10.28.53_ade0bbfb13-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-29-a-las-10.28.53_ade0bbfb13-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-29-a-las-10.28.53_ade0bbfb13.avif 1606w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-29-a-las-10.28.53_ade0bbfb13-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-29-a-las-10.28.53_ade0bbfb13-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-29-a-las-10.28.53_ade0bbfb13.webp 1606w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/I2863400340328613190744412730051/Captura-de-pantalla-2026-03-29-a-las-10.28.53.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -10447,7 +10443,11 @@
 
     /* ------------------ Herbario de Criptógamas Subantárticas — Javiera Videla ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/J2863400340310166446670703178435/Captura-de-pantalla-2026-03-29-a-las-10.29.20.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-29-a-las-10.29.20_b8d8cbaad4.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-29-a-las-10.29.20_b8d8cbaad4.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-29-a-las-10.29.20_b8d8cbaad4-640.avif 640w, IMG/avif/Captura-de-pantalla-2026-03-29-a-las-10.29.20_b8d8cbaad4.avif 1248w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-29-a-las-10.29.20_b8d8cbaad4-640.webp 640w, IMG/webp/Captura-de-pantalla-2026-03-29-a-las-10.29.20_b8d8cbaad4.webp 1248w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/J2863400340310166446670703178435/Captura-de-pantalla-2026-03-29-a-las-10.29.20.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -10464,7 +10464,11 @@
 
     /* ------------------ MOON DOG — Abril Araneda ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/M2863400340291719702596993626819/Captura-de-pantalla-2026-03-29-a-las-10.35.20.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-29-a-las-10.35.20_2bf9012e0e.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-29-a-las-10.35.20_2bf9012e0e.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-29-a-las-10.35.20_2bf9012e0e-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-29-a-las-10.35.20_2bf9012e0e-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-29-a-las-10.35.20_2bf9012e0e.avif 2134w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-29-a-las-10.35.20_2bf9012e0e-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-29-a-las-10.35.20_2bf9012e0e-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-29-a-las-10.35.20_2bf9012e0e.webp 2134w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/M2863400340291719702596993626819/Captura-de-pantalla-2026-03-29-a-las-10.35.20.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -10484,7 +10488,11 @@
 
     /* ------------------ FROM PATAGONIA TO THE WORLD — Abril Araneda ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/Z2863400340273272958523284075203/Captura-de-pantalla-2026-03-29-a-las-10.37.54.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-29-a-las-10.37.54_4bd60e04fe.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-29-a-las-10.37.54_4bd60e04fe.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-29-a-las-10.37.54_4bd60e04fe-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-29-a-las-10.37.54_4bd60e04fe-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-29-a-las-10.37.54_4bd60e04fe.avif 2658w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-29-a-las-10.37.54_4bd60e04fe-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-29-a-las-10.37.54_4bd60e04fe-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-29-a-las-10.37.54_4bd60e04fe.webp 2658w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/Z2863400340273272958523284075203/Captura-de-pantalla-2026-03-29-a-las-10.37.54.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -10504,7 +10512,11 @@
 
     /* ------------------ La hormiguitua y el ratón Pérez — Abril Araneda ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/P2863400340254826214449574523587/Captura-de-pantalla-2026-03-29-a-las-10.39.34.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-29-a-las-10.39.34_83245643b8.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-29-a-las-10.39.34_83245643b8.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-29-a-las-10.39.34_83245643b8-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-29-a-las-10.39.34_83245643b8-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-29-a-las-10.39.34_83245643b8.avif 3456w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-29-a-las-10.39.34_83245643b8-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-29-a-las-10.39.34_83245643b8-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-29-a-las-10.39.34_83245643b8.webp 3456w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/P2863400340254826214449574523587/Captura-de-pantalla-2026-03-29-a-las-10.39.34.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -10524,7 +10536,11 @@
 
     /* ------------------ SERENO — Francisco Blümel Araya ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/F2863402583028417440130569548483/w_1920_quality_90_fit_scale-down.jpg",
+      src: "IMG/webp/w_1920_quality_90_fit_scale-down_ededa1f6c4.webp",
+      srcAvif: "IMG/avif/w_1920_quality_90_fit_scale-down_ededa1f6c4.avif",
+      srcSetAvif: "IMG/avif/variants/w_1920_quality_90_fit_scale-down_ededa1f6c4-640.avif 640w, IMG/avif/variants/w_1920_quality_90_fit_scale-down_ededa1f6c4-1280.avif 1280w, IMG/avif/w_1920_quality_90_fit_scale-down_ededa1f6c4.avif 1919w",
+      srcSetWebp: "IMG/webp/variants/w_1920_quality_90_fit_scale-down_ededa1f6c4-640.webp 640w, IMG/webp/variants/w_1920_quality_90_fit_scale-down_ededa1f6c4-1280.webp 1280w, IMG/webp/w_1920_quality_90_fit_scale-down_ededa1f6c4.webp 1919w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/F2863402583028417440130569548483/w_1920_quality_90_fit_scale-down.jpg",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -10541,7 +10557,11 @@
 
     /* ------------------ SLIDE DUNGEON — Francisco Blümel Araya ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/T2863402831413826392629682057923/19-w1920-quality90-fitscale-down.jpg",
+      src: "IMG/webp/19-w1920-quality90-fitscale-down_0985256247.webp",
+      srcAvif: "IMG/avif/19-w1920-quality90-fitscale-down_0985256247.avif",
+      srcSetAvif: "IMG/avif/19-w1920-quality90-fitscale-down_0985256247.avif 426w",
+      srcSetWebp: "IMG/webp/19-w1920-quality90-fitscale-down_0985256247.webp 426w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/T2863402831413826392629682057923/19-w1920-quality90-fitscale-down.jpg",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -10558,7 +10578,11 @@
 
     /* ------------------ TONY SOAP’S PRO DUCKER — Francisco Blümel Araya ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/E2863410648756583205189756334787/Captura-de-pantalla-2026-03-29-a-las-11.16.34.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-29-a-las-11.16.34_8f9a4724ec.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-29-a-las-11.16.34_8f9a4724ec.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-29-a-las-11.16.34_8f9a4724ec-640.avif 640w, IMG/avif/Captura-de-pantalla-2026-03-29-a-las-11.16.34_8f9a4724ec.avif 1264w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-29-a-las-11.16.34_8f9a4724ec-640.webp 640w, IMG/webp/Captura-de-pantalla-2026-03-29-a-las-11.16.34_8f9a4724ec.webp 1264w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/E2863410648756583205189756334787/Captura-de-pantalla-2026-03-29-a-las-11.16.34.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -10575,7 +10599,11 @@
 
     /* ------------------ Vecinos Chilenos | Educación para la conservación — Debi Codriansky ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/M2863400340236379470375864971971/Captura-de-pantalla-2026-03-29-a-las-10.49.06.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-29-a-las-10.49.06_122a901384.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-29-a-las-10.49.06_122a901384.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-29-a-las-10.49.06_122a901384-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-29-a-las-10.49.06_122a901384-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-29-a-las-10.49.06_122a901384.avif 1810w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-29-a-las-10.49.06_122a901384-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-29-a-las-10.49.06_122a901384-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-29-a-las-10.49.06_122a901384.webp 1810w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/M2863400340236379470375864971971/Captura-de-pantalla-2026-03-29-a-las-10.49.06.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -10592,7 +10620,11 @@
 
     /* ------------------ Centro de la sexoafectividad — Florencia Cood ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/A2863400340217932726302155420355/Captura-de-pantalla-2026-03-29-a-las-10.52.11.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-29-a-las-10.52.11_8253875a77.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-29-a-las-10.52.11_8253875a77.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-29-a-las-10.52.11_8253875a77-640.avif 640w, IMG/avif/Captura-de-pantalla-2026-03-29-a-las-10.52.11_8253875a77.avif 670w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-29-a-las-10.52.11_8253875a77-640.webp 640w, IMG/webp/Captura-de-pantalla-2026-03-29-a-las-10.52.11_8253875a77.webp 670w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/A2863400340217932726302155420355/Captura-de-pantalla-2026-03-29-a-las-10.52.11.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -10609,7 +10641,11 @@
 
     /* ------------------ LOA — Bárbara Gelfenstein ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/L2863400340199485982228445868739/Captura-de-pantalla-2026-03-29-a-las-11.00.56.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-29-a-las-11.00.56_f7c6f25a5b.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-29-a-las-11.00.56_f7c6f25a5b.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-29-a-las-11.00.56_f7c6f25a5b-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-29-a-las-11.00.56_f7c6f25a5b-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-29-a-las-11.00.56_f7c6f25a5b.avif 1398w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-29-a-las-11.00.56_f7c6f25a5b-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-29-a-las-11.00.56_f7c6f25a5b-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-29-a-las-11.00.56_f7c6f25a5b.webp 1398w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/L2863400340199485982228445868739/Captura-de-pantalla-2026-03-29-a-las-11.00.56.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -10626,7 +10662,11 @@
 
     /* ------------------ Por los ojos que no ven — Bárbara Gelfenstein ------------------ */
     {
-      src: "https://freight.cargo.site/t/original/i/Q2863400340181039238154736317123/Captura-de-pantalla-2026-03-29-a-las-11.02.36.png",
+      src: "IMG/webp/Captura-de-pantalla-2026-03-29-a-las-11.02.36_5e2204c61a.webp",
+      srcAvif: "IMG/avif/Captura-de-pantalla-2026-03-29-a-las-11.02.36_5e2204c61a.avif",
+      srcSetAvif: "IMG/avif/variants/Captura-de-pantalla-2026-03-29-a-las-11.02.36_5e2204c61a-640.avif 640w, IMG/avif/variants/Captura-de-pantalla-2026-03-29-a-las-11.02.36_5e2204c61a-1280.avif 1280w, IMG/avif/Captura-de-pantalla-2026-03-29-a-las-11.02.36_5e2204c61a.avif 2088w",
+      srcSetWebp: "IMG/webp/variants/Captura-de-pantalla-2026-03-29-a-las-11.02.36_5e2204c61a-640.webp 640w, IMG/webp/variants/Captura-de-pantalla-2026-03-29-a-las-11.02.36_5e2204c61a-1280.webp 1280w, IMG/webp/Captura-de-pantalla-2026-03-29-a-las-11.02.36_5e2204c61a.webp 2088w",
+      srcOriginal: "https://freight.cargo.site/t/original/i/Q2863400340181039238154736317123/Captura-de-pantalla-2026-03-29-a-las-11.02.36.png",
       srcOriginal: "",
       orientation: "h",
       span: 1,
@@ -10794,6 +10834,573 @@
 
   function setImageSrcWithFallback(img, meta) {
     setImageSrcChain(img, getProjectImageCandidates(meta));
+  }
+
+  function getMetaFirstUrl(meta) {
+    const fromArray = Array.isArray(meta && meta.url) ? meta.url[0] : "";
+    const fromString = meta && !Array.isArray(meta.url) ? meta.url : "";
+    return String(fromArray || fromString || "").trim();
+  }
+
+  function getProjectStableKey(meta) {
+    if (!meta) return "";
+    const id = meta.id != null ? String(meta.id).trim() : "";
+    const title = String(meta.title || "").trim().toLowerCase();
+    const author = String(meta._displayAuthor || meta.author || "").trim().toLowerCase();
+    const year = String(meta.year || "").trim().toLowerCase();
+    const area = String(meta.area || "").trim().toLowerCase();
+    const url = getMetaFirstUrl(meta).toLowerCase();
+    return [id, title, author, year, area, url].join("|");
+  }
+
+  function getProjectThumb(meta) {
+    return getProjectPrimarySrc(meta) || getProjectFallbackSrc(meta) || "";
+  }
+
+  function toSavedEntry(meta) {
+    return {
+      key: getProjectStableKey(meta),
+      id: meta.id != null ? String(meta.id) : "",
+      title: meta.title || "Proyecto sin título",
+      author: meta._displayAuthor || meta.author || "—",
+      role: meta._displayRole || meta.role || "Diseñador/a",
+      credits: meta._displayCredits || meta.collab || "",
+      area: meta.area || "—",
+      year: meta.year || "—",
+      url: getMetaFirstUrl(meta),
+      thumb: getProjectThumb(meta),
+      tags: Array.isArray(meta.tags) ? meta.tags.slice() : [],
+      metaRef: meta
+    };
+  }
+
+  function getSavedIndex(key) {
+    return savedBundle.findIndex((entry) => entry.key === key);
+  }
+
+  function isProjectSaved(key) {
+    return getSavedIndex(key) !== -1;
+  }
+
+  function updateSaveButtonState(button) {
+    if (!button) return;
+    const key = String(button.dataset.saveKey || "");
+    const saved = isProjectSaved(key);
+    const isModal = button.classList.contains("sheet__saveBtn");
+    const isInline = button.classList.contains("ref2d__save-btn--inline");
+    button.setAttribute("aria-pressed", saved ? "true" : "false");
+    if (isModal) {
+      button.textContent = saved ? "Proyecto guardado" : "Guardar proyecto";
+    } else if (isInline) {
+      button.textContent = saved ? "Guardado" : "Guardar";
+    } else {
+      button.textContent = saved ? "✓" : "+";
+    }
+    button.setAttribute("aria-label", saved ? "Quitar de guardados" : "Guardar proyecto");
+    button.title = saved ? "Quitar de guardados" : "Guardar proyecto";
+  }
+
+  function syncSaveButtonsState() {
+    document.querySelectorAll("[data-save-key]").forEach(updateSaveButtonState);
+    if (sheetSaveBtn && activeSpotlightKey) {
+      updateSaveButtonState(sheetSaveBtn);
+    }
+  }
+
+  function setSavedModalStatus(message, isError) {
+    if (!savedModalStatus) return;
+    const value = String(message || "").trim();
+    if (!value) {
+      savedModalStatus.hidden = true;
+      savedModalStatus.textContent = "";
+      savedModalStatus.classList.remove("is-error");
+      return;
+    }
+    savedModalStatus.hidden = false;
+    savedModalStatus.textContent = value;
+    savedModalStatus.classList.toggle("is-error", !!isError);
+  }
+
+  function removeSavedProjectByKey(key) {
+    const index = getSavedIndex(key);
+    if (index === -1) return;
+    savedBundle = savedBundle.filter((entry) => entry.key !== key);
+    renderSavedTray();
+    syncSaveButtonsState();
+  }
+
+  function addSavedProject(meta) {
+    const entry = toSavedEntry(meta);
+    if (!entry.key) return;
+    const existingIndex = getSavedIndex(entry.key);
+    if (existingIndex !== -1) {
+      const copy = savedBundle.slice();
+      copy.splice(existingIndex, 1);
+      copy.push(entry);
+      savedBundle = copy;
+    } else {
+      savedBundle = savedBundle.concat(entry);
+    }
+    renderSavedTray();
+    if (savedList) {
+      requestAnimationFrame(() => {
+        savedList.scrollLeft = savedList.scrollWidth;
+      });
+    }
+    syncSaveButtonsState();
+  }
+
+  function toggleSavedProject(meta) {
+    const key = getProjectStableKey(meta);
+    if (!key) return;
+    if (isProjectSaved(key)) {
+      removeSavedProjectByKey(key);
+      return;
+    }
+    addSavedProject(meta);
+  }
+
+  function createSaveButton(meta, className) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = className || "ref2d__save-btn";
+    button.dataset.saveKey = getProjectStableKey(meta);
+    button.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      toggleSavedProject(meta);
+      updateSaveButtonState(button);
+    });
+    updateSaveButtonState(button);
+    return button;
+  }
+
+  function downloadBlob(blob, filename) {
+    const objectUrl = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = objectUrl;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    setTimeout(() => URL.revokeObjectURL(objectUrl), 1500);
+  }
+
+  function sanitizeFileName(text) {
+    const base = String(text || "").trim() || "seleccion-referencioteca";
+    return base
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "")
+      .slice(0, 48) || "seleccion-referencioteca";
+  }
+
+  function ensureJspdfAvailable() {
+    return !!(window.jspdf && window.jspdf.jsPDF);
+  }
+
+  function blobToBase64(blob) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const result = String(reader.result || "");
+        const commaIdx = result.indexOf(",");
+        if (commaIdx === -1) {
+          reject(new Error("blob_base64_decode_failed"));
+          return;
+        }
+        resolve(result.slice(commaIdx + 1));
+      };
+      reader.onerror = () => reject(new Error("blob_base64_read_failed"));
+      reader.readAsDataURL(blob);
+    });
+  }
+
+  function loadImageAsDataUrl(src) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => {
+        try {
+          const canvas = document.createElement("canvas");
+          canvas.width = img.naturalWidth || SAVED_PDF_PAGE_WIDTH;
+          canvas.height = img.naturalHeight || SAVED_PDF_PAGE_HEIGHT;
+          const ctx = canvas.getContext("2d");
+          if (!ctx) {
+            reject(new Error("template_canvas_context_missing"));
+            return;
+          }
+          ctx.drawImage(img, 0, 0);
+          resolve(canvas.toDataURL("image/png"));
+        } catch (_err) {
+          reject(new Error("template_canvas_export_failed"));
+        }
+      };
+      img.onerror = () => reject(new Error("template_image_load_failed"));
+      img.src = src;
+    });
+  }
+
+  async function getSavedPdfTemplateDataUrl() {
+    if (savedPdfTemplateDataUrl) return savedPdfTemplateDataUrl;
+    const cacheBuster = `v=${Date.now()}`;
+    const path = `${SAVED_PDF_TEMPLATE_IMAGE}${SAVED_PDF_TEMPLATE_IMAGE.includes("?") ? "&" : "?"}${cacheBuster}`;
+    savedPdfTemplateDataUrl = await loadImageAsDataUrl(path);
+    return savedPdfTemplateDataUrl;
+  }
+
+  async function buildSavedPdf(name, recipientEmail) {
+    if (!ensureJspdfAvailable()) {
+      throw new Error("pdf_lib_missing");
+    }
+    const doc = new window.jspdf.jsPDF({ orientation: "portrait", unit: "pt", format: "letter" });
+    const title = String(name || "").trim() || "Selección de proyectos";
+    const createdAt = new Date();
+    const dateLabel = createdAt.toLocaleString("es-CL", { hour12: false });
+    const safeEmail = String(recipientEmail || "").trim();
+    const drawBrandHeader = () => {
+      doc.setFillColor(232, 232, 232);
+      doc.rect(0, 0, SAVED_PDF_PAGE_WIDTH, SAVED_PDF_PAGE_HEIGHT, "F");
+
+      doc.setTextColor(18, 18, 22);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(34);
+      doc.text("REFERENCIOTECA", SAVED_PDF_PAGE_WIDTH / 2, 72, { align: "center" });
+
+      const pills = ["mapear", "organizar", "relacionar", "conectar", "visibilizar"];
+      doc.setFont("helvetica", "italic");
+      doc.setFontSize(10.5);
+      const pillWidths = pills.map((pill) => doc.getTextWidth(pill) + 22);
+      const totalPillsWidth = pillWidths.reduce((acc, width) => acc + width, 0) + (8 * (pills.length - 1));
+      let x = (SAVED_PDF_PAGE_WIDTH - totalPillsWidth) / 2;
+      pills.forEach((pill, idx) => {
+        const width = pillWidths[idx];
+        doc.setDrawColor(112, 112, 112);
+        doc.setLineWidth(1);
+        doc.roundedRect(x, 86, width, 18, 9, 9, "S");
+        doc.setTextColor(68, 68, 68);
+        doc.text(pill, x + width / 2, 98, { align: "center" });
+        x += width + 8;
+      });
+
+      doc.setDrawColor(110, 110, 110);
+      doc.setLineWidth(2);
+      doc.circle(28, 360, 13, "S");
+      doc.circle(28, 500, 13, "S");
+    };
+
+    const drawOverlayMeta = (pageNumber) => {
+      doc.setTextColor(24, 24, 28);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(25);
+      doc.text(title, 64, 158);
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(11);
+      doc.text(`Correo destino: ${safeEmail || "—"}`, 64, 180);
+      doc.text(`Generado: ${dateLabel}`, 64, 200);
+      doc.setTextColor(128, 134, 146);
+      doc.setFontSize(9);
+      doc.text(`Página: ${pageNumber}`, SAVED_PDF_PAGE_WIDTH - 24, 200, { align: "right" });
+    };
+
+    const drawFooter = () => {
+      doc.setTextColor(92, 92, 92);
+      doc.setFont("helvetica", "italic");
+      doc.setFontSize(9);
+      const footerBoxWidth = SAVED_PDF_PAGE_WIDTH - 110;
+      const footerMain = "Archivo generado desde REFERENCIOTECA para consulta personal. La autoría y los derechos de los contenidos aquí referenciados pertenecen a sus respectivas autoras, autores o titulares, conforme a la Ley N° 17.336 sobre Propiedad Intelectual. Su inclusión es de carácter referencial, con mención de autoría y fuente original,";
+      const footerLast = "y no implica cesión ni transferencia de derechos.";
+      const lines = doc.splitTextToSize(footerMain, footerBoxWidth);
+      const lineHeight = 12;
+      const startY = SAVED_PDF_PAGE_HEIGHT - 58;
+      lines.forEach((line, idx) => {
+        doc.text(line, SAVED_PDF_PAGE_WIDTH / 2, startY + (idx * lineHeight), { align: "center" });
+      });
+      doc.text(footerLast, SAVED_PDF_PAGE_WIDTH / 2, startY + (lines.length * lineHeight), { align: "center" });
+    };
+
+    drawBrandHeader();
+    drawOverlayMeta(1);
+    drawFooter();
+
+    const body = savedBundle.map((entry, idx) => ([
+      String(idx + 1),
+      entry.title || "—",
+      entry.author || "—",
+      entry.role || "—",
+      entry.credits || "—",
+      entry.year || "—",
+      entry.area || "—",
+      entry.url || "—"
+    ]));
+
+    doc.autoTable({
+      startY: 218,
+      head: [["#", "Proyecto", "Autor", "Rol", "Créditos", "Año", "Área", "Link"]],
+      body,
+      theme: "grid",
+      tableWidth: 483,
+      margin: { top: 218, right: 64.5, bottom: 102, left: 64.5 },
+      willDrawPage: (data) => {
+        drawBrandHeader();
+        drawOverlayMeta(data.pageNumber || 1);
+        drawFooter();
+      },
+      headStyles: {
+        fillColor: [20, 24, 36],
+        textColor: [248, 250, 255],
+        fontStyle: "bold",
+        lineColor: [36, 42, 58],
+        lineWidth: 0.5
+      },
+      styles: {
+        fontSize: 7.7,
+        cellPadding: 4,
+        overflow: "linebreak",
+        textColor: [42, 42, 42],
+        lineColor: [208, 208, 208],
+        lineWidth: 0.3,
+        fillColor: [232, 232, 232]
+      },
+      alternateRowStyles: {
+        fillColor: [226, 226, 226]
+      },
+      columnStyles: {
+        0: { cellWidth: 18 },
+        1: { cellWidth: 92 },
+        2: { cellWidth: 66 },
+        3: { cellWidth: 52 },
+        4: { cellWidth: 104 },
+        5: { cellWidth: 34 },
+        6: { cellWidth: 46 },
+        7: { cellWidth: 71 }
+      }
+    });
+
+    const blob = doc.output("blob");
+    const filename = `${sanitizeFileName(title)}.pdf`;
+    return { blob, filename, title };
+  }
+
+  async function registerSavedBundleRequest(filename, collectionName, requesterEmail) {
+    if (!SAVED_PDF_EMAIL_ENDPOINT) {
+      return { logged: false, reason: "endpoint_missing" };
+    }
+    const projects = savedBundle.map((entry, idx) => ({
+      order: idx + 1,
+      title: entry.title,
+      author: entry.author,
+      role: entry.role,
+      credits: entry.credits,
+      year: entry.year,
+      area: entry.area,
+      url: entry.url
+    }));
+
+    const now = new Date().toISOString();
+    const ticketId = `bundle_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`;
+    const detailLines = projects.slice(0, 80).map((item) => {
+      return `${item.order}. ${item.title || "—"} | ${item.author || "—"} | ${item.url || "—"}`;
+    });
+
+    const payload = new URLSearchParams();
+    payload.set("mode", "create");
+    payload.set("apiKey", REQUESTS_API_KEY || "");
+    payload.set("id", ticketId);
+    payload.set("createdAt", now);
+    payload.set("type", "bundle_export");
+    payload.set("typeLabel", "Exportación PDF");
+    payload.set("projectTitle", collectionName || "Selección Referencioteca");
+    payload.set("projectAuthor", `${projects.length} proyecto(s)`);
+    payload.set("projectYear", "");
+    payload.set("projectArea", "analitica");
+    payload.set("projectUrl", window.location.href || "");
+    payload.set("requesterEmail", requesterEmail || "");
+    payload.set("message", `Archivo generado: ${filename || "seleccion-referencioteca.pdf"}\nTotal proyectos: ${projects.length}\n${detailLines.join("\n")}`);
+    payload.set("status", "open");
+
+    const res = await fetch(SAVED_PDF_EMAIL_ENDPOINT, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+        "Accept": "application/json"
+      },
+      body: payload.toString()
+    });
+    if (!res.ok) {
+      throw new Error("saved_bundle_log_failed");
+    }
+    const raw = await res.text();
+    let data = {};
+    try {
+      data = JSON.parse(raw);
+    } catch (_err) {
+      throw new Error("saved_bundle_log_invalid_response");
+    }
+    if (!data || data.ok !== true) {
+      const reason = data && (data.error || data.message) ? `${data.error || data.message}` : "saved_bundle_log_failed";
+      throw new Error(reason);
+    }
+    return { logged: true };
+  }
+
+  function openSavedModal() {
+    if (!savedModalOverlay) return;
+    if (!savedBundle.length) return;
+    if (savedCollectionName && !savedCollectionName.value.trim()) {
+      savedCollectionName.value = "Selección Referencioteca";
+    }
+    setSavedModalStatus("", false);
+    savedModalOverlay.hidden = false;
+  }
+
+  function closeSavedModal() {
+    if (!savedModalOverlay) return;
+    if (isSavedBundleSending) return;
+    savedModalOverlay.hidden = true;
+    setSavedModalStatus("", false);
+  }
+
+  async function generateAndSendSavedBundle() {
+    if (isSavedBundleSending) return;
+    const collectionName = String(savedCollectionName && savedCollectionName.value || "").trim();
+    const recipientEmail = String(savedEmail && savedEmail.value || "").trim();
+
+    if (!savedBundle.length) {
+      setSavedModalStatus("Guarda al menos un proyecto.", true);
+      return;
+    }
+    if (!collectionName) {
+      setSavedModalStatus("Agrega un nombre para la selección.", true);
+      if (savedCollectionName) savedCollectionName.focus();
+      return;
+    }
+    if (!savedEmail || !recipientEmail) {
+      setSavedModalStatus("Ingresa un correo de destino.", true);
+      if (savedEmail) savedEmail.focus();
+      return;
+    }
+    if (savedEmail && !savedEmail.checkValidity()) {
+      setSavedModalStatus("Revisa el formato del correo.", true);
+      savedEmail.reportValidity();
+      return;
+    }
+
+    isSavedBundleSending = true;
+    if (savedModalSend) savedModalSend.disabled = true;
+    if (savedModalCancel) savedModalCancel.disabled = true;
+    if (savedModalClose) savedModalClose.disabled = true;
+    setSavedModalStatus("Generando PDF...", false);
+
+    let generated = false;
+    try {
+      const pdf = await buildSavedPdf(collectionName, recipientEmail);
+      downloadBlob(pdf.blob, pdf.filename);
+      generated = true;
+      setSavedModalStatus("PDF generado. Registrando solicitud...", false);
+      const logResult = await registerSavedBundleRequest(pdf.filename, collectionName, recipientEmail);
+      if (logResult.logged) {
+        setSavedModalStatus("PDF generado y solicitud registrada.", false);
+      } else {
+        setSavedModalStatus("PDF generado. No se pudo registrar analítica.", true);
+      }
+    } catch (error) {
+      if (error && error.message === "pdf_lib_missing") {
+        setSavedModalStatus("No se pudo generar PDF: falta jsPDF.", true);
+      } else if (error && error.message === "saved_bundle_log_invalid_response") {
+        setSavedModalStatus("PDF generado, pero falló el registro (respuesta inválida del endpoint).", true);
+      } else {
+        setSavedModalStatus("PDF generado, pero falló el registro analítico.", true);
+      }
+    } finally {
+      isSavedBundleSending = false;
+      if (savedModalSend) savedModalSend.disabled = false;
+      if (savedModalCancel) savedModalCancel.disabled = false;
+      if (savedModalClose) savedModalClose.disabled = false;
+      if (generated) {
+        savedBundle = [];
+        renderSavedTray();
+        syncSaveButtonsState();
+        closeSavedModal();
+      }
+    }
+  }
+
+  function renderSavedTray() {
+    if (!savedTray || !savedList || !savedMeta) return;
+    savedTray.hidden = savedBundle.length === 0;
+    savedList.innerHTML = "";
+    const visibleCount = Math.min(savedBundle.length, SAVED_TRAY_VISIBLE_MAX);
+    savedMeta.textContent = `${visibleCount} visibles · ${savedBundle.length} guardados`;
+    savedList.classList.toggle("is-scrollable", savedBundle.length > SAVED_TRAY_VISIBLE_MAX);
+    if (savedSendBtn) {
+      savedSendBtn.disabled = !savedBundle.length;
+    }
+    const visibleEntries = savedBundle;
+    visibleEntries.forEach((entry) => {
+      const item = document.createElement("div");
+      item.className = "ref2d__savedItem";
+      item.title = entry.title || "Proyecto";
+      item.style.cursor = "pointer";
+      item.addEventListener("click", (event) => {
+        event.preventDefault();
+        const ghost = document.createElement("div");
+        ghost.dataset.tags = (entry.tags || []).join(" | ");
+        ghost.dataset.title = entry.title || "—";
+        ghost.dataset.author = entry.author || "—";
+        ghost.dataset.role = entry.role || "Diseñador/a";
+        ghost.dataset.area = entry.area || "—";
+        ghost.dataset.year = entry.year || "—";
+        ghost.dataset.url = entry.url || "";
+        ghost.dataset.collab = entry.credits || "";
+        ghost.dataset.credits = entry.credits || "";
+        if (entry.thumb) ghost.dataset.src = entry.thumb;
+        ghost._meta = entry.metaRef || {
+          id: entry.id || "",
+          title: entry.title,
+          author: entry.author,
+          _displayAuthor: entry.author,
+          role: entry.role,
+          _displayRole: entry.role,
+          collab: entry.credits,
+          _displayCredits: entry.credits,
+          area: entry.area,
+          year: entry.year,
+          url: entry.url,
+          tags: entry.tags || [],
+          src: entry.thumb || ""
+        };
+        openSpotlight(ghost);
+      });
+      const thumb = String(entry.thumb || "").trim();
+      if (thumb) {
+        const img = document.createElement("img");
+        img.className = "ref2d__savedThumb";
+        img.alt = entry.title || "Proyecto";
+        img.src = thumb;
+        item.appendChild(img);
+      } else {
+        const noThumb = document.createElement("div");
+        noThumb.className = "ref2d__savedNoThumb";
+        noThumb.textContent = "Sin imagen";
+        item.appendChild(noThumb);
+      }
+
+      const removeBtn = document.createElement("button");
+      removeBtn.type = "button";
+      removeBtn.className = "ref2d__savedRemove";
+      removeBtn.textContent = "×";
+      removeBtn.setAttribute("aria-label", "Quitar proyecto guardado");
+      removeBtn.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        removeSavedProjectByKey(entry.key);
+      });
+      item.appendChild(removeBtn);
+
+      savedList.appendChild(item);
+    });
   }
 
   function createProjectPicture(meta, altText, onImageLoad) {
@@ -11039,6 +11646,7 @@
       Object.assign(media.picture.style, { position: 'absolute', inset: '0' });
       el.appendChild(media.picture);
     }
+    el.appendChild(createSaveButton(meta, 'ref2d__save-btn'));
 
     const metaBox = document.createElement('div');
     metaBox.className='ref2d__meta';
@@ -11330,6 +11938,7 @@
       const media = createProjectPicture(meta, meta.title || '', onImageLoad);
       imgWrap.appendChild(media.picture);
     }
+    imgWrap.appendChild(createSaveButton(meta, 'ref2d__save-btn'));
     body.appendChild(imgWrap);
 
     const head = document.createElement('div');
@@ -11567,7 +12176,7 @@
     updateIndexSortUI();
 
     if (!activeList.length) {
-      indexBody.innerHTML = '<tr><td colspan="6" class="ref2d__index-empty">Sin resultados para esta búsqueda.</td></tr>';
+      indexBody.innerHTML = '<tr><td colspan="7" class="ref2d__index-empty">Sin resultados para esta búsqueda.</td></tr>';
       return;
     }
 
@@ -11582,10 +12191,21 @@
         <td>${meta._displayRole || 'Diseñador/a'}</td>
         <td>${meta.area || '—'}</td>
         <td>${meta.year || '—'}</td>
+        <td><button type="button" class="ref2d__save-btn ref2d__save-btn--inline" data-save-key="${getProjectStableKey(meta)}">+ Guardar</button></td>
         <td>${firstUrl ? `<a href="${firstUrl}" target="_blank" rel="noopener">↗</a>` : '—'}</td>
       `;
+      const listSaveBtn = tr.querySelector('.ref2d__save-btn');
+      if (listSaveBtn) {
+        updateSaveButtonState(listSaveBtn);
+        listSaveBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          toggleSavedProject(meta);
+          updateSaveButtonState(listSaveBtn);
+        });
+      }
       tr.addEventListener('click', (e) => {
-        if (e.target.closest('a')) return;
+        if (e.target.closest('a') || e.target.closest('.ref2d__save-btn')) return;
         const ghost = document.createElement('div');
         ghost.dataset.tags = (meta.tags || []).join(' | ');
         ghost.dataset.title = meta.title || '—';
@@ -12380,11 +13000,17 @@
   function openSpotlight(el){
     resetPointerState(); // por si quedó un drag “medio”
     const meta = el._meta || {};
+    activeSpotlightKey = getProjectStableKey(meta);
     activeSpotlightMeta = {
+      id: meta.id != null ? meta.id : "",
       title: el.dataset.title || meta.title || "—",
       author: el.dataset.author || meta._displayAuthor || meta.author || "—",
+      role: el.dataset.role || meta._displayRole || meta.role || "Diseñador/a",
+      credits: meta._displayCredits || el.dataset.credits || meta.collab || el.dataset.collab || "",
       year: el.dataset.year || meta.year || "—",
       area: el.dataset.area || meta.area || "—",
+      tags: Array.isArray(meta.tags) ? meta.tags.slice() : [],
+      src: getProjectPrimarySrc(meta) || "",
       url: meta.url || el.dataset.url || "",
       urls: Array.isArray(meta.url) ? meta.url.slice() : [meta.url || el.dataset.url || ""].filter(Boolean)
     };
@@ -12405,6 +13031,10 @@
 
     sArea.textContent   = el.dataset.area   || meta.area   || "—";
     sYear.textContent   = el.dataset.year   || meta.year   || "—";
+    if (sheetSaveBtn) {
+      sheetSaveBtn.dataset.saveKey = activeSpotlightKey;
+      updateSaveButtonState(sheetSaveBtn);
+    }
 
     // Tags clicables → activan filtro (igual que en la grilla)
     sTags.innerHTML = "";
@@ -12507,6 +13137,7 @@
   function closeSpotlight(){
     closeRequestPanel();
     setSupportOptionsOpen(false);
+    activeSpotlightKey = "";
     activeSpotlightMeta = null;
     renderSheetCitation(null);
     if (overlay) {
@@ -12530,6 +13161,73 @@
     closeBtn.addEventListener('click',(e)=>{
       e.stopPropagation();
       closeSpotlight();
+    });
+  }
+  if (sheetSaveBtn) {
+    sheetSaveBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (!activeSpotlightMeta) return;
+      const fromMeta = {
+        id: activeSpotlightMeta.id || "",
+        title: activeSpotlightMeta.title,
+        author: activeSpotlightMeta.author,
+        _displayAuthor: activeSpotlightMeta.author,
+        role: activeSpotlightMeta.role || "",
+        _displayRole: activeSpotlightMeta.role || "",
+        collab: activeSpotlightMeta.credits || "",
+        _displayCredits: activeSpotlightMeta.credits || "",
+        area: activeSpotlightMeta.area,
+        year: activeSpotlightMeta.year,
+        tags: Array.isArray(activeSpotlightMeta.tags) ? activeSpotlightMeta.tags.slice() : [],
+        url: activeSpotlightMeta.urls && activeSpotlightMeta.urls.length ? activeSpotlightMeta.urls : activeSpotlightMeta.url,
+        src: activeSpotlightMeta.src || (sheetImg ? sheetImg.currentSrc || sheetImg.src : "")
+      };
+      toggleSavedProject(fromMeta);
+      updateSaveButtonState(sheetSaveBtn);
+    });
+  }
+  if (savedSendBtn) {
+    savedSendBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      openSavedModal();
+    });
+  }
+  if (savedList) {
+    savedList.addEventListener('wheel', (e) => {
+      if (savedList.scrollWidth <= savedList.clientWidth) return;
+      if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+      e.preventDefault();
+      savedList.scrollLeft += e.deltaY;
+    }, { passive: false });
+  }
+  if (savedModalOverlay) {
+    savedModalOverlay.addEventListener('click', (e) => {
+      if (!e.target.closest('.ref2d__savedModal')) {
+        closeSavedModal();
+      }
+    });
+  }
+  if (savedModalClose) {
+    savedModalClose.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      closeSavedModal();
+    });
+  }
+  if (savedModalCancel) {
+    savedModalCancel.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      closeSavedModal();
+    });
+  }
+  if (savedModalSend) {
+    savedModalSend.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      generateAndSendSavedBundle();
     });
   }
   if (sheetReportActions) {
@@ -12573,6 +13271,11 @@
   
   // Cerrar modal de proyecto con tecla Escape
   document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && savedModalOverlay && !savedModalOverlay.hidden) {
+      e.preventDefault();
+      closeSavedModal();
+      return;
+    }
     // Solo cerrar si el modal de proyecto está abierto y no hay otros modales abiertos
     if (e.key === 'Escape' && overlay && !overlay.hidden) {
       if (sheetRequestPanel && !sheetRequestPanel.hidden) {
@@ -13621,6 +14324,8 @@
   initRandomButton();
   initIndexSorting();
   setView(activeView);
+  renderSavedTray();
+  syncSaveButtonsState();
   
   // Mostrar modal institucional al cargar (si no se ha visto antes)
   showWipModal();

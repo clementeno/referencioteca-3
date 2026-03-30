@@ -1,13 +1,13 @@
 {
-  "sources": 443,
-  "updated_fields_inserted": 1335,
+  "sources": 461,
+  "updated_fields_inserted": 1389,
   "generation": {
-    "avif_base_generated": 32,
-    "avif_base_cached": 411,
-    "avif_variants_generated": 49,
-    "avif_variants_cached": 623,
-    "webp_variants_generated": 49,
-    "webp_variants_cached": 623
+    "avif_base_generated": 18,
+    "avif_base_cached": 443,
+    "avif_variants_generated": 29,
+    "avif_variants_cached": 672,
+    "webp_variants_generated": 29,
+    "webp_variants_cached": 672
   },
   "errors": [],
   "target_widths": [

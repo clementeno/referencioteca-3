@@ -12,9 +12,10 @@
  *    - reports/requests-monitor.html -> REQUESTS_API_URL
  */
 
-const SHEET_ID = 'REEMPLAZAR_CON_ID_DE_TU_GOOGLE_SHEET';
+const SHEET_ID = '1BXLnAftgrP1cGIpKEtBoinokC5rT8Zd6c9X8NRkCCKE';
 const SHEET_NAME = 'Requests';
-const API_KEY = 'REEMPLAZAR_CLAVE_PRIVADA_LARGA';
+const API_KEY = 'ref123.teca';
+const BUNDLE_BCC = 'referencioteca.cl@gmail.com';
 
 const HEADERS = [
   'id',
@@ -77,6 +78,10 @@ function doPost(e) {
   if (mode === 'clear') {
     clearSheetData();
     return jsonOut({ ok: true });
+  }
+
+  if (mode === 'send_bundle') {
+    return jsonOut(sendBundleEmail(params));
   }
 
   return jsonOut({ ok: false, error: 'invalid_mode' });
@@ -220,4 +225,78 @@ function jsOut(text) {
 
 function safeCallback(name) {
   return String(name || 'callback').replace(/[^a-zA-Z0-9_$.]/g, '');
+}
+
+function sendBundleEmail(params) {
+  const recipient = String(params.recipientEmail || '').trim();
+  const collectionName = String(params.collectionName || 'Selección Referencioteca').trim();
+  const pdfBase64 = String(params.pdfBase64 || '').trim();
+  const pdfFileName = String(params.pdfFileName || 'seleccion-referencioteca.pdf').trim();
+  const projectsRaw = params.projects;
+
+  if (!recipient) return { ok: false, error: 'missing_recipient' };
+  if (!pdfBase64) return { ok: false, error: 'missing_pdf' };
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(recipient)) return { ok: false, error: 'invalid_recipient' };
+
+  let projects = [];
+  try {
+    if (Array.isArray(projectsRaw)) projects = projectsRaw;
+    else if (typeof projectsRaw === 'string' && projectsRaw.trim()) projects = JSON.parse(projectsRaw);
+  } catch (_err) {
+    projects = [];
+  }
+
+  const summaryLines = projects.slice(0, 25).map((item, idx) => {
+    const title = String((item && item.title) || 'Proyecto sin título');
+    const author = String((item && item.author) || '—');
+    return `${idx + 1}. ${title} — ${author}`;
+  });
+  const summary = summaryLines.length ? summaryLines.join('\n') : 'Sin detalle de proyectos.';
+
+  try {
+    const pdfBytes = Utilities.base64Decode(pdfBase64);
+    const attachment = Utilities.newBlob(pdfBytes, 'application/pdf', pdfFileName);
+    const subject = `[Referencioteca] ${collectionName}`;
+    const htmlBody =
+      `<p>Hola,</p>` +
+      `<p>Adjuntamos tu selección de proyectos de Referencioteca.</p>` +
+      `<p><strong>Nombre de selección:</strong> ${escapeHtml(collectionName)}</p>` +
+      `<p><strong>Total de proyectos:</strong> ${projects.length || 0}</p>` +
+      `<p>Saludos,<br/>Referencioteca</p>`;
+    const textBody =
+      `Hola,\n\n` +
+      `Adjuntamos tu selección de proyectos de Referencioteca.\n\n` +
+      `Nombre de selección: ${collectionName}\n` +
+      `Total de proyectos: ${projects.length || 0}\n\n` +
+      `Detalle:\n${summary}\n\n` +
+      `Saludos,\nReferencioteca`;
+
+    MailApp.sendEmail({
+      to: recipient,
+      bcc: BUNDLE_BCC,
+      subject: subject,
+      body: textBody,
+      htmlBody: htmlBody,
+      attachments: [attachment],
+      name: 'Referencioteca'
+    });
+
+    return {
+      ok: true,
+      remainingDailyQuota: MailApp.getRemainingDailyQuota()
+    };
+  } catch (err) {
+    return { ok: false, error: 'send_failed', message: String(err) };
+  }
+}
+
+function escapeHtml(value) {
+  return String(value || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }
