@@ -2,12 +2,12 @@
   "sources": 461,
   "updated_fields_inserted": 1389,
   "generation": {
-    "avif_base_generated": 18,
-    "avif_base_cached": 443,
-    "avif_variants_generated": 29,
-    "avif_variants_cached": 672,
-    "webp_variants_generated": 29,
-    "webp_variants_cached": 672
+    "avif_base_generated": 0,
+    "avif_base_cached": 461,
+    "avif_variants_generated": 0,
+    "avif_variants_cached": 701,
+    "webp_variants_generated": 0,
+    "webp_variants_cached": 701
   },
   "errors": [],
   "target_widths": [
