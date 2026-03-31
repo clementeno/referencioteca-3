@@ -6581,12 +6581,15 @@
   span: 1,
   tags: ["editorial","ilustración","infantil"],
   title: "¿Dónde viven tus monstruos?",
-  author: "Isidora Silva",
+  author: "Isidora Silva Chiros",
   role: "",
   collab: "",
-  area: "Editorial / Ilustración / Infantil",
+  area: "Diseño para niños",
   year: "2020",
-  url: "https://www.behance.net/gallery/110237953/Donde-viven-tus-monstruos"
+  url: [
+    "https://isidorasilva.xyz",
+    "https://www.behance.net/gallery/110237953/Donde-viven-tus-monstruos"
+  ]
 },
 
 /* ------------------ La naturaleza de la tecnología — Isidora Silva ------------------ */
@@ -6600,12 +6603,15 @@
   span: 1,
   tags: ["editorial","experimental","digital"],
   title: "La naturaleza de la tecnología",
-  author: "Isidora Silva",
-  role: "",
-  collab: "Por Isidora Silva y Antonia Van de Wyngard - 2021.",
-  area: "Editorial / Experimental / Digital",
+  author: "Isidora Silva Chiros",
+  role: "Por Isidora Silva y Antonia Van de Wyngard - 2021",
+  collab: "",
+  area: "Diseño de publicación, narración visual",
   year: "2021",
-  url: "https://www.behance.net/gallery/168081973/La-naturaleza-de-la-tecnologia-Publicacion-Digital"
+  url: [
+    "https://isidorasilva.xyz",
+    "https://www.behance.net/gallery/168081973/La-naturaleza-de-la-tecnologia-Publicacion-Digital"
+  ]
 },
 
 /* ------------------ Aurora Botánica — Javiera Palma ------------------ */
