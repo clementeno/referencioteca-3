@@ -1496,6 +1496,21 @@
       .map((v) => String(v || "").trim())
       .filter(Boolean);
 
+    // Regla puntual: si el proyecto menciona "audiovisual" en tags/keywords,
+    // garantizamos que la categoría canónica "audiovisual" quede incluida.
+    const hasAudiovisualSignal = [
+      ...rawPrimary,
+      ...rawSecondary,
+      ...keywordValues
+    ].some((value) => {
+      const k = canonicalTagKey(value);
+      return k === "audiovisual" || norm(String(value || "")).includes("audiovisual");
+    });
+    if (hasAudiovisualSignal && !primarySeen.has("audiovisual")) {
+      primarySeen.add("audiovisual");
+      primaryKeys.push("audiovisual");
+    }
+
     // Capa visible (principal)
     p._tagKeys = primaryKeys;
     p.primaryCategories = primaryKeys.map(prettyTag);
@@ -10685,6 +10700,22 @@
       area: "editorial",
       year: "2024",
       url: ["https://barbaragp.myportfolio.com/diseno-editorial"]
+    },
+
+    /* ------------------ ARDER — Isidora Millas Simosen ------------------ */
+    {
+      srcOriginal: "https://freight.cargo.site/t/original/i/H2866538215981639043064040731331/Captura-de-pantalla-2026-03-31-a-las-10.12.16.png",
+      orientation: "h",
+      span: 1,
+      tags: ["audiovisual", "diseño especulativo"],
+      keywords: ["cambio climático", "moda", "fashion film"],
+      title: "ARDER",
+      author: "Isidora Millas Simosen",
+      role: "Co-dirección y producción",
+      collab: "Natalia Poblete",
+      area: "audiovisual, diseño especulativo",
+      year: "2025",
+      url: ["https://iximillas.github.io/arder/"]
     }
 
   ];
