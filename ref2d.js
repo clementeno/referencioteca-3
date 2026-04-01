@@ -328,6 +328,9 @@
     "responsive": "web",
     "desarrollo web": "web",
     "portafolio web": "web",
+    "tienda online": "web",
+    "tienda en linea": "web",
+    "shop online": "web",
     "ecommerce": "web",
     "landing page": "web",
     "one pager": "web",
@@ -1456,7 +1459,32 @@
     };
   }
 
+  function looksLikeCreditsInRole(rawRole) {
+    const value = String(rawRole || "").replace(/\s+/g, " ").trim();
+    if (!value) return false;
+    if (value.length < 45) return false;
+    const words = value.split(/\s+/).filter(Boolean);
+    if (words.length < 6) return false;
+    const hasCreditMarkers = /[:.;|]|@|cliente|desarrollad|realizad|producci|fotograf|curadur|direcci|ilustr|modelo|equipo|colabor|studio|estudio|montaje|programador|programadora/i.test(value);
+    if (!hasCreditMarkers) return false;
+    return true;
+  }
+
+  function normalizeProjectShape(meta) {
+    if (!meta || typeof meta !== "object") return;
+    if (!Array.isArray(meta.keywords)) meta.keywords = [];
+    if (!Array.isArray(meta.secondaryTags)) meta.secondaryTags = [];
+
+    const roleText = String(meta.role || "").replace(/\s+/g, " ").trim();
+    if (roleText && looksLikeCreditsInRole(roleText)) {
+      const credits = String(meta.collab || "").replace(/\s+/g, " ").trim();
+      meta.collab = credits ? `${credits}. ${roleText}` : roleText;
+      meta.role = "";
+    }
+  }
+
   function normalizeProjectTags(p) {
+    normalizeProjectShape(p);
     const people = deriveDisplayPeople(p);
     p.author = people.author || p.author || "—";
     p._displayAuthor = people.author || "—";
