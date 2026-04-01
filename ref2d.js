@@ -130,7 +130,6 @@
     { key: "experimental", label: "Experimental" },
     { key: "publicacion digital", label: "Publicación digital" },
     { key: "impresion", label: "Impresión" },
-    { key: "impreso", label: "Impreso" },
     { key: "curaduria", label: "Curaduría" },
     { key: "iluminacion", label: "Iluminación" },
     { key: "musica", label: "Música" },
@@ -139,7 +138,6 @@
     { key: "afiche", label: "Afiche" },
     { key: "moda", label: "Moda" },
     { key: "motion graphics", label: "Motion Graphics" },
-    { key: "sitio web", label: "Sitio Web" },
     { key: "educacion", label: "Educación" },
     { key: "exhibicion", label: "Exhibición" },
     { key: "museografia", label: "Museografía" },
@@ -166,7 +164,7 @@
     { key: "salud", label: "Salud" },
     { key: "muralismo", label: "Muralismo" },
     { key: "infografia", label: "Infografía" },
-    { key: "rrss", label: "RRSS" },
+    { key: "rrss", label: "RRSS", hidden: true },
     { key: "web", label: "Web" },
     { key: "diseno servicio", label: "Diseño Servicio" },
     { key: "cover art", label: "Cover Art" },
@@ -183,11 +181,13 @@
     { key: "galeria", label: "Galería" },
     { key: "innovacion", label: "Innovación" },
     { key: "juego de mesa", label: "Juego de Mesa" },
-    { key: "objeto", label: "Objeto" },
-    { key: "servicio", label: "Servicio" },
     { key: "vitrinaje", label: "Vitrinaje" },
     { key: "3d", label: "3D" }
   ];
+
+  const HIDDEN_CATEGORY_KEYS = new Set(
+    CATEGORY_DEFINITIONS.filter((entry) => entry && entry.hidden === true).map((entry) => entry.key)
+  );
 
   const CATEGORY_LABELS = Object.freeze(
     CATEGORY_DEFINITIONS.reduce((acc, entry) => {
@@ -14121,7 +14121,10 @@
   function initCategoryPanel() {
     if (!catGrid) return;
 
-    const categories = buildCategoryStats(DB);
+    const categories = buildCategoryStats(DB).filter((cat) => {
+      if (!cat || cat.key === 'all') return true;
+      return !HIDDEN_CATEGORY_KEYS.has(cat.key);
+    });
     catGrid.innerHTML = '';
 
     categories.forEach(cat => {

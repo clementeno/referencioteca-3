@@ -17,6 +17,13 @@ window.REF2D_TAXONOMY_OVERRIDES = {
     "pieza audiovisual": "audiovisual",
     "video audiovisual": "audiovisual",
 
+    "impreso": "impresion",
+    "sitio web": "web",
+    "servicio": "diseno servicio",
+    "objeto": "producto",
+    "redes sociales": "rrss",
+    "social media": "rrss",
+
     // Ajustes manuales de indumentaria/textil
     "polera": "textil",
     "poleron": "textil",
