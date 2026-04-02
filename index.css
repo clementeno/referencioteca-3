@@ -142,6 +142,7 @@ div.caution-processing{--processing-opacity: .08;position:absolute;inset:0;opaci
   border-radius:14px;
   overflow:hidden;
   cursor:pointer;
+  contain:layout paint style;
 }
 .ref2d__view-card--seleccion-active{
   background:#4a4d53;
@@ -166,6 +167,37 @@ div.caution-processing{--processing-opacity: .08;position:absolute;inset:0;opaci
   object-fit:cover;
   display:block;
 }
+.ref2d__media{
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(120% 90% at 10% 20%, rgba(110,110,122,.35), transparent 60%),
+    radial-gradient(120% 90% at 80% 70%, rgba(88,88,100,.28), transparent 62%),
+    #111217;
+}
+.ref2d__media.is-loading{
+  animation:ref2dMediaPulse 1.3s ease-in-out infinite;
+}
+.ref2d__media img{
+  opacity:0;
+  filter:blur(16px);
+  transform:scale(1.035);
+  transition:opacity .22s ease, filter .34s ease, transform .34s ease;
+}
+.ref2d__media.is-loaded{
+  animation:none;
+  background:#0b0b0d;
+}
+.ref2d__media.is-loaded img{
+  opacity:1;
+  filter:blur(0);
+  transform:scale(1);
+}
+@keyframes ref2dMediaPulse{
+  0%{ filter:brightness(.92) saturate(.92); }
+  50%{ filter:brightness(1.02) saturate(1); }
+  100%{ filter:brightness(.92) saturate(.92); }
+}
 .ref2d__view-card-head{padding:10px 12px 0;}
 .ref2d__view-card-head h3{margin:0; font-size:0.95rem; color:var(--ink);}
 .ref2d__view-card-head p{margin:0.3rem 0 0; color:var(--ink-dim); font-size:0.8rem;}
@@ -177,6 +209,13 @@ div.caution-processing{--processing-opacity: .08;position:absolute;inset:0;opaci
   color:rgba(255,255,255,0.7);
 }
 .ref2d__view-card-tags{display:flex; flex-wrap:wrap; gap:8px; padding:10px 12px 12px;}
+
+/* PERF: reduce expensive blur paints when many chips are visible */
+.ref2d__multiGrid .ref2d__chip,
+.ref2d__item .ref2d__chip{
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+}
 
 .ref2d__indexList{
   width:100%;

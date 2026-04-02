@@ -1764,6 +1764,7 @@
     const projectPeople = deriveProjectPeople(p, p._displayAuthor, p._displayCredits);
     p._peopleNames = projectPeople.names;
     p._peopleKeys = projectPeople.keys;
+    p._peopleKeySet = new Set(projectPeople.keys);
 
     const rawPrimary = Array.isArray(p.primaryCategories)
       ? p.primaryCategories.slice()
@@ -1812,6 +1813,7 @@
 
     // Capa visible (principal)
     p._tagKeys = primaryKeys;
+    p._tagKeySet = new Set(primaryKeys);
     p.primaryCategories = primaryKeys.map(prettyTag);
     p.tags = p.primaryCategories.slice();
 
@@ -4247,7 +4249,7 @@
       srcSetAvif: "IMG/avif/variants/093_perez-c_1_169643a6bd-640.avif 640w, IMG/avif/093_perez-c_1_169643a6bd.avif 961w",
       srcSetWebp: "IMG/webp/variants/093_perez-c_1_169643a6bd-640.webp 640w, IMG/webp/093_perez-c_1_169643a6bd.webp 961w",
       srcOriginal: "IMG/remote-originals/093_perez-c_1.png",
-      orientation: "h",
+      orientation: "v",
       span: 1,
       tags: ["identidad visual","Identidad gráfica","branding","museografía","instalación","exposición"],
       title: "FPO Módulo — Bienal de Arquitectura",
@@ -10095,7 +10097,7 @@
       url: ["https://www.behance.net/gallery/175530403/Genias-Podcast-Graficas-para-redes-y-merchandising"]
     },
 
-    /* ------------------ Bitluxe — Francisca Beatriz Medina Concha ------------------ */
+    /* ------------------ Bitluxe — Francisca Medina ------------------ */
     {
       src: "IMG/webp/bitluxe-cover_1d2dc054bd.webp",
       srcAvif: "IMG/avif/bitluxe-cover_1d2dc054bd.avif",
@@ -10108,7 +10110,7 @@
       tags: ["desarrollo web"],
       keywords: ["página web", "wordpress"],
       title: "Bitluxe",
-      author: "Francisca Beatriz Medina Concha",
+      author: "Francisca Medina",
       role: "",
       collab: "",
       area: "desarrollo web",
@@ -10116,7 +10118,7 @@
       url: ["https://frani.be/project-detail.html?id=bitluxe"]
     },
 
-    /* ------------------ Agencia de Borde — Francisca Beatriz Medina Concha ------------------ */
+    /* ------------------ Agencia de Borde — Francisca Medina ------------------ */
     {
       src: "IMG/webp/borde-cover_98a14fe2fe.webp",
       srcAvif: "IMG/avif/borde-cover_98a14fe2fe.avif",
@@ -10129,7 +10131,7 @@
       tags: ["desarrollo web"],
       keywords: ["página web", "front end", "full stack"],
       title: "Agencia de borde",
-      author: "Francisca Beatriz Medina Concha",
+      author: "Francisca Medina",
       role: "",
       collab: "Cliente: Agencia de Borde.",
       area: "desarrollo web",
@@ -11220,6 +11222,29 @@
   const PEOPLE_INDEX = buildPeopleIndex(DB);
   let PEOPLE_BY_KEY = PEOPLE_INDEX.byKey;
   let PEOPLE_KEY_ALIASES = PEOPLE_INDEX.aliases;
+  let KNOWN_TAG_KEYS = new Set();
+  let CATEGORY_SUGGESTION_LABELS = [];
+  let PERSON_SUGGESTION_LABELS = [];
+  let PROJECT_TITLE_SUGGESTIONS = [];
+
+  function rebuildSearchIndexes() {
+    const tagKeys = new Set();
+    DB.forEach((project) => {
+      const keys = (project && Array.isArray(project._tagKeys)) ? project._tagKeys : [];
+      keys.forEach((key) => {
+        if (key) tagKeys.add(key);
+      });
+    });
+    Object.keys(CAT_LABELS).forEach((key) => {
+      if (key && key !== "all") tagKeys.add(key);
+    });
+    KNOWN_TAG_KEYS = tagKeys;
+    CATEGORY_SUGGESTION_LABELS = Array.from(new Set(Array.from(tagKeys).map((key) => prettyTag(key))));
+    PERSON_SUGGESTION_LABELS = Array.from(PEOPLE_BY_KEY.values());
+    PROJECT_TITLE_SUGGESTIONS = DB.map((project) => String(project && project.title || "").trim()).filter(Boolean);
+  }
+
+  rebuildSearchIndexes();
 
   /* ===== Reordenamiento de proyectos al cargar ===== */
   // Opción A: Shuffle aleatorio (Fisher-Yates)
@@ -11943,8 +11968,9 @@
     });
   }
 
-  function createProjectPicture(meta, altText, onImageLoad) {
+  function createProjectPicture(meta, altText, onImageLoad, options = {}) {
     const picture = document.createElement('picture');
+    picture.className = 'ref2d__media is-loading';
     picture.style.display = 'block';
     picture.style.width = '100%';
     picture.style.height = '100%';
@@ -11970,9 +11996,11 @@
     }
 
     const img = new Image();
-    img.loading = 'lazy';
+    const loading = options.loading === 'eager' ? 'eager' : 'lazy';
+    const fetchPriority = String(options.fetchPriority || '').trim() || (loading === 'eager' ? 'auto' : 'low');
+    img.loading = loading;
     img.decoding = 'async';
-    img.fetchPriority = 'low';
+    img.fetchPriority = fetchPriority;
     img.alt = altText || '';
     img.style.width = '100%';
     img.style.height = '100%';
@@ -11983,12 +12011,20 @@
       img.sizes = sizes;
     }
 
-    if (typeof onImageLoad === 'function') {
-      img.addEventListener('load', onImageLoad);
-      img.addEventListener('error', onImageLoad);
-    }
+    const settleMedia = () => {
+      picture.classList.remove('is-loading');
+      picture.classList.add('is-loaded');
+      if (typeof onImageLoad === 'function') onImageLoad();
+    };
+    img.addEventListener('load', settleMedia, { once: true });
+    img.addEventListener('error', settleMedia, { once: true });
 
     setImageSrcChain(img, [meta?.src || '', meta?.srcOriginal || '']);
+    if (img.complete) {
+      requestAnimationFrame(() => {
+        if (picture.classList.contains('is-loading')) settleMedia();
+      });
+    }
     picture.appendChild(img);
     return { picture, img };
   }
@@ -12000,6 +12036,9 @@
   let genPtr = 0;
   let activeView = 'bento';
   let masonryRaf = null;
+  let masonryTimer = null;
+  const masonryDirtyCards = new Set();
+  let detachMultiGridScrollLoader = null;
   let listSortKey = '';
   let listSortDir = 1;
   let gridRenderToken = 0;
@@ -12461,6 +12500,8 @@
   function createSharedCardElement(meta, className, options = {}) {
     const maxTags = Number.isFinite(options.maxTags) ? options.maxTags : 4;
     const onImageLoad = typeof options.onImageLoad === 'function' ? options.onImageLoad : null;
+    const imageLoading = options.imageLoading === 'eager' ? 'eager' : 'lazy';
+    const imageFetchPriority = String(options.imageFetchPriority || '').trim() || (imageLoading === 'eager' ? 'auto' : 'low');
     const el = document.createElement('article');
     const orient = normalizeOrientation(meta.orientation);
     const isFeatured = getBentoSpan(meta) === 2;
@@ -12486,7 +12527,12 @@
     imgWrap.className = 'ref2d__view-card-figure';
     imgWrap.style.aspectRatio = ORIENTATION_ASPECT_CSS[orient];
     if (getProjectPrimarySrc(meta)) {
-      const media = createProjectPicture(meta, meta.title || '', onImageLoad);
+      const media = createProjectPicture(
+        meta,
+        meta.title || '',
+        onImageLoad ? () => onImageLoad(el) : null,
+        { loading: imageLoading, fetchPriority: imageFetchPriority }
+      );
       imgWrap.appendChild(media.picture);
     }
     /* SELECCION_START: sello R en vista grilla */
@@ -12546,7 +12592,7 @@
     return el;
   }
 
-  function layoutMultiGridMasonry() {
+  function layoutMultiGridMasonry(cards) {
     if (!multiGrid || activeView !== 'grid' || multiGrid.hidden) return;
 
     const styles = getComputedStyle(multiGrid);
@@ -12554,7 +12600,10 @@
     const rowGap = parseFloat(styles.getPropertyValue('row-gap'));
     if (!rowUnit) return;
 
-    multiGrid.querySelectorAll('.ref2d__view-card').forEach((card) => {
+    const list = (Array.isArray(cards) && cards.length)
+      ? cards
+      : Array.from(multiGrid.querySelectorAll('.ref2d__view-card'));
+    list.forEach((card) => {
       const content = card.querySelector('.ref2d__view-card-body');
       if (!content) return;
       const span = Math.ceil((content.getBoundingClientRect().height + rowGap) / (rowUnit + rowGap));
@@ -12562,17 +12611,27 @@
     });
   }
 
-  function scheduleMultiGridLayout() {
-    if (masonryRaf !== null) return;
-    masonryRaf = requestAnimationFrame(() => {
-      masonryRaf = null;
-      layoutMultiGridMasonry();
-    });
+  function scheduleMultiGridLayout(card = null) {
+    if (card) masonryDirtyCards.add(card);
+    if (masonryTimer !== null || masonryRaf !== null) return;
+    masonryTimer = setTimeout(() => {
+      masonryTimer = null;
+      masonryRaf = requestAnimationFrame(() => {
+        masonryRaf = null;
+        const dirty = masonryDirtyCards.size ? Array.from(masonryDirtyCards) : null;
+        masonryDirtyCards.clear();
+        layoutMultiGridMasonry(dirty);
+      });
+    }, 70);
   }
 
   function renderMultiGridView() {
     if (!multiGrid) return;
     const renderToken = ++gridRenderToken;
+    if (typeof detachMultiGridScrollLoader === 'function') {
+      detachMultiGridScrollLoader();
+      detachMultiGridScrollLoader = null;
+    }
     multiGrid.innerHTML = '';
 
     if (!activeList.length) {
@@ -12580,26 +12639,76 @@
       return;
     }
 
-    const BATCH_SIZE = 28;
+    const BATCH_SIZE = 20;
+    const INITIAL_BATCHES = 3;
+    const LOAD_MORE_THRESHOLD_PX = 900;
     let cursor = 0;
+    let appendScheduled = false;
+
+    const estimateInitialGridSpan = (meta) => {
+      const orient = normalizeOrientation(meta && meta.orientation);
+      if (orient === 'v') return 66;
+      if (orient === 'sq') return 58;
+      return 50; // h por defecto
+    };
 
     const appendBatch = () => {
       if (renderToken !== gridRenderToken || activeView !== 'grid' || !multiGrid) return;
       const frag = document.createDocumentFragment();
+      const addedCards = [];
       const end = Math.min(cursor + BATCH_SIZE, activeList.length);
       while (cursor < end) {
+        const currentIndex = cursor;
         const meta = activeList[cursor++];
-        const card = createSharedCardElement(meta, 'ref2d__view-card', { onImageLoad: scheduleMultiGridLayout });
+        const card = createSharedCardElement(meta, 'ref2d__view-card', {
+          onImageLoad: scheduleMultiGridLayout,
+          imageLoading: currentIndex < 16 ? 'eager' : 'lazy',
+          imageFetchPriority: currentIndex < 8 ? 'high' : (currentIndex < 16 ? 'auto' : 'low')
+        });
+        card.style.gridRowEnd = `span ${estimateInitialGridSpan(meta)}`;
         frag.appendChild(card);
+        addedCards.push(card);
       }
       multiGrid.appendChild(frag);
-      scheduleMultiGridLayout();
-      if (cursor < activeList.length) {
-        requestAnimationFrame(appendBatch);
+      // Evita el "stack" temporal de franjas al renderizar tarjetas nuevas:
+      // medimos y aplicamos span del lote en el mismo ciclo de render.
+      if (addedCards.length) {
+        layoutMultiGridMasonry(addedCards);
       }
     };
 
-    appendBatch();
+    const scheduleAppend = () => {
+      if (appendScheduled) return;
+      appendScheduled = true;
+      requestAnimationFrame(() => {
+        appendScheduled = false;
+        appendBatch();
+        maybeAppendMore();
+      });
+    };
+
+    const maybeAppendMore = () => {
+      if (renderToken !== gridRenderToken || activeView !== 'grid' || !multiGrid) return;
+      if (cursor >= activeList.length) return;
+      const nearBottom = (multiGrid.scrollTop + multiGrid.clientHeight + LOAD_MORE_THRESHOLD_PX) >= multiGrid.scrollHeight;
+      if (nearBottom) {
+        scheduleAppend();
+      }
+    };
+
+    for (let i = 0; i < INITIAL_BATCHES && cursor < activeList.length; i += 1) {
+      appendBatch();
+    }
+
+    const onGridScroll = () => {
+      maybeAppendMore();
+    };
+    multiGrid.addEventListener('scroll', onGridScroll, { passive: true });
+    detachMultiGridScrollLoader = () => {
+      multiGrid.removeEventListener('scroll', onGridScroll);
+    };
+
+    maybeAppendMore();
   }
 
   function getSimpleSelectionFromCategories(projects, amount = SIMPLE_CARD_COUNT) {
@@ -12857,6 +12966,10 @@
     if (count) count.hidden = false;
     if (!isGrid) {
       gridRenderToken += 1;
+      if (typeof detachMultiGridScrollLoader === 'function') {
+        detachMultiGridScrollLoader();
+        detachMultiGridScrollLoader = null;
+      }
     }
     if (btnSearchRandom) {
       btnSearchRandom.hidden = !isGrid;
@@ -13978,16 +14091,10 @@
       return { type, title, items };
     };
 
-    const categoryLabels = Array.from(new Set(
-      DB.flatMap((project) => getProjectTagKeys(project).map((key) => prettyTag(key)))
-    ));
-    const personLabels = Array.from(PEOPLE_BY_KEY.values());
-    const projectTitles = DB.map((project) => project.title || "").filter(Boolean);
-
     return [
-      buildGroup('category', 'Categorías', categoryLabels.concat(SUGGESTIONS)),
-      buildGroup('person', 'Nombres', personLabels),
-      buildGroup('project', 'Proyectos', projectTitles)
+      buildGroup('category', 'Categorías', CATEGORY_SUGGESTION_LABELS.concat(SUGGESTIONS)),
+      buildGroup('person', 'Nombres', PERSON_SUGGESTION_LABELS),
+      buildGroup('project', 'Proyectos', PROJECT_TITLE_SUGGESTIONS)
     ].filter(Boolean);
   }
 
@@ -14186,8 +14293,10 @@
     const keys = Array.isArray(tagKeys) ? tagKeys.map((k) => normalizeTagKey(k)).filter(Boolean) : [];
     if (!keys.length) return DB_ORDERED.slice();
     return DB_ORDERED.filter((project) => {
-      const projectKeys = getProjectTagKeys(project).map((k) => normalizeTagKey(k)).filter(Boolean);
-      return keys.every((key) => projectKeys.includes(key));
+      const projectKeySet = project && project._tagKeySet instanceof Set
+        ? project._tagKeySet
+        : new Set(getProjectTagKeys(project).map((k) => normalizeTagKey(k)).filter(Boolean));
+      return keys.every((key) => projectKeySet.has(key));
     });
   }
 
@@ -14196,10 +14305,14 @@
     const normPersonKeys = Array.isArray(personKeys) ? personKeys.map((k) => normalizePersonKey(k)).filter(Boolean) : [];
     if (!normTagKeys.length && !normPersonKeys.length) return DB_ORDERED.slice();
     return DB_ORDERED.filter((project) => {
-      const projectTagKeys = getProjectTagKeys(project).map((k) => normalizeTagKey(k)).filter(Boolean);
-      const projectPersonKeys = getProjectPersonKeys(project).map((k) => normalizePersonKey(k)).filter(Boolean);
-      const matchesTags = normTagKeys.every((key) => projectTagKeys.includes(key));
-      const matchesPeople = normPersonKeys.every((key) => projectPersonKeys.includes(key));
+      const projectTagSet = project && project._tagKeySet instanceof Set
+        ? project._tagKeySet
+        : new Set(getProjectTagKeys(project).map((k) => normalizeTagKey(k)).filter(Boolean));
+      const projectPersonSet = project && project._peopleKeySet instanceof Set
+        ? project._peopleKeySet
+        : new Set(getProjectPersonKeys(project).map((k) => normalizePersonKey(k)).filter(Boolean));
+      const matchesTags = normTagKeys.every((key) => projectTagSet.has(key));
+      const matchesPeople = normPersonKeys.every((key) => projectPersonSet.has(key));
       return matchesTags && matchesPeople;
     });
   }
@@ -14211,7 +14324,7 @@
   function isKnownTagKey(tagKey) {
     if (!tagKey) return false;
     if (tagKey !== 'all' && Object.prototype.hasOwnProperty.call(CAT_LABELS, tagKey)) return true;
-    return DB.some((project) => getProjectTagKeys(project).includes(tagKey));
+    return KNOWN_TAG_KEYS.has(tagKey);
   }
 
   function getCombinedKeysFromTerm(term) {
@@ -14616,7 +14729,10 @@
       normalizeProjectTags(newItem);
       DB.push(newItem);
       exposeSelectionDataSource(DB);
-      PEOPLE_BY_KEY = buildPeopleIndex(DB);
+      const nextPeopleIndex = buildPeopleIndex(DB);
+      PEOPLE_BY_KEY = nextPeopleIndex.byKey;
+      PEOPLE_KEY_ALIASES = nextPeopleIndex.aliases;
+      rebuildSearchIndexes();
       rebuildBentoRandomSpans();
       // Reordenar DB_ORDERED cuando se agrega un nuevo proyecto
       if (USE_RANDOM_SHUFFLE) {
