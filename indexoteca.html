@@ -11,17 +11,13 @@
   <header class="ref2d__top ref2d__top--internal" role="banner">
     <a class="ref2d__brand" href="index.html">REFERENCIOTECA</a>
     <div class="ref2d__header-actions">
-      <a class="ref2d__header-btn ref2d__header-btn--secondary" href="info.html">Información</a>
-      <a class="ref2d__header-btn ref2d__header-btn--secondary" href="submit.html">Submit</a>
-      <a class="ref2d__header-chip" href="indexoteca.html">Indexoteca <span aria-hidden="true">↗</span></a>
-      <div class="ref2d__header-more-wrap">
-        <button class="ref2d__header-more" id="idxHeaderMore" type="button" aria-expanded="false" aria-haspopup="true" aria-label="Más opciones">⋯</button>
-        <div class="ref2d__header-more-dropdown" id="idxHeaderMoreDropdown" hidden>
-          <a href="info.html">Información</a>
-          <a href="submit.html">Submit</a>
-          <a href="indexoteca.html">Indexoteca ↗</a>
-        </div>
-      </div>
+      <!-- HEADER_INTERNAL_START: accesos completos -->
+      <a class="ref2d__header-btn" href="index.html">Explorar archivo</a>
+      <a class="ref2d__header-btn" href="seleccion.html">Selección Referencioteca</a>
+      <a class="ref2d__header-btn" href="info.html">Información</a>
+      <a class="ref2d__header-btn" href="submit.html">Submit</a>
+      <a class="ref2d__header-btn" href="indexoteca.html" aria-current="page">Indexoteca <span aria-hidden="true">↗</span></a>
+      <!-- HEADER_INTERNAL_END: accesos completos -->
     </div>
   </header>
 
@@ -64,6 +60,9 @@
     </div>
   </main>
 
+  <!-- HEADER_ACTIVE_START: resalta botón actual por página -->
+  <script src="header-active.js?v=20260401b"></script>
+  <!-- HEADER_ACTIVE_END: resalta botón actual por página -->
   <script src="indexoteca.js"></script>
 </body>
 </html>

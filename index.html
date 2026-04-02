@@ -38,8 +38,14 @@
       <button class="ref2d__count ref2d__count--action" id="ref2dSearchRandom" type="button" hidden>Aleatorio</button>
     </div>
     <div class="ref2d__header-actions">
-      <button class="ref2d__catToggle" id="ref2dCatToggle" type="button" aria-expanded="false" aria-controls="ref2dCatPanel">Ver categorías</button>
-      <div class="ref2d__view-wrap">
+      <!-- HEADER_MODE_START: switch Explorar/Filtrar -->
+      <div class="ref2d__modeSwitch" id="ref2dModeSwitch" role="group" aria-label="Modo de navegación">
+        <button class="ref2d__modeBtn is-active" id="ref2dModeExplore" type="button" data-mode="explore" aria-pressed="true">Explorar</button>
+        <button class="ref2d__modeBtn" id="ref2dModeFilter" type="button" data-mode="filter" aria-pressed="false">Filtrar</button>
+      </div>
+      <!-- HEADER_MODE_END: switch Explorar/Filtrar -->
+      <button class="ref2d__catToggle ref2d__filter-tool" id="ref2dCatToggle" type="button" aria-expanded="false" aria-controls="ref2dCatPanel">Ver categorías</button>
+      <div class="ref2d__view-wrap ref2d__filter-tool">
         <button class="ref2d__view-toggle" id="ref2dViewToggle" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="ref2dViewMenu">Vista: Infinita</button>
         <div class="ref2d__view-menu" id="ref2dViewMenu" hidden>
           <button type="button" data-view="bento">Infinita</button>
@@ -47,11 +53,11 @@
           <button type="button" data-view="index">Lista</button>
         </div>
       </div>
-      <a class="ref2d__header-btn ref2d__header-btn--secondary" href="info.html">Información</a>
-      <a class="ref2d__header-btn ref2d__header-btn--secondary" href="submit.html">Submit</a>
-      <a class="ref2d__header-chip" href="indexoteca.html">Indexoteca <span aria-hidden="true">↗</span></a>
+      <!-- SELECCION_START: acceso a experiencia editorial -->
+      <a class="ref2d__header-btn" href="seleccion.html">Selección Referencioteca</a>
+      <!-- SELECCION_END: acceso a experiencia editorial -->
       <div class="ref2d__header-more-wrap">
-        <button class="ref2d__header-more" id="ref2dHeaderMore" type="button" aria-expanded="false" aria-haspopup="true" aria-label="Más opciones">⋯</button>
+        <button class="ref2d__header-more" id="ref2dHeaderMore" type="button" aria-expanded="false" aria-haspopup="true" aria-label="Información">ⓘ</button>
         <div class="ref2d__header-more-dropdown" id="ref2dHeaderMoreDropdown" hidden>
           <a href="info.html">Información</a>
           <a href="submit.html">Submit</a>
@@ -211,7 +217,7 @@
 <script src="clickable-entities-overrides.js?v=20260329b"></script>
 <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.2/dist/jspdf.plugin.autotable.min.js"></script>
-<script src="ref2d.js?v=20260401a"></script>
+<script src="ref2d.js?v=20260401c"></script>
 <script>
   (function () {
     const ACCESS_KEY = "ref123.teca";

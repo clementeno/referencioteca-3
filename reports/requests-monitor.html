@@ -140,6 +140,8 @@
       <input id="q" class="input" placeholder="Buscar por proyecto, autor o texto" />
       <select id="type" class="select">
         <option value="all">Todos los tipos</option>
+        <option value="no_pdf" selected>Ocultar exportaciones PDF</option>
+        <option value="bundle_export">Solo exportaciones PDF</option>
         <option value="modify">Modificar información</option>
         <option value="remove">Solicitud de baja</option>
         <option value="link">Notificar enlace</option>
@@ -170,9 +172,9 @@
 
   <script>
     (function () {
-      const ADMIN_KEY_HASH = 'f6010fcfc407a6d747534d8b08062c8f71ff02dcdc23a09f15066a44cb24d9fd'; // "ref-admin-2026-cambiar"
+      const ADMIN_KEY_HASH = '1906a74567f31f08bba40c980a748bc6fc8f1baa04544f9ba5e7beb3e826d5bd'; // "ref123.teca"
       const STORAGE_KEY = 'ref2d_admin_requests_v1';
-      const REQUESTS_API_URL = 'https://script.google.com/macros/s/AKfycbwxazNeMlGlw2aFNLCF1L3B-ceWtH54qWYa_7FHRs8GjN0V3zmzXYgosdCP4cjGEWdjWQ/exec';
+      const REQUESTS_API_URL = 'https://script.google.com/macros/s/AKfycbzMBpdgUQPv2hhebfuzllDVOz-8D71-oMsWsHU-IRrOxFyDG8nDTtG_0_efTFGPuZ8O/exec';
       const REQUESTS_API_KEY = 'ref123.teca';
       const AUTO_REFRESH_MS = 30000;
       const authGate = document.getElementById('authGate');
@@ -310,7 +312,11 @@
         const text = (q.value || '').trim().toLowerCase();
         const t = type.value;
         return list.filter((it) => {
-          if (t !== 'all' && it.type !== t) return false;
+          if (t === 'no_pdf') {
+            if (it.type === 'bundle_export') return false;
+          } else if (t !== 'all' && it.type !== t) {
+            return false;
+          }
           if (!text) return true;
           const hay = [
             it.projectTitle,

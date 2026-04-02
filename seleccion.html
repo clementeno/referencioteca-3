@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Selección Referencioteca</title>
+
+  <style>
+    @font-face {
+      font-family: "Diatype Variable";
+      src: url("Cargo-DiatypePlusVariable.woff2") format("woff2");
+      font-weight: 100 900;
+      font-style: normal;
+    }
+  </style>
+
+  <link rel="stylesheet" href="embed.css">
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="seleccion.css?v=20260402f">
+</head>
+<body class="seleccion-page">
+  <header class="ref2d__top ref2d__top--internal" role="banner">
+    <a class="ref2d__brand" href="index.html">REFERENCIOTECA</a>
+    <div class="ref2d__header-actions">
+      <!-- HEADER_INTERNAL_START: accesos completos -->
+      <a class="ref2d__header-btn" href="index.html">Explorar archivo</a>
+      <a class="ref2d__header-btn" href="seleccion.html" aria-current="page">Selección Referencioteca</a>
+      <a class="ref2d__header-btn" href="info.html">Información</a>
+      <a class="ref2d__header-btn" href="submit.html">Submit</a>
+      <a class="ref2d__header-btn" href="indexoteca.html">Indexoteca <span aria-hidden="true">↗</span></a>
+      <!-- HEADER_INTERNAL_END: accesos completos -->
+    </div>
+  </header>
+
+  <!-- SELECCION_START: banda animada dinámica de cápsula -->
+  <section class="seleccion__wordband" aria-hidden="true">
+    <div class="seleccion__wordtrack">
+      <p class="seleccion__wordline" id="seleccionWordlineA">SELECCIÓN REFERENCIOTECA / R0001 /</p>
+      <p class="seleccion__wordline" id="seleccionWordlineB">SELECCIÓN REFERENCIOTECA / R0001 /</p>
+    </div>
+  </section>
+  <!-- SELECCION_END: banda animada dinámica de cápsula -->
+
+  <main class="seleccion__layout" id="top">
+    <!-- SELECCION_START: columna izquierda fija con cápsulas históricas -->
+    <aside class="seleccion__left" aria-label="Resumen curatorial">
+      <section class="seleccion__intro">
+        <p class="seleccion__eyebrow" id="seleccionMeta">Selección curada</p>
+        <h1 class="seleccion__title" id="seleccionTitulo">Selección Referencioteca</h1>
+        <p class="seleccion__desc" id="seleccionDescripcion"></p>
+        <div class="seleccion__intro-actions">
+          <a class="seleccion__back" href="index.html">Volver al archivo</a>
+          <span class="seleccion__frequency" id="seleccionFrecuencia"></span>
+        </div>
+      </section>
+
+      <section class="seleccion__capsules" aria-labelledby="seleccionCapsulesTitle">
+        <h2 class="seleccion__capsules-title" id="seleccionCapsulesTitle">Cápsulas de selección</h2>
+        <div class="seleccion__capsules-list" id="seleccionCapsulas" aria-live="polite"></div>
+        <div class="seleccion__capsule-detail" id="seleccionCapsulaDetalle" aria-live="polite"></div>
+      </section>
+    </aside>
+    <!-- SELECCION_END: columna izquierda fija con cápsulas históricas -->
+
+    <!-- SELECCION_START: columna derecha con grilla de selección vigente -->
+    <section class="seleccion__right" aria-labelledby="seleccionActualTitle">
+      <header class="seleccion__right-head">
+        <p class="seleccion__right-kicker">Selección vigente</p>
+        <h2 class="seleccion__right-title" id="seleccionActualTitle"></h2>
+      </header>
+      <section class="seleccion__grid" id="seleccionGrid" aria-live="polite"></section>
+    </section>
+    <!-- SELECCION_END: columna derecha con grilla de selección vigente -->
+  </main>
+
+  <!-- SELECCION_START: modal propio de tarjeta (sin guardado) -->
+  <div class="seleccion__overlay" id="seleccionOverlay" hidden>
+    <article class="seleccion__modal" role="dialog" aria-modal="true" aria-labelledby="seleccionModalTitle">
+      <button class="seleccion__modal-close" id="seleccionModalClose" type="button" aria-label="Cerrar">×</button>
+      <figure class="seleccion__modal-figure">
+        <img id="seleccionModalImg" alt="">
+      </figure>
+      <aside class="seleccion__modal-aside">
+        <h3 class="seleccion__modal-title" id="seleccionModalTitle"></h3>
+        <p class="seleccion__modal-author" id="seleccionModalAuthor"></p>
+        <p class="seleccion__modal-role" id="seleccionModalRole"></p>
+        <p class="seleccion__modal-note" id="seleccionModalNote"></p>
+        <div class="seleccion__modal-tags" id="seleccionModalTags"></div>
+        <a class="seleccion__modal-link" id="seleccionModalLink" href="#" target="_blank" rel="noopener">Abrir proyecto ↗</a>
+      </aside>
+    </article>
+  </div>
+  <!-- SELECCION_END: modal propio de tarjeta (sin guardado) -->
+
+  <!-- SELECCION_START: render de experiencia editorial separada -->
+  <script>
+    window.__REF2D_SELECTION_DATA_ONLY__ = true;
+  </script>
+  <script src="ref2d.js?v=20260401c"></script>
+  <script src="seleccion.js?v=20260402g"></script>
+  <!-- HEADER_ACTIVE_START: resalta botón actual por página -->
+  <script src="header-active.js?v=20260401b"></script>
+  <!-- HEADER_ACTIVE_END: resalta botón actual por página -->
+  <!-- SELECCION_END: render de experiencia editorial separada -->
+</body>
+</html>

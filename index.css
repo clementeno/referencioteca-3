@@ -143,6 +143,10 @@ div.caution-processing{--processing-opacity: .08;position:absolute;inset:0;opaci
   overflow:hidden;
   cursor:pointer;
 }
+.ref2d__view-card--seleccion-active{
+  background:#4a4d53;
+  border-color:#6b6f78;
+}
 .ref2d__view-card.is-featured{
   grid-column:span 2;
 }
@@ -207,6 +211,10 @@ div.caution-processing{--processing-opacity: .08;position:absolute;inset:0;opaci
   transform:translateY(-3px);
   border-color:rgba(255,255,255,0.24);
   box-shadow:0 14px 32px rgba(0,0,0,0.35);
+}
+.ref2d__simple-card.ref2d__view-card--seleccion-active{
+  background:#4a4d53;
+  border-color:#6b6f78;
 }
 .ref2d__simple-card .ref2d__view-card-body{
   display:flex;
@@ -418,6 +426,65 @@ div.caution-processing{--processing-opacity: .08;position:absolute;inset:0;opaci
 .sheet__figure{
   position:relative;
 }
+
+/* SELECCION_START: sello R reutilizable para archivo general */
+.ref2d__seleccion-badge{
+  position:absolute;
+  top:8px;
+  left:8px;
+  z-index:4;
+  width:22px;
+  height:22px;
+  border-radius:999px;
+  border:1px solid rgba(0,0,0,0.42);
+  background:rgba(255,255,255,0.9);
+  color:#0f1012;
+  font-size:0.67rem;
+  font-weight:700;
+  letter-spacing:0.04em;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  pointer-events:none;
+}
+
+.ref2d__seleccion-badge--inline{
+  position:static;
+  top:auto;
+  left:auto;
+  z-index:auto;
+  width:18px;
+  height:18px;
+  min-width:18px;
+  font-size:0.58rem;
+  margin-right:7px;
+}
+
+.ref2d__index-title-cell{
+  display:flex;
+  align-items:center;
+}
+
+.ref2d__index-row--seleccion-active td{
+  background:rgba(133,136,146,0.28);
+}
+
+.ref2d__index-row--seleccion-active:hover td{
+  background:rgba(133,136,146,0.38);
+}
+
+.ref2d__chip--seleccion{
+  text-decoration:none;
+  border-color:rgba(255,255,255,0.36);
+  background:rgba(255,255,255,0.12);
+  color:#fff;
+}
+
+.ref2d__chip--seleccion:hover{
+  border-color:rgba(255,255,255,0.58);
+  background:rgba(255,255,255,0.2);
+}
+/* SELECCION_END: sello R reutilizable para archivo general */
 
 .ref2d__save-btn,
 .sheet__saveBtn{

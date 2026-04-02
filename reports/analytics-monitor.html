@@ -1,0 +1,662 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Referencioteca · Analytics</title>
+  <style>
+    :root {
+      --bg: #0a0b11;
+      --panel: #11131b;
+      --panel-2: #171a24;
+      --line: #2a2f42;
+      --text: #eef1ff;
+      --dim: #9ea5be;
+      --ok: #35d07f;
+      --warn: #ffd166;
+      --bad: #ff8d8d;
+      --chip: #1f2331;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+    }
+    .wrap { max-width: 1320px; margin: 0 auto; padding: 24px; }
+    h1 { margin: 0 0 6px 0; font-size: 28px; }
+    .sub { color: var(--dim); margin-bottom: 16px; }
+    .toolbar {
+      display: grid;
+      grid-template-columns: 180px 160px 1fr auto auto;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .input, .select, .btn {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--text);
+      border-radius: 10px;
+      min-height: 40px;
+      padding: 0 12px;
+    }
+    .btn { cursor: pointer; }
+    .btn:hover { background: var(--panel-2); }
+
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .kpi {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 12px;
+      padding: 10px 12px;
+    }
+    .kpi__label { color: var(--dim); font-size: 12px; margin-bottom: 6px; }
+    .kpi__value { font-size: 24px; font-weight: 700; }
+    .kpi__value.ok { color: var(--ok); }
+    .kpi__value.warn { color: var(--warn); }
+    .kpi__value.bad { color: var(--bad); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .card__head {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      color: var(--dim);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .card__body { padding: 10px 12px; }
+
+    table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 8px 6px;
+      text-align: left;
+      vertical-align: top;
+      word-wrap: break-word;
+    }
+    th { color: var(--dim); font-weight: 600; }
+    tr:last-child td { border-bottom: 0; }
+    .small { color: var(--dim); font-size: 12px; }
+
+    .chip {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: var(--chip);
+      border: 1px solid var(--line);
+      font-size: 12px;
+      color: var(--dim);
+    }
+
+    @media (max-width: 1020px) {
+      .toolbar { grid-template-columns: 1fr 1fr; }
+      .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div id="authGate" style="position:fixed;inset:0;background:#0a0b11;display:flex;align-items:center;justify-content:center;z-index:99;">
+    <div style="width:min(420px,92vw);background:#11131b;border:1px solid #2a2f42;border-radius:12px;padding:18px;">
+      <h2 style="margin:0 0 10px 0;">Acceso administrador</h2>
+      <p style="margin:0 0 10px 0;color:#9ea5be;">Ingresa tu clave privada para ver analytics.</p>
+      <input id="authInput" type="password" placeholder="Clave privada" style="width:100%;height:40px;border-radius:10px;border:1px solid #2a2f42;background:#0a0b11;color:#eef1ff;padding:0 10px;" />
+      <div style="display:flex;gap:8px;margin-top:10px;">
+        <button id="authBtn" style="height:38px;border-radius:10px;border:1px solid #2a2f42;background:#eef1ff;color:#111;padding:0 12px;cursor:pointer;">Entrar</button>
+      </div>
+      <p id="authErr" style="min-height:18px;margin:8px 0 0 0;color:#ffadad;font-size:12px;"></p>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <h1>Analytics de Referencioteca</h1>
+    <div class="sub">Métricas de uso, interacción y conversión basadas en eventos del sitio.</div>
+
+    <div class="toolbar">
+      <select id="days" class="select">
+        <option value="7">Últimos 7 días</option>
+        <option value="14">Últimos 14 días</option>
+        <option value="30" selected>Últimos 30 días</option>
+        <option value="60">Últimos 60 días</option>
+        <option value="90">Últimos 90 días</option>
+      </select>
+      <input id="limit" class="input" type="number" min="500" max="20000" step="500" value="5000" />
+      <div class="small" id="status" style="display:flex;align-items:center;"></div>
+      <button id="refreshBtn" class="btn">Actualizar</button>
+      <button id="clearAnalyticsBtn" class="btn">Reset analytics</button>
+    </div>
+
+    <section class="kpis" id="kpis"></section>
+
+    <section class="grid">
+      <article class="card">
+        <div class="card__head">Top Proyectos · Opens <span class="chip" id="chipOpens">0</span></div>
+        <div class="card__body"><table><thead><tr><th>Proyecto</th><th>Opens</th><th>CTR link</th><th>Save Rate</th></tr></thead><tbody id="topProjectsRows"></tbody></table></div>
+      </article>
+
+      <article class="card">
+        <div class="card__head">Búsquedas y Filtros <span class="chip" id="chipSearch">0</span></div>
+        <div class="card__body"><table><thead><tr><th>Consulta/Tag</th><th>Uso</th><th>Resultados prom.</th></tr></thead><tbody id="searchRows"></tbody></table></div>
+      </article>
+
+      <article class="card">
+        <div class="card__head">Top Proyectos · Guardados <span class="chip" id="chipSaves">0</span></div>
+        <div class="card__body"><table><thead><tr><th>Proyecto</th><th>Guardados</th><th>Save/Open</th></tr></thead><tbody id="topSavedRows"></tbody></table></div>
+      </article>
+
+      <article class="card">
+        <div class="card__head">Top Proyectos · Click Externo <span class="chip" id="chipLinkClicks">0</span></div>
+        <div class="card__body"><table><thead><tr><th>Proyecto</th><th>Clicks</th><th>Click/Open</th></tr></thead><tbody id="topLinkRows"></tbody></table></div>
+      </article>
+
+      <article class="card">
+        <div class="card__head">Embudo</div>
+        <div class="card__body"><table><tbody id="funnelRows"></tbody></table></div>
+      </article>
+
+      <article class="card">
+        <div class="card__head">Eventos recientes <span class="chip" id="chipEvents">0</span></div>
+        <div class="card__body"><table><thead><tr><th>Fecha</th><th>Evento</th><th>Proyecto / Query</th><th>Estado</th></tr></thead><tbody id="recentRows"></tbody></table></div>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const ADMIN_KEY_HASH = '1906a74567f31f08bba40c980a748bc6fc8f1baa04544f9ba5e7beb3e826d5bd';
+      const REQUESTS_API_URL = 'https://script.google.com/macros/s/AKfycbzMBpdgUQPv2hhebfuzllDVOz-8D71-oMsWsHU-IRrOxFyDG8nDTtG_0_efTFGPuZ8O/exec';
+      const REQUESTS_API_KEY = 'ref123.teca';
+
+      const authGate = document.getElementById('authGate');
+      const authInput = document.getElementById('authInput');
+      const authBtn = document.getElementById('authBtn');
+      const authErr = document.getElementById('authErr');
+      const daysEl = document.getElementById('days');
+      const limitEl = document.getElementById('limit');
+      const refreshBtn = document.getElementById('refreshBtn');
+      const clearAnalyticsBtn = document.getElementById('clearAnalyticsBtn');
+      const statusEl = document.getElementById('status');
+      const kpis = document.getElementById('kpis');
+      const topProjectsRows = document.getElementById('topProjectsRows');
+      const topSavedRows = document.getElementById('topSavedRows');
+      const topLinkRows = document.getElementById('topLinkRows');
+      const searchRows = document.getElementById('searchRows');
+      const recentRows = document.getElementById('recentRows');
+      const funnelRows = document.getElementById('funnelRows');
+      const chipEvents = document.getElementById('chipEvents');
+      const chipOpens = document.getElementById('chipOpens');
+      const chipSearch = document.getElementById('chipSearch');
+      const chipSaves = document.getElementById('chipSaves');
+      const chipLinkClicks = document.getElementById('chipLinkClicks');
+
+      function esc(v) {
+        return String(v == null ? '' : v).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+      }
+
+      function pct(num) {
+        if (!Number.isFinite(num)) return '0%';
+        return `${(num * 100).toFixed(1)}%`;
+      }
+
+      function num(value) {
+        const n = Number(value);
+        return Number.isFinite(n) ? n : 0;
+      }
+
+      function median(values) {
+        if (!values.length) return 0;
+        const sorted = values.slice().sort((a, b) => a - b);
+        const mid = Math.floor(sorted.length / 2);
+        return sorted.length % 2 ? sorted[mid] : ((sorted[mid - 1] + sorted[mid]) / 2);
+      }
+
+      function badgeClass(value, greenMin, amberMin) {
+        if (value >= greenMin) return 'ok';
+        if (value >= amberMin) return 'warn';
+        return 'bad';
+      }
+
+      async function sha256(text) {
+        const data = new TextEncoder().encode(String(text || ''));
+        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+      }
+
+      async function tryAuth(inputKey) {
+        const h = await sha256(inputKey);
+        return h === ADMIN_KEY_HASH;
+      }
+
+      function toDateText(iso) {
+        const d = new Date(iso);
+        if (Number.isNaN(d.getTime())) return '—';
+        return d.toLocaleString('es-CL');
+      }
+
+      async function fetchEvents() {
+        const days = Math.max(1, Math.min(365, Number(daysEl.value) || 30));
+        const limit = Math.max(500, Math.min(20000, Number(limitEl.value) || 5000));
+        const url = new URL(REQUESTS_API_URL);
+        url.searchParams.set('mode', 'analytics_list');
+        url.searchParams.set('apiKey', REQUESTS_API_KEY);
+        url.searchParams.set('days', String(days));
+        url.searchParams.set('limit', String(limit));
+        const res = await fetch(url.toString(), { headers: { Accept: 'application/json' } });
+        if (!res.ok) throw new Error('analytics_fetch_failed');
+        const data = await res.json();
+        if (!data || !Array.isArray(data.items)) return [];
+        return data.items;
+      }
+
+      async function clearAnalyticsEvents() {
+        const payload = new URLSearchParams();
+        payload.set('mode', 'analytics_clear');
+        payload.set('apiKey', REQUESTS_API_KEY);
+        const res = await fetch(REQUESTS_API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+            'Accept': 'application/json'
+          },
+          body: payload.toString()
+        });
+        if (!res.ok) throw new Error('analytics_clear_failed');
+        const data = await res.json().catch(() => ({}));
+        if (!data || data.ok !== true) throw new Error('analytics_clear_failed');
+      }
+
+      function computeMetrics(events) {
+        const sessions = new Map();
+        const projects = new Map();
+        const searches = new Map();
+        let totalSearches = 0;
+        let searchWithResults = 0;
+        let opens = 0;
+        let linkClicks = 0;
+        let saves = 0;
+        let bundleSuccess = 0;
+
+        events.forEach((ev) => {
+          const sid = String(ev.sessionId || '').trim() || 'no-session';
+          if (!sessions.has(sid)) {
+            sessions.set(sid, {
+              sessionId: sid,
+              startedAt: '',
+              endedAt: '',
+              isNewVisitor: String(ev.isNewVisitor || '') === '1',
+              meaningful: 0,
+              hasOpen: false,
+              hasSearch: false,
+              hasFilter: false,
+              hasBundleSuccess: false,
+              firstActionMs: null
+            });
+          }
+          const s = sessions.get(sid);
+
+          const name = String(ev.eventName || '');
+          const ts = Date.parse(String(ev.timestampIso || ''));
+
+          if (name === 'session_start') {
+            s.startedAt = ev.timestampIso || s.startedAt;
+            s.isNewVisitor = String(ev.isNewVisitor || '') === '1';
+          }
+          if (name === 'session_end') {
+            s.endedAt = ev.timestampIso || s.endedAt;
+          }
+
+          const isMeaningful = (
+            name === 'project_open' ||
+            name === 'project_link_click' ||
+            name === 'project_save_toggle' ||
+            name === 'search_performed' ||
+            name === 'bundle_generate'
+          );
+          if (isMeaningful) {
+            s.meaningful += 1;
+            const startTs = Date.parse(String(s.startedAt || ev.timestampIso || ''));
+            if (s.firstActionMs == null && Number.isFinite(startTs) && Number.isFinite(ts)) {
+              s.firstActionMs = Math.max(0, ts - startTs);
+            }
+          }
+
+          if (name === 'project_open') {
+            opens += 1;
+            s.hasOpen = true;
+            const pid = String(ev.projectId || '').trim() || `title:${String(ev.projectTitle || '').trim()}`;
+            const title = String(ev.projectTitle || 'Proyecto sin título').trim();
+            if (!projects.has(pid)) {
+              projects.set(pid, { projectId: pid, title, opens: 0, clicks: 0, links: 0, saves: 0 });
+            }
+            projects.get(pid).opens += 1;
+          }
+
+          if (name === 'project_card_click') {
+            const pid = String(ev.projectId || '').trim() || `title:${String(ev.projectTitle || '').trim()}`;
+            const title = String(ev.projectTitle || 'Proyecto sin título').trim();
+            if (!projects.has(pid)) {
+              projects.set(pid, { projectId: pid, title, opens: 0, clicks: 0, links: 0, saves: 0 });
+            }
+            projects.get(pid).clicks += 1;
+          }
+
+          if (name === 'project_link_click') {
+            linkClicks += 1;
+            const pid = String(ev.projectId || '').trim() || `title:${String(ev.projectTitle || '').trim()}`;
+            const title = String(ev.projectTitle || 'Proyecto sin título').trim();
+            if (!projects.has(pid)) {
+              projects.set(pid, { projectId: pid, title, opens: 0, clicks: 0, links: 0, saves: 0 });
+            }
+            projects.get(pid).links += 1;
+          }
+
+          if (name === 'project_save_toggle' && String(ev.action || '') === 'save') {
+            saves += 1;
+            const pid = String(ev.projectId || '').trim() || `title:${String(ev.projectTitle || '').trim()}`;
+            const title = String(ev.projectTitle || 'Proyecto sin título').trim();
+            if (!projects.has(pid)) {
+              projects.set(pid, { projectId: pid, title, opens: 0, clicks: 0, links: 0, saves: 0 });
+            }
+            projects.get(pid).saves += 1;
+          }
+
+          if (name === 'bundle_generate' && String(ev.status || '') === 'success') {
+            bundleSuccess += 1;
+            s.hasBundleSuccess = true;
+          }
+
+          if (name === 'search_performed') {
+            totalSearches += 1;
+            s.hasSearch = true;
+            const q = String(ev.query || '').trim();
+            if (num(ev.resultsCount) > 0) searchWithResults += 1;
+            const key = q || 'Búsqueda sin texto';
+            if (!searches.has(key)) searches.set(key, { key, count: 0, totalResults: 0 });
+            const item = searches.get(key);
+            item.count += 1;
+            item.totalResults += num(ev.resultsCount);
+          }
+
+          if (name === 'tag_filter_click') {
+            s.hasFilter = true;
+            const tag = String(ev.tag || '').trim() || 'tag';
+            if (!searches.has(`#${tag}`)) searches.set(`#${tag}`, { key: `#${tag}`, count: 0, totalResults: 0 });
+            searches.get(`#${tag}`).count += 1;
+          }
+        });
+
+        const sessionList = Array.from(sessions.values());
+        const totalSessions = sessionList.length;
+        const newSessions = sessionList.filter((s) => s.isNewVisitor).length;
+        const returningSessions = totalSessions - newSessions;
+
+        const engagedSessions = sessionList.filter((s) => {
+          if (s.meaningful >= 2) return true;
+          const startTs = Date.parse(String(s.startedAt || ''));
+          const endTs = Date.parse(String(s.endedAt || ''));
+          if (Number.isFinite(startTs) && Number.isFinite(endTs) && (endTs - startTs) >= 30000) return true;
+          return false;
+        }).length;
+
+        const sessionsWithOpen = sessionList.filter((s) => s.hasOpen).length;
+        const sessionsWithSearch = sessionList.filter((s) => s.hasSearch).length;
+        const sessionsWithBundleSuccess = sessionList.filter((s) => s.hasBundleSuccess).length;
+        const firstActionValues = sessionList.map((s) => num(s.firstActionMs)).filter((v) => v > 0);
+
+        const topProjects = Array.from(projects.values())
+          .sort((a, b) => b.opens - a.opens)
+          .slice(0, 12);
+
+        const topSavedProjects = Array.from(projects.values())
+          .filter((p) => p.saves > 0)
+          .sort((a, b) => b.saves - a.saves)
+          .slice(0, 12);
+
+        const topLinkedProjects = Array.from(projects.values())
+          .filter((p) => p.links > 0)
+          .sort((a, b) => b.links - a.links)
+          .slice(0, 12);
+
+        const topSearches = Array.from(searches.values())
+          .sort((a, b) => b.count - a.count)
+          .slice(0, 12)
+          .map((item) => ({
+            key: item.key,
+            count: item.count,
+            avgResults: item.count ? (item.totalResults / item.count) : 0
+          }));
+
+        const recentEvents = events
+          .slice()
+          .sort((a, b) => String(b.timestampIso || '').localeCompare(String(a.timestampIso || '')))
+          .slice(0, 20);
+
+        return {
+          totalEvents: events.length,
+          totalSessions,
+          newSessions,
+          returningSessions,
+          engagedSessions,
+          sessionsWithOpen,
+          sessionsWithSearch,
+          sessionsWithBundleSuccess,
+          opens,
+          linkClicks,
+          saves,
+          bundleSuccess,
+          totalSearches,
+          searchWithResults,
+          medianFirstActionMs: median(firstActionValues),
+          topProjects,
+          topSavedProjects,
+          topLinkedProjects,
+          topSearches,
+          recentEvents
+        };
+      }
+
+      function renderKpis(m) {
+        const engagedRate = m.totalSessions ? (m.engagedSessions / m.totalSessions) : 0;
+        const openRate = m.totalSessions ? (m.sessionsWithOpen / m.totalSessions) : 0;
+        const linkCtr = m.opens ? (m.linkClicks / m.opens) : 0;
+        const saveRate = m.opens ? (m.saves / m.opens) : 0;
+        const bundleRate = m.totalSessions ? (m.sessionsWithBundleSuccess / m.totalSessions) : 0;
+        const searchAdoption = m.totalSessions ? (m.sessionsWithSearch / m.totalSessions) : 0;
+        const searchSuccess = m.totalSearches ? (m.searchWithResults / m.totalSearches) : 0;
+
+        const cards = [
+          ['Sesiones', m.totalSessions, ''],
+          ['Eventos', m.totalEvents, ''],
+          ['Engaged Rate', pct(engagedRate), badgeClass(engagedRate, 0.45, 0.30)],
+          ['Open Rate', pct(openRate), badgeClass(openRate, 0.35, 0.20)],
+          ['CTR externo', pct(linkCtr), badgeClass(linkCtr, 0.20, 0.10)],
+          ['Save Rate', pct(saveRate), badgeClass(saveRate, 0.12, 0.06)],
+          ['Bundle Conversion', pct(bundleRate), badgeClass(bundleRate, 0.05, 0.02)],
+          ['Search Adoption', pct(searchAdoption), badgeClass(searchAdoption, 0.20, 0.10)],
+          ['Search Success', pct(searchSuccess), badgeClass(searchSuccess, 0.70, 0.50)],
+          ['1ra acción (mediana)', `${Math.round(m.medianFirstActionMs / 1000)}s`, ''],
+          ['Nuevos', `${m.newSessions}`, ''],
+          ['Retornantes', `${m.returningSessions}`, '']
+        ];
+
+        kpis.innerHTML = cards.map(([label, value, cls]) => {
+          const c = cls ? `kpi__value ${cls}` : 'kpi__value';
+          return `<article class="kpi"><div class="kpi__label">${esc(label)}</div><div class="${c}">${esc(value)}</div></article>`;
+        }).join('');
+      }
+
+      function renderTopProjects(m) {
+        chipOpens.textContent = String(m.opens || 0);
+        if (!m.topProjects.length) {
+          topProjectsRows.innerHTML = '<tr><td colspan="4" class="small">Sin datos.</td></tr>';
+          return;
+        }
+        topProjectsRows.innerHTML = m.topProjects.map((p) => {
+          const ctr = p.opens ? (p.links / p.opens) : 0;
+          const saveRate = p.opens ? (p.saves / p.opens) : 0;
+          return `<tr>
+            <td>${esc(p.title)}</td>
+            <td>${esc(p.opens)}</td>
+            <td>${esc(pct(ctr))}</td>
+            <td>${esc(pct(saveRate))}</td>
+          </tr>`;
+        }).join('');
+      }
+
+      function renderSearch(m) {
+        chipSearch.textContent = String(m.totalSearches || 0);
+        if (!m.topSearches.length) {
+          searchRows.innerHTML = '<tr><td colspan="3" class="small">Sin datos.</td></tr>';
+          return;
+        }
+        searchRows.innerHTML = m.topSearches.map((s) => `
+          <tr>
+            <td>${esc(s.key)}</td>
+            <td>${esc(s.count)}</td>
+            <td>${esc(s.avgResults.toFixed(1))}</td>
+          </tr>
+        `).join('');
+      }
+
+      function renderTopSaved(m) {
+        chipSaves.textContent = String(m.saves || 0);
+        if (!m.topSavedProjects.length) {
+          topSavedRows.innerHTML = '<tr><td colspan="3" class="small">Sin datos.</td></tr>';
+          return;
+        }
+        topSavedRows.innerHTML = m.topSavedProjects.map((p) => {
+          const rate = p.opens ? (p.saves / p.opens) : 0;
+          return `<tr>
+            <td>${esc(p.title)}</td>
+            <td>${esc(p.saves)}</td>
+            <td>${esc(pct(rate))}</td>
+          </tr>`;
+        }).join('');
+      }
+
+      function renderTopLinked(m) {
+        chipLinkClicks.textContent = String(m.linkClicks || 0);
+        if (!m.topLinkedProjects.length) {
+          topLinkRows.innerHTML = '<tr><td colspan="3" class="small">Sin datos.</td></tr>';
+          return;
+        }
+        topLinkRows.innerHTML = m.topLinkedProjects.map((p) => {
+          const rate = p.opens ? (p.links / p.opens) : 0;
+          return `<tr>
+            <td>${esc(p.title)}</td>
+            <td>${esc(p.links)}</td>
+            <td>${esc(pct(rate))}</td>
+          </tr>`;
+        }).join('');
+      }
+
+      function renderFunnel(m) {
+        const sessions = Math.max(1, m.totalSessions || 0);
+        const openSessions = m.sessionsWithOpen || 0;
+        const bundleSessions = m.sessionsWithBundleSuccess || 0;
+        const lines = [
+          ['Sesiones', m.totalSessions, 1],
+          ['Sesiones con open', openSessions, openSessions / sessions],
+          ['Project opens', m.opens, m.opens / sessions],
+          ['Link clicks', m.linkClicks, m.linkClicks / Math.max(1, m.opens)],
+          ['Saves', m.saves, m.saves / Math.max(1, m.opens)],
+          ['Bundles exitosos', bundleSessions, bundleSessions / sessions]
+        ];
+        funnelRows.innerHTML = lines.map((row) => `<tr><td>${esc(row[0])}</td><td>${esc(row[1])}</td><td>${esc(pct(row[2]))}</td></tr>`).join('');
+      }
+
+      function renderRecent(m) {
+        chipEvents.textContent = String(m.totalEvents || 0);
+        if (!m.recentEvents.length) {
+          recentRows.innerHTML = '<tr><td colspan="4" class="small">Sin datos.</td></tr>';
+          return;
+        }
+        recentRows.innerHTML = m.recentEvents.map((ev) => {
+          const context = ev.projectTitle || ev.query || ev.tag || '—';
+          return `<tr>
+            <td>${esc(toDateText(ev.timestampIso))}</td>
+            <td>${esc(ev.eventName || '—')}</td>
+            <td>${esc(context)}</td>
+            <td>${esc(ev.status || ev.action || '—')}</td>
+          </tr>`;
+        }).join('');
+      }
+
+      async function refresh() {
+        statusEl.textContent = 'Cargando eventos...';
+        try {
+          const events = await fetchEvents();
+          const m = computeMetrics(events);
+          renderKpis(m);
+          renderTopProjects(m);
+          renderSearch(m);
+          renderTopSaved(m);
+          renderTopLinked(m);
+          renderFunnel(m);
+          renderRecent(m);
+          statusEl.textContent = `OK · ${events.length} eventos analizados`;
+        } catch (err) {
+          statusEl.textContent = 'Error al cargar analytics';
+          console.error(err);
+        }
+      }
+
+      authBtn.addEventListener('click', async () => {
+        const ok = await tryAuth(authInput.value || '');
+        if (!ok) {
+          authErr.textContent = 'Clave incorrecta.';
+          return;
+        }
+        authGate.style.display = 'none';
+        await refresh();
+      });
+
+      authInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') authBtn.click();
+      });
+
+      refreshBtn.addEventListener('click', refresh);
+      clearAnalyticsBtn.addEventListener('click', async () => {
+        const first = window.confirm('Esto borrará todos los eventos de AnalyticsEvents. ¿Continuar?');
+        if (!first) return;
+        const second = window.prompt('Escribe BORRAR para confirmar');
+        if (second !== 'BORRAR') return;
+        statusEl.textContent = 'Borrando analytics...';
+        clearAnalyticsBtn.disabled = true;
+        try {
+          await clearAnalyticsEvents();
+          statusEl.textContent = 'Analytics reiniciado.';
+          await refresh();
+        } catch (err) {
+          statusEl.textContent = 'No se pudo reiniciar analytics';
+          console.error(err);
+        } finally {
+          clearAnalyticsBtn.disabled = false;
+        }
+      });
+      daysEl.addEventListener('change', refresh);
+    })();
+  </script>
+</body>
+</html>

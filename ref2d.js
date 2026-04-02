@@ -61,6 +61,11 @@
   const btnSearchRandom = $("#ref2dSearchRandom");
   const headerMoreBtn = $("#ref2dHeaderMore");
   const headerMoreDropdown = $("#ref2dHeaderMoreDropdown");
+  const modeSwitch = $("#ref2dModeSwitch");
+  const modeExploreBtn = $("#ref2dModeExplore");
+  const modeFilterBtn = $("#ref2dModeFilter");
+  const modeButtons = modeSwitch ? Array.from(modeSwitch.querySelectorAll("[data-mode]")) : [];
+  const ref2dRoot = document.querySelector(".ref2d");
   const savedTray = $("#ref2dSavedTray");
   const savedList = $("#ref2dSavedList");
   const savedMeta = $("#ref2dSavedMeta");
@@ -73,10 +78,14 @@
   const savedEmail = $("#ref2dSavedEmail");
   const savedModalStatus = $("#ref2dSavedModalStatus");
   const MOBILE_MAX_WIDTH = 768;
-  const MOBILE_ALLOWED_VIEWS = new Set(['grid', 'index']);
+  const MOBILE_ALLOWED_VIEWS = new Set(['bento', 'grid', 'index']);
   const DESKTOP_ALLOWED_VIEWS = new Set(['bento', 'grid', 'index']);
+  /* HEADER_MODE_START: modo por defecto del header */
+  const DEFAULT_HEADER_MODE = 'explore';
+  /* HEADER_MODE_END: modo por defecto del header */
   const REQUESTS_STORAGE_KEY = "ref2d_admin_requests_v1";
-  const REQUESTS_API_URL = "https://script.google.com/macros/s/AKfycbxcvNK3PQCVfiHOrqbhxZcF1BueDSrIVpjS8pzhPKC2-LvASNdDWTVSVrYMmrb8PIh4Xw/exec";
+  const REQUESTS_API_URL = "https://script.google.com/macros/s/AKfycbzMBpdgUQPv2hhebfuzllDVOz-8D71-oMsWsHU-IRrOxFyDG8nDTtG_0_efTFGPuZ8O/exec";
+  const ANALYTICS_API_URL = "https://script.google.com/macros/s/AKfycbzMBpdgUQPv2hhebfuzllDVOz-8D71-oMsWsHU-IRrOxFyDG8nDTtG_0_efTFGPuZ8O/exec";
   const REQUESTS_API_KEY = "ref123.teca";
   const REQUEST_EMAIL_ENDPOINT = "https://formsubmit.co/referencioteca.cl@gmail.com";
   const SAVED_TRAY_VISIBLE_MAX = 5;
@@ -84,6 +93,10 @@
   const SAVED_PDF_TEMPLATE_IMAGE = "IMG/plantilla_exp_template.png";
   const SAVED_PDF_PAGE_WIDTH = 612;
   const SAVED_PDF_PAGE_HEIGHT = 792;
+  const ANALYTICS_ENABLED = true;
+  const ANALYTICS_VISITOR_KEY = "ref2d_visitor_id_v1";
+  const ANALYTICS_VISITOR_SEEN_KEY = "ref2d_visitor_seen_v1";
+  const ANALYTICS_SITE_VERSION = "2026-04-02";
   const REQUEST_TYPES = {
     modify: {
       title: "Modificar Información",
@@ -101,17 +114,131 @@
       prompt: "Indica qué enlace falla y, si existe, comparte el enlace correcto."
     }
   };
+  /* SELECCION_START: estado y helpers de Seleccion Referencioteca */
+  const SELECCION_EDITORIAL_CONFIG = Object.freeze({
+    id: "seleccion_01",
+    titulo: "Selección Referencioteca",
+    frecuenciaDias: 15,
+    descripcion: "Selección Referencioteca destaca, cada 15 días, una serie de entradas relevantes por su aporte, contribución o valor para ser estudiadas y visibilizadas. Estas selecciones no reconocen necesariamente una autoría total, sino también roles, colaboraciones y participaciones significativas dentro de un proyecto. Al volver al archivo, las selecciones anteriores quedan identificadas con una (R) al desplegar su tarjeta, pasando a formar parte de la selección histórica de Referencioteca."
+  });
+  const REF2D_DATA_ONLY_MODE = window.__REF2D_SELECTION_DATA_ONLY__ === true && (!viewport || !plane);
+  const REF2D_HAS_MAIN_UI = !!(viewport && plane);
+  const parseSelectionProjectId = (value) => {
+    const n = Number.parseInt(String(value || "").trim(), 10);
+    return Number.isFinite(n) && n > 0 ? n : null;
+  };
+  const normalizeSelectionRef = (value) => {
+    if (value === true) return SELECCION_EDITORIAL_CONFIG.id;
+    if (typeof value === "string") {
+      const clean = value.trim();
+      return clean || "";
+    }
+    return "";
+  };
+  const getProjectSelectionRef = (meta) => normalizeSelectionRef(meta && meta.selectionRef);
+  const isSeleccionProject = (meta) => !!getProjectSelectionRef(meta);
+  const isSeleccionActive = (meta, selectionId = SELECCION_EDITORIAL_CONFIG.id) => {
+    if (!meta || meta.selectionActive !== true) return false;
+    const selectionRef = getProjectSelectionRef(meta);
+    if (!selectionRef) return false;
+    if (!selectionId) return true;
+    return selectionRef === selectionId;
+  };
+  const getMetaSelectionUrl = (meta) => {
+    if (!meta) return "";
+    if (Array.isArray(meta.url)) {
+      return String(meta.url[0] || "").trim();
+    }
+    return String(meta.url || "").trim();
+  };
+  const getMetaSelectionImage = (meta) => {
+    if (!meta) return "";
+    return String(meta.src || meta.srcAvif || meta.srcOriginal || "").trim();
+  };
+  const toSelectionEntry = (meta) => ({
+    projectId: meta && meta.id != null ? Number(meta.id) : null,
+    selectionRef: getProjectSelectionRef(meta),
+    selectionActive: !!(meta && meta.selectionActive === true),
+    titulo: String(meta && meta.title || "Proyecto sin título"),
+    autor: String(meta && (meta._displayAuthor || meta.author) || "—"),
+    rol: String(meta && (meta._displayRole || meta.role) || "Diseñador/a"),
+    anio: String(meta && meta.year || "—"),
+    area: String(meta && meta.area || "—"),
+    orientation: String(meta && meta.orientation || "h"),
+    tags: Array.isArray(meta && meta.tags) ? meta.tags.slice(0, 6) : [],
+    nota: String(meta && (meta.selectionNote || meta._displayCredits || meta.collab) || "").trim(),
+    url: getMetaSelectionUrl(meta),
+    imagen: getMetaSelectionImage(meta)
+  });
+  function buildSelectionDataSource(projects) {
+    const list = Array.isArray(projects) ? projects : [];
+    const historicalProjects = list
+      .filter((meta) => isSeleccionProject(meta))
+      .map((meta) => toSelectionEntry(meta));
+    const activeProjects = list
+      .filter((meta) => isSeleccionActive(meta))
+      .map((meta) => toSelectionEntry(meta));
+    return {
+      config: SELECCION_EDITORIAL_CONFIG,
+      activeProjects,
+      historicalProjects
+    };
+  }
+  function exposeSelectionDataSource(projects) {
+    window.Refx2DSelectionData = buildSelectionDataSource(projects);
+  }
+  function createSeleccionBadge(extraClass = "") {
+    const badge = document.createElement("span");
+    badge.className = `ref2d__seleccion-badge ${extraClass}`.trim();
+    badge.textContent = "R";
+    badge.title = "Sello Referencioteca";
+    badge.setAttribute("aria-label", "Sello Referencioteca");
+    return badge;
+  }
+  function getNextProjectId(projects) {
+    let max = 0;
+    (projects || []).forEach((project) => {
+      const id = parseSelectionProjectId(project && project.id);
+      if (id !== null && id > max) max = id;
+    });
+    return max + 1;
+  }
+  function ensureProjectIds(projects) {
+    if (!Array.isArray(projects)) return;
+    const used = new Set();
+    let nextId = 1;
+    projects.forEach((project) => {
+      if (!project || typeof project !== "object") return;
+      let id = parseSelectionProjectId(project.id);
+      if (id === null || used.has(id)) {
+        while (used.has(nextId)) nextId += 1;
+        id = nextId;
+      }
+      project.id = id;
+      used.add(id);
+      if (id >= nextId) nextId = id + 1;
+    });
+  }
+  /* SELECCION_END: estado y helpers de Seleccion Referencioteca */
   let activeRequestType = "";
   let activeSpotlightMeta = null;
   let activeSpotlightKey = "";
+  let activeSpotlightOpenedAt = 0;
   let isRequestSending = false;
   let isSavedBundleSending = false;
   let sheetCitationFeedbackTimer = null;
   let savedBundle = [];
   let savedPdfTemplateDataUrl = "";
+  let lastTrackedSearchSignature = "";
+  let analyticsSessionId = "";
+  let analyticsVisitorId = "";
+  let analyticsIsNewVisitor = false;
+  let analyticsSessionStartedAt = Date.now();
+  let analyticsMeaningfulActions = 0;
+  let analyticsCurrentView = "bento";
 
   /* Si falta el contenedor principal, salimos en silencio (para no romper otras páginas) */
-  if (!viewport || !plane) {
+  if (!REF2D_HAS_MAIN_UI && !REF2D_DATA_ONLY_MODE) {
     return;
   }
 
@@ -120,6 +247,150 @@
     overlay.setAttribute('hidden','');
   }
   document.body.style.overflow = '';
+
+  function newAnalyticsId(prefix) {
+    const p = String(prefix || "id");
+    return `${p}_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
+  }
+
+  function detectDeviceType() {
+    return window.matchMedia(`(max-width: ${MOBILE_MAX_WIDTH}px)`).matches ? "mobile" : "desktop";
+  }
+
+  function getReferrerDomain() {
+    try {
+      if (!document.referrer) return "";
+      return new URL(document.referrer).hostname || "";
+    } catch (_err) {
+      return "";
+    }
+  }
+
+  function getCurrentViewModeForAnalytics() {
+    return String(analyticsCurrentView || "").trim() || "bento";
+  }
+
+  function getUtmParams() {
+    const params = new URLSearchParams(window.location.search || "");
+    return {
+      utmSource: params.get("utm_source") || "",
+      utmMedium: params.get("utm_medium") || "",
+      utmCampaign: params.get("utm_campaign") || ""
+    };
+  }
+
+  function getOrCreateVisitorState() {
+    let visitorId = "";
+    let isNew = false;
+    try {
+      visitorId = String(localStorage.getItem(ANALYTICS_VISITOR_KEY) || "").trim();
+      if (!visitorId) {
+        visitorId = newAnalyticsId("visitor");
+        localStorage.setItem(ANALYTICS_VISITOR_KEY, visitorId);
+        isNew = true;
+      }
+      if (!localStorage.getItem(ANALYTICS_VISITOR_SEEN_KEY)) {
+        localStorage.setItem(ANALYTICS_VISITOR_SEEN_KEY, "1");
+        isNew = true;
+      }
+    } catch (_err) {
+      if (!visitorId) visitorId = newAnalyticsId("visitor_tmp");
+      isNew = false;
+    }
+    return { visitorId, isNew };
+  }
+
+  function trackAnalyticsEvent(eventName, data) {
+    if (!ANALYTICS_ENABLED || !REQUESTS_API_KEY) return;
+    const analyticsEndpoint = String(ANALYTICS_API_URL || REQUESTS_API_URL || "").trim();
+    if (!analyticsEndpoint) return;
+    const name = String(eventName || "").trim();
+    if (!name) return;
+    if (
+      name === "project_open" ||
+      name === "project_link_click" ||
+      name === "project_save_toggle" ||
+      name === "search_performed" ||
+      name === "bundle_generate"
+    ) {
+      analyticsMeaningfulActions += 1;
+    }
+    const payloadData = data && typeof data === "object" ? data : {};
+    const utm = getUtmParams();
+    const eventId = newAnalyticsId("evt");
+    const payload = new URLSearchParams();
+    const merged = Object.assign({
+      mode: "track_event",
+      apiKey: REQUESTS_API_KEY,
+      eventId: eventId,
+      timestampIso: new Date().toISOString(),
+      eventName: name,
+      sessionId: analyticsSessionId,
+      visitorId: analyticsVisitorId,
+      isNewVisitor: analyticsIsNewVisitor ? "1" : "0",
+      pagePath: `${window.location.pathname || ""}${window.location.search || ""}`,
+      viewMode: getCurrentViewModeForAnalytics(),
+      utmSource: utm.utmSource,
+      utmMedium: utm.utmMedium,
+      utmCampaign: utm.utmCampaign,
+      referrerDomain: getReferrerDomain(),
+      deviceType: detectDeviceType(),
+      viewportW: String(window.innerWidth || 0),
+      viewportH: String(window.innerHeight || 0),
+      userAgent: String(navigator.userAgent || "").slice(0, 380),
+      siteVersion: ANALYTICS_SITE_VERSION,
+      rawJson: JSON.stringify(payloadData).slice(0, 1800)
+    }, payloadData);
+
+    Object.keys(merged).forEach((key) => {
+      const value = merged[key];
+      if (value == null) return;
+      payload.set(key, String(value));
+    });
+
+    fetch(analyticsEndpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+        "Accept": "application/json"
+      },
+      keepalive: true,
+      body: payload.toString()
+    }).catch(() => {});
+  }
+
+  function trackSearchEvent(query, resultsCount) {
+    const q = String(query || "").trim();
+    if (!q) return;
+    const signature = `${norm(q)}::${Number(resultsCount || 0)}`;
+    if (signature === lastTrackedSearchSignature) return;
+    lastTrackedSearchSignature = signature;
+    trackAnalyticsEvent("search_performed", {
+      query: q,
+      resultsCount: Number(resultsCount || 0)
+    });
+  }
+
+  (function initAnalyticsSession() {
+    analyticsSessionId = newAnalyticsId("session");
+    const visitor = getOrCreateVisitorState();
+    analyticsVisitorId = visitor.visitorId;
+    analyticsIsNewVisitor = !!visitor.isNew;
+    analyticsSessionStartedAt = Date.now();
+    trackAnalyticsEvent("session_start", {
+      action: "start"
+    });
+  })();
+
+  window.addEventListener("beforeunload", () => {
+    const durationMs = Math.max(0, Date.now() - analyticsSessionStartedAt);
+    const isEngaged = durationMs >= 30000 || analyticsMeaningfulActions >= 2;
+    trackAnalyticsEvent("session_end", {
+      action: "end",
+      openDurationMs: durationMs,
+      status: isEngaged ? "engaged" : "bounce"
+    });
+  });
 
   /* ---- CATEGORÍAS (FUENTE ÚNICA DE VERDAD) ---- */
   const CATEGORY_DEFINITIONS = [
@@ -1605,11 +1876,11 @@
   const CAM_SCALE_STEP = 0.08;
   const CAM_LOD_FAR = 0.56;
   const CAM_LOD_MID = 0.74;
-  let viewportWidth = viewport.clientWidth || 0;
-  let viewportHeight = viewport.clientHeight || 0;
+  let viewportWidth = viewport ? (viewport.clientWidth || 0) : 0;
+  let viewportHeight = viewport ? (viewport.clientHeight || 0) : 0;
   const refreshViewportSize = () => {
-    viewportWidth = viewport.clientWidth || 0;
-    viewportHeight = viewport.clientHeight || 0;
+    viewportWidth = viewport ? (viewport.clientWidth || 0) : 0;
+    viewportHeight = viewport ? (viewport.clientHeight || 0) : 0;
   };
   const clampCamScale = (value) => Math.min(CAM_SCALE_MAX, Math.max(CAM_SCALE_MIN, value));
   let currentLodMode = '';
@@ -1676,6 +1947,9 @@
       collab: "",
       area: "Editorial / Experimental / Fanzine / Objeto editorial / Gráfico",
       year: "2022",
+      selectionRef: "seleccion_01",
+      selectionActive: false,
+      selectionNote: "Explora el objeto editorial como soporte de investigación visual y relato.",
       url: "https://www.behance.net/gallery/160223073/encontrarse-en-la-forma"
     },
 
@@ -1695,6 +1969,9 @@
       collab: "Pablo González",
       area: "Identidad visual / Identidad gráfica / Branding",
       year: "2016",
+      selectionRef: "seleccion_01",
+      selectionActive: false,
+      selectionNote: "Un caso de identidad con continuidad formal y claridad tipográfica.",
       url: "https://weichi.works/L-ucello"
     },
 
@@ -1714,6 +1991,9 @@
       collab: "Max Fett",
       area: "Editorial / Tipografía / Gráfico / Impreso",
       year: "2020",
+      selectionRef: "seleccion_01",
+      selectionActive: false,
+      selectionNote: "Investigación tipográfica aplicada al formato editorial.",
       url: "https://weichi.works/Max-Fett-Specimen"
     },
 
@@ -1732,6 +2012,9 @@
       collab: "Malhumor Studio",
       area: "Afiche / Gráfico",
       year: "2025",
+      selectionRef: "seleccion_01",
+      selectionActive: false,
+      selectionNote: "Afiche con enfoque experimental y lenguaje material.",
       url: "https://www.instagram.com/p/DPEx3F9j9wF/"
     },
     {
@@ -1749,6 +2032,9 @@
       collab: "Malhumor Studio",
       area: "Editorial / Experimental / Fanzine / Objeto editorial / Gráfico",
       year: "2025",
+      selectionRef: "seleccion_01",
+      selectionActive: false,
+      selectionNote: "Cruza narrativa, ritmo y forma en un registro editorial abierto.",
       url: "https://www.instagram.com/reel/DQ4wuXaD_i9/?igsh=dTFpaWQ2OHgzMTRq"
     },
 
@@ -1768,6 +2054,9 @@
       collab: "",
       area: "Editorial / Infantil",
       year: "2022",
+      selectionRef: "seleccion_01",
+      selectionActive: false,
+      selectionNote: "Ejemplo de trabajo editorial con sensibilidad para públicos infantiles.",
       url: "https://graciastudio.cl/15/"
     },
     {
@@ -1785,6 +2074,9 @@
       collab: "",
       area: "Identidad visual / Branding",
       year: "2025",
+      selectionRef: "seleccion_01",
+      selectionActive: false,
+      selectionNote: "Construcción de marca con foco en consistencia y lectura institucional.",
       url: "https://graciastudio.cl/68/"
     },
 
@@ -1804,6 +2096,9 @@
       collab: "Schön! Magazine",
       area: "Editorial / Moda / Vestuario",
       year: "2025",
+      selectionRef: "seleccion_01",
+      selectionActive: false,
+      selectionNote: "Proyecto colaborativo donde se integran dirección de arte, moda y edición.",
       url: ["https://www.instagram.com/p/DPO39QgDY3z/?img_index=0", "https://schonmagazine.com/retorno/"]
     },
     {
@@ -8009,6 +8304,9 @@
       collab: "",
       area: "Arte / Exhibición",
       year: "2024",
+      selectionRef: "seleccion_02",
+      selectionActive: true,
+      selectionNote: "Rellenar.",
       url: "https://sebastiancobo.com/Work"
     },
 
@@ -10744,11 +11042,146 @@
       area: "audiovisual, diseño especulativo",
       year: "2025",
       url: ["https://iximillas.github.io/arder/"]
+    },
+
+    /* ------------------ Frankenstudio I.D — Tomás Dintrans ------------------ */
+    {
+      srcOriginal: "https://freight.cargo.site/t/original/i/F2870112549679122767659686900419/Captura-de-pantalla-2026-04-02-a-las-15.55.18.png",
+      orientation: "sq",
+      span: 1,
+      tags: ["branding"],
+      keywords: ["identidad visual", "logo"],
+      title: "Frankenstudio I.D",
+      author: "Tomás Dintrans",
+      role: "",
+      collab: "",
+      area: "branding",
+      year: "2012",
+      url: [
+        "https://cargocollective.com/dintranstomas/filter/dintrans/Frankenstudio-I-D"
+      ]
+    },
+
+    /* ------------------ Team Chile I.D — Tomás Dintrans ------------------ */
+    {
+      srcOriginal: "https://freight.cargo.site/t/original/i/G2870112549697569511733396452035/Captura-de-pantalla-2026-04-02-a-las-15.58.11.png",
+      orientation: "sq",
+      span: 1,
+      tags: ["branding"],
+      keywords: ["identidad visual", "logo", "chile", "team chile"],
+      title: "Team Chile I.D",
+      author: "Tomás Dintrans",
+      role: "",
+      collab: "",
+      area: "branding",
+      year: "2013",
+      url: [
+        "https://cargocollective.com/dintranstomas/filter/dintrans/Team-Chile-I-D"
+      ]
+    },
+
+    /* ------------------ Architecture Biennial Chile 2010 Poster — Tomás Dintrans ------------------ */
+    {
+      srcOriginal: "https://freight.cargo.site/t/original/i/H2870114462698716931708737237699/tomas-dintrans-bienal_o.jpg",
+      orientation: "v",
+      span: 1,
+      tags: ["afiche", "ilustración"],
+      keywords: ["poster", "arquitectura", "gráfico"],
+      title: "Architecture Biennial Chile 2010 Poster",
+      author: "Tomás Dintrans",
+      role: "",
+      collab: "",
+      area: "afiche, ilustración",
+      year: "2010",
+      url: [
+        "https://cargocollective.com/dintranstomas/filter/dintrans/Architecture-Biennial-Chile-2010-Poster"
+      ]
+    },
+
+    /* ------------------ Adelante Estudio — Tomás Dintrans ------------------ */
+    {
+      srcOriginal: "https://freight.cargo.site/t/original/i/C2870113170854782705755128017603/434454422_406269172154571_8231517270525907439_n.jpg",
+      orientation: "sq",
+      span: 1,
+      tags: ["estudio"],
+      keywords: ["Diseño digital", "diseño integral", "ilustración", "branding"],
+      title: "Adelante Estudio",
+      author: "Tomás Dintrans",
+      role: "Diseñador / Cofundador",
+      collab: "Work & play, all at once. Graphic Design. Stgo - Chile",
+      area: "estudio",
+      year: "n/a",
+      url: [
+        "https://www.instagram.com/adelanteestudio/"
+      ]
+    },
+
+    /* ------------------ Vuelo — Javiera Barriga ------------------ */
+    {
+      srcOriginal: "https://freight.cargo.site/t/original/i/K2870112673087840620776587211459/J.Barriga_2.jpg.jpg",
+      orientation: "sq",
+      span: 1,
+      tags: ["muralismo"],
+      keywords: ["pintura", "obra de arte"],
+      title: "Vuelo",
+      author: "Javiera Barriga",
+      role: "Diseñador / Artista",
+      collab: "Mural realizado en colaboración con el artista Gustavo López",
+      area: "muralismo",
+      year: "2025",
+      url: [
+        "https://javierbarriga.cl/blogs/murales/vuelo"
+      ]
+    },
+
+    /* ------------------ China — Javiera Barriga ------------------ */
+    {
+      srcOriginal: "https://freight.cargo.site/t/original/i/D2870112832891984531322432860867/muralescuadrado3_f7d8b525-f1a8-45e5-a5aa-801624dc25e0.png.jpg",
+      orientation: "sq",
+      span: 1,
+      tags: ["muralismo"],
+      keywords: ["pintura", "obra de arte"],
+      title: "China",
+      author: "Javiera Barriga",
+      role: "Diseñador / Artista",
+      collab: "Mural realizado en el contexto del Museo a Cielo Abierto en San Miguel, bajo la invitación del director artístico Alejandro “Mono” González.",
+      area: "muralismo",
+      year: "2016",
+      url: [
+        "https://javierbarriga.cl/blogs/murales/mural-3"
+      ]
+    },
+
+    /* ------------------ Apegado a mí — Javiera Barriga ------------------ */
+    {
+      srcOriginal: "https://freight.cargo.site/t/original/i/W2870112673050947132629168108227/muralescuadrado16_e55c1c9a-14dc-4136-a67c-297b71861ccc.png.jpg",
+      orientation: "sq",
+      span: 1,
+      tags: ["muralismo"],
+      keywords: ["pintura", "obra de arte"],
+      title: "Apegado a mí",
+      author: "Javiera Barriga",
+      role: "Diseñador / Artista",
+      collab: "Participación en el festival internacional de muralismo “Tbilisi MuralFest”, en la cuidad de Tbilisi, Georgia.",
+      area: "muralismo",
+      year: "2024",
+      url: [
+        "https://javierbarriga.cl/blogs/murales/apegado-a-mi"
+      ]
     }
 
   ];
+    /* SELECCION_START: asegurar id estable por proyecto para sello y seleccion manual */
+    ensureProjectIds(DB);
+    /* SELECCION_END: asegurar id estable por proyecto para sello y seleccion manual */
     // Normalizar tags + crear índice de búsqueda
     DB.forEach(normalizeProjectTags);
+    /* SELECCION_START: fuente unica para vista curada e historico */
+    exposeSelectionDataSource(DB);
+    if (REF2D_DATA_ONLY_MODE) {
+      return;
+    }
+    /* SELECCION_END: fuente unica para vista curada e historico */
 
   function buildPeopleIndex(projects) {
     const byKey = new Map();
@@ -10791,7 +11224,7 @@
   /* ===== Reordenamiento de proyectos al cargar ===== */
   // Opción A: Shuffle aleatorio (Fisher-Yates)
   // Opción B: Rotación persistente (por defecto)
-  const USE_RANDOM_SHUFFLE = false; // Cambiar a true para usar shuffle aleatorio
+  const USE_RANDOM_SHUFFLE = true; // true: cargar universo en orden aleatorio
   const ROTATION_STEP = 7; // Ajusta este valor para cambiar el "paso" de rotación (cuántos items se mueven por carga)
 
   function shuffleArray(array) {
@@ -11020,9 +11453,27 @@
     if (!key) return;
     if (isProjectSaved(key)) {
       removeSavedProjectByKey(key);
+      trackAnalyticsEvent("project_save_toggle", {
+        action: "remove",
+        projectId: String(meta && meta.id || ""),
+        projectTitle: String(meta && meta.title || ""),
+        projectAuthor: String(meta && (meta._displayAuthor || meta.author) || ""),
+        projectArea: String(meta && meta.area || ""),
+        projectYear: String(meta && meta.year || ""),
+        resultsCount: savedBundle.length
+      });
       return;
     }
     addSavedProject(meta);
+    trackAnalyticsEvent("project_save_toggle", {
+      action: "save",
+      projectId: String(meta && meta.id || ""),
+      projectTitle: String(meta && meta.title || ""),
+      projectAuthor: String(meta && (meta._displayAuthor || meta.author) || ""),
+      projectArea: String(meta && meta.area || ""),
+      projectYear: String(meta && meta.year || ""),
+      resultsCount: savedBundle.length
+    });
   }
 
   function createSaveButton(meta, className) {
@@ -11318,6 +11769,10 @@
     }
     setSavedModalStatus("", false);
     savedModalOverlay.hidden = false;
+    trackAnalyticsEvent("saved_tray_open", {
+      action: "open",
+      resultsCount: savedBundle.length
+    });
   }
 
   function closeSavedModal() {
@@ -11367,10 +11822,25 @@
       const logResult = await registerSavedBundleRequest(pdf.filename, collectionName, recipientEmail);
       if (logResult.logged) {
         setSavedModalStatus("PDF generado y solicitud registrada.", false);
+        trackAnalyticsEvent("bundle_generate", {
+          status: "success",
+          bundleName: collectionName,
+          projectsCount: savedBundle.length
+        });
       } else {
         setSavedModalStatus("PDF generado. No se pudo registrar analítica.", true);
+        trackAnalyticsEvent("bundle_generate", {
+          status: "error",
+          bundleName: collectionName,
+          projectsCount: savedBundle.length
+        });
       }
     } catch (error) {
+      trackAnalyticsEvent("bundle_generate", {
+        status: "error",
+        bundleName: collectionName,
+        projectsCount: savedBundle.length
+      });
       if (error && error.message === "pdf_lib_missing") {
         setSavedModalStatus("No se pudo generar PDF: falta jsPDF.", true);
       } else if (error && error.message === "saved_bundle_log_invalid_response") {
@@ -11410,6 +11880,11 @@
       item.style.cursor = "pointer";
       item.addEventListener("click", (event) => {
         event.preventDefault();
+        trackAnalyticsEvent("saved_tray_item_click", {
+          projectId: String(entry.id || (entry.metaRef && entry.metaRef.id) || ""),
+          projectTitle: String(entry.title || ""),
+          action: "open_from_saved_tray"
+        });
         const ghost = document.createElement("div");
         ghost.dataset.tags = (entry.tags || []).join(" | ");
         ghost.dataset.title = entry.title || "—";
@@ -11523,7 +11998,7 @@
   /* Activo + generador circular */
   let activeList = DB_ORDERED.slice();
   let genPtr = 0;
-  let activeView = window.matchMedia(`(max-width: ${MOBILE_MAX_WIDTH}px)`).matches ? 'grid' : 'bento';
+  let activeView = 'bento';
   let masonryRaf = null;
   let listSortKey = '';
   let listSortDir = 1;
@@ -11683,6 +12158,9 @@
 
     const el = document.createElement('article');
     el.className = `ref2d__item ${span2?'span-2':'norm'} ratio-${orient}`;
+    if (isSeleccionActive(meta)) {
+      el.classList.add('ref2d__item--seleccion-active');
+    }
     el.style.left = colA.pos + "px";
     el.style.top  = y + "px";
     el.style.background = meta.src ? "#000" : PALETTE[globalId % PALETTE.length];
@@ -11711,6 +12189,11 @@
       Object.assign(media.picture.style, { position: 'absolute', inset: '0' });
       el.appendChild(media.picture);
     }
+    /* SELECCION_START: sello R en vista infinita */
+    if (isSeleccionProject(meta)) {
+      el.appendChild(createSeleccionBadge());
+    }
+    /* SELECCION_END: sello R en vista infinita */
     el.appendChild(createSaveButton(meta, 'ref2d__save-btn'));
 
     const metaBox = document.createElement('div');
@@ -11982,6 +12465,9 @@
     const orient = normalizeOrientation(meta.orientation);
     const isFeatured = getBentoSpan(meta) === 2;
     el.className = `${className} is-${orient} ${isFeatured ? 'is-featured' : ''}`;
+    if (isSeleccionActive(meta)) {
+      el.classList.add('ref2d__view-card--seleccion-active');
+    }
     el.dataset.tags   = (meta.tags || []).join(' | ');
     el.dataset.title  = meta.title || '—';
     el.dataset.author = meta._displayAuthor || meta.author || '—';
@@ -12003,6 +12489,11 @@
       const media = createProjectPicture(meta, meta.title || '', onImageLoad);
       imgWrap.appendChild(media.picture);
     }
+    /* SELECCION_START: sello R en vista grilla */
+    if (isSeleccionProject(meta)) {
+      imgWrap.appendChild(createSeleccionBadge());
+    }
+    /* SELECCION_END: sello R en vista grilla */
     imgWrap.appendChild(createSaveButton(meta, 'ref2d__save-btn'));
     body.appendChild(imgWrap);
 
@@ -12012,7 +12503,7 @@
     title.textContent = meta.title || '—';
     const author = document.createElement('p');
     author.className = 'ref2d__view-card-author';
-    renderPeopleInContainer(author, [meta._displayAuthor || meta.author || '—']);
+    renderPeopleInContainer(author, splitAuthorNames(meta._displayAuthor || meta.author || '—'));
     const role = document.createElement('p');
     role.className = 'ref2d__view-card-role';
     role.textContent = `Rol: ${meta._displayRole || 'Diseñador/a'}`;
@@ -12044,7 +12535,14 @@
 
     el.appendChild(body);
 
-    el.addEventListener('click', () => openSpotlight(el));
+    el.addEventListener('click', () => {
+      trackAnalyticsEvent("project_card_click", {
+        projectId: String(meta.id || ""),
+        projectTitle: String(meta.title || ""),
+        action: "grid_card"
+      });
+      openSpotlight(el);
+    });
     return el;
   }
 
@@ -12259,6 +12757,19 @@
         <td><button type="button" class="ref2d__save-btn ref2d__save-btn--inline" data-save-key="${getProjectStableKey(meta)}">+ Guardar</button></td>
         <td>${firstUrl ? `<a href="${firstUrl}" target="_blank" rel="noopener">↗</a>` : '—'}</td>
       `;
+      /* SELECCION_START: sello R en vista lista */
+      if (isSeleccionProject(meta)) {
+        tr.classList.add('ref2d__index-row--seleccion');
+        if (isSeleccionActive(meta)) {
+          tr.classList.add('ref2d__index-row--seleccion-active');
+        }
+        const titleCell = tr.querySelector('td');
+        if (titleCell) {
+          titleCell.classList.add('ref2d__index-title-cell');
+          titleCell.prepend(createSeleccionBadge('ref2d__seleccion-badge--inline'));
+        }
+      }
+      /* SELECCION_END: sello R en vista lista */
       const listSaveBtn = tr.querySelector('.ref2d__save-btn');
       if (listSaveBtn) {
         updateSaveButtonState(listSaveBtn);
@@ -12271,6 +12782,11 @@
       }
       tr.addEventListener('click', (e) => {
         if (e.target.closest('a') || e.target.closest('.ref2d__save-btn')) return;
+        trackAnalyticsEvent("project_card_click", {
+          projectId: String(meta.id || ""),
+          projectTitle: String(meta.title || ""),
+          action: "index_list"
+        });
         const ghost = document.createElement('div');
         ghost.dataset.tags = (meta.tags || []).join(' | ');
         ghost.dataset.title = meta.title || '—';
@@ -12304,17 +12820,27 @@
   }
 
   function setView(view) {
+    const previousView = activeView;
     if (filterDebounceTimer !== null) {
       clearTimeout(filterDebounceTimer);
       filterDebounceTimer = null;
     }
     view = sanitizeViewForViewport(view);
+    view = sanitizeViewForHeaderMode(view);
     const viewMap = {
       bento: 'Vista: Infinita',
       grid: 'Vista: Grilla',
       index: 'Vista: Lista'
     };
     activeView = viewMap[view] ? view : 'bento';
+    analyticsCurrentView = activeView;
+    if (previousView && previousView !== activeView) {
+      trackAnalyticsEvent("view_mode_change", {
+        action: "change",
+        fromView: previousView,
+        toView: activeView
+      });
+    }
 
     const isBento = activeView === 'bento';
     const isGrid = activeView === 'grid';
@@ -12727,6 +13253,12 @@
     if(item){
       e.preventDefault();
       e.stopPropagation();
+      const meta = item._meta || {};
+      trackAnalyticsEvent("project_card_click", {
+        projectId: String(meta.id || ""),
+        projectTitle: String(meta.title || ""),
+        action: "bento_card"
+      });
       openSpotlight(item);
     }
   });
@@ -13079,6 +13611,17 @@
       url: meta.url || el.dataset.url || "",
       urls: Array.isArray(meta.url) ? meta.url.slice() : [meta.url || el.dataset.url || ""].filter(Boolean)
     };
+    activeSpotlightOpenedAt = Date.now();
+    trackAnalyticsEvent("project_open", {
+      projectId: String(activeSpotlightMeta.id || ""),
+      projectTitle: String(activeSpotlightMeta.title || ""),
+      projectAuthor: String(activeSpotlightMeta.author || ""),
+      projectArea: String(activeSpotlightMeta.area || ""),
+      projectYear: String(activeSpotlightMeta.year || "")
+    });
+    if (modal) {
+      modal.classList.toggle('ref2d__modal--seleccion-active', isSeleccionActive(meta));
+    }
     closeRequestPanel();
     setSupportOptionsOpen(false);
 
@@ -13103,6 +13646,19 @@
 
     // Tags clicables → activan filtro (igual que en la grilla)
     sTags.innerHTML = "";
+    /* SELECCION_START: refuerzo textual en ficha desplegada */
+    if (isSeleccionProject(meta)) {
+      const selectionChip = document.createElement('a');
+      selectionChip.className = 'ref2d__chip ref2d__chip--seleccion';
+      selectionChip.href = 'seleccion.html';
+      selectionChip.textContent = 'Selección Referencioteca · R';
+      selectionChip.title = 'Ver selección editorial';
+      selectionChip.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
+      sTags.appendChild(selectionChip);
+    }
+    /* SELECCION_END: refuerzo textual en ficha desplegada */
     (el.dataset.tags||"")
       .split("|")
       .map(s=>s.trim())
@@ -13146,6 +13702,20 @@
       sLink.target = "_blank";
       sLink.rel = "noopener";
       sLink.textContent = "Abrir proyecto ↗";
+      sLink.onclick = () => {
+        let targetDomain = "";
+        try {
+          targetDomain = new URL(String(urls[0] || "")).hostname || "";
+        } catch (_err) {
+          targetDomain = "";
+        }
+        trackAnalyticsEvent("project_link_click", {
+          projectId: String(activeSpotlightMeta && activeSpotlightMeta.id || ""),
+          projectTitle: String(activeSpotlightMeta && activeSpotlightMeta.title || ""),
+          targetUrl: String(urls[0] || ""),
+          targetDomain: targetDomain
+        });
+      };
 
       // Si hay links adicionales, creamos botones extra
       for (let i = 1; i < urls.length; i++) {
@@ -13155,6 +13725,20 @@
         a.target = "_blank";
         a.rel = "noopener";
         a.textContent = "Otro enlace ↗";
+        a.addEventListener("click", () => {
+          let targetDomain = "";
+          try {
+            targetDomain = new URL(String(urls[i] || "")).hostname || "";
+          } catch (_err) {
+            targetDomain = "";
+          }
+          trackAnalyticsEvent("project_link_click", {
+            projectId: String(activeSpotlightMeta && activeSpotlightMeta.id || ""),
+            projectTitle: String(activeSpotlightMeta && activeSpotlightMeta.title || ""),
+            targetUrl: String(urls[i] || ""),
+            targetDomain: targetDomain
+          });
+        });
         sLink.insertAdjacentElement("afterend", a);
       }
     }
@@ -13200,6 +13784,14 @@
   }
 
   function closeSpotlight(){
+    if (activeSpotlightMeta && activeSpotlightOpenedAt > 0) {
+      trackAnalyticsEvent("project_close", {
+        projectId: String(activeSpotlightMeta.id || ""),
+        projectTitle: String(activeSpotlightMeta.title || ""),
+        openDurationMs: Math.max(0, Date.now() - activeSpotlightOpenedAt)
+      });
+    }
+    activeSpotlightOpenedAt = 0;
     closeRequestPanel();
     setSupportOptionsOpen(false);
     activeSpotlightKey = "";
@@ -13699,6 +14291,10 @@
     if (next.has(key)) next.delete(key);
     else next.add(key);
     setActiveTagFilters(Array.from(next));
+    trackAnalyticsEvent("tag_filter_click", {
+      tag: String(key || ""),
+      action: next.has(key) ? "add" : "remove"
+    });
     updateSearchWithActiveFilters();
     applyFilter({
       tagKeys: Array.from(activeTagFilterKeys),
@@ -13713,6 +14309,10 @@
     if (next.has(key)) next.delete(key);
     else next.add(key);
     setActivePersonFilters(Array.from(next));
+    trackAnalyticsEvent("person_filter_click", {
+      action: next.has(key) ? "add" : "remove",
+      query: String(name || "")
+    });
     updateSearchWithActiveFilters();
     applyFilter({
       tagKeys: Array.from(activeTagFilterKeys),
@@ -13804,6 +14404,8 @@
           count.textContent = `${formatCountLine(0, 0)} — sin resultados para “${labels.join(' + ')}”`;
         }
         highlightActiveCategory(tagKeysFromInput.length === 1 ? tagKeysFromInput[0] : '');
+        const filterLabel = tagKeysFromInput.concat(personKeysFromInput).join(" + ");
+        trackSearchEvent(filterLabel, 0);
         return;
       }
       activeList = list;
@@ -13817,6 +14419,8 @@
       renderActiveView();
       syncActiveTagChips();
       syncActivePersonChips();
+      const filterLabel = tagKeysFromInput.concat(personKeysFromInput).join(" + ");
+      trackSearchEvent(filterLabel, activeList.length);
       return;
     }
 
@@ -13850,6 +14454,7 @@
         }
         // Limpiar highlight de categorías si no hay resultados
         highlightActiveCategory('');
+        trackSearchEvent(textTerm, 0);
         return;
       }
       activeList = list;
@@ -13860,12 +14465,14 @@
         ? exactTagKey
         : (normalizedTerm ? canonicalTagKey(normalizedTerm) : '');
       highlightActiveCategory(matchingCat || '');
+      trackSearchEvent(textTerm, list.length);
     }else{
       // Sin filtro: usar el orden reordenado inicial
       activeList = DB_ORDERED.slice();
       setActiveTagFilters([]);
       setActivePersonFilters([]);
       highlightActiveCategory('all');
+      lastTrackedSearchSignature = "";
     }
     if (activeView === 'bento') {
       // Evita bloqueos cuando se filtra después de desplazarse mucho en infinito.
@@ -13980,7 +14587,9 @@
   /* API pública para tus proyectos reales */
   window.Refx2D = {
     add(item){
-      const id = DB.length;
+      /* SELECCION_START: nuevo proyecto con id estable no repetido */
+      const id = getNextProjectId(DB);
+      /* SELECCION_END: nuevo proyecto con id estable no repetido */
       const newItem = Object.assign(
         {
           id,
@@ -13991,6 +14600,9 @@
           tags:[],
           secondaryTags:[], // Categorías vinculadas opcionales (solo búsqueda interna)
           keywords:[], // Palabras clave libres para ampliar lenguaje de búsqueda
+          selectionRef:"",
+          selectionActive:false,
+          selectionNote:"",
           title:"—",
           author:"—",
           role:"",
@@ -14003,6 +14615,7 @@
       );
       normalizeProjectTags(newItem);
       DB.push(newItem);
+      exposeSelectionDataSource(DB);
       PEOPLE_BY_KEY = buildPeopleIndex(DB);
       rebuildBentoRandomSpans();
       // Reordenar DB_ORDERED cuando se agrega un nuevo proyecto
@@ -14218,13 +14831,25 @@
     return view;
   }
 
+  function sanitizeViewForHeaderMode(view) {
+    if (headerMode === 'filter' && view === 'bento') return 'grid';
+    return view;
+  }
+
   function syncViewOptionsWithViewport() {
     const mobile = isMobileViewport();
+    const isFilterMode = headerMode === 'filter';
     if (viewMenu) {
       viewMenu.querySelectorAll('button[data-view]').forEach((btn) => {
         const view = btn.dataset.view;
-        btn.hidden = mobile && !MOBILE_ALLOWED_VIEWS.has(view);
+        const hiddenByViewport = mobile && !MOBILE_ALLOWED_VIEWS.has(view);
+        const hiddenByMode = isFilterMode && view === 'bento';
+        btn.hidden = hiddenByViewport || hiddenByMode;
       });
+    }
+    if (isFilterMode && activeView === 'bento') {
+      setView('grid');
+      return true;
     }
     if (mobile && !MOBILE_ALLOWED_VIEWS.has(activeView)) {
       setView('grid');
@@ -14264,6 +14889,54 @@
     });
   }
 
+  /* HEADER_MODE_START: lógica Explorar/Filtrar */
+  let headerMode = DEFAULT_HEADER_MODE;
+
+  function applyHeaderMode(nextMode, options = {}) {
+    const normalized = nextMode === 'filter' ? 'filter' : 'explore';
+    headerMode = normalized;
+    if (ref2dRoot) {
+      ref2dRoot.classList.toggle('ref2d--mode-explore', normalized === 'explore');
+      ref2dRoot.classList.toggle('ref2d--mode-filter', normalized === 'filter');
+    }
+    modeButtons.forEach((btn) => {
+      const active = btn.dataset.mode === normalized;
+      btn.classList.toggle('is-active', active);
+      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+
+    if (normalized === 'explore') {
+      closeCatPanel();
+      closeViewMenu();
+      const shouldKeepView = options.keepView === true;
+      if (!shouldKeepView && activeView !== 'bento') {
+        setView('bento');
+      }
+      syncViewOptionsWithViewport();
+      return;
+    }
+
+    if (normalized === 'filter') {
+      closeCatPanel();
+      closeViewMenu();
+      if (activeView !== 'grid') {
+        setView('grid');
+      }
+      syncViewOptionsWithViewport();
+    }
+  }
+
+  function initHeaderModeSwitch() {
+    if (!modeButtons.length) return;
+    modeButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const nextMode = btn.dataset.mode === 'filter' ? 'filter' : 'explore';
+        applyHeaderMode(nextMode);
+      });
+    });
+  }
+  /* HEADER_MODE_END: lógica Explorar/Filtrar */
+
   function openHeaderMore() {
     if (!headerMoreBtn || !headerMoreDropdown) return;
     headerMoreDropdown.hidden = false;
@@ -14277,11 +14950,37 @@
   }
 
   function initHeaderMore() {
+    let closeTimer = null;
+    const cancelClose = () => {
+      if (closeTimer !== null) {
+        clearTimeout(closeTimer);
+        closeTimer = null;
+      }
+    };
+    const queueClose = () => {
+      cancelClose();
+      closeTimer = setTimeout(() => {
+        closeHeaderMore();
+      }, 120);
+    };
     if (headerMoreBtn && headerMoreDropdown) {
       headerMoreBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         if (headerMoreDropdown.hidden) openHeaderMore();
         else closeHeaderMore();
+      });
+      headerMoreBtn.addEventListener('mouseenter', () => {
+        cancelClose();
+        openHeaderMore();
+      });
+      headerMoreBtn.addEventListener('mouseleave', () => {
+        queueClose();
+      });
+      headerMoreDropdown.addEventListener('mouseenter', () => {
+        cancelClose();
+      });
+      headerMoreDropdown.addEventListener('mouseleave', () => {
+        queueClose();
       });
 
       document.addEventListener('click', (e) => {
@@ -14329,6 +15028,47 @@
       });
     });
   }
+
+  /* URL_STATE_START: aplicar modo/vista/filtros desde query params */
+  function applyInitialUrlState() {
+    let params = null;
+    try {
+      params = new URLSearchParams(window.location.search || "");
+    } catch (_err) {
+      params = null;
+    }
+    if (!params) return;
+
+    const modeParam = String(params.get("mode") || "").trim().toLowerCase();
+    if (modeParam === "filter" || modeParam === "explore") {
+      applyHeaderMode(modeParam, { keepView: false });
+    }
+
+    const viewParam = String(params.get("view") || "").trim().toLowerCase();
+    if (viewParam === "bento" || viewParam === "grid" || viewParam === "index") {
+      setView(viewParam);
+    }
+
+    const rawTags = [];
+    params.getAll("tag").forEach((value) => {
+      String(value || "")
+        .split(",")
+        .map((part) => part.trim())
+        .filter(Boolean)
+        .forEach((part) => rawTags.push(part));
+    });
+    const normalizedTags = rawTags.map((tag) => normalizeTagKey(tag)).filter(Boolean);
+    if (normalizedTags.length) {
+      const uniqueTags = Array.from(new Set(normalizedTags));
+      setActiveTagFilters(uniqueTags);
+      updateSearchWithActiveFilters();
+      applyFilter({
+        tagKeys: uniqueTags,
+        personKeys: Array.from(activePersonFilterKeys)
+      });
+    }
+  }
+  /* URL_STATE_END: aplicar modo/vista/filtros desde query params */
 
   /* ===== Modal institucional (work in progress) ===== */
   const wipOverlay = $("#ref2dWipOverlay");
@@ -14388,10 +15128,13 @@
   // Inicializar panel de categorías
   initCategoryPanel();
   initViewSwitcher();
+  initHeaderModeSwitch();
   initHeaderMore();
   initRandomButton();
   initIndexSorting();
   setView(activeView);
+  applyHeaderMode(DEFAULT_HEADER_MODE, { keepView: false });
+  applyInitialUrlState();
   renderSavedTray();
   syncSaveButtonsState();
   
