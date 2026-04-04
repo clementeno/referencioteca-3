@@ -13,7 +13,6 @@
   const catPanel = $("#ref2dCatPanel");
   const catGrid  = $("#ref2dCatGrid");
   const catToggle = $("#ref2dCatToggle");
-  const catClose = $("#ref2dCatClose");
   const mobileCatToggle = $("#ref2dMobileCatToggle");
   const overlay = $("#ref2dOverlay"),
         modal   = document.querySelector(".ref2d__modal");
@@ -15095,13 +15094,6 @@
         } else {
           closeCatPanel();
         }
-      });
-    }
-
-    if (catClose) {
-      catClose.addEventListener('click', (e) => {
-        e.stopPropagation();
-        closeCatPanel();
       });
     }
 
