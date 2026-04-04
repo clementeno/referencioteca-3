@@ -154,6 +154,17 @@
   const selectionRefs = Array.from(bySelection.keys()).sort(compareSelectionDesc);
   const latestSelectionRef = selectionRefs[0] || String(cfg.id || "seleccion_01");
   const latestProjects = bySelection.get(latestSelectionRef) || [];
+  const requestedCapsuleRef = (() => {
+    try {
+      const params = new URLSearchParams(window.location.search || "");
+      return String(params.get("capsula") || "").trim();
+    } catch (_err) {
+      return "";
+    }
+  })();
+  const initialSelectionRef = requestedCapsuleRef && bySelection.has(requestedCapsuleRef)
+    ? requestedCapsuleRef
+    : latestSelectionRef;
 
   titleEl.textContent = String(cfg.titulo || "Selección Referencioteca");
   descEl.textContent = String(cfg.descripcion || "");
@@ -218,7 +229,8 @@
     capsulesEl.innerHTML = '<p class="seleccion__empty">No hay selecciones históricas todavía.</p>';
   } else {
     const capsuleFragment = document.createDocumentFragment();
-    selectionRefs.forEach((selectionRef, index) => {
+    const buttonBySelectionRef = new Map();
+    selectionRefs.forEach((selectionRef) => {
       const button = document.createElement("button");
       button.className = "seleccion__capsule-btn";
       button.type = "button";
@@ -228,10 +240,12 @@
         setActiveCapsule(selectionRef, button);
       });
       capsuleFragment.appendChild(button);
-      if (index === 0) setTimeout(() => setActiveCapsule(selectionRef, button), 0);
+      buttonBySelectionRef.set(selectionRef, button);
     });
     capsulesEl.innerHTML = "";
     capsulesEl.appendChild(capsuleFragment);
+    const initialButton = buttonBySelectionRef.get(initialSelectionRef) || null;
+    setTimeout(() => setActiveCapsule(initialSelectionRef, initialButton), 0);
   }
 
   function renderRightColumn(selectionRef) {
@@ -317,8 +331,8 @@
     gridEl.appendChild(gridFragment);
   }
 
-  renderRightColumn(latestSelectionRef);
-  updateWordBand(latestSelectionRef);
+  renderRightColumn(initialSelectionRef);
+  updateWordBand(initialSelectionRef);
 
   const originalSetActiveCapsule = setActiveCapsule;
   setActiveCapsule = function (selectionRef, button) {

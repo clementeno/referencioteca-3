@@ -487,6 +487,29 @@ div.caution-processing{--processing-opacity: .08;position:absolute;inset:0;opaci
   pointer-events:none;
 }
 
+.ref2d__seleccion-badge--sheet{
+  top:12px;
+  left:12px;
+  z-index:6;
+  width:34px;
+  height:34px;
+  font-size:0.95rem;
+  font-weight:800;
+  border:1px solid rgba(255,255,255,0.55);
+  background:rgba(255,255,255,0.96);
+  color:#090a0d;
+  text-decoration:none;
+  pointer-events:auto;
+  cursor:pointer;
+  box-shadow:0 6px 16px rgba(0,0,0,0.35);
+  transition:transform .15s ease, filter .15s ease;
+}
+
+.ref2d__seleccion-badge--sheet:hover{
+  transform:translateY(-1px) scale(1.03);
+  filter:brightness(1.02);
+}
+
 .ref2d__seleccion-badge--inline{
   position:static;
   top:auto;
@@ -625,10 +648,19 @@ div.caution-processing{--processing-opacity: .08;position:absolute;inset:0;opaci
   position:fixed;
   left:50%;
   bottom:18px;
-  transform:translateX(-50%);
+  transform:translateX(-50%) translateY(10px);
   z-index:8;
   width:min(96vw, 760px);
   pointer-events:none;
+  opacity:0;
+  visibility:hidden;
+  transition:opacity 220ms ease, transform 220ms ease, visibility 220ms ease;
+}
+
+.ref2d__savedTray.is-visible{
+  opacity:1;
+  visibility:visible;
+  transform:translateX(-50%) translateY(0);
 }
 
 .ref2d__savedTray[hidden]{
@@ -636,16 +668,40 @@ div.caution-processing{--processing-opacity: .08;position:absolute;inset:0;opaci
 }
 
 .ref2d__savedTrayInner{
+  position:relative;
   display:flex;
   align-items:center;
   gap:10px;
-  padding:10px;
+  padding:10px 40px 10px 10px;
   border-radius:20px;
   border:1px solid rgba(255,255,255,0.18);
   background:rgba(15,15,19,0.86);
   backdrop-filter:blur(10px);
   box-shadow:0 16px 36px rgba(0,0,0,0.4);
   pointer-events:auto;
+}
+
+.ref2d__savedClearAll{
+  position:absolute;
+  top:8px;
+  right:8px;
+  width:24px;
+  height:24px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,0.28);
+  background:rgba(0,0,0,0.42);
+  color:#fff;
+  font-size:15px;
+  line-height:1;
+  cursor:pointer;
+  display:grid;
+  place-items:center;
+  padding:0;
+}
+
+.ref2d__savedClearAll:hover{
+  background:rgba(0,0,0,0.62);
+  border-color:rgba(255,255,255,0.46);
 }
 
 .ref2d__savedSend{
@@ -901,6 +957,12 @@ body.is-modal-open .ref2d__savedTray{
     padding:8px;
     border-radius:16px;
     gap:8px;
+  }
+  .ref2d__savedClearAll{
+    top:6px;
+    right:6px;
+    width:22px;
+    height:22px;
   }
   .ref2d__savedSend{
     padding:9px 11px;

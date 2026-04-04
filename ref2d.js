@@ -70,6 +70,7 @@
   const savedList = $("#ref2dSavedList");
   const savedMeta = $("#ref2dSavedMeta");
   const savedSendBtn = $("#ref2dSavedSend");
+  const savedClearAllBtn = $("#ref2dSavedClearAll");
   const savedModalOverlay = $("#ref2dSavedModalOverlay");
   const savedModalClose = $("#ref2dSavedModalClose");
   const savedModalCancel = $("#ref2dSavedModalCancel");
@@ -89,6 +90,9 @@
   const REQUESTS_API_KEY = "ref123.teca";
   const REQUEST_EMAIL_ENDPOINT = "https://formsubmit.co/referencioteca.cl@gmail.com";
   const SAVED_TRAY_VISIBLE_MAX = 5;
+  /* SAVED_SESSION_START: persistencia de guardados por pestaña */
+  const SAVED_BUNDLE_SESSION_KEY = "ref2d_saved_bundle_v1";
+  /* SAVED_SESSION_END: persistencia de guardados por pestaña */
   const SAVED_PDF_EMAIL_ENDPOINT = REQUESTS_API_URL;
   const SAVED_PDF_TEMPLATE_IMAGE = "IMG/plantilla_exp_template.png";
   const SAVED_PDF_PAGE_WIDTH = 612;
@@ -195,6 +199,20 @@
     badge.setAttribute("aria-label", "Sello Referencioteca");
     return badge;
   }
+  function parseSelectionNumberFromRef(selectionRef) {
+    const raw = String(selectionRef || "");
+    const matches = raw.match(/\d+/g);
+    if (!matches || !matches.length) return 0;
+    return Number(matches[matches.length - 1]) || 0;
+  }
+  function formatSelectionCodeFromRef(selectionRef) {
+    return `R${String(parseSelectionNumberFromRef(selectionRef)).padStart(4, "0")}`;
+  }
+  function getSelectionCapsuleUrl(selectionRef) {
+    const ref = String(selectionRef || "").trim();
+    if (!ref) return "seleccion.html";
+    return `seleccion.html?capsula=${encodeURIComponent(ref)}`;
+  }
   function getNextProjectId(projects) {
     let max = 0;
     (projects || []).forEach((project) => {
@@ -228,6 +246,7 @@
   let isSavedBundleSending = false;
   let sheetCitationFeedbackTimer = null;
   let savedBundle = [];
+  let savedTrayHideTimer = null;
   let savedPdfTemplateDataUrl = "";
   let lastTrackedSearchSignature = "";
   let analyticsSessionId = "";
@@ -11397,6 +11416,69 @@
     };
   }
 
+  /* SAVED_SESSION_START: persistencia de guardados por pestaña */
+  function navigationIsReloadLike() {
+    try {
+      const nav = performance.getEntriesByType("navigation");
+      if (Array.isArray(nav) && nav.length && nav[0] && nav[0].type === "reload") return true;
+      if (performance && performance.navigation && performance.navigation.type === 1) return true;
+    } catch (_err) {}
+    return false;
+  }
+
+  function getPersistableSavedEntry(entry) {
+    if (!entry || typeof entry !== "object") return null;
+    const key = String(entry.key || "").trim();
+    if (!key) return null;
+    return {
+      key,
+      id: String(entry.id || "").trim(),
+      title: String(entry.title || "").trim() || "Proyecto sin título",
+      author: String(entry.author || "").trim() || "—",
+      role: String(entry.role || "").trim() || "Diseñador/a",
+      credits: String(entry.credits || "").trim(),
+      area: String(entry.area || "").trim() || "—",
+      year: String(entry.year || "").trim() || "—",
+      url: String(entry.url || "").trim(),
+      thumb: String(entry.thumb || "").trim(),
+      tags: Array.isArray(entry.tags) ? entry.tags.map((tag) => String(tag || "").trim()).filter(Boolean) : []
+    };
+  }
+
+  function persistSavedBundleSession() {
+    try {
+      if (!savedBundle.length) {
+        sessionStorage.removeItem(SAVED_BUNDLE_SESSION_KEY);
+        return;
+      }
+      const payload = savedBundle
+        .map(getPersistableSavedEntry)
+        .filter(Boolean)
+        .slice(-200);
+      sessionStorage.setItem(SAVED_BUNDLE_SESSION_KEY, JSON.stringify(payload));
+    } catch (_err) {}
+  }
+
+  function restoreSavedBundleSession() {
+    try {
+      if (navigationIsReloadLike()) {
+        sessionStorage.removeItem(SAVED_BUNDLE_SESSION_KEY);
+        return;
+      }
+      const raw = sessionStorage.getItem(SAVED_BUNDLE_SESSION_KEY);
+      if (!raw) return;
+      const parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed) || !parsed.length) return;
+      const restored = parsed
+        .map(getPersistableSavedEntry)
+        .filter(Boolean)
+        .map((entry) => Object.assign({}, entry, { metaRef: null }));
+      if (!restored.length) return;
+      savedBundle = restored;
+    } catch (_err) {}
+  }
+  /* SAVED_SESSION_END: persistencia de guardados por pestaña */
+
   function getSavedIndex(key) {
     return savedBundle.findIndex((entry) => entry.key === key);
   }
@@ -11448,7 +11530,53 @@
     const index = getSavedIndex(key);
     if (index === -1) return;
     savedBundle = savedBundle.filter((entry) => entry.key !== key);
+    persistSavedBundleSession();
     renderSavedTray();
+    syncSaveButtonsState();
+  }
+
+  function setSavedTrayVisibility(visible, animate) {
+    if (!savedTray) return;
+    if (savedTrayHideTimer !== null) {
+      clearTimeout(savedTrayHideTimer);
+      savedTrayHideTimer = null;
+    }
+    if (visible) {
+      if (savedTray.hidden) {
+        savedTray.hidden = false;
+        requestAnimationFrame(() => {
+          if (savedTray) savedTray.classList.add("is-visible");
+        });
+      } else {
+        savedTray.classList.add("is-visible");
+      }
+      return;
+    }
+    const withAnimation = !!animate && !savedTray.hidden;
+    if (!withAnimation) {
+      savedTray.classList.remove("is-visible");
+      savedTray.hidden = true;
+      return;
+    }
+    savedTray.classList.remove("is-visible");
+    savedTrayHideTimer = setTimeout(() => {
+      savedTrayHideTimer = null;
+      if (!savedBundle.length && savedTray) {
+        savedTray.hidden = true;
+      }
+    }, 240);
+  }
+
+  function clearSavedProjects(options) {
+    const cfg = options && typeof options === "object" ? options : {};
+    const animateHide = cfg.animateHide === true;
+    if (!savedBundle.length) {
+      setSavedTrayVisibility(false, animateHide);
+      return;
+    }
+    savedBundle = [];
+    persistSavedBundleSession();
+    renderSavedTray({ animateHide });
     syncSaveButtonsState();
   }
 
@@ -11464,6 +11592,7 @@
     } else {
       savedBundle = savedBundle.concat(entry);
     }
+    persistSavedBundleSession();
     renderSavedTray();
     if (savedList) {
       requestAnimationFrame(() => {
@@ -11880,6 +12009,7 @@
       if (savedModalClose) savedModalClose.disabled = false;
       if (generated) {
         savedBundle = [];
+        persistSavedBundleSession();
         renderSavedTray();
         syncSaveButtonsState();
         closeSavedModal();
@@ -11887,9 +12017,11 @@
     }
   }
 
-  function renderSavedTray() {
+  function renderSavedTray(options) {
+    const cfg = options && typeof options === "object" ? options : {};
+    const animateHide = cfg.animateHide === true;
     if (!savedTray || !savedList || !savedMeta) return;
-    savedTray.hidden = savedBundle.length === 0;
+    setSavedTrayVisibility(savedBundle.length > 0, animateHide);
     savedList.innerHTML = "";
     const visibleCount = Math.min(savedBundle.length, SAVED_TRAY_VISIBLE_MAX);
     savedMeta.textContent = `${visibleCount} visibles · ${savedBundle.length} guardados`;
@@ -12074,6 +12206,7 @@
   const BENTO_INTERACTION_SETTLE_MS = 120;
   const BENTO_LITE_MIN_MOVE_SCREEN = 30;
   const BENTO_LITE_MIN_MOVE_SCREEN_SQ = BENTO_LITE_MIN_MOVE_SCREEN * BENTO_LITE_MIN_MOVE_SCREEN;
+  const BENTO_RING_LOAD_ENABLED = true; // Reversible: false = carga secuencial antigua
   const SIMPLE_CARD_COUNT = 3;
   const nextMeta = ()=> activeList.length ? activeList[(genPtr++) % activeList.length] : null;
   const ORIENTATION_RATIO = { h: 4 / 3, v: 3 / 4, sq: 1 };
@@ -13033,6 +13166,29 @@
     }
   }
 
+  function buildColumnFillOrder(startIdx, endIdx, centerIdx) {
+    if (!Number.isFinite(startIdx) || !Number.isFinite(endIdx) || startIdx > endIdx) return [];
+    if (!BENTO_RING_LOAD_ENABLED) {
+      const linear = [];
+      for (let i = startIdx; i <= endIdx; i += 1) linear.push(i);
+      return linear;
+    }
+    const safeCenter = Math.max(startIdx, Math.min(endIdx, Math.round(centerIdx)));
+    const order = [];
+    const maxRadius = Math.max(Math.abs(safeCenter - startIdx), Math.abs(endIdx - safeCenter));
+    for (let radius = 0; radius <= maxRadius; radius += 1) {
+      const leftIdx = safeCenter - radius;
+      const rightIdx = safeCenter + radius;
+      if (leftIdx >= startIdx && leftIdx <= endIdx) {
+        order.push(leftIdx);
+      }
+      if (radius !== 0 && rightIdx >= startIdx && rightIdx <= endIdx) {
+        order.push(rightIdx);
+      }
+    }
+    return order;
+  }
+
   /* Relleno alrededor de la vista */
   function fillAround(lite = false){
     if(activeList.length===0) return;
@@ -13047,9 +13203,12 @@
     const bottom = top + vh * prefetch.y;
     const startIdx = Math.floor((leftBound)  / (COL_W+GAP)) - 2;
     const endIdx   = Math.floor((rightBound) / (COL_W+GAP)) + 2;
+    const centerX = (left + right) * 0.5;
+    const centerIdx = Math.floor(centerX / (COL_W + GAP));
+    const columnOrder = buildColumnFillOrder(startIdx, endIdx, centerIdx);
     let created = 0;
 
-    for(let i=startIdx; i<=endIdx; i++){
+    for (const i of columnOrder) {
       const col = ensureColumn(i);
       while(col.yDown < bottom){
         // PERF:
@@ -13720,6 +13879,7 @@
       year: el.dataset.year || meta.year || "—",
       area: el.dataset.area || meta.area || "—",
       tags: Array.isArray(meta.tags) ? meta.tags.slice() : [],
+      selectionRef: getProjectSelectionRef(meta),
       src: getProjectPrimarySrc(meta) || "",
       url: meta.url || el.dataset.url || "",
       urls: Array.isArray(meta.url) ? meta.url.slice() : [meta.url || el.dataset.url || ""].filter(Boolean)
@@ -13757,15 +13917,38 @@
       updateSaveButtonState(sheetSaveBtn);
     }
 
+    /* SELECCION_START: badge R clickeable en esquina de ficha desplegada */
+    if (sheetFig) {
+      const existingBadgeLink = sheetFig.querySelector(".ref2d__seleccion-badge--sheet-link");
+      if (existingBadgeLink) existingBadgeLink.remove();
+      if (isSeleccionProject(meta)) {
+        const selectionRef = getProjectSelectionRef(meta);
+        const selectionCode = formatSelectionCodeFromRef(selectionRef);
+        const badgeLink = document.createElement("a");
+        badgeLink.className = "ref2d__seleccion-badge ref2d__seleccion-badge--sheet ref2d__seleccion-badge--sheet-link";
+        badgeLink.href = getSelectionCapsuleUrl(selectionRef);
+        badgeLink.textContent = "R";
+        badgeLink.title = `Abrir cápsula ${selectionCode} en Selección Referencioteca`;
+        badgeLink.setAttribute("aria-label", `Abrir cápsula ${selectionCode} en Selección Referencioteca`);
+        badgeLink.addEventListener("click", (e) => {
+          e.stopPropagation();
+        });
+        sheetFig.appendChild(badgeLink);
+      }
+    }
+    /* SELECCION_END: badge R clickeable en esquina de ficha desplegada */
+
     // Tags clicables → activan filtro (igual que en la grilla)
     sTags.innerHTML = "";
     /* SELECCION_START: refuerzo textual en ficha desplegada */
     if (isSeleccionProject(meta)) {
+      const selectionRef = getProjectSelectionRef(meta);
+      const selectionCode = formatSelectionCodeFromRef(selectionRef);
       const selectionChip = document.createElement('a');
       selectionChip.className = 'ref2d__chip ref2d__chip--seleccion';
-      selectionChip.href = 'seleccion.html';
-      selectionChip.textContent = 'Selección Referencioteca · R';
-      selectionChip.title = 'Ver selección editorial';
+      selectionChip.href = getSelectionCapsuleUrl(selectionRef);
+      selectionChip.textContent = `Selección Referencioteca · ${selectionCode}`;
+      selectionChip.title = `Ver cápsula ${selectionCode}`;
       selectionChip.addEventListener('click', (e) => {
         e.stopPropagation();
       });
@@ -13962,6 +14145,13 @@
       e.preventDefault();
       e.stopPropagation();
       openSavedModal();
+    });
+  }
+  if (savedClearAllBtn) {
+    savedClearAllBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      clearSavedProjects({ animateHide: true });
     });
   }
   if (savedList) {
@@ -15251,8 +15441,10 @@
   setView(activeView);
   applyHeaderMode(DEFAULT_HEADER_MODE, { keepView: false });
   applyInitialUrlState();
+  restoreSavedBundleSession();
   renderSavedTray();
   syncSaveButtonsState();
+  window.addEventListener("pagehide", persistSavedBundleSession);
   
   // Mostrar modal institucional al cargar (si no se ha visto antes)
   showWipModal();
