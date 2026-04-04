@@ -13,6 +13,7 @@
   const catPanel = $("#ref2dCatPanel");
   const catGrid  = $("#ref2dCatGrid");
   const catToggle = $("#ref2dCatToggle");
+  const catClose = $("#ref2dCatClose");
   const mobileCatToggle = $("#ref2dMobileCatToggle");
   const overlay = $("#ref2dOverlay"),
         modal   = document.querySelector(".ref2d__modal");
@@ -13371,9 +13372,19 @@
     return `${projectTotal} ${projectLabel} · ${designersTotal} ${designerLabel}`;
   }
 
+  function formatProjectCountOnly(projectTotal) {
+    const projectLabel = projectTotal === 1 ? "proyecto" : "proyectos";
+    return `${projectTotal} ${projectLabel}`;
+  }
+
+  function formatCountSummary(projectTotal, designersTotal) {
+    if (isMobileViewport()) return formatProjectCountOnly(projectTotal);
+    return formatCountLine(projectTotal, designersTotal);
+  }
+
   const updateCount = ()=> {
     if (!count) return;
-    count.textContent = formatCountLine(activeList.length, getUniqueDesignersCount(activeList));
+    count.textContent = formatCountSummary(activeList.length, getUniqueDesignersCount(activeList));
   };
 
   /* ===== Pan 2D mejorado: drag vs click ===== */
@@ -14704,7 +14715,7 @@
         renderActiveView();
         if (count) {
           const labels = tagKeysFromInput.map((k) => prettyTag(k)).concat(personKeysFromInput.map((k) => getPersonDisplayName(k)));
-          count.textContent = `${formatCountLine(0, 0)} — sin resultados para “${labels.join(' + ')}”`;
+          count.textContent = `${formatCountSummary(0, 0)} — sin resultados para “${labels.join(' + ')}”`;
         }
         highlightActiveCategory(tagKeysFromInput.length === 1 ? tagKeysFromInput[0] : '');
         const filterLabel = tagKeysFromInput.concat(personKeysFromInput).join(" + ");
@@ -14753,7 +14764,7 @@
         closeSpotlight();
         renderActiveView();
         if (count) {
-          count.textContent = `${formatCountLine(0, 0)} — sin resultados para “${textTerm}”`;
+          count.textContent = `${formatCountSummary(0, 0)} — sin resultados para “${textTerm}”`;
         }
         // Limpiar highlight de categorías si no hay resultados
         highlightActiveCategory('');
@@ -14959,6 +14970,7 @@
     if (!forcedViewChange) {
       renderActiveView();
     }
+    updateCount();
   });
 
   /* ===== Panel de categorías ===== */
@@ -15003,7 +15015,10 @@
   function openCatPanel() {
     if (!catPanel) return;
     catPanel.hidden = false;
-    if (catToggle) catToggle.setAttribute('aria-expanded', 'true');
+    if (catToggle) {
+      catToggle.setAttribute('aria-expanded', 'true');
+      catToggle.textContent = 'Cerrar categorías';
+    }
     if (mobileCatToggle) mobileCatToggle.setAttribute('aria-expanded', 'true');
     // Bloquear scroll del body en mobile
     if (window.innerWidth <= 768) {
@@ -15015,7 +15030,10 @@
   function closeCatPanel() {
     if (!catPanel) return;
     catPanel.hidden = true;
-    if (catToggle) catToggle.setAttribute('aria-expanded', 'false');
+    if (catToggle) {
+      catToggle.setAttribute('aria-expanded', 'false');
+      catToggle.textContent = 'Ver categorías';
+    }
     if (mobileCatToggle) mobileCatToggle.setAttribute('aria-expanded', 'false');
     // Desbloquear scroll del body
     document.body.classList.remove('ref2d__catPanel-open');
@@ -15070,12 +15088,20 @@
 
     // Toggle del botón desktop
     if (catToggle) {
+      catToggle.textContent = 'Ver categorías';
       catToggle.addEventListener('click', () => {
         if (catPanel && catPanel.hidden) {
           openCatPanel();
         } else {
           closeCatPanel();
         }
+      });
+    }
+
+    if (catClose) {
+      catClose.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeCatPanel();
       });
     }
 

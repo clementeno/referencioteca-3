@@ -71,20 +71,12 @@
     id="ref2dCatPanel"
     hidden
   >
+    <div class="ref2d__catPanelHead">
+      <strong class="ref2d__catPanelTitle">Categorías</strong>
+      <button class="ref2d__catPanelClose" id="ref2dCatClose" type="button" aria-label="Cerrar categorías">Cerrar ×</button>
+    </div>
     <div class="ref2d__catGrid" id="ref2dCatGrid"></div>
   </section>
-
-  <!-- Botón flotante para categorías (solo mobile) -->
-  <button
-    class="ref2d__mobileCatToggle"
-    id="ref2dMobileCatToggle"
-    type="button"
-    aria-expanded="false"
-    aria-controls="ref2dCatPanel"
-    aria-label="Ver categorías"
-  >
-    <span class="ref2d__mobileCatToggle-icon">+</span>
-  </button>
 
   <!-- Viewport panable -->
   <div aria-live="polite" class="ref2d__viewport" id="ref2dViewport">
