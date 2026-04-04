@@ -976,8 +976,10 @@ body.is-modal-open .ref2d__savedTray{
     --saved-thumb-size:56px;
   }
   .sheet__saveBtn{
-    top:8px;
-    right:8px;
+    top:auto;
+    right:auto;
+    left:8px;
+    bottom:8px;
     padding:7px 10px;
     font-size:0.68rem;
   }
