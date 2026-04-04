@@ -19,7 +19,7 @@ body {
 
 /* Topbar y viewport (igual que antes) */
 .ref2d{background:var(--bg); color:var(--ink); min-height:100vh; overflow:hidden;}
-.ref2d__top{position:sticky; top:0; z-index:5; display:grid; grid-template-columns:200px 1fr auto; gap:16px; align-items:center; padding:10px clamp(12px,2.5vw,24px); border-bottom:1px solid #1b1b1f; background:color-mix(in oklab, var(--bg) 85%, transparent); backdrop-filter: blur(6px);}
+.ref2d__top{position:sticky; top:0; z-index:5; display:grid; grid-template-columns:170px 1fr auto; gap:16px; align-items:center; padding:10px clamp(12px,2.5vw,24px); border-bottom:1px solid #1b1b1f; background:color-mix(in oklab, var(--bg) 85%, transparent); backdrop-filter: blur(6px);}
 /* Páginas internas: solo logo + Información | Submit | Indexoteca */
 .ref2d__top--internal .ref2d__search-block,
 .ref2d__top--internal .ref2d__catToggle,
@@ -62,11 +62,13 @@ body {
     padding:0 16px 2px;
   }
   .ref2d__top:not(.ref2d__top--internal) .ref2d__header-actions .ref2d__modeSwitch{
-    order:-1;
+    display:none !important;
+  }
+  .ref2d__top:not(.ref2d__top--internal) .ref2d__header-actions .ref2d__view-wrap{
+    display:none !important;
   }
   .ref2d__top:not(.ref2d__top--internal) .ref2d__header-actions .ref2d__header-btn,
   .ref2d__top:not(.ref2d__top--internal) .ref2d__header-actions .ref2d__header-chip,
-  .ref2d__top:not(.ref2d__top--internal) .ref2d__header-actions .ref2d__view-wrap,
   .ref2d__top:not(.ref2d__top--internal) .ref2d__header-actions .ref2d__catToggle,
   .ref2d__top:not(.ref2d__top--internal) .ref2d__header-actions .ref2d__header-more-wrap{
     display:inline-flex !important;
@@ -92,7 +94,7 @@ body {
   .ref2d__top--internal .ref2d__header-more-wrap{ display:none !important; }
 }
 .ref2d__brand{font-weight:700; letter-spacing:.03em; color:var(--ink); text-decoration:none; font-size:clamp(1rem, 1.1vw, 1.15rem);}
-.ref2d__search-block{display:flex; align-items:center; gap:10px; min-width:0; flex:1 1 auto; max-width:min(720px, 58vw);}
+.ref2d__search-block{display:flex; align-items:center; gap:10px; min-width:0; flex:1 1 auto; max-width:min(980px, 76vw); width:100%;}
 .ref2d__search-wrapper{position:relative; flex:1 1 auto; min-width:0;}
 .ref2d__search{height:40px; border-radius:999px; border:1px solid #2a2a2e; background:#141418; color:var(--ink); padding:0 42px 0 16px; width:100%;}
 .ref2d__search-clear{

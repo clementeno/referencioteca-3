@@ -79,7 +79,7 @@
   const savedEmail = $("#ref2dSavedEmail");
   const savedModalStatus = $("#ref2dSavedModalStatus");
   const MOBILE_MAX_WIDTH = 768;
-  const MOBILE_ALLOWED_VIEWS = new Set(['bento', 'grid', 'index']);
+  const MOBILE_ALLOWED_VIEWS = new Set(['grid']);
   const DESKTOP_ALLOWED_VIEWS = new Set(['bento', 'grid', 'index']);
   /* HEADER_MODE_START: modo por defecto del header */
   const DEFAULT_HEADER_MODE = 'explore';
@@ -13105,7 +13105,7 @@
       }
     }
     if (btnSearchRandom) {
-      btnSearchRandom.hidden = !isGrid;
+      btnSearchRandom.hidden = !isGrid || headerMode === 'filter';
       btnSearchRandom.textContent = 'Aleatorio';
     }
     if (btnSimpleRefresh) btnSimpleRefresh.hidden = true;
@@ -14945,7 +14945,17 @@
     GAP   = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--gap'));
     refreshViewportSize();
     resetPlaneLimits();
-    const forcedViewChange = syncViewOptionsWithViewport();
+    const mobile = isMobileViewport();
+    let forcedByMobileMode = false;
+    if (mobile && headerMode !== 'filter') {
+      applyHeaderMode('filter', { keepView: false });
+      forcedByMobileMode = true;
+    }
+    if (mobile && activeView !== 'grid') {
+      setView('grid');
+      forcedByMobileMode = true;
+    }
+    const forcedViewChange = syncViewOptionsWithViewport() || forcedByMobileMode;
     if (!forcedViewChange) {
       renderActiveView();
     }
@@ -15145,6 +15155,10 @@
   function syncViewOptionsWithViewport() {
     const mobile = isMobileViewport();
     const isFilterMode = headerMode === 'filter';
+    if (modeSwitch) modeSwitch.hidden = mobile;
+    const viewWrap = viewToggle ? viewToggle.closest('.ref2d__view-wrap') : null;
+    if (viewWrap) viewWrap.hidden = mobile;
+    if (mobile) closeViewMenu();
     if (viewMenu) {
       viewMenu.querySelectorAll('button[data-view]').forEach((btn) => {
         const view = btn.dataset.view;
@@ -15373,6 +15387,11 @@
         personKeys: Array.from(activePersonFilterKeys)
       });
     }
+
+    if (isMobileViewport()) {
+      applyHeaderMode('filter', { keepView: false });
+      setView('grid');
+    }
   }
   /* URL_STATE_END: aplicar modo/vista/filtros desde query params */
 
@@ -15439,7 +15458,8 @@
   initRandomButton();
   initIndexSorting();
   setView(activeView);
-  applyHeaderMode(DEFAULT_HEADER_MODE, { keepView: false });
+  const initialHeaderMode = isMobileViewport() ? 'filter' : DEFAULT_HEADER_MODE;
+  applyHeaderMode(initialHeaderMode, { keepView: false });
   applyInitialUrlState();
   restoreSavedBundleSession();
   renderSavedTray();
