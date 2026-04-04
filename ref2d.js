@@ -10,6 +10,7 @@
         count   = $("#ref2dCount");
   const searchClearBtn = $("#ref2dSearchClear");
   const suggestionsBox = $("#ref2dSuggestions");
+  const topBar = document.querySelector(".ref2d__top");
   const catPanel = $("#ref2dCatPanel");
   const catGrid  = $("#ref2dCatGrid");
   const catToggle = $("#ref2dCatToggle");
@@ -14969,6 +14970,7 @@
     if (!forcedViewChange) {
       renderActiveView();
     }
+    syncCatPanelMobileLayout();
     updateCount();
   });
 
@@ -15010,9 +15012,26 @@
     return list;
   }
 
+  function syncCatPanelMobileLayout() {
+    if (!catPanel) return;
+    if (!isMobileViewport()) {
+      catPanel.style.removeProperty('top');
+      catPanel.style.removeProperty('height');
+      catPanel.style.removeProperty('max-height');
+      return;
+    }
+    const topOffset = topBar
+      ? Math.max(0, Math.ceil(topBar.getBoundingClientRect().bottom))
+      : 0;
+    catPanel.style.top = `${topOffset}px`;
+    catPanel.style.height = `calc(100dvh - ${topOffset}px)`;
+    catPanel.style.maxHeight = `calc(100dvh - ${topOffset}px)`;
+  }
+
   // Abrir panel de categorías
   function openCatPanel() {
     if (!catPanel) return;
+    syncCatPanelMobileLayout();
     catPanel.hidden = false;
     if (catToggle) {
       catToggle.setAttribute('aria-expanded', 'true');
